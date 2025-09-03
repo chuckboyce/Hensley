@@ -1,5 +1,6 @@
 import { CheckCircle } from "lucide-react";
 import { agentInfo } from "@/data/mock-data";
+import kevinHensleyHeadshot from "@/assets/kevin-hensley-headshot.png";
 
 export default function About() {
   return (
@@ -8,7 +9,7 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <img 
-              src="/attached_assets/generated_images/Professional_realtor_headshot_ef7251d9.png" 
+              src={kevinHensleyHeadshot} 
               alt="Professional headshot of Kevin Hensley, local real estate agent" 
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto" 
             />
