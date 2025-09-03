@@ -8,7 +8,7 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
+              src="/attached_assets/generated_images/Professional_realtor_headshot_ef7251d9.png" 
               alt="Professional headshot of Kevin Hensley, local real estate agent" 
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto" 
             />
