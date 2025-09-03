@@ -1,0 +1,115 @@
+export interface Property {
+  id: string;
+  price: string;
+  address: string;
+  bedrooms: string;
+  bathrooms: string;
+  sqft: string;
+  type: 'sale' | 'rent';
+  status: string;
+  image: string;
+}
+
+export interface Testimonial {
+  id: string;
+  content: string;
+  clientName: string;
+  clientRole: string;
+  rating: number;
+  image: string;
+}
+
+export interface ServiceArea {
+  name: string;
+  description: string;
+}
+
+export const properties: Property[] = [
+  {
+    id: '1',
+    price: '$485,000',
+    address: '1234 Maple Street, Downtown',
+    bedrooms: '4',
+    bathrooms: '3',
+    sqft: '2,400',
+    type: 'sale',
+    status: 'For Sale',
+    image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600'
+  },
+  {
+    id: '2',
+    price: '$2,200/mo',
+    address: '5678 Oak Avenue, Riverside',
+    bedrooms: '3',
+    bathrooms: '2',
+    sqft: '1,800',
+    type: 'rent',
+    status: 'For Rent',
+    image: 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600'
+  },
+  {
+    id: '3',
+    price: '$395,000',
+    address: '9876 Pine Lane, Westside',
+    bedrooms: '3',
+    bathrooms: '2.5',
+    sqft: '2,100',
+    type: 'sale',
+    status: 'For Sale',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600'
+  }
+];
+
+export const testimonials: Testimonial[] = [
+  {
+    id: '1',
+    content: "Hensley made buying our first home such a smooth experience. His knowledge of the local market and attention to detail gave us confidence throughout the entire process.",
+    clientName: "Sarah Johnson",
+    clientRole: "First-time Buyer",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1494790108755-2616b612b977?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64"
+  },
+  {
+    id: '2',
+    content: "As an investor, I've worked with Hensley on multiple properties. His property management service is top-notch - professional, responsive, and always looking out for my investment.",
+    clientName: "Michael Chen",
+    clientRole: "Property Investor",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64"
+  },
+  {
+    id: '3',
+    content: "We've rented through Hensley for three years now. Any maintenance issues are handled promptly, and communication is always clear and professional. Highly recommended!",
+    clientName: "Emma Rodriguez",
+    clientRole: "Long-term Tenant",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64"
+  },
+  {
+    id: '4',
+    content: "Hensley helped us sell our home in just two weeks! His marketing strategy and pricing were spot on. We couldn't be happier with the results and his professional approach.",
+    clientName: "David & Lisa Thompson",
+    clientRole: "Home Sellers",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64"
+  }
+];
+
+export const serviceAreas: ServiceArea[] = [
+  { name: "Downtown", description: "Urban Living" },
+  { name: "Riverside", description: "Family Friendly" },
+  { name: "Westside", description: "New Development" },
+  { name: "Historic District", description: "Character Homes" }
+];
+
+export const agentInfo = {
+  name: "Hensley",
+  yearsExperience: "15+",
+  transactionCount: "500+"
+};
+
+export const contactInfo = {
+  phone: "(555) 123-4567",
+  email: "hensley@hensleys-homes.com",
+  address: "123 Main Street\nYour City, State 12345"
+};

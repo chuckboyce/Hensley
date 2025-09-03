@@ -1,0 +1,55 @@
+import { CheckCircle } from "lucide-react";
+import { agentInfo } from "@/data/mock-data";
+
+export default function About() {
+  return (
+    <section id="about" className="py-20 bg-background">
+      <div className="container mx-auto px-4 lg:px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <img 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
+              alt="Professional headshot of Hensley, local real estate agent" 
+              className="rounded-2xl shadow-2xl w-full max-w-md mx-auto" 
+            />
+          </div>
+          
+          <div className="space-y-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Meet Hensley</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {agentInfo.name} has been serving the local community for over {agentInfo.yearsExperience} years, building lasting relationships based on trust, integrity, and exceptional service. As both a respected real estate professional and active community member, he brings unparalleled local knowledge to every transaction.
+            </p>
+            
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="bg-card rounded-lg p-6 border border-border" data-testid="stat-experience">
+                <h4 className="font-semibold text-card-foreground mb-2">Experience</h4>
+                <p className="text-3xl font-bold text-primary">{agentInfo.yearsExperience}</p>
+                <p className="text-sm text-muted-foreground">Years in Real Estate</p>
+              </div>
+              <div className="bg-card rounded-lg p-6 border border-border" data-testid="stat-transactions">
+                <h4 className="font-semibold text-card-foreground mb-2">Transactions</h4>
+                <p className="text-3xl font-bold text-primary">{agentInfo.transactionCount}</p>
+                <p className="text-sm text-muted-foreground">Successful Deals</p>
+              </div>
+            </div>
+            
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center bg-secondary rounded-full px-4 py-2">
+                <CheckCircle className="h-4 w-4 text-primary mr-2" />
+                <span className="text-sm font-medium">Licensed Agent</span>
+              </div>
+              <div className="flex items-center bg-secondary rounded-full px-4 py-2">
+                <CheckCircle className="h-4 w-4 text-primary mr-2" />
+                <span className="text-sm font-medium">Local Expert</span>
+              </div>
+              <div className="flex items-center bg-secondary rounded-full px-4 py-2">
+                <CheckCircle className="h-4 w-4 text-primary mr-2" />
+                <span className="text-sm font-medium">Community Leader</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
