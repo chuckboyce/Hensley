@@ -18,7 +18,7 @@ export default function About() {
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">Meet Kevin Hensley</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              {agentInfo.name} has been serving the local community for over {agentInfo.yearsExperience} years, building lasting relationships based on trust, integrity, and exceptional service. As both a respected real estate professional and active community member, he brings unparalleled local knowledge to every transaction.
+              {agentInfo.name} has been serving the Delaware community for over {agentInfo.yearsExperience} years, building lasting relationships based on trust, integrity, and exceptional service. As Past President of both the state and local Boards of Realtors and the 2011 Realtor of the Year Award winner for Delaware, he brings unparalleled expertise to every transaction. Outside of real estate, Kevin serves as a State Representative in the Delaware General Assembly.
             </p>
             
             <div className="grid sm:grid-cols-2 gap-6">
@@ -37,15 +37,15 @@ export default function About() {
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center bg-secondary rounded-full px-4 py-2">
                 <CheckCircle className="h-4 w-4 text-primary mr-2" />
-                <span className="text-sm font-medium">Licensed Agent</span>
+                <span className="text-sm font-medium">Licensed Broker</span>
               </div>
               <div className="flex items-center bg-secondary rounded-full px-4 py-2">
                 <CheckCircle className="h-4 w-4 text-primary mr-2" />
-                <span className="text-sm font-medium">Local Expert</span>
+                <span className="text-sm font-medium">Award Winner</span>
               </div>
               <div className="flex items-center bg-secondary rounded-full px-4 py-2">
                 <CheckCircle className="h-4 w-4 text-primary mr-2" />
-                <span className="text-sm font-medium">Community Leader</span>
+                <span className="text-sm font-medium">State Representative</span>
               </div>
             </div>
           </div>

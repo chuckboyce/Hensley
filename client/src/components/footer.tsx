@@ -31,7 +31,7 @@ export default function Footer() {
               className="bg-white hover:bg-gray-100 text-primary px-8 py-4 rounded-lg font-semibold text-lg"
               data-testid="button-call-now"
             >
-              <a href="tel:(555) 123-4567">Call (555) 123-4567</a>
+              <a href="tel:(302) 218-0130">Call (302) 218-0130</a>
             </Button>
             <Button 
               onClick={scrollToContact}

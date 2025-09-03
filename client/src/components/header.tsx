@@ -77,12 +77,12 @@ export default function Header() {
             
             <div className="flex items-center space-x-4">
               <a 
-                href="tel:(555) 123-4567" 
+                href="tel:(302) 218-0130" 
                 className="hidden sm:flex items-center space-x-2 text-sm text-muted-foreground hover:text-foreground"
                 data-testid="header-phone"
               >
                 <Phone className="h-4 w-4" />
-                <span>(555) 123-4567</span>
+                <span>(302) 218-0130</span>
               </a>
               <Button
                 variant="ghost"

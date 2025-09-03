@@ -96,20 +96,27 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const serviceAreas: ServiceArea[] = [
-  { name: "Downtown", description: "Urban Living" },
-  { name: "Riverside", description: "Family Friendly" },
-  { name: "Westside", description: "New Development" },
-  { name: "Historic District", description: "Character Homes" }
+  { name: "Middletown", description: "Growing Community" },
+  { name: "Smyrna", description: "Historic Charm" },
+  { name: "Bear", description: "Family Friendly" },
+  { name: "Newark", description: "University Town" },
+  { name: "New Castle County", description: "Diverse Options" },
+  { name: "Kent County", description: "Rural & Suburban" }
 ];
 
 export const agentInfo = {
   name: "Kevin Hensley",
-  yearsExperience: "15+",
-  transactionCount: "500+"
+  yearsExperience: "35+",
+  transactionCount: "500+",
+  title: "Associate Broker",
+  brokerage: "RE/MAX Eagle Realty",
+  licenseNumber: "#324709"
 };
 
 export const contactInfo = {
-  phone: "(555) 123-4567",
+  phone: "(302) 218-0130",
+  directPhone: "(302) 273-0057",
   email: "kevin@hensleys-homes.com",
-  address: "123 Main Street\nYour City, State 12345"
+  website: "https://www.hensleyshomes.com",
+  address: "5609 DuPont Pkwy Ste 11\nSmyrna, DE 19977"
 };
