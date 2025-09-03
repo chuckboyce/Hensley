@@ -1,6 +1,6 @@
 import { CheckCircle } from "lucide-react";
 import { agentInfo } from "@/data/mock-data";
-import kevinHensleyHeadshot from "@/assets/kevin-hensley-headshot.png";
+import kevinHensleyHeadshot from "@assets/Generated Image September 03, 2025 - 3_19PM_1756927173027.jpeg";
 
 export default function About() {
   return (
