@@ -98,7 +98,7 @@ export default function Footer() {
                   className="block text-muted-foreground hover:text-primary transition-colors text-left"
                   data-testid="footer-link-about"
                 >
-                  About Hensley
+                  About Kevin
                 </button>
                 <button 
                   onClick={() => scrollToSection('services')} 

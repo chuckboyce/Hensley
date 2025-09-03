@@ -9,13 +9,13 @@ export default function About() {
           <div>
             <img 
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-              alt="Professional headshot of Hensley, local real estate agent" 
+              alt="Professional headshot of Kevin Hensley, local real estate agent" 
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto" 
             />
           </div>
           
           <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Meet Hensley</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Meet Kevin Hensley</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               {agentInfo.name} has been serving the local community for over {agentInfo.yearsExperience} years, building lasting relationships based on trust, integrity, and exceptional service. As both a respected real estate professional and active community member, he brings unparalleled local knowledge to every transaction.
             </p>

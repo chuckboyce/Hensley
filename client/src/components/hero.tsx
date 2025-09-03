@@ -35,7 +35,7 @@ export default function Hero() {
             <span className="text-blue-400"> Real Estate</span> Partner
           </h1>
           <p className="text-xl text-gray-200 mb-8 leading-relaxed">
-            With years of experience serving our community, Hensley's Homes provides expert real estate sales and comprehensive property management services you can trust.
+            With years of experience serving our community, Kevin Hensley's Homes provides expert real estate sales and comprehensive property management services you can trust.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 mb-12">

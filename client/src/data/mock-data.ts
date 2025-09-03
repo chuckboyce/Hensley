@@ -63,7 +63,7 @@ export const properties: Property[] = [
 export const testimonials: Testimonial[] = [
   {
     id: '1',
-    content: "Hensley made buying our first home such a smooth experience. His knowledge of the local market and attention to detail gave us confidence throughout the entire process.",
+    content: "Kevin Hensley made buying our first home such a smooth experience. His knowledge of the local market and attention to detail gave us confidence throughout the entire process.",
     clientName: "Sarah Johnson",
     clientRole: "First-time Buyer",
     rating: 5,
@@ -71,7 +71,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: '2',
-    content: "As an investor, I've worked with Hensley on multiple properties. His property management service is top-notch - professional, responsive, and always looking out for my investment.",
+    content: "As an investor, I've worked with Kevin Hensley on multiple properties. His property management service is top-notch - professional, responsive, and always looking out for my investment.",
     clientName: "Michael Chen",
     clientRole: "Property Investor",
     rating: 5,
@@ -79,7 +79,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: '3',
-    content: "We've rented through Hensley for three years now. Any maintenance issues are handled promptly, and communication is always clear and professional. Highly recommended!",
+    content: "We've rented through Kevin Hensley for three years now. Any maintenance issues are handled promptly, and communication is always clear and professional. Highly recommended!",
     clientName: "Emma Rodriguez",
     clientRole: "Long-term Tenant",
     rating: 5,
@@ -87,7 +87,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: '4',
-    content: "Hensley helped us sell our home in just two weeks! His marketing strategy and pricing were spot on. We couldn't be happier with the results and his professional approach.",
+    content: "Kevin Hensley helped us sell our home in just two weeks! His marketing strategy and pricing were spot on. We couldn't be happier with the results and his professional approach.",
     clientName: "David & Lisa Thompson",
     clientRole: "Home Sellers",
     rating: 5,
@@ -103,13 +103,13 @@ export const serviceAreas: ServiceArea[] = [
 ];
 
 export const agentInfo = {
-  name: "Hensley",
+  name: "Kevin Hensley",
   yearsExperience: "15+",
   transactionCount: "500+"
 };
 
 export const contactInfo = {
   phone: "(555) 123-4567",
-  email: "hensley@hensleys-homes.com",
+  email: "kevin@hensleys-homes.com",
   address: "123 Main Street\nYour City, State 12345"
 };
