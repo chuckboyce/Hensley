@@ -20,7 +20,7 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative">
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40">
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/60">
         <img 
           src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" 
           alt="Modern luxury home exterior" 
@@ -30,11 +30,11 @@ export default function Hero() {
       
       <div className="relative z-10 container mx-auto px-4 lg:px-6 py-24 lg:py-32">
         <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl">
             Your Trusted Local
-            <span className="text-blue-400"> Real Estate</span> Partner
+            <span className="text-blue-300"> Real Estate</span> Partner
           </h1>
-          <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+          <p className="text-xl text-white mb-8 leading-relaxed drop-shadow-xl">
             With years of experience serving our community, Kevin Hensley's Homes provides expert real estate sales and comprehensive property management services you can trust.
           </p>
           
