@@ -30,11 +30,11 @@ export default function Hero() {
       
       <div className="relative z-10 container mx-auto px-4 lg:px-6 py-24 lg:py-32">
         <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6" style={{textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0px 0px 20px rgba(0,0,0,0.8)'}}>
             Your Trusted Local
-            <span className="text-blue-300"> Real Estate</span> Partner
+            <span className="text-blue-400"> Real Estate</span> Partner
           </h1>
-          <p className="text-xl text-white mb-8 leading-relaxed drop-shadow-xl">
+          <p className="text-xl text-white mb-8 leading-relaxed" style={{textShadow: '2px 2px 6px rgba(0,0,0,0.9), 0px 0px 15px rgba(0,0,0,0.7)'}}>
             With years of experience serving our community, Kevin Hensley's Homes provides expert real estate sales and comprehensive property management services you can trust.
           </p>
           
