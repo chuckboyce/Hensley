@@ -6,7 +6,7 @@ export default function About() {
   return (
     <section id="about" className="py-20 bg-background">
       <div className="container mx-auto px-4 lg:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
             <img 
               src={kevinHensleyHeadshot} 
