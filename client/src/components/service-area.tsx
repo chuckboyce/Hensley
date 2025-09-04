@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { serviceAreas } from "@/data/mock-data";
+import middletownImage from "@assets/Middletown_DE_1757012981537.jpg";
 
 export default function ServiceArea() {
   return (
@@ -15,8 +16,8 @@ export default function ServiceArea() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <img 
-              src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" 
-              alt="Beautiful downtown area with local community buildings" 
+              src={middletownImage}
+              alt="Historic downtown Middletown, DE with monument and local buildings" 
               className="rounded-xl shadow-lg w-full" 
             />
           </div>
