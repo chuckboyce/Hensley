@@ -28,9 +28,12 @@ export default function Header() {
                     className="w-full h-full object-contain rounded"
                   />
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-bold text-lg text-foreground">Hensley's Homes</span>
-                  <span className="text-xs text-muted-foreground">Real Estate & Property Management</span>
+                <div className="flex items-center">
+                  <img 
+                    src="/hensleys-homes-logotype.png" 
+                    alt="Hensley's Homes" 
+                    className="h-8 object-contain"
+                  />
                 </div>
               </div>
             </div>
