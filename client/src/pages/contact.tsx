@@ -207,8 +207,8 @@ export default function Contact() {
                 <h2 className="text-2xl font-bold text-primary mb-2">RE/MAX Eagle Realty</h2>
                 <div className="h-12 w-12 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 p-1 border border-border">
                   <img 
-                    src="/remax-eagle-logo.jpg" 
-                    alt="RE/MAX Eagle Realty Logo" 
+                    src="/hensleys-homes-logo.png" 
+                    alt="Hensley's Homes Logo" 
                     className="w-full h-full object-contain rounded"
                   />
                 </div>

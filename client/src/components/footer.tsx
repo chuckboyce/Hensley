@@ -56,8 +56,8 @@ export default function Footer() {
               <div className="flex items-center space-x-2 mb-4">
                 <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center p-1 border border-border">
                   <img 
-                    src="/remax-eagle-logo.jpg" 
-                    alt="RE/MAX Eagle Realty Logo" 
+                    src="/hensleys-homes-logo.png" 
+                    alt="Hensley's Homes Logo" 
                     className="w-full h-full object-contain rounded"
                   />
                 </div>
