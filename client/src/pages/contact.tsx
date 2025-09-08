@@ -205,8 +205,12 @@ export default function Contact() {
             <div className="bg-card rounded-xl p-8 shadow-lg border border-border">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-primary mb-2">RE/MAX Eagle Realty</h2>
-                <div className="h-12 w-12 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <span className="text-primary-foreground font-bold text-xl">R</span>
+                <div className="h-12 w-12 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 p-1 border border-border">
+                  <img 
+                    src="/remax-eagle-logo.jpg" 
+                    alt="RE/MAX Eagle Realty Logo" 
+                    className="w-full h-full object-contain rounded"
+                  />
                 </div>
               </div>
               

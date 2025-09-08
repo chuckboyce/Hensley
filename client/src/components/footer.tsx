@@ -54,8 +54,12 @@ export default function Footer() {
             {/* Company Info */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="h-10 w-10 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-lg">H</span>
+                <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center p-1 border border-border">
+                  <img 
+                    src="/remax-eagle-logo.jpg" 
+                    alt="RE/MAX Eagle Realty Logo" 
+                    className="w-full h-full object-contain rounded"
+                  />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold text-lg text-foreground">Hensley's Homes</span>
