@@ -5,7 +5,6 @@ import About from "@/components/about";
 import FeaturedProperties from "@/components/featured-properties";
 import Testimonials from "@/components/testimonials";
 import ServiceArea from "@/components/service-area";
-import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 
 export default function Home() {
@@ -19,7 +18,6 @@ export default function Home() {
         <FeaturedProperties />
         <Testimonials />
         <ServiceArea />
-        <Contact />
       </main>
       <Footer />
     </div>

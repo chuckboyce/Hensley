@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, Phone } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -66,13 +67,12 @@ export default function Header() {
               >
                 Testimonials
               </button>
-              <button 
-                onClick={() => scrollToSection('contact')} 
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                data-testid="nav-contact"
-              >
-                Contact
-              </button>
+              <Link href="/contact">
+                <span className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      data-testid="nav-contact">
+                  Contact
+                </span>
+              </Link>
             </nav>
             
             <div className="flex items-center space-x-4">
@@ -137,13 +137,12 @@ export default function Header() {
             >
               Testimonials
             </button>
-            <button 
-              onClick={() => scrollToSection('contact')} 
-              className="text-lg font-medium text-muted-foreground hover:text-foreground text-left"
-              data-testid="mobile-nav-contact"
-            >
-              Contact
-            </button>
+            <Link href="/contact">
+              <span className="text-lg font-medium text-muted-foreground hover:text-foreground text-left cursor-pointer"
+                    data-testid="mobile-nav-contact">
+                Contact
+              </span>
+            </Link>
           </nav>
         </div>
       )}

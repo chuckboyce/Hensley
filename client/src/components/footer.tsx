@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 export default function Footer() {
   const scrollToSection = (id: string) => {
@@ -33,14 +34,15 @@ export default function Footer() {
             >
               <a href="tel:(302) 218-0130">Call (302) 218-0130</a>
             </Button>
-            <Button 
-              onClick={scrollToContact}
-              variant="outline"
-              className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-2 border-primary-foreground/20 px-8 py-4 rounded-lg font-semibold text-lg"
-              data-testid="button-schedule-consultation-footer"
-            >
-              Schedule Free Consultation
-            </Button>
+            <Link href="/contact">
+              <Button 
+                variant="outline"
+                className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-2 border-primary-foreground/20 px-8 py-4 rounded-lg font-semibold text-lg"
+                data-testid="button-schedule-consultation-footer"
+              >
+                Schedule Free Consultation
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
