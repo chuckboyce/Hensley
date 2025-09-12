@@ -30,6 +30,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // List all properties
+  app.get("/api/properties", async (req, res) => {
+    try {
+      const properties = await storage.listProperties();
+      res.json(properties);
+    } catch (error) {
+      console.error("Error listing properties:", error);
+      res.status(500).json({ error: "Failed to list properties" });
+    }
+  });
+
+  // Get a specific property by listingKey
+  app.get("/api/properties/:listingKey", async (req, res) => {
+    try {
+      const { listingKey } = req.params as { listingKey: string };
+      const property = await storage.getProperty(listingKey);
+      if (!property) return res.status(404).json({ error: "Property not found" });
+      res.json(property);
+    } catch (error) {
+      console.error("Error fetching property:", error);
+      res.status(500).json({ error: "Failed to fetch property" });
+    }
+  });
+
+  // Get media for a property
+  app.get("/api/properties/:listingKey/media", async (req, res) => {
+    try {
+      const { listingKey } = req.params as { listingKey: string };
+      const property = await storage.getProperty(listingKey);
+      if (!property) return res.status(404).json({ error: "Property not found" });
+      const media = await storage.getPropertyMedia(listingKey);
+      res.json(media);
+    } catch (error) {
+      console.error("Error fetching property media:", error);
+      res.status(500).json({ error: "Failed to fetch property media" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
