@@ -82,13 +82,21 @@ export default function PropertyDetail() {
     );
   }
 
-  const formatPrice = (price: string) => {
+  const formatPrice = (price: string, isRental: boolean = false) => {
     const numPrice = parseFloat(price);
-    return new Intl.NumberFormat('en-US', {
+    const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       maximumFractionDigits: 0,
     }).format(numPrice);
+    
+    return isRental ? `${formatted}/month` : formatted;
+  };
+
+  const isRentalProperty = (property: Property): boolean => {
+    return property.mlsStatus?.toLowerCase().includes('rent') || 
+           property.standardStatus?.toLowerCase().includes('rent') ||
+           property.propertySubType?.toLowerCase().includes('rental');
   };
 
   const formatDate = (date: Date | string) => {
@@ -156,9 +164,16 @@ export default function PropertyDetail() {
           <div className="md:col-span-2">
             {/* Property Header */}
             <div className="mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2" data-testid="text-property-price">
-                {formatPrice(property.listPrice)}
-              </h1>
+              <div className="flex items-center gap-3 mb-2">
+                <h1 className="text-3xl md:text-4xl font-bold text-foreground" data-testid="text-property-price">
+                  {formatPrice(property.listPrice, isRentalProperty(property))}
+                </h1>
+                {isRentalProperty(property) && (
+                  <Badge variant="secondary" className="text-sm px-3 py-1">
+                    For Rent
+                  </Badge>
+                )}
+              </div>
               <div className="flex items-start text-muted-foreground mb-4">
                 <MapPin className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
                 <span className="text-lg" data-testid="text-property-address">
@@ -219,18 +234,36 @@ export default function PropertyDetail() {
                           {property.propertyType || 'N/A'}
                         </span>
                       </div>
+                      {isRentalProperty(property) && (
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Available:</span>
+                          <span className="font-medium text-green-600" data-testid="text-availability">
+                            Now
+                          </span>
+                        </div>
+                      )}
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Year Built:</span>
                         <span className="font-medium" data-testid="text-year-built">
                           {property.yearBuilt || 'N/A'}
                         </span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Lot Size:</span>
-                        <span className="font-medium" data-testid="text-lot-size">
-                          {property.lotSizeArea ? `${parseFloat(property.lotSizeArea).toLocaleString()} ${property.lotSizeUnits || 'sq ft'}` : 'N/A'}
-                        </span>
-                      </div>
+                      {!isRentalProperty(property) && (
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Lot Size:</span>
+                          <span className="font-medium" data-testid="text-lot-size">
+                            {property.lotSizeArea ? `${parseFloat(property.lotSizeArea).toLocaleString()} ${property.lotSizeUnits || 'sq ft'}` : 'N/A'}
+                          </span>
+                        </div>
+                      )}
+                      {isRentalProperty(property) && (
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Lease Terms:</span>
+                          <span className="font-medium" data-testid="text-lease-terms">
+                            Flexible
+                          </span>
+                        </div>
+                      )}
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Stories:</span>
                         <span className="font-medium" data-testid="text-stories">
@@ -288,13 +321,18 @@ export default function PropertyDetail() {
                   © {new Date().getFullYear()} Bright MLS. All rights reserved. Information is deemed reliable but not guaranteed.
                 </p>
                 <p>
-                  The data relating to real estate for sale on this website appears in part through the BRIGHT Internet Data Exchange program, 
+                  The data relating to real estate {isRentalProperty(property) ? 'for rent' : 'for sale'} on this website appears in part through the BRIGHT Internet Data Exchange program, 
                   a voluntary cooperative exchange of property listing information between licensed real estate brokerage firms in which 
                   Hensley's Homes participates, and is provided by BRIGHT through a licensing agreement.
                 </p>
                 <p>
-                  The information provided by this website is for the personal, non-commercial use of consumers and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing.
+                  The information provided by this website is for the personal, non-commercial use of consumers and may not be used for any purpose other than to identify prospective properties consumers may be interested in {isRentalProperty(property) ? 'renting' : 'purchasing'}.
                 </p>
+                {isRentalProperty(property) && (
+                  <p>
+                    <strong>Rental Notice:</strong> This property is available for rent. Contact the listing agent for current availability, application requirements, and rental terms. Rental prices and availability are subject to change without notice.
+                  </p>
+                )}
                 <p className="text-xs">
                   Data last updated: {property.lastUpdated ? formatDate(property.lastUpdated) : formatDate(new Date())}
                 </p>
@@ -326,7 +364,7 @@ export default function PropertyDetail() {
                     </Button>
                     <Button variant="outline" className="w-full" data-testid="button-email-agent">
                       <Mail className="h-4 w-4 mr-2" />
-                      Email Agent
+                      {isRentalProperty(property) ? 'Inquire About Rental' : 'Email Agent'}
                     </Button>
                   </div>
 

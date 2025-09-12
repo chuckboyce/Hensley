@@ -145,7 +145,7 @@ export class MemStorage implements IStorage {
   }
 
   private seedSampleProperty(): void {
-    // Sample property representing the listing from the MLS URL
+    // Sample sale property representing the listing from the MLS URL
     const sampleProperty: Property = {
       id: randomUUID(),
       listingKey: "DENC2087994",
@@ -273,6 +273,135 @@ export class MemStorage implements IStorage {
     ];
 
     this.propertyMedia.set(sampleProperty.listingKey, sampleMedia);
+
+    // Sample rental property
+    const rentalProperty: Property = {
+      id: randomUUID(),
+      listingKey: "RENT2024001",
+      listingId: "RENT2024001",
+      mlsId: "RENT2024001",
+      mlsName: "Bright MLS",
+      standardStatus: "Active",
+      mlsStatus: "For Rent",
+      
+      // Pricing and Status (monthly rent)
+      listPrice: "2800",
+      closePrice: null,
+      listingContractDate: null,
+      onMarketDate: new Date("2024-11-15"),
+      daysOnMarket: 63,
+      contingency: null,
+      
+      // Location
+      unparsedAddress: "456 Oak Avenue, Unit 2B, Wilmington, DE 19801",
+      streetNumber: "456",
+      streetName: "Oak",
+      streetSuffix: "Avenue",
+      unitNumber: "2B",
+      city: "Wilmington",
+      stateOrProvince: "DE",
+      postalCode: "19801",
+      countyOrParish: "New Castle",
+      latitude: "39.7391",
+      longitude: "-75.5398",
+      
+      // Property details
+      propertyType: "Residential",
+      propertySubType: "Condominium",
+      bedroomsTotal: 2,
+      bathroomsFull: 2,
+      bathroomsHalf: 0,
+      livingArea: 1200,
+      lotSizeArea: null,
+      lotSizeUnits: null,
+      yearBuilt: 2020,
+      storiesTotal: null,
+      garageSpaces: 1,
+      
+      // Features
+      cooling: ["Central Air", "Electric"],
+      heating: ["Electric", "Heat Pump"],
+      sewer: ["Public Sewer"],
+      waterSource: ["Public"],
+      associationFee: "350",
+      associationFeeFrequency: "Monthly",
+      
+      // Media
+      photosCount: 18,
+      
+      // Marketing
+      publicRemarks: "Modern 2-bedroom, 2-bathroom condo available for rent in downtown Wilmington! This beautifully appointed unit features floor-to-ceiling windows, hardwood floors, and an open-concept design. The gourmet kitchen includes quartz countertops, stainless steel appliances, and a breakfast bar. Master suite with walk-in closet and spa-like bathroom. In-unit washer/dryer, central AC/heat, and one assigned parking space included. Building amenities include fitness center, rooftop deck, and concierge services. Walking distance to restaurants, shops, and public transportation. Available immediately with flexible lease terms. Security deposit and first month's rent required.",
+      virtualTourURLUnbranded: null,
+      virtualTourURLBranded: null,
+      
+      // Attribution (IDX compliance)
+      listingOfficeName: "RE/MAX Eagle Realty",
+      listingOfficePhone: "(302) 659-1320",
+      listingAgentName: "Kevin Hensley",
+      listingAgentPhone: "(302) 218-0130",
+      
+      // System fields
+      lastUpdated: new Date(),
+      createdAt: new Date()
+    };
+
+    this.properties.set(rentalProperty.listingKey, rentalProperty);
+
+    // Sample rental property media
+    const rentalMedia: PropertyMedia[] = [
+      {
+        id: randomUUID(),
+        mediaKey: "RENT2024001-001",
+        listingKey: "RENT2024001",
+        mediaUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        mediaOrder: 1,
+        caption: "Building Exterior",
+        mediaType: "Photo",
+        createdAt: new Date()
+      },
+      {
+        id: randomUUID(),
+        mediaKey: "RENT2024001-002",
+        listingKey: "RENT2024001",
+        mediaUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        mediaOrder: 2,
+        caption: "Living Room",
+        mediaType: "Photo",
+        createdAt: new Date()
+      },
+      {
+        id: randomUUID(),
+        mediaKey: "RENT2024001-003",
+        listingKey: "RENT2024001",
+        mediaUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        mediaOrder: 3,
+        caption: "Kitchen",
+        mediaType: "Photo",
+        createdAt: new Date()
+      },
+      {
+        id: randomUUID(),
+        mediaKey: "RENT2024001-004",
+        listingKey: "RENT2024001",
+        mediaUrl: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        mediaOrder: 4,
+        caption: "Master Bedroom",
+        mediaType: "Photo",
+        createdAt: new Date()
+      },
+      {
+        id: randomUUID(),
+        mediaKey: "RENT2024001-005",
+        listingKey: "RENT2024001",
+        mediaUrl: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&auto=format&fit=crop&w=2126&q=80",
+        mediaOrder: 5,
+        caption: "City View",
+        mediaType: "Photo",
+        createdAt: new Date()
+      }
+    ];
+
+    this.propertyMedia.set(rentalProperty.listingKey, rentalMedia);
   }
 }
 
