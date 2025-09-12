@@ -94,9 +94,9 @@ export default function PropertyDetail() {
   };
 
   const isRentalProperty = (property: Property): boolean => {
-    return property.mlsStatus?.toLowerCase().includes('rent') || 
-           property.standardStatus?.toLowerCase().includes('rent') ||
-           property.propertySubType?.toLowerCase().includes('rental');
+    return !!(property.mlsStatus?.toLowerCase().includes('rent') || 
+              property.standardStatus?.toLowerCase().includes('rent') ||
+              property.propertySubType?.toLowerCase().includes('rental'));
   };
 
   const formatDate = (date: Date | string) => {
