@@ -8,6 +8,7 @@ import Contact from "@/pages/contact";
 import FairHousing from "@/pages/fair-housing";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import TermsOfUse from "@/pages/terms-of-use";
+import PropertyDetail from "@/pages/property-detail";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/fair-housing" component={FairHousing} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-use" component={TermsOfUse} />
+      <Route path="/properties/:listingKey" component={PropertyDetail} />
       <Route component={NotFound} />
     </Switch>
   );
