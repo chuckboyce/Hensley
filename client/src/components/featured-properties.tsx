@@ -1,16 +1,63 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Bed, Bath, Square } from "lucide-react";
-import { properties, type Property } from "@/data/mock-data";
+import { Bed, Bath, Square, MapPin } from "lucide-react";
+import { type Property } from "@shared/schema";
+import { Link } from "wouter";
 
 export default function FeaturedProperties() {
-  const [filter, setFilter] = useState<'all' | 'sale' | 'rent'>('all');
+  const [filter, setFilter] = useState<'all' | 'active' | 'sold'>('all');
 
-  const filteredProperties = properties.filter(property => {
-    if (filter === 'all') return true;
-    return property.type === filter;
+  const { data: properties = [], isLoading, error } = useQuery<Property[]>({
+    queryKey: ['/api/properties'],
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
+
+  const filteredProperties = properties.filter((property) => {
+    if (filter === 'all') return true;
+    return property.standardStatus.toLowerCase() === filter;
+  });
+
+  if (isLoading) {
+    return (
+      <section id="properties" className="py-20 bg-background">
+        <div className="container mx-auto px-4 lg:px-6">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Featured Properties</h2>
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-card rounded-xl overflow-hidden shadow-lg border border-border animate-pulse">
+                  <div className="h-64 bg-muted"></div>
+                  <div className="p-6">
+                    <div className="h-6 bg-muted rounded mb-3"></div>
+                    <div className="h-4 bg-muted rounded mb-4"></div>
+                    <div className="flex justify-between mb-4">
+                      <div className="h-4 bg-muted rounded w-16"></div>
+                      <div className="h-4 bg-muted rounded w-16"></div>
+                      <div className="h-4 bg-muted rounded w-16"></div>
+                    </div>
+                    <div className="h-10 bg-muted rounded"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="properties" className="py-20 bg-background">
+        <div className="container mx-auto px-4 lg:px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Featured Properties</h2>
+          <p className="text-muted-foreground">Unable to load properties at this time. Please try again later.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="properties" className="py-20 bg-background">
@@ -33,20 +80,20 @@ export default function FeaturedProperties() {
         {/* Property Filters */}
         <div className="flex flex-wrap gap-4 mb-8">
           <Button
-            onClick={() => setFilter('sale')}
-            variant={filter === 'sale' ? 'default' : 'secondary'}
+            onClick={() => setFilter('active')}
+            variant={filter === 'active' ? 'default' : 'secondary'}
             className="rounded-full"
-            data-testid="filter-sale"
+            data-testid="filter-active"
           >
-            For Sale
+            Active Listings
           </Button>
           <Button
-            onClick={() => setFilter('rent')}
-            variant={filter === 'rent' ? 'default' : 'secondary'}
+            onClick={() => setFilter('sold')}
+            variant={filter === 'sold' ? 'default' : 'secondary'}
             className="rounded-full"
-            data-testid="filter-rent"
+            data-testid="filter-sold"
           >
-            For Rent
+            Recently Sold
           </Button>
           <Button
             onClick={() => setFilter('all')}
@@ -85,51 +132,77 @@ export default function FeaturedProperties() {
 }
 
 function PropertyCard({ property }: { property: Property }) {
+  const formatPrice = (price: string) => {
+    const numPrice = parseFloat(price);
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    }).format(numPrice);
+  };
+
+  const getMainImage = () => {
+    // For now, use a placeholder. In the actual implementation, 
+    // this would fetch the first media image from the API
+    return "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2075&q=80";
+  };
+
   return (
-    <div className="bg-card rounded-xl overflow-hidden shadow-lg border border-border hover:shadow-xl transition-shadow" data-testid={`property-card-${property.id}`}>
+    <div className="bg-card rounded-xl overflow-hidden shadow-lg border border-border hover:shadow-xl transition-shadow" data-testid={`property-card-${property.listingKey}`}>
       <img 
-        src={property.image} 
-        alt={`Property at ${property.address}`} 
+        src={getMainImage()} 
+        alt={`Property at ${property.unparsedAddress}`} 
         className="w-full h-64 object-cover" 
       />
       
       <div className="p-6">
         <div className="flex justify-between items-start mb-3">
-          <h4 className="text-xl font-semibold text-card-foreground" data-testid={`property-price-${property.id}`}>
-            {property.price}
+          <h4 className="text-xl font-semibold text-card-foreground" data-testid={`property-price-${property.listingKey}`}>
+            {formatPrice(property.listPrice)}
           </h4>
           <Badge 
-            variant={property.type === 'sale' ? 'default' : 'secondary'}
-            className={property.type === 'sale' ? 'bg-green-100 text-green-800 hover:bg-green-100' : 'bg-blue-100 text-blue-800 hover:bg-blue-100'}
+            variant={property.standardStatus === 'Active' ? 'default' : 'secondary'}
+            className={property.standardStatus === 'Active' ? 'bg-green-100 text-green-800 hover:bg-green-100' : 'bg-blue-100 text-blue-800 hover:bg-blue-100'}
           >
-            {property.status}
+            {property.standardStatus}
           </Badge>
         </div>
-        <p className="text-muted-foreground mb-4" data-testid={`property-address-${property.id}`}>
-          {property.address}
-        </p>
+        
+        <div className="flex items-start text-muted-foreground mb-4" data-testid={`property-address-${property.listingKey}`}>
+          <MapPin className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
+          <span className="text-sm">{property.unparsedAddress}</span>
+        </div>
         
         <div className="flex justify-between text-sm text-muted-foreground mb-4">
           <div className="flex items-center">
             <Bed className="h-4 w-4 mr-1" />
-            <span>{property.bedrooms} bed</span>
+            <span>{property.bedroomsTotal || 0} bed</span>
           </div>
           <div className="flex items-center">
             <Bath className="h-4 w-4 mr-1" />
-            <span>{property.bathrooms} bath</span>
+            <span>{(property.bathroomsFull || 0) + (property.bathroomsHalf || 0)} bath</span>
           </div>
           <div className="flex items-center">
             <Square className="h-4 w-4 mr-1" />
-            <span>{property.sqft} sqft</span>
+            <span>{property.livingArea?.toLocaleString() || 'N/A'} sqft</span>
           </div>
         </div>
         
-        <Button 
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-          data-testid={`button-view-details-${property.id}`}
-        >
-          View Details
+        <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+          <Link 
+            href={`/properties/${property.listingKey}`} 
+            data-testid={`link-property-${property.listingKey}`}
+          >
+            View Details
+          </Link>
         </Button>
+      </div>
+      
+      {/* IDX Attribution */}
+      <div className="px-6 pb-4">
+        <p className="text-xs text-muted-foreground">
+          Listing courtesy of {property.listingOfficeName}
+        </p>
       </div>
     </div>
   );

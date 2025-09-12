@@ -172,7 +172,6 @@ export const insertPropertySchema = createInsertSchema(properties).pick({
   listingOfficePhone: true,
   listingAgentName: true,
   listingAgentPhone: true,
-  lastUpdated: true,
 });
 
 export const insertPropertyMediaSchema = createInsertSchema(propertyMedia).pick({
