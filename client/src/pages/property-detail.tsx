@@ -91,12 +91,28 @@ export default function PropertyDetail() {
     }).format(numPrice);
   };
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date: Date | string) => {
+    const dateObj = typeof date === 'string' ? new Date(date) : date;
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-    }).format(date);
+    }).format(dateObj);
+  };
+
+  const formatBathrooms = (full: number | null, half: number | null) => {
+    const fullCount = full || 0;
+    const halfCount = half || 0;
+    
+    if (halfCount === 0) {
+      return `${fullCount}`;
+    }
+    
+    if (fullCount === 0) {
+      return `${halfCount} half`;
+    }
+    
+    return `${fullCount} full, ${halfCount} half`;
   };
 
   const mainImage = media.length > 0 
@@ -160,7 +176,7 @@ export default function PropertyDetail() {
                 <div className="flex items-center" data-testid="text-bathrooms">
                   <Bath className="h-5 w-5 mr-2" />
                   <span className="font-semibold">
-                    {(property.bathroomsFull || 0) + (property.bathroomsHalf || 0)}
+                    {formatBathrooms(property.bathroomsFull, property.bathroomsHalf)}
                   </span>
                   <span className="ml-1">Bathrooms</span>
                 </div>
