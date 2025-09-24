@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 import { serviceAreas } from "@/data/mock-data";
 import middletownImage from "@assets/Middletown_DE_1757012981537.jpg";
 
@@ -37,18 +38,12 @@ export default function ServiceArea() {
               ))}
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex justify-center">
               <Button 
-                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
-                data-testid="button-market-report"
-              >
-                Get Market Report
-              </Button>
-              <Button 
-                variant="secondary"
-                className="flex-1 border border-border"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg flex items-center gap-2"
                 data-testid="button-schedule-consultation"
               >
+                <Plus className="h-5 w-5" />
                 Schedule Consultation
               </Button>
             </div>
