@@ -39,13 +39,14 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Button 
+            {/* View Properties button hidden until IDX approval */}
+            {/* <Button 
               onClick={scrollToProperties}
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg"
               data-testid="button-view-properties"
             >
               View Properties
-            </Button>
+            </Button> */}
             <Button 
               onClick={scrollToContact}
               variant="outline"
@@ -57,8 +58,8 @@ export default function Hero() {
           </div>
         </div>
         
-        {/* Quick Search Bar */}
-        <div className="bg-white rounded-xl p-6 shadow-2xl max-w-4xl">
+        {/* Property Search Bar hidden until IDX approval */}
+        {/* <div className="bg-white rounded-xl p-6 shadow-2xl max-w-4xl">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1">
               <Label className="block text-sm font-medium text-muted-foreground mb-2">Location</Label>
@@ -108,7 +109,7 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
