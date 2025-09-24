@@ -281,7 +281,7 @@ export default function Contact() {
 
             {/* Footer Note */}
             <div className="text-center">
-              <div className="flex items-center justify-center mt-4 space-x-4"></div>
+              <div className="flex items-center justify-center mt-4 space-x-4">
                 <div className="h-8 w-8 bg-primary/10 rounded flex items-center justify-center">
                   <span className="text-xs font-bold text-primary">NAR</span>
                 </div>
