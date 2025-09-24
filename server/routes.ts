@@ -18,7 +18,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let ghlError = null;
       
       try {
-        ghlContact = await ghlService.createContactFromForm(validatedData);
+        // Convert null phone to undefined for GHL service
+        const ghlFormData = {
+          ...validatedData,
+          phone: validatedData.phone || undefined
+        };
+        ghlContact = await ghlService.createContactFromForm(ghlFormData);
         console.log("Contact successfully sent to GoHighLevel:", ghlContact.id);
       } catch (error) {
         ghlError = error;
