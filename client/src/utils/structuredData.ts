@@ -177,3 +177,92 @@ export function createServiceData(service: {
     }
   };
 }
+
+/**
+ * Creates comprehensive RealEstateAgent structured data
+ */
+export function createRealEstateAgentData(): StructuredDataProps {
+  return {
+    type: 'RealEstateAgent',
+    data: {
+      name: "Kevin Hensley's Homes",
+      description: "Licensed real estate professional specializing in residential sales and property management in Delaware and Maryland",
+      url: "https://hensleys-homes.com",
+      telephone: "(302) 218-0130",
+      email: "info@hensleys-homes.com",
+      areaServed: [
+        {
+          "@type": "State",
+          "name": "Delaware"
+        },
+        {
+          "@type": "State", 
+          "name": "Maryland"
+        }
+      ],
+      serviceType: [
+        "Real Estate Sales",
+        "Property Management", 
+        "Investment Consulting",
+        "Market Analysis",
+        "Rental Properties",
+        "Home Buying Assistance",
+        "Home Selling Assistance",
+        "Property Valuation"
+      ],
+      address: {
+        "@type": "PostalAddress",
+        "addressRegion": "DE",
+        "addressCountry": "US"
+      },
+      agent: {
+        "@type": "Person",
+        "name": "Kevin Hensley",
+        "jobTitle": "Real Estate Broker",
+        "telephone": "(302) 218-0130",
+        "knowsAbout": [
+          "Delaware Real Estate Market",
+          "Maryland Real Estate Market", 
+          "Property Management",
+          "Investment Properties",
+          "Residential Sales",
+          "Market Analysis"
+        ]
+      },
+      hasCredential: {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Real Estate License",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "Delaware Real Estate Commission"
+        }
+      },
+      makesOffer: [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Free Market Analysis",
+            "description": "Complimentary home valuation and market analysis"
+          },
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service", 
+            "name": "Free Consultation",
+            "description": "No-obligation consultation for buying, selling, or property management"
+          },
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      ],
+      sameAs: [
+        "https://www.facebook.com/kevin.hensley.5",
+        "https://www.facebook.com/HensleysHomes"
+      ]
+    }
+  };
+}

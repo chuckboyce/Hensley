@@ -7,7 +7,7 @@ import Testimonials from "@/components/testimonials";
 import ServiceArea from "@/components/service-area";
 import Footer from "@/components/footer";
 import StructuredData from "@/components/StructuredData";
-import { createWebPageData, createBreadcrumbData } from "@/utils/structuredData";
+import { createWebPageData, createBreadcrumbData, createRealEstateAgentData } from "@/utils/structuredData";
 
 export default function Home() {
   // Create structured data for the home page
@@ -24,9 +24,11 @@ export default function Home() {
     { name: "Home", url: "https://hensleys-homes.com" }
   ]);
 
+  const realEstateAgentData = createRealEstateAgentData();
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <StructuredData data={[homePageData, breadcrumbData]} />
+      <StructuredData data={[homePageData, breadcrumbData, realEstateAgentData]} />
       <Header />
       <main>
         <Hero />
