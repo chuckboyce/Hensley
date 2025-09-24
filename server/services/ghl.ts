@@ -90,15 +90,24 @@ class GoHighLevelService {
       email: formData.email,
       phone: formData.phone,
       source: 'Website Contact Form',
-      tags: ['Website Lead', 'Real Estate Inquiry'],
+      tags: ['Website Lead', 'Real Estate Inquiry', formData.service],
       customFields: {
-        'service_interest': formData.service,
-        'message': formData.message,
         'lead_source': 'hensleys-homes.com'
       }
     };
 
-    return await this.createContact(ghlData);
+    const contact = await this.createContact(ghlData);
+    
+    // Add the message as a contact note
+    if (formData.message && formData.message.trim()) {
+      try {
+        await this.addNoteToContact(contact.id, `Website Contact Form Message:\n\n${formData.message}`);
+      } catch (error) {
+        console.warn('Failed to add note to contact, but contact was created successfully:', error);
+      }
+    }
+
+    return contact;
   }
 
   /**
