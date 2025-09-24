@@ -6,10 +6,27 @@ import About from "@/components/about";
 import Testimonials from "@/components/testimonials";
 import ServiceArea from "@/components/service-area";
 import Footer from "@/components/footer";
+import StructuredData from "@/components/StructuredData";
+import { createWebPageData, createBreadcrumbData } from "@/utils/structuredData";
 
 export default function Home() {
+  // Create structured data for the home page
+  const homePageData = createWebPageData({
+    name: "Kevin Hensley's Homes - Delaware & Maryland Real Estate",
+    description: "Professional real estate services in Delaware and Maryland. Specializing in home sales, property management, and investment consulting. Contact us for a free consultation.",
+    url: "https://hensleys-homes.com",
+    breadcrumbs: [
+      { name: "Home", url: "https://hensleys-homes.com" }
+    ]
+  });
+
+  const breadcrumbData = createBreadcrumbData([
+    { name: "Home", url: "https://hensleys-homes.com" }
+  ]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <StructuredData data={[homePageData, breadcrumbData]} />
       <Header />
       <main>
         <Hero />
