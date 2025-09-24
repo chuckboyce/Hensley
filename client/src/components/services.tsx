@@ -39,12 +39,6 @@ export default function Services() {
                 <span className="text-sm">Negotiation & Contract Management</span>
               </li>
             </ul>
-            <Button 
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-              data-testid="button-learn-sales"
-            >
-              Learn More About Sales
-            </Button>
           </div>
           
           {/* Property Management */}
@@ -72,13 +66,6 @@ export default function Services() {
                 <span className="text-sm">Maintenance & Emergency Response</span>
               </li>
             </ul>
-            <Button 
-              variant="secondary"
-              className="w-full border border-border"
-              data-testid="button-learn-management"
-            >
-              Learn More About Management
-            </Button>
           </div>
         </div>
       </div>
