@@ -1,6 +1,22 @@
 /**
- * GoHighLevel API integration service
- * Handles sending contact form data to GHL CRM
+ * ==========================================
+ * GoHighLevel (GHL) Complete Integration
+ * ==========================================
+ * 
+ * This file contains ALL GoHighLevel integration logic, API configuration,
+ * and contact management functionality. All GHL-related code should be
+ * centralized here for easy maintenance and future enhancements.
+ * 
+ * Environment Variables Required:
+ * - GHL_SECRET: GoHighLevel API key
+ * - GHL_LOCATION_ID: GoHighLevel location identifier
+ * 
+ * Features:
+ * - Contact creation with tags and custom fields
+ * - Contact notes management
+ * - Website form integration
+ * - Error handling with local backup
+ * - Comprehensive logging
  */
 
 interface GHLContactData {
@@ -136,8 +152,126 @@ class GoHighLevelService {
       console.warn(`Failed to add note to GHL contact ${contactId}: ${errorText}`);
     }
   }
+
+  /**
+   * Complete integration method for handling website contact form submissions
+   * This method handles the entire flow: validation, local backup, GHL creation, and error handling
+   */
+  async processContactFormSubmission(
+    formData: {
+      firstName: string;
+      lastName: string;
+      email: string;
+      phone?: string | null;
+      service: string;
+      message: string;
+    },
+    localStorageBackup: (data: any) => Promise<any>
+  ): Promise<{
+    success: boolean;
+    localContact: any;
+    ghl: {
+      success: boolean;
+      contactId?: string;
+      error?: string;
+    };
+  }> {
+    
+    // 1. Create local backup first (always succeeds)
+    const localContact = await localStorageBackup(formData);
+    console.log('Contact saved locally as backup:', localContact.id);
+    
+    // 2. Attempt GHL integration
+    let ghlContact = null;
+    let ghlError = null;
+    
+    try {
+      // Convert null phone to undefined for GHL service
+      const ghlFormData = {
+        ...formData,
+        phone: formData.phone || undefined
+      };
+      
+      ghlContact = await this.createContactFromForm(ghlFormData);
+      console.log('✅ Contact successfully sent to GoHighLevel:', ghlContact.id);
+      
+    } catch (error) {
+      ghlError = error;
+      console.error('❌ Failed to send contact to GoHighLevel:', error);
+      // Don't fail the request if GHL fails - we still have local backup
+    }
+    
+    return {
+      success: true,
+      localContact,
+      ghl: {
+        success: !!ghlContact,
+        contactId: ghlContact?.id,
+        error: ghlError ? (ghlError instanceof Error ? ghlError.message : 'Unknown GHL error') : undefined
+      }
+    };
+  }
+
+  /**
+   * Health check method to verify GHL API connectivity
+   */
+  async healthCheck(): Promise<{ status: 'connected' | 'error'; message: string }> {
+    try {
+      // Test API connectivity by attempting to fetch a contact (this will fail if no contacts exist, but that's OK)
+      const url = `${this.baseUrl}/contacts/?limit=1`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json',
+          'Version': '2021-07-28'
+        }
+      });
+      
+      if (response.status === 401) {
+        return { status: 'error', message: 'Invalid API credentials' };
+      } else if (!response.ok) {
+        return { status: 'error', message: `API returned ${response.status}` };
+      }
+      
+      return { status: 'connected', message: 'GHL API connection successful' };
+    } catch (error) {
+      return { 
+        status: 'error', 
+        message: error instanceof Error ? error.message : 'Unknown connection error' 
+      };
+    }
+  }
+
+  /**
+   * Get current GHL configuration (without exposing secrets)
+   */
+  getConfig() {
+    return {
+      baseUrl: this.baseUrl,
+      locationId: this.locationId ? '***configured***' : 'NOT SET',
+      apiKey: this.apiKey ? '***configured***' : 'NOT SET',
+      isConfigured: !!(this.apiKey && this.locationId)
+    };
+  }
 }
 
-// Export singleton instance
+// ==========================================
+// EXPORT SINGLETON INSTANCE
+// ==========================================
+// All GHL operations should use this single instance
 export const ghlService = new GoHighLevelService();
+
+// Export class for testing purposes
 export { GoHighLevelService };
+
+// ==========================================
+// GHL INTEGRATION CONSTANTS
+// ==========================================
+export const GHL_CONFIG = {
+  API_VERSION: '2021-07-28',
+  BASE_URL: 'https://services.leadconnectorhq.com',
+  DEFAULT_TAGS: ['Website Lead', 'Real Estate Inquiry'],
+  DEFAULT_SOURCE: 'Website Contact Form',
+  LEAD_SOURCE_CUSTOM_FIELD: 'hensleys-homes.com'
+} as const;
