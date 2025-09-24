@@ -2,7 +2,7 @@ import Header from "@/components/header";
 import Hero from "@/components/hero";
 import Services from "@/components/services";
 import About from "@/components/about";
-import FeaturedProperties from "@/components/featured-properties";
+// import FeaturedProperties from "@/components/featured-properties"; // Hidden until IDX approval
 import Testimonials from "@/components/testimonials";
 import ServiceArea from "@/components/service-area";
 import Footer from "@/components/footer";
@@ -15,7 +15,7 @@ export default function Home() {
         <Hero />
         <Services />
         <About />
-        <FeaturedProperties />
+        {/* <FeaturedProperties /> */} {/* Hidden until IDX approval */}
         <Testimonials />
         <ServiceArea />
       </main>

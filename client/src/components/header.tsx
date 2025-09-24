@@ -60,13 +60,14 @@ export default function Header() {
               >
                 Services
               </button>
-              <button 
+              {/* Properties navigation hidden until IDX approval */}
+              {/* <button 
                 onClick={() => scrollToSection('properties')} 
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 data-testid="nav-properties"
               >
                 Properties
-              </button>
+              </button> */}
               <button 
                 onClick={() => scrollToSection('testimonials')} 
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -130,13 +131,14 @@ export default function Header() {
             >
               Services
             </button>
-            <button 
+            {/* Properties navigation hidden until IDX approval */}
+            {/* <button 
               onClick={() => scrollToSection('properties')} 
               className="text-lg font-medium text-muted-foreground hover:text-foreground text-left"
               data-testid="mobile-nav-properties"
             >
               Properties
-            </button>
+            </button> */}
             <button 
               onClick={() => scrollToSection('testimonials')} 
               className="text-lg font-medium text-muted-foreground hover:text-foreground text-left"

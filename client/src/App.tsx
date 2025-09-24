@@ -20,8 +20,9 @@ function Router() {
       <Route path="/fair-housing" component={FairHousing} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-use" component={TermsOfUse} />
-      <Route path="/properties/:listingKey" component={PropertyDetail} />
-      <Route path="/idx-test" component={IdxTest} />
+      {/* Property routes hidden until IDX approval */}
+      {/* <Route path="/properties/:listingKey" component={PropertyDetail} /> */}
+      {/* <Route path="/idx-test" component={IdxTest} /> */}
       <Route component={NotFound} />
     </Switch>
   );
