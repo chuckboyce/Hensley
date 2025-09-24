@@ -2,14 +2,39 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema } from "@shared/schema";
+import { ghlService } from "./services/ghl";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission
   app.post("/api/contacts", async (req, res) => {
     try {
       const validatedData = insertContactSchema.parse(req.body);
+      
+      // Create contact in local storage (backup)
       const contact = await storage.createContact(validatedData);
-      res.json({ success: true, contact });
+      
+      // Send to GoHighLevel
+      let ghlContact = null;
+      let ghlError = null;
+      
+      try {
+        ghlContact = await ghlService.createContactFromForm(validatedData);
+        console.log("Contact successfully sent to GoHighLevel:", ghlContact.id);
+      } catch (error) {
+        ghlError = error;
+        console.error("Failed to send contact to GoHighLevel:", error);
+        // Don't fail the request if GHL fails - we still have local backup
+      }
+      
+      res.json({ 
+        success: true, 
+        contact,
+        ghl: {
+          success: !!ghlContact,
+          contactId: ghlContact?.id,
+          error: ghlError ? (ghlError instanceof Error ? ghlError.message : 'Unknown GHL error') : null
+        }
+      });
     } catch (error) {
       console.error("Error creating contact:", error);
       res.status(400).json({ 
