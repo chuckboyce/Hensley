@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://hensleys-homes.com/sitemap.xml
+
+# Disallow admin or private areas when they exist
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow important pages for real estate
+Allow: /
+Allow: /contact
+Allow: /about
+Allow: /services
+Allow: /properties
+
+# Real estate specific
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
