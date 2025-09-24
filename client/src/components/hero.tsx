@@ -49,8 +49,7 @@ export default function Hero() {
             </Button> */}
             <Button 
               onClick={scrollToContact}
-              variant="outline"
-              className="bg-white/10 hover:bg-white/20 text-white border-2 border-white/20 px-8 py-4 rounded-lg font-semibold text-lg backdrop-blur"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg"
               data-testid="button-consultation"
             >
               Get Free Consultation
