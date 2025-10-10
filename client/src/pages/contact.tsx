@@ -11,6 +11,8 @@ import { Phone, Mail, MapPin, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 import remaxLogo from "@assets/remax_2025_logo_1760103527751.png";
 
+import HH_logotype_1757349200633 from "@assets/HH_logotype_1757349200633.png";
+
 interface ContactFormData {
   firstName: string;
   lastName: string;
@@ -92,7 +94,6 @@ export default function Contact() {
           <p className="text-lg text-muted-foreground mt-2">Ready to start your real estate journey? Let's talk about your goals.</p>
         </div>
       </header>
-
       {/* Main Content */}
       <main className="container mx-auto px-4 lg:px-6 py-12">
         <div className="grid lg:grid-cols-2 gap-12">
@@ -214,7 +215,7 @@ export default function Contact() {
                 <h2 className="text-2xl font-bold text-primary mb-2">RE/MAX Eagle Realty</h2>
                 <div className="h-12 w-12 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 p-1 border border-border">
                   <img 
-                    src="/hensleys-homes-logo.png" 
+                    src={HH_logotype_1757349200633} 
                     alt="Hensley's Homes Logo" 
                     className="w-full h-full object-contain rounded"
                   />
