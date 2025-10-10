@@ -71,6 +71,13 @@ Preferred communication style: Simple, everyday language.
 ## Third-Party Services
 - **Unsplash**: External image hosting for property photos and stock imagery
 - **Replit**: Development environment integration with custom plugins and banners
+- **GoHighLevel (GHL)**: CRM integration for lead capture and automated follow-up
+  - **Custom Fields**: 10 compliance tracking fields (all prefixed with `contact.`):
+    - `contact.method`, `contact.textshown`, `contact.timestamp`, `contact.ip`
+    - `contact.useragent`, `contact.pageurl`, `contact.referrer`
+    - `contact.consentsms`, `contact.consentemail`, `contact.evidenceid`
+  - **Important**: Custom field names MUST include the `contact.` prefix when sending to GHL API
+  - **Fallback**: If custom fields aren't configured, contacts are created without them (metadata saved locally)
 
 ## Runtime Libraries
 - **TanStack Query**: Server state management and caching
