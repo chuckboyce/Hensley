@@ -55,6 +55,7 @@ class GoHighLevelService {
 
   /**
    * Upserts a contact in GoHighLevel (creates or updates if exists)
+   * Note: Custom fields are NOT supported in upsert endpoint - use updateContactCustomFields instead
    */
   async upsertContact(contactData: GHLContactData): Promise<GHLContact> {
     const url = `${this.baseUrl}/contacts/upsert`;
@@ -68,13 +69,8 @@ class GoHighLevelService {
       locationId: this.locationId,
       tags: contactData.tags || []
     };
-    
-    // Include customField if provided and properly structured with GHL field IDs
-    if (contactData.customField && Object.keys(contactData.customField).length > 0) {
-      Object.assign(payload, { customField: contactData.customField });
-    }
 
-    let response = await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${this.apiKey}`,
@@ -84,40 +80,6 @@ class GoHighLevelService {
       body: JSON.stringify(payload)
     });
 
-    // If custom fields error (422), retry without custom fields
-    if (!response.ok && response.status === 422) {
-      const errorText = await response.text();
-      console.error('🔍 GHL returned 422 error. Full error response:', errorText);
-      console.error('🔍 Payload sent:', JSON.stringify(payload, null, 2));
-      
-      if (errorText.includes('customField')) {
-        console.warn('⚠️ Custom fields not configured in GHL. Creating contact without custom fields.');
-        console.warn('💡 To enable custom fields, create these fields in GHL Settings > Custom Fields:');
-        console.warn('   - contact.method, contact.textshown, contact.timestamp, contact.ip, contact.useragent, contact.pageurl, contact.referrer, contact.consentsms, contact.consentemail, contact.evidenceid');
-        
-        // Retry without custom fields
-        const payloadWithoutCustomFields = {
-          firstName: contactData.firstName,
-          lastName: contactData.lastName,
-          email: contactData.email,
-          phone: contactData.phone || '',
-          source: contactData.source,
-          locationId: this.locationId,
-          tags: contactData.tags || []
-        };
-        
-        response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${this.apiKey}`,
-            'Content-Type': 'application/json',
-            'Version': '2021-07-28'
-          },
-          body: JSON.stringify(payloadWithoutCustomFields)
-        });
-      }
-    }
-
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(`GHL API Error (${response.status}): ${errorText}`);
@@ -125,6 +87,37 @@ class GoHighLevelService {
 
     const result = await response.json();
     return result.contact || result;
+  }
+
+  /**
+   * Updates custom fields for an existing contact using PUT endpoint
+   * Format: customFields array with { key: "contact.fieldname", field_value: value }
+   */
+  async updateContactCustomFields(
+    contactId: string,
+    customFields: Array<{ key: string; field_value: any }>
+  ): Promise<void> {
+    const url = `${this.baseUrl}/contacts/${contactId}`;
+    
+    const payload = {
+      customFields
+    };
+
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${this.apiKey}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Version': '2021-07-28'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to update custom fields for contact ${contactId}: ${errorText}`);
+    }
   }
 
   /**
@@ -154,35 +147,45 @@ class GoHighLevelService {
     const timestamp = formData.timestamp || new Date().toISOString();
     const method = formData.method || 'webform';
     
-    // Build custom fields object with GHL field names
-    // Note: GHL UI shows "contact.fieldname" but API requires just "fieldname"
-    const customField: Record<string, any> = {
-      'method': method,
-      'textshown': [
-        formData.emailConsentText || '',
-        formData.smsConsentText || ''
-      ].filter(t => t).join(' | '),
-      'timestamp': timestamp,
-      'ip': formData.ipAddress || 'unknown',
-      'useragent': formData.userAgent || 'unknown',
-      'pageurl': formData.pageUrl || 'unknown',
-      'referrer': formData.referrer || 'direct',
-      'consentsms': formData.smsOptIn || false,
-      'consentemail': formData.emailOptIn || false,
-      'evidenceid': formData.evidenceId || ''
-    };
-    
     const ghlData: GHLContactData = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
       source: 'hensleys-homes.com - Contact Form',
-      tags,
-      customField
+      tags
     };
 
+    // Step 1: Upsert the contact (without custom fields)
     const contact = await this.upsertContact(ghlData);
+    
+    // Step 2: Update custom fields using PUT endpoint
+    // Format: customFields array with { key: "contact.fieldname", field_value: value }
+    const customFields = [
+      { key: 'contact.method', field_value: method },
+      { 
+        key: 'contact.textshown', 
+        field_value: [
+          formData.emailConsentText || '',
+          formData.smsConsentText || ''
+        ].filter(t => t).join(' | ')
+      },
+      { key: 'contact.timestamp', field_value: timestamp },
+      { key: 'contact.ip', field_value: formData.ipAddress || 'unknown' },
+      { key: 'contact.useragent', field_value: formData.userAgent || 'unknown' },
+      { key: 'contact.pageurl', field_value: formData.pageUrl || 'unknown' },
+      { key: 'contact.referrer', field_value: formData.referrer || 'direct' },
+      { key: 'contact.consentsms', field_value: formData.smsOptIn || false },
+      { key: 'contact.consentemail', field_value: formData.emailOptIn || false },
+      { key: 'contact.evidenceid', field_value: formData.evidenceId || '' }
+    ];
+    
+    try {
+      await this.updateContactCustomFields(contact.id, customFields);
+      console.log('✅ Custom fields updated successfully for contact:', contact.id);
+    } catch (error) {
+      console.warn('⚠️ Failed to update custom fields (contact created successfully):', error);
+    }
     
     // Post system message with opt-in evidence
     const systemMessage = `Opt In captured ${timestamp}, page ${formData.pageUrl || 'unknown'}, IP: ${formData.ipAddress || 'unknown'}, SMS = ${formData.smsOptIn || false}, EMAIL = ${formData.emailOptIn || false}`;
