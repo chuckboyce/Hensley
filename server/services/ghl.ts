@@ -54,10 +54,10 @@ class GoHighLevelService {
   }
 
   /**
-   * Creates a new contact in GoHighLevel
+   * Upserts a contact in GoHighLevel (creates or updates if exists)
    */
-  async createContact(contactData: GHLContactData): Promise<GHLContact> {
-    const url = `${this.baseUrl}/contacts/`;
+  async upsertContact(contactData: GHLContactData): Promise<GHLContact> {
+    const url = `${this.baseUrl}/contacts/upsert`;
     
     const payload = {
       firstName: contactData.firstName,
@@ -72,7 +72,7 @@ class GoHighLevelService {
     // Only include customFields if provided and properly structured with GHL field IDs
     if (contactData.customFields && Object.keys(contactData.customFields).length > 0) {
       // Note: customFields in GHL require actual field IDs from your GHL account
-      // For now we're not using custom fields - all info is captured via source, tags, and notes
+      // For now we're not using custom fields - all info is captured via source, tags, and inbound messages
       console.warn('Custom fields provided but not configured for GHL integration');
     }
 
@@ -115,14 +115,14 @@ class GoHighLevelService {
       tags: ['Website Lead', 'Real Estate Inquiry', formData.service]
     };
 
-    const contact = await this.createContact(ghlData);
+    const contact = await this.upsertContact(ghlData);
     
-    // Add the message as a contact note
+    // Post the message as an inbound message to the contact's conversation
     if (formData.message && formData.message.trim()) {
       try {
-        await this.addNoteToContact(contact.id, `Website Contact Form Message:\n\n${formData.message}`);
+        await this.postInboundMessage(contact.id, `Website Contact Form Message:\n\n${formData.message}`);
       } catch (error) {
-        console.warn('Failed to add note to contact, but contact was created successfully:', error);
+        console.warn('Failed to post inbound message to contact, but contact was upserted successfully:', error);
       }
     }
 
@@ -130,14 +130,15 @@ class GoHighLevelService {
   }
 
   /**
-   * Adds a note to an existing contact
+   * Posts an inbound message to a contact's conversation
    */
-  async addNoteToContact(contactId: string, note: string): Promise<void> {
-    const url = `${this.baseUrl}/contacts/${contactId}/notes/`;
+  async postInboundMessage(contactId: string, message: string): Promise<void> {
+    const url = `${this.baseUrl}/conversations/messages/inbound`;
     
     const payload = {
-      body: note,
-      userId: this.locationId // Using location ID as user ID fallback
+      type: 'SMS',
+      contactId: contactId,
+      message: message
     };
 
     const response = await fetch(url, {
@@ -152,7 +153,7 @@ class GoHighLevelService {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.warn(`Failed to add note to GHL contact ${contactId}: ${errorText}`);
+      throw new Error(`Failed to post inbound message to GHL contact ${contactId}: ${errorText}`);
     }
   }
 
