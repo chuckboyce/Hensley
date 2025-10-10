@@ -75,7 +75,7 @@ export default function Footer() {
               </p>
               <div className="flex items-center space-x-4 mb-4">
                 <img 
-                  src={eho_logo} 
+                  src="/attached_assets/eho_logo.png" 
                   alt="Equal Housing Opportunity" 
                   className="h-12 w-auto"
                   data-testid="img-eho-logo"
