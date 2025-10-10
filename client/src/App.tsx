@@ -12,6 +12,13 @@ import PropertyDetail from "@/pages/property-detail";
 import IdxTest from "@/pages/idx-test";
 import NotFound from "@/pages/not-found";
 
+// GoHighLevel Chat Widget Component
+function ChatWidget() {
+  return (
+    <chat-widget location-id="woWxqHyKDVM5Fd6Y05OW"></chat-widget>
+  );
+}
+
 function Router() {
   return (
     <Switch>
@@ -34,6 +41,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
+        <ChatWidget />
       </TooltipProvider>
     </QueryClientProvider>
   );
