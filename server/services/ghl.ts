@@ -95,13 +95,22 @@ class GoHighLevelService {
    */
   async updateContactCustomFields(
     contactId: string,
-    customFields: Array<{ key: string; field_value: any }>
+    customFields: Array<{ key: string; field_value: any }>,
+    contactInfo?: { firstName?: string; lastName?: string; email?: string; phone?: string }
   ): Promise<void> {
     const url = `${this.baseUrl}/contacts/${contactId}`;
     
-    const payload = {
+    // Include basic contact info if provided (may be required for custom fields to update)
+    const payload: any = {
       customFields
     };
+    
+    if (contactInfo) {
+      if (contactInfo.firstName) payload.firstName = contactInfo.firstName;
+      if (contactInfo.lastName) payload.lastName = contactInfo.lastName;
+      if (contactInfo.email) payload.email = contactInfo.email;
+      if (contactInfo.phone) payload.phone = contactInfo.phone;
+    }
 
     console.log('📝 Updating custom fields for contact:', contactId);
     console.log('📝 Payload:', JSON.stringify(payload, null, 2));
@@ -189,7 +198,12 @@ class GoHighLevelService {
     ];
     
     try {
-      await this.updateContactCustomFields(contact.id, customFields);
+      await this.updateContactCustomFields(contact.id, customFields, {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone
+      });
       console.log('✅ Custom fields updated successfully for contact:', contact.id);
     } catch (error) {
       console.warn('⚠️ Failed to update custom fields (contact created successfully):', error);
