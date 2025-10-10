@@ -254,14 +254,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Website Assistance */}
-            <div className="bg-primary/5 border border-primary/20 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-foreground mb-3">Need Help?</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Should you require assistance in navigating our website or searching for real estate, please contact our offices at <a href="tel:302-659-1320" className="text-primary font-semibold hover:underline">(302) 659-1320</a>.
-              </p>
-            </div>
-
             {/* Business Hours */}
             <div className="bg-card rounded-xl p-8 shadow-lg border border-border">
               <h3 className="text-xl font-semibold text-card-foreground mb-4">Business Hours</h3>
