@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import ConsultationModal from "@/components/consultation-modal";
 
 export default function Hero() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const scrollToProperties = () => {
     const element = document.getElementById('properties');
     if (element) {
@@ -48,7 +52,7 @@ export default function Hero() {
               View Properties
             </Button> */}
             <Button 
-              onClick={scrollToContact}
+              onClick={() => setIsModalOpen(true)}
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg"
               data-testid="button-consultation"
             >
@@ -110,6 +114,8 @@ export default function Hero() {
           </div>
         </div> */}
       </div>
+
+      <ConsultationModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </section>
   );
 }
