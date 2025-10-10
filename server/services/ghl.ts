@@ -168,6 +168,7 @@ class GoHighLevelService {
     
     // Step 2: Update custom fields using PUT endpoint
     // Format: customFields array with { key: "contact.fieldname", field_value: value }
+    // Note: Keys must match EXACTLY what's configured in GHL (including typos like "timetamp")
     const customFields = [
       { key: 'contact.method', field_value: method },
       { 
@@ -177,7 +178,7 @@ class GoHighLevelService {
           formData.smsConsentText || ''
         ].filter(t => t).join(' | ')
       },
-      { key: 'contact.timestamp', field_value: timestamp },
+      { key: 'contact.timetamp', field_value: timestamp }, // Note: GHL has typo "timetamp" not "timestamp"
       { key: 'contact.ip', field_value: formData.ipAddress || 'unknown' },
       { key: 'contact.useragent', field_value: formData.userAgent || 'unknown' },
       { key: 'contact.pageurl', field_value: formData.pageUrl || 'unknown' },
