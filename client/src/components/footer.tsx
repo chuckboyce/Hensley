@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
-import eho_logo from "@assets/eho_logo.png";
+import ehoLogo from "@assets/eho_logo_1760104830421.png";
+import realtorLogo from "@assets/realtor_logo_1760104830430.png";
 
 export default function Footer() {
   const scrollToSection = (id: string) => {
@@ -75,13 +76,13 @@ export default function Footer() {
               </p>
               <div className="flex items-center space-x-4 mb-4">
                 <img 
-                  src="/attached_assets/eho_logo.png" 
+                  src={ehoLogo} 
                   alt="Equal Housing Opportunity" 
                   className="h-12 w-auto"
                   data-testid="img-eho-logo"
                 />
                 <img 
-                  src={eho_logo} 
+                  src={realtorLogo} 
                   alt="Realtor" 
                   className="h-12 w-auto"
                   data-testid="img-realtor-logo"
