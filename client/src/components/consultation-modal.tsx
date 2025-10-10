@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertContactSchema, type InsertContact } from "@shared/schema";
+import { getBrowserMetadata, CONSENT_TEXT } from "@/lib/browser-metadata";
 import {
   Dialog,
   DialogContent,
@@ -72,7 +73,18 @@ export default function ConsultationModal({ open, onOpenChange }: ConsultationMo
   });
 
   const onSubmit = (data: InsertContact) => {
-    consultationMutation.mutate(data);
+    const browserMetadata = getBrowserMetadata();
+    
+    const submissionData: InsertContact = {
+      ...data,
+      userAgent: browserMetadata.userAgent,
+      pageUrl: browserMetadata.pageUrl,
+      referrer: browserMetadata.referrer,
+      emailConsentText: data.emailOptIn ? CONSENT_TEXT.email : undefined,
+      smsConsentText: data.smsOptIn ? CONSENT_TEXT.sms : undefined
+    };
+    
+    consultationMutation.mutate(submissionData);
   };
 
   return (
