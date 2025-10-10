@@ -4,6 +4,8 @@ import kevinHensleyHeadshot from "@assets/Generated Image September 03, 2025 - 3
 
 import kevin_hensley_delaware_realtor from "@assets/kevin_hensley_delaware_realtor.jpeg";
 
+import IMG_0525 from "@assets/IMG_0525.jpeg";
+
 export default function About() {
   return (
     <section id="about" className="py-20 bg-background">
@@ -11,7 +13,7 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
             <img 
-              src={kevin_hensley_delaware_realtor} 
+              src={IMG_0525} 
               alt="Professional headshot of Kevin Hensley, local real estate agent" 
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto" 
             />
