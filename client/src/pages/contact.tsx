@@ -12,6 +12,7 @@ import { Phone, Mail, MapPin, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 import remaxLogo from "@assets/remax_2025_logo_1760103527751.png";
 import hhLogo from "@assets/HH_logotype_1757349200633.png";
+import { getBrowserMetadata, CONSENT_TEXT } from "@/lib/browser-metadata";
 
 interface ContactFormData {
   firstName: string;
@@ -78,7 +79,19 @@ export default function Contact() {
       });
       return;
     }
-    contactMutation.mutate(formData);
+    
+    const browserMetadata = getBrowserMetadata();
+    
+    const submissionData = {
+      ...formData,
+      userAgent: browserMetadata.userAgent,
+      pageUrl: browserMetadata.pageUrl,
+      referrer: browserMetadata.referrer,
+      emailConsentText: formData.emailOptIn ? CONSENT_TEXT.email : undefined,
+      smsConsentText: formData.smsOptIn ? CONSENT_TEXT.sms : undefined
+    };
+    
+    contactMutation.mutate(submissionData);
   };
 
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
