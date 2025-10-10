@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Phone, Mail, MapPin, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
+import remaxLogo from "@assets/remax_2025_logo_1760103527751.png";
 
 interface ContactFormData {
   firstName: string;
@@ -204,6 +205,12 @@ export default function Contact() {
             {/* RE/MAX Eagle Realty Information */}
             <div className="bg-card rounded-xl p-8 shadow-lg border border-border">
               <div className="text-center mb-6">
+                <img 
+                  src={remaxLogo} 
+                  alt="RE/MAX Logo" 
+                  className="h-16 mx-auto mb-4"
+                  data-testid="img-remax-logo"
+                />
                 <h2 className="text-2xl font-bold text-primary mb-2">RE/MAX Eagle Realty</h2>
                 <div className="h-12 w-12 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 p-1 border border-border">
                   <img 
