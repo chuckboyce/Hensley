@@ -191,25 +191,25 @@ export default function Contact() {
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
                   <Checkbox
-                    id="emailOptIn"
-                    checked={formData.emailOptIn}
-                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, emailOptIn: checked === true }))}
-                    data-testid="checkbox-email-opt-in"
-                  />
-                  <Label htmlFor="emailOptIn" className="text-sm font-normal cursor-pointer leading-tight">
-                    I agree to receive email communications about my real estate inquiry
-                  </Label>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <Checkbox
                     id="smsOptIn"
                     checked={formData.smsOptIn}
                     onCheckedChange={(checked) => setFormData(prev => ({ ...prev, smsOptIn: checked === true }))}
                     data-testid="checkbox-sms-opt-in"
                   />
                   <Label htmlFor="smsOptIn" className="text-sm font-normal cursor-pointer leading-tight">
-                    I agree to receive SMS/text messages about my real estate inquiry
+                    I agree to receive SMS from Hensleys Homes. Msg & data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. By signing up, you agree to our <a href="/terms-of-use" className="text-primary underline hover:text-primary/80" target="_blank">Terms</a> and <a href="/privacy-policy" className="text-primary underline hover:text-primary/80" target="_blank">Privacy Policy</a>.
+                  </Label>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="emailOptIn"
+                    checked={formData.emailOptIn}
+                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, emailOptIn: checked === true }))}
+                    data-testid="checkbox-email-opt-in"
+                  />
+                  <Label htmlFor="emailOptIn" className="text-sm font-normal cursor-pointer leading-tight">
+                    I agree to receive email from Hensleys Homes. You can unsubscribe anytime. See our <a href="/terms-of-use" className="text-primary underline hover:text-primary/80" target="_blank">Terms</a> and <a href="/privacy-policy" className="text-primary underline hover:text-primary/80" target="_blank">Privacy Policy</a>.
                   </Label>
                 </div>
               </div>
