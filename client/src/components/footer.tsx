@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
+import eho_logo from "@assets/eho_logo.png";
+
 export default function Footer() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -46,7 +48,6 @@ export default function Footer() {
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="bg-secondary border-t border-border">
         <div className="container mx-auto px-4 lg:px-6 py-12">
@@ -74,7 +75,7 @@ export default function Footer() {
               </p>
               <div className="flex items-center space-x-4 mb-4">
                 <img 
-                  src="/attached_assets/eho_logo_1760104830421.png" 
+                  src={eho_logo} 
                   alt="Equal Housing Opportunity" 
                   className="h-12 w-auto"
                   data-testid="img-eho-logo"
