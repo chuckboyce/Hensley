@@ -7,52 +7,52 @@ To enable full compliance tracking and metadata capture, you need to create cust
 
 Create the following custom fields in **Settings > Custom Fields** in your GoHighLevel account:
 
-### 1. **method**
+### 1. **contact.method**
 - **Type:** Text (Single Line)
 - **Label:** Submission Method
 - **Description:** How the contact was submitted (e.g., "webform")
 
-### 2. **textshown**
+### 2. **contact.textshown**
 - **Type:** Text (Multi Line) or Text Area
 - **Label:** Consent Text Shown
 - **Description:** The exact consent language shown to the user
 
-### 3. **timestamp**
+### 3. **contact.timestamp**
 - **Type:** Text (Single Line) or Date/Time
 - **Label:** Submission Timestamp
 - **Description:** When the form was submitted (UTC ISO8601 format)
 
-### 4. **ip**
+### 4. **contact.ip**
 - **Type:** Text (Single Line)
 - **Label:** IP Address
 - **Description:** User's IP address at time of submission
 
-### 5. **useragent**
+### 5. **contact.useragent**
 - **Type:** Text (Multi Line)
 - **Label:** User Agent
 - **Description:** Browser user agent string
 
-### 6. **pageurl**
+### 6. **contact.pageurl**
 - **Type:** Text (Single Line)
 - **Label:** Page URL
 - **Description:** The URL where the form was submitted
 
-### 7. **referrer**
+### 7. **contact.referrer**
 - **Type:** Text (Single Line)
 - **Label:** Referrer
 - **Description:** The referring page URL (or "direct" if none)
 
-### 8. **consentsms**
+### 8. **contact.consentsms**
 - **Type:** Checkbox or Text
 - **Label:** SMS Consent
 - **Description:** Whether user opted in to SMS (true/false)
 
-### 9. **consentemail**
+### 9. **contact.consentemail**
 - **Type:** Checkbox or Text
 - **Label:** Email Consent
 - **Description:** Whether user opted in to Email (true/false)
 
-### 10. **evidenceid**
+### 10. **contact.evidenceid**
 - **Type:** Text (Single Line)
 - **Label:** Evidence ID
 - **Description:** Database record ID linking to full audit trail
@@ -67,15 +67,15 @@ Create the following custom fields in **Settings > Custom Fields** in your GoHig
 2. **Create Each Field:**
    - Click **+ Add Custom Field**
    - Select **Contact** as the object type
-   - Enter the field name **exactly as shown above** (e.g., `method`, `timestamp`, etc.)
+   - Enter the field name **exactly as shown above** including the `contact.` prefix (e.g., `contact.method`, `contact.timestamp`, etc.)
    - Choose the appropriate field type
    - Add a label and description
    - Save the field
 
 3. **Important Notes:**
    - Field names are **case-sensitive** and must match exactly
-   - Do NOT add `contact.` prefix when creating fields
-   - The API will automatically use the correct field keys
+   - The `contact.` prefix is **required** and must be included in the field name
+   - The full field name format is: `contact.fieldname` (e.g., `contact.method`, `contact.ip`)
    - All fields are optional - the system will work without them but won't track compliance metadata
 
 ## Current Behavior

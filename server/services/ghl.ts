@@ -90,7 +90,7 @@ class GoHighLevelService {
       if (errorText.includes('customField')) {
         console.warn('⚠️ Custom fields not configured in GHL. Creating contact without custom fields.');
         console.warn('💡 To enable custom fields, create these fields in GHL Settings > Custom Fields:');
-        console.warn('   - method, textshown, timestamp, ip, useragent, pageurl, referrer, consentsms, consentemail, evidenceid');
+        console.warn('   - contact.method, contact.textshown, contact.timestamp, contact.ip, contact.useragent, contact.pageurl, contact.referrer, contact.consentsms, contact.consentemail, contact.evidenceid');
         
         // Retry without custom fields
         const payloadWithoutCustomFields = {
@@ -149,21 +149,21 @@ class GoHighLevelService {
     
     const timestamp = formData.timestamp || new Date().toISOString();
     
-    // Build custom fields object with GHL field names
+    // Build custom fields object with GHL field names (contact. prefix required)
     const customField: Record<string, any> = {
-      method: 'webform',
-      textshown: [
+      'contact.method': 'webform',
+      'contact.textshown': [
         formData.emailConsentText || '',
         formData.smsConsentText || ''
       ].filter(t => t).join(' | '),
-      timestamp: timestamp,
-      ip: formData.ipAddress || 'unknown',
-      useragent: formData.userAgent || 'unknown',
-      pageurl: formData.pageUrl || 'unknown',
-      referrer: formData.referrer || 'direct',
-      consentsms: formData.smsOptIn || false,
-      consentemail: formData.emailOptIn || false,
-      evidenceid: formData.evidenceId || ''
+      'contact.timestamp': timestamp,
+      'contact.ip': formData.ipAddress || 'unknown',
+      'contact.useragent': formData.userAgent || 'unknown',
+      'contact.pageurl': formData.pageUrl || 'unknown',
+      'contact.referrer': formData.referrer || 'direct',
+      'contact.consentsms': formData.smsOptIn || false,
+      'contact.consentemail': formData.emailOptIn || false,
+      'contact.evidenceid': formData.evidenceId || ''
     };
     
     const ghlData: GHLContactData = {
