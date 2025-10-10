@@ -95,22 +95,15 @@ class GoHighLevelService {
    */
   async updateContactCustomFields(
     contactId: string,
-    customFields: Array<{ key: string; field_value: any }>,
-    contactInfo?: { firstName?: string; lastName?: string; email?: string; phone?: string }
+    customFields: Array<{ key: string; field_value: any }>
   ): Promise<void> {
     const url = `${this.baseUrl}/contacts/${contactId}`;
     
-    // Include basic contact info if provided (may be required for custom fields to update)
-    const payload: any = {
+    // GHL PUT endpoint for custom fields
+    // Note: locationId causes 422 error "property locationId should not exist"
+    const payload = {
       customFields
     };
-    
-    if (contactInfo) {
-      if (contactInfo.firstName) payload.firstName = contactInfo.firstName;
-      if (contactInfo.lastName) payload.lastName = contactInfo.lastName;
-      if (contactInfo.email) payload.email = contactInfo.email;
-      if (contactInfo.phone) payload.phone = contactInfo.phone;
-    }
 
     console.log('📝 Updating custom fields for contact:', contactId);
     console.log('📝 Payload:', JSON.stringify(payload, null, 2));
@@ -178,6 +171,9 @@ class GoHighLevelService {
     // Step 2: Update custom fields using PUT endpoint
     // Format: customFields array with { key: "contact.fieldname", field_value: value }
     // Note: Keys must match EXACTLY what's configured in GHL (including typos like "timetamp")
+    // DATE fields must use YYYY-MM-DD format, not full ISO timestamp
+    const dateOnly = timestamp.split('T')[0]; // Convert "2025-10-10T20:29:28.029Z" to "2025-10-10"
+    
     const customFields = [
       { key: 'contact.method', field_value: method },
       { 
@@ -187,7 +183,7 @@ class GoHighLevelService {
           formData.smsConsentText || ''
         ].filter(t => t).join(' | ')
       },
-      { key: 'contact.timetamp', field_value: timestamp }, // Note: GHL has typo "timetamp" not "timestamp"
+      { key: 'contact.timetamp', field_value: dateOnly }, // DATE type requires YYYY-MM-DD format
       { key: 'contact.ip', field_value: formData.ipAddress || 'unknown' },
       { key: 'contact.useragent', field_value: formData.userAgent || 'unknown' },
       { key: 'contact.pageurl', field_value: formData.pageUrl || 'unknown' },
@@ -198,12 +194,7 @@ class GoHighLevelService {
     ];
     
     try {
-      await this.updateContactCustomFields(contact.id, customFields, {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone
-      });
+      await this.updateContactCustomFields(contact.id, customFields);
       console.log('✅ Custom fields updated successfully for contact:', contact.id);
     } catch (error) {
       console.warn('⚠️ Failed to update custom fields (contact created successfully):', error);
