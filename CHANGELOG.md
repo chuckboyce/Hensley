@@ -2,6 +2,25 @@
 
 All notable changes to the Kevin Hensley real estate website will be documented in this file.
 
+## [1.1.0] - 2025-10-10
+
+### Changed
+- **GoHighLevel Integration**: Refactored to use official `@gohighlevel/api-client` SDK
+  - Replaced manual fetch API calls with SDK methods for cleaner, more maintainable code
+  - Contact creation now uses `contacts.upsertContact()` method
+  - Custom field updates use `contacts.updateContact()` method
+  - Custom field definitions fetched via `locations.getCustomFields()` method
+  - Conversation messages posted via SDK's generic `request()` method
+  - All 10 custom compliance fields continue to populate correctly
+  - Authentication using private integration token via `GHL_SECRET` environment variable
+  - Dynamic field ID mapping maintained for proper custom field updates
+
+### Technical Details
+- Updated `server/services/ghl.ts` to use `@gohighlevel/api-client` package
+- Maintained existing error handling and fallback mechanisms
+- All functionality verified working with SDK implementation
+- Documentation updated in `replit.md` to reflect SDK usage
+
 ## [Initial Release] - 2025-01-09
 
 ### Added
