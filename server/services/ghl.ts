@@ -59,14 +59,6 @@ class GoHighLevelService {
   async createContact(contactData: GHLContactData): Promise<GHLContact> {
     const url = `${this.baseUrl}/contacts/`;
     
-    // Convert customFields object to array format required by GHL API
-    const customFieldsArray = contactData.customFields 
-      ? Object.entries(contactData.customFields).map(([key, value]) => ({
-          key,
-          field_value: value
-        }))
-      : [];
-    
     const payload = {
       firstName: contactData.firstName,
       lastName: contactData.lastName,
@@ -74,9 +66,15 @@ class GoHighLevelService {
       phone: contactData.phone || '',
       source: contactData.source,
       locationId: this.locationId,
-      tags: contactData.tags || [],
-      customFields: customFieldsArray
+      tags: contactData.tags || []
     };
+    
+    // Only include customFields if provided and properly structured with GHL field IDs
+    if (contactData.customFields && Object.keys(contactData.customFields).length > 0) {
+      // Note: customFields in GHL require actual field IDs from your GHL account
+      // For now we're not using custom fields - all info is captured via source, tags, and notes
+      console.warn('Custom fields provided but not configured for GHL integration');
+    }
 
     const response = await fetch(url, {
       method: 'POST',
@@ -113,11 +111,8 @@ class GoHighLevelService {
       lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
-      source: 'Website Contact Form',
-      tags: ['Website Lead', 'Real Estate Inquiry', formData.service],
-      customFields: {
-        'lead_source': 'hensleys-homes.com'
-      }
+      source: 'hensleys-homes.com - Contact Form',
+      tags: ['Website Lead', 'Real Estate Inquiry', formData.service]
     };
 
     const contact = await this.createContact(ghlData);
