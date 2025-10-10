@@ -68,6 +68,61 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Resend a contact to GoHighLevel (creates contact + sends messages)
+  app.post("/api/contacts/:id/resend-to-ghl", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { ghlContactId } = req.body; // Optional: specify existing GHL contact ID
+      
+      const contacts = await storage.getContacts();
+      const contact = contacts.find(c => c.id === id);
+      
+      if (!contact) {
+        return res.status(404).json({ error: "Contact not found" });
+      }
+
+      console.log(`📤 Resending contact ${id} to GoHighLevel...`);
+
+      // Prepare data for GHL
+      const ghlFormData = {
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
+        phone: contact.phone || undefined,
+        service: contact.service,
+        message: contact.message,
+        method: contact.method || 'webform',
+        emailOptIn: contact.emailOptIn,
+        smsOptIn: contact.smsOptIn,
+        emailConsentText: contact.emailConsentText || undefined,
+        smsConsentText: contact.smsConsentText || undefined,
+        userAgent: contact.userAgent || undefined,
+        pageUrl: contact.pageUrl || undefined,
+        referrer: contact.referrer || undefined,
+        ipAddress: contact.ipAddress || undefined,
+        evidenceId: contact.id,
+        timestamp: contact.timestamp?.toISOString() || new Date().toISOString()
+      };
+
+      const ghlContact = await ghlService.createContactFromForm(ghlFormData);
+      
+      console.log(`✅ Successfully resent contact to GHL: ${ghlContact.id}`);
+      
+      res.json({
+        success: true,
+        message: "Contact resent to GoHighLevel successfully",
+        ghlContactId: ghlContact.id,
+        localContactId: contact.id
+      });
+    } catch (error) {
+      console.error("❌ Error resending contact to GHL:", error);
+      res.status(500).json({ 
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to resend contact" 
+      });
+    }
+  });
+
   // List all properties
   app.get("/api/properties", async (req, res) => {
     try {
