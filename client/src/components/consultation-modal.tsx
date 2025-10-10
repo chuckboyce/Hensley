@@ -1,5 +1,7 @@
-import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { insertContactSchema, type InsertContact } from "@shared/schema";
 import {
   Dialog,
   DialogContent,
@@ -12,17 +14,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-
-interface ConsultationFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  service: string;
-  message: string;
-}
 
 interface ConsultationModalProps {
   open: boolean;
@@ -30,20 +31,23 @@ interface ConsultationModalProps {
 }
 
 export default function ConsultationModal({ open, onOpenChange }: ConsultationModalProps) {
-  const [formData, setFormData] = useState<ConsultationFormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
-
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
+  const form = useForm<InsertContact>({
+    resolver: zodResolver(insertContactSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      service: '',
+      message: ''
+    },
+  });
+
   const consultationMutation = useMutation({
-    mutationFn: async (data: ConsultationFormData) => {
+    mutationFn: async (data: InsertContact) => {
       return await apiRequest('POST', '/api/contacts', data);
     },
     onSuccess: () => {
@@ -51,14 +55,7 @@ export default function ConsultationModal({ open, onOpenChange }: ConsultationMo
         title: "Consultation request sent!",
         description: "We'll contact you within 24 hours to schedule your free consultation.",
       });
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        service: '',
-        message: ''
-      });
+      form.reset();
       queryClient.invalidateQueries({ queryKey: ['/api/contacts'] });
       onOpenChange(false);
     },
@@ -71,20 +68,8 @@ export default function ConsultationModal({ open, onOpenChange }: ConsultationMo
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.service || !formData.message) {
-      toast({
-        title: "Please fill in all required fields",
-        variant: "destructive",
-      });
-      return;
-    }
-    consultationMutation.mutate(formData);
-  };
-
-  const handleInputChange = (field: keyof ConsultationFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const onSubmit = (data: InsertContact) => {
+    consultationMutation.mutate(data);
   };
 
   return (
@@ -97,94 +82,107 @@ export default function ConsultationModal({ open, onOpenChange }: ConsultationMo
           </DialogDescription>
         </DialogHeader>
         
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
           <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="modal-firstName" className="block text-sm font-medium text-foreground mb-2">
-                First Name *
-              </Label>
-              <Input 
-                type="text" 
-                id="modal-firstName"
-                value={formData.firstName}
-                onChange={(e) => handleInputChange('firstName', e.target.value)}
-                required
-                data-testid="modal-input-first-name"
-              />
-            </div>
-            <div>
-              <Label htmlFor="modal-lastName" className="block text-sm font-medium text-foreground mb-2">
-                Last Name *
-              </Label>
-              <Input 
-                type="text" 
-                id="modal-lastName"
-                value={formData.lastName}
-                onChange={(e) => handleInputChange('lastName', e.target.value)}
-                required
-                data-testid="modal-input-last-name"
-              />
-            </div>
-          </div>
-          
-          <div>
-            <Label htmlFor="modal-email" className="block text-sm font-medium text-foreground mb-2">
-              Email *
-            </Label>
-            <Input 
-              type="email" 
-              id="modal-email"
-              value={formData.email}
-              onChange={(e) => handleInputChange('email', e.target.value)}
-              required
-              data-testid="modal-input-email"
+            <FormField
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>First Name *</FormLabel>
+                  <FormControl>
+                    <Input {...field} data-testid="modal-input-first-name" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name *</FormLabel>
+                  <FormControl>
+                    <Input {...field} data-testid="modal-input-last-name" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
           </div>
           
-          <div>
-            <Label htmlFor="modal-phone" className="block text-sm font-medium text-foreground mb-2">
-              Phone
-            </Label>
-            <Input 
-              type="tel" 
-              id="modal-phone"
-              value={formData.phone}
-              onChange={(e) => handleInputChange('phone', e.target.value)}
-              data-testid="modal-input-phone"
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email *</FormLabel>
+                <FormControl>
+                  <Input type="email" {...field} data-testid="modal-input-email" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           
-          <div>
-            <Label className="block text-sm font-medium text-foreground mb-2">
-              How can we help? *
-            </Label>
-            <Select value={formData.service} onValueChange={(value) => handleInputChange('service', value)}>
-              <SelectTrigger data-testid="modal-select-service">
-                <SelectValue placeholder="Select a service" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="buying">Buying a Home</SelectItem>
-                <SelectItem value="selling">Selling a Home</SelectItem>
-                <SelectItem value="property-management">Property Management</SelectItem>
-                <SelectItem value="consultation">General Consultation</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone</FormLabel>
+                <FormControl>
+                  <Input type="tel" {...field} value={field.value || ''} data-testid="modal-input-phone" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           
-          <div>
-            <Label htmlFor="modal-message" className="block text-sm font-medium text-foreground mb-2">
-              Tell us about your needs *
-            </Label>
-            <Textarea 
-              id="modal-message"
-              rows={3}
-              value={formData.message}
-              onChange={(e) => handleInputChange('message', e.target.value)}
-              placeholder="What are your real estate goals? What's your timeline?"
-              required
-              data-testid="modal-textarea-message"
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name="service"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>How can we help? *</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger data-testid="modal-select-service">
+                      <SelectValue placeholder="Select a service" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="buying">Buying a Home</SelectItem>
+                    <SelectItem value="selling">Selling a Home</SelectItem>
+                    <SelectItem value="property-management">Property Management</SelectItem>
+                    <SelectItem value="consultation">General Consultation</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tell us about your needs *</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    {...field}
+                    rows={3}
+                    placeholder="What are your real estate goals? What's your timeline?"
+                    data-testid="modal-textarea-message"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           
           <div className="flex gap-3 pt-4">
             <Button 
@@ -205,7 +203,8 @@ export default function ConsultationModal({ open, onOpenChange }: ConsultationMo
               {consultationMutation.isPending ? 'Sending...' : 'Request Consultation'}
             </Button>
           </div>
-        </form>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );

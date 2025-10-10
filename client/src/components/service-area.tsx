@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { serviceAreas } from "@/data/mock-data";
 import middletownImage from "@assets/Middletown_DE_1757012981537.jpg";
+import ConsultationModal from "@/components/consultation-modal";
 
 export default function ServiceArea() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4 lg:px-6">
@@ -40,6 +43,7 @@ export default function ServiceArea() {
             
             <div className="flex justify-center">
               <Button 
+                onClick={() => setIsModalOpen(true)}
                 className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg flex items-center gap-2"
                 data-testid="button-schedule-consultation"
               >
@@ -50,6 +54,8 @@ export default function ServiceArea() {
           </div>
         </div>
       </div>
+
+      <ConsultationModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </section>
   );
 }

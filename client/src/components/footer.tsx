@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import ehoLogo from "@assets/eho_logo_1760104830421.png";
 import realtorLogo from "@assets/realtor_logo_1760104830430.png";
+import ConsultationModal from "@/components/consultation-modal";
 
 export default function Footer() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -36,15 +40,14 @@ export default function Footer() {
             >
               <a href="tel:(302) 218-0130">Call (302) 218-0130</a>
             </Button>
-            <Link href="/contact">
-              <Button 
-                variant="outline"
-                className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-2 border-primary-foreground/20 px-8 py-4 rounded-lg font-semibold text-lg"
-                data-testid="button-schedule-consultation-footer"
-              >
-                Schedule Free Consultation
-              </Button>
-            </Link>
+            <Button 
+              onClick={() => setIsModalOpen(true)}
+              variant="outline"
+              className="bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground border-2 border-primary-foreground/20 px-8 py-4 rounded-lg font-semibold text-lg"
+              data-testid="button-schedule-consultation-footer"
+            >
+              Schedule Free Consultation
+            </Button>
           </div>
         </div>
       </section>
@@ -166,6 +169,8 @@ export default function Footer() {
           </div>
         </div>
       </footer>
+
+      <ConsultationModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </>
   );
 }
