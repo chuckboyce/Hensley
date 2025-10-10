@@ -74,7 +74,7 @@ class GoHighLevelService {
       Object.assign(payload, { customField: contactData.customField });
     }
 
-    const response = await fetch(url, {
+    let response = await fetch(url, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${this.apiKey}`,
@@ -83,6 +83,37 @@ class GoHighLevelService {
       },
       body: JSON.stringify(payload)
     });
+
+    // If custom fields error (422), retry without custom fields
+    if (!response.ok && response.status === 422) {
+      const errorText = await response.text();
+      if (errorText.includes('customField')) {
+        console.warn('⚠️ Custom fields not configured in GHL. Creating contact without custom fields.');
+        console.warn('💡 To enable custom fields, create these fields in GHL Settings > Custom Fields:');
+        console.warn('   - method, textshown, timestamp, ip, useragent, pageurl, referrer, consentsms, consentemail, evidenceid');
+        
+        // Retry without custom fields
+        const payloadWithoutCustomFields = {
+          firstName: contactData.firstName,
+          lastName: contactData.lastName,
+          email: contactData.email,
+          phone: contactData.phone || '',
+          source: contactData.source,
+          locationId: this.locationId,
+          tags: contactData.tags || []
+        };
+        
+        response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${this.apiKey}`,
+            'Content-Type': 'application/json',
+            'Version': '2021-07-28'
+          },
+          body: JSON.stringify(payloadWithoutCustomFields)
+        });
+      }
+    }
 
     if (!response.ok) {
       const errorText = await response.text();
