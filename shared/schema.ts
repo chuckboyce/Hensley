@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer, decimal } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, decimal, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -17,6 +17,8 @@ export const contacts = pgTable("contacts", {
   phone: text("phone"),
   service: text("service").notNull(),
   message: text("message").notNull(),
+  emailOptIn: boolean("email_opt_in").default(false).notNull(),
+  smsOptIn: boolean("sms_opt_in").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -32,6 +34,8 @@ export const insertContactSchema = createInsertSchema(contacts).pick({
   phone: true,
   service: true,
   message: true,
+  emailOptIn: true,
+  smsOptIn: true,
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;

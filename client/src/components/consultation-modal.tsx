@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -42,7 +43,9 @@ export default function ConsultationModal({ open, onOpenChange }: ConsultationMo
       email: '',
       phone: '',
       service: '',
-      message: ''
+      message: '',
+      emailOptIn: false,
+      smsOptIn: false
     },
   });
 
@@ -183,6 +186,50 @@ export default function ConsultationModal({ open, onOpenChange }: ConsultationMo
               </FormItem>
             )}
           />
+          
+          <div className="space-y-3 pt-2">
+            <FormField
+              control={form.control}
+              name="emailOptIn"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      data-testid="modal-checkbox-email-opt-in"
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel className="text-sm font-normal">
+                      I agree to receive email communications about my real estate inquiry
+                    </FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="smsOptIn"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      data-testid="modal-checkbox-sms-opt-in"
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel className="text-sm font-normal">
+                      I agree to receive SMS/text messages about my real estate inquiry
+                    </FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+          </div>
           
           <div className="flex gap-3 pt-4">
             <Button 
