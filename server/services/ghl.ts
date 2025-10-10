@@ -134,6 +134,7 @@ class GoHighLevelService {
     phone?: string;
     service: string;
     message: string;
+    method?: string;
     emailOptIn?: boolean;
     smsOptIn?: boolean;
     emailConsentText?: string;
@@ -148,10 +149,11 @@ class GoHighLevelService {
     const tags = ['Website Lead', 'Real Estate Inquiry', formData.service];
     
     const timestamp = formData.timestamp || new Date().toISOString();
+    const method = formData.method || 'webform';
     
     // Build custom fields object with GHL field names (contact. prefix required)
     const customField: Record<string, any> = {
-      'contact.method': 'webform',
+      'contact.method': method,
       'contact.textshown': [
         formData.emailConsentText || '',
         formData.smsConsentText || ''
@@ -239,6 +241,7 @@ class GoHighLevelService {
       phone?: string | null;
       service: string;
       message: string;
+      method?: string;
       emailOptIn?: boolean;
       smsOptIn?: boolean;
       emailConsentText?: string;
@@ -247,6 +250,7 @@ class GoHighLevelService {
       pageUrl?: string;
       referrer?: string;
       ipAddress?: string;
+      timestamp?: Date;
     },
     localStorageBackup: (data: any) => Promise<any>
   ): Promise<{
@@ -268,8 +272,8 @@ class GoHighLevelService {
     let ghlError = null;
     
     try {
-      // Convert null phone to undefined for GHL service and pass all metadata
-      const timestamp = new Date().toISOString();
+      // Convert timestamp Date to ISO string for GHL service
+      const timestamp = formData.timestamp ? formData.timestamp.toISOString() : new Date().toISOString();
       const ghlFormData = {
         ...formData,
         phone: formData.phone || undefined,

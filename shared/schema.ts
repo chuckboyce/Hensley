@@ -52,6 +52,8 @@ export const insertContactSchema = createInsertSchema(contacts).pick({
   referrer: true,
   ipAddress: true,
   timestamp: true,
+}).extend({
+  timestamp: z.coerce.date().optional()
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
