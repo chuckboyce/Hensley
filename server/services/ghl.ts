@@ -59,6 +59,14 @@ class GoHighLevelService {
   async createContact(contactData: GHLContactData): Promise<GHLContact> {
     const url = `${this.baseUrl}/contacts/`;
     
+    // Convert customFields object to array format required by GHL API
+    const customFieldsArray = contactData.customFields 
+      ? Object.entries(contactData.customFields).map(([key, value]) => ({
+          key,
+          field_value: value
+        }))
+      : [];
+    
     const payload = {
       firstName: contactData.firstName,
       lastName: contactData.lastName,
@@ -67,7 +75,7 @@ class GoHighLevelService {
       source: contactData.source,
       locationId: this.locationId,
       tags: contactData.tags || [],
-      customFields: contactData.customFields || {}
+      customFields: customFieldsArray
     };
 
     const response = await fetch(url, {
