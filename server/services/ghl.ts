@@ -90,8 +90,32 @@ class GoHighLevelService {
   }
 
   /**
+   * Fetches custom field definitions to get their IDs
+   */
+  async getCustomFieldDefinitions(): Promise<Array<{ id: string; key: string; name: string }>> {
+    const url = `${this.baseUrl}/locations/${this.locationId}/customFields`;
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${this.apiKey}`,
+        'Accept': 'application/json',
+        'Version': '2021-07-28'
+      }
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch custom field definitions: ${errorText}`);
+    }
+
+    const result = await response.json();
+    return result.customFields || [];
+  }
+
+  /**
    * Updates custom fields for an existing contact using PUT endpoint
-   * Format: customFields array with { key: "contact.fieldname", field_value: value }
+   * Format: customFields array with { id: "field_id", key: "contact.fieldname", field_value: value }
    */
   async updateContactCustomFields(
     contactId: string,
@@ -99,10 +123,32 @@ class GoHighLevelService {
   ): Promise<void> {
     const url = `${this.baseUrl}/contacts/${contactId}`;
     
-    // GHL PUT endpoint for custom fields
-    // Note: locationId causes 422 error "property locationId should not exist"
+    // First, fetch custom field definitions to get their IDs
+    console.log('📝 Fetching custom field definitions...');
+    const fieldDefinitions = await this.getCustomFieldDefinitions();
+    console.log('📝 Found custom field definitions:', JSON.stringify(fieldDefinitions, null, 2));
+    
+    // Map field keys to their IDs
+    const fieldKeyToId = new Map<string, string>();
+    for (const field of fieldDefinitions) {
+      fieldKeyToId.set(field.key, field.id);
+    }
+    
+    // Add IDs to custom fields (required by GHL API)
+    const customFieldsWithIds = customFields.map(field => {
+      const fieldId = fieldKeyToId.get(field.key);
+      if (!fieldId) {
+        console.warn(`⚠️ No field ID found for key: ${field.key}`);
+      }
+      return {
+        id: fieldId || '',
+        key: field.key,
+        field_value: field.field_value
+      };
+    });
+    
     const payload = {
-      customFields
+      customFields: customFieldsWithIds
     };
 
     console.log('📝 Updating custom fields for contact:', contactId);
