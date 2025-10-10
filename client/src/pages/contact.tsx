@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Phone, Mail, MapPin, ArrowLeft } from "lucide-react";
@@ -19,6 +20,8 @@ interface ContactFormData {
   phone: string;
   service: string;
   message: string;
+  emailOptIn: boolean;
+  smsOptIn: boolean;
 }
 
 export default function Contact() {
@@ -28,7 +31,9 @@ export default function Contact() {
     email: '',
     phone: '',
     service: '',
-    message: ''
+    message: '',
+    emailOptIn: false,
+    smsOptIn: false
   });
 
   const { toast } = useToast();
@@ -49,7 +54,9 @@ export default function Contact() {
         email: '',
         phone: '',
         service: '',
-        message: ''
+        message: '',
+        emailOptIn: false,
+        smsOptIn: false
       });
       queryClient.invalidateQueries({ queryKey: ['/api/contacts'] });
     },
@@ -187,6 +194,32 @@ export default function Contact() {
                   required
                   data-testid="textarea-message"
                 />
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="emailOptIn"
+                    checked={formData.emailOptIn}
+                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, emailOptIn: checked === true }))}
+                    data-testid="checkbox-email-opt-in"
+                  />
+                  <Label htmlFor="emailOptIn" className="text-sm font-normal cursor-pointer leading-tight">
+                    I agree to receive email communications about my real estate inquiry
+                  </Label>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="smsOptIn"
+                    checked={formData.smsOptIn}
+                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, smsOptIn: checked === true }))}
+                    data-testid="checkbox-sms-opt-in"
+                  />
+                  <Label htmlFor="smsOptIn" className="text-sm font-normal cursor-pointer leading-tight">
+                    I agree to receive SMS/text messages about my real estate inquiry
+                  </Label>
+                </div>
               </div>
               
               <Button 
