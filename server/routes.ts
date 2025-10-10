@@ -26,6 +26,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GHL Health check endpoint
+  app.get("/api/ghl/health", async (req, res) => {
+    try {
+      const health = await ghlService.healthCheck();
+      res.json(health);
+    } catch (error) {
+      console.error("Error checking GHL health:", error);
+      res.status(500).json({ 
+        status: 'error', 
+        message: error instanceof Error ? error.message : 'Unknown error' 
+      });
+    }
+  });
+
   // Get all contacts (for admin purposes)
   app.get("/api/contacts", async (req, res) => {
     try {
