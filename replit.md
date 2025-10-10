@@ -72,11 +72,14 @@ Preferred communication style: Simple, everyday language.
 - **Unsplash**: External image hosting for property photos and stock imagery
 - **Replit**: Development environment integration with custom plugins and banners
 - **GoHighLevel (GHL)**: CRM integration for lead capture and automated follow-up
+  - **SDK**: Uses official `@gohighlevel/api-client` npm package for all API interactions
+  - **Authentication**: Private integration token via `GHL_SECRET` environment variable
   - **Custom Fields**: 10 compliance tracking fields (all prefixed with `contact.`):
-    - `contact.method`, `contact.textshown`, `contact.timestamp`, `contact.ip`
+    - `contact.method`, `contact.textshown`, `contact.timetamp` (note typo in GHL), `contact.ip`
     - `contact.useragent`, `contact.pageurl`, `contact.referrer`
     - `contact.consentsms`, `contact.consentemail`, `contact.evidenceid`
   - **Important**: Custom field names MUST include the `contact.` prefix when sending to GHL API
+  - **Custom Field IDs**: Field definitions are fetched dynamically to map field keys to their unique IDs
   - **Fallback**: If custom fields aren't configured, contacts are created without them (metadata saved locally)
 
 ## Runtime Libraries
