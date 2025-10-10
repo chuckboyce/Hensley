@@ -91,6 +91,7 @@ class GoHighLevelService {
 
   /**
    * Fetches custom field definitions to get their IDs
+   * Returns normalized format with key (from fieldKey) for easy mapping
    */
   async getCustomFieldDefinitions(): Promise<Array<{ id: string; key: string; name: string }>> {
     const url = `${this.baseUrl}/locations/${this.locationId}/customFields`;
@@ -110,7 +111,14 @@ class GoHighLevelService {
     }
 
     const result = await response.json();
-    return result.customFields || [];
+    const rawFields = result.customFields || [];
+    
+    // Normalize: GHL returns fieldKey, we map it to key for consistency
+    return rawFields.map((field: any) => ({
+      id: field.id,
+      key: field.fieldKey,  // GHL uses 'fieldKey' not 'key'
+      name: field.name
+    }));
   }
 
   /**
