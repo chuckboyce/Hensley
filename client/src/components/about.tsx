@@ -2,6 +2,8 @@ import { CheckCircle } from "lucide-react";
 import { agentInfo } from "@/data/mock-data";
 import kevinHensleyHeadshot from "@assets/Generated Image September 03, 2025 - 3_19PM_1756927173027.jpeg";
 
+import kevin_hensley_delaware_realtor from "@assets/kevin_hensley_delaware_realtor.jpeg";
+
 export default function About() {
   return (
     <section id="about" className="py-20 bg-background">
@@ -9,7 +11,7 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
             <img 
-              src={kevinHensleyHeadshot} 
+              src={kevin_hensley_delaware_realtor} 
               alt="Professional headshot of Kevin Hensley, local real estate agent" 
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto" 
             />
