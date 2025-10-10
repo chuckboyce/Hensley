@@ -72,6 +72,20 @@ export default function Footer() {
               <p className="text-muted-foreground mb-4 max-w-md">
                 Your trusted local partner for real estate sales and property management services. Serving the community with integrity and expertise.
               </p>
+              <div className="flex items-center space-x-4 mb-4">
+                <img 
+                  src="/attached_assets/eho_logo_1760104830421.png" 
+                  alt="Equal Housing Opportunity" 
+                  className="h-12 w-auto"
+                  data-testid="img-eho-logo"
+                />
+                <img 
+                  src="/attached_assets/realtor_logo_1760104830430.png" 
+                  alt="Realtor" 
+                  className="h-12 w-auto"
+                  data-testid="img-realtor-logo"
+                />
+              </div>
               <div className="flex space-x-4">
                 <a href="https://www.facebook.com/kevin.hensley.5" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="social-facebook-personal">
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
