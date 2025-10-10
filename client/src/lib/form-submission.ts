@@ -14,6 +14,7 @@ export interface FormSubmissionData {
 
 export function prepareContactSubmission(formData: FormSubmissionData): InsertContact {
   const browserMetadata = getBrowserMetadata();
+  const timestamp = new Date();
   
   return {
     firstName: formData.firstName,
@@ -22,12 +23,14 @@ export function prepareContactSubmission(formData: FormSubmissionData): InsertCo
     phone: formData.phone || undefined,
     service: formData.service,
     message: formData.message,
+    method: "webform",
     emailOptIn: formData.emailOptIn,
     smsOptIn: formData.smsOptIn,
     userAgent: browserMetadata.userAgent,
     pageUrl: browserMetadata.pageUrl,
     referrer: browserMetadata.referrer,
     emailConsentText: formData.emailOptIn ? CONSENT_TEXT.email : undefined,
-    smsConsentText: formData.smsOptIn ? CONSENT_TEXT.sms : undefined
+    smsConsentText: formData.smsOptIn ? CONSENT_TEXT.sms : undefined,
+    timestamp
   };
 }
