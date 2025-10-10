@@ -12,21 +12,10 @@ import { Phone, Mail, MapPin, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 import remaxLogo from "@assets/remax_2025_logo_1760103527751.png";
 import hhLogo from "@assets/HH_logotype_1757349200633.png";
-import { getBrowserMetadata, CONSENT_TEXT } from "@/lib/browser-metadata";
-
-interface ContactFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  service: string;
-  message: string;
-  emailOptIn: boolean;
-  smsOptIn: boolean;
-}
+import { prepareContactSubmission, type FormSubmissionData } from "@/lib/form-submission";
 
 export default function Contact() {
-  const [formData, setFormData] = useState<ContactFormData>({
+  const [formData, setFormData] = useState<FormSubmissionData>({
     firstName: '',
     lastName: '',
     email: '',
@@ -41,7 +30,7 @@ export default function Contact() {
   const queryClient = useQueryClient();
 
   const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
+    mutationFn: async (data: FormSubmissionData) => {
       return await apiRequest('POST', '/api/contacts', data);
     },
     onSuccess: () => {
@@ -80,21 +69,11 @@ export default function Contact() {
       return;
     }
     
-    const browserMetadata = getBrowserMetadata();
-    
-    const submissionData = {
-      ...formData,
-      userAgent: browserMetadata.userAgent,
-      pageUrl: browserMetadata.pageUrl,
-      referrer: browserMetadata.referrer,
-      emailConsentText: formData.emailOptIn ? CONSENT_TEXT.email : undefined,
-      smsConsentText: formData.smsOptIn ? CONSENT_TEXT.sms : undefined
-    };
-    
+    const submissionData = prepareContactSubmission(formData);
     contactMutation.mutate(submissionData);
   };
 
-  const handleInputChange = (field: keyof ContactFormData, value: string) => {
+  const handleInputChange = (field: keyof FormSubmissionData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -171,7 +150,7 @@ export default function Contact() {
                 <Input 
                   type="tel" 
                   id="phone"
-                  value={formData.phone}
+                  value={formData.phone || ''}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
                   data-testid="input-phone"
                 />
