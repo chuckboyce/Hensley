@@ -115,7 +115,7 @@ class GoHighLevelService {
 
   /**
    * Updates custom fields for an existing contact using PUT endpoint
-   * Format: customFields array with { id: contactId, key: "contact.fieldname", field_value: value }
+   * Format: customFields array with { id: "field_id", key: "contact.fieldname", field_value: value }
    */
   async updateContactCustomFields(
     contactId: string,
@@ -123,12 +123,29 @@ class GoHighLevelService {
   ): Promise<void> {
     const url = `${this.baseUrl}/contacts/${contactId}`;
     
-    // Add contact ID to each custom field (required by GHL API)
-    const customFieldsWithIds = customFields.map(field => ({
-      id: contactId,
-      key: field.key,
-      field_value: field.field_value
-    }));
+    // First, fetch custom field definitions to get their IDs
+    console.log('📝 Fetching custom field definitions...');
+    const fieldDefinitions = await this.getCustomFieldDefinitions();
+    console.log('📝 Found custom field definitions:', JSON.stringify(fieldDefinitions, null, 2));
+    
+    // Map field keys to their IDs
+    const fieldKeyToId = new Map<string, string>();
+    for (const field of fieldDefinitions) {
+      fieldKeyToId.set(field.key, field.id);
+    }
+    
+    // Add IDs to custom fields (required by GHL API)
+    const customFieldsWithIds = customFields.map(field => {
+      const fieldId = fieldKeyToId.get(field.key);
+      if (!fieldId) {
+        console.warn(`⚠️ No field ID found for key: ${field.key}`);
+      }
+      return {
+        id: fieldId || '',
+        key: field.key,
+        field_value: field.field_value
+      };
+    });
     
     const payload = {
       customFields: customFieldsWithIds
@@ -156,7 +173,6 @@ class GoHighLevelService {
 
     const result = await response.json();
     console.log('📝 GHL response:', JSON.stringify(result, null, 2));
-    console.log('✅ Custom fields updated successfully for contact:', contactId);
   }
 
   /**
