@@ -26,7 +26,7 @@ interface GHLContactData {
   phone?: string;
   source: string;
   tags?: string[];
-  customFields?: Record<string, string>;
+  customField?: Record<string, any>;
 }
 
 interface GHLContact {
@@ -69,11 +69,9 @@ class GoHighLevelService {
       tags: contactData.tags || []
     };
     
-    // Only include customFields if provided and properly structured with GHL field IDs
-    if (contactData.customFields && Object.keys(contactData.customFields).length > 0) {
-      // Note: customFields in GHL require actual field IDs from your GHL account
-      // For now we're not using custom fields - all info is captured via source, tags, and inbound messages
-      console.warn('Custom fields provided but not configured for GHL integration');
+    // Include customField if provided and properly structured with GHL field IDs
+    if (contactData.customField && Object.keys(contactData.customField).length > 0) {
+      Object.assign(payload, { customField: contactData.customField });
     }
 
     const response = await fetch(url, {
@@ -96,7 +94,7 @@ class GoHighLevelService {
   }
 
   /**
-   * Creates a contact from website form data
+   * Creates a contact from website form data with metadata and custom fields
    */
   async createContactFromForm(formData: {
     firstName: string;
@@ -107,16 +105,35 @@ class GoHighLevelService {
     message: string;
     emailOptIn?: boolean;
     smsOptIn?: boolean;
+    emailConsentText?: string;
+    smsConsentText?: string;
+    userAgent?: string;
+    pageUrl?: string;
+    referrer?: string;
+    ipAddress?: string;
+    evidenceId?: string;
+    timestamp?: string;
   }): Promise<GHLContact> {
     const tags = ['Website Lead', 'Real Estate Inquiry', formData.service];
     
-    // Add opt-in tags based on user preferences
-    if (formData.emailOptIn) {
-      tags.push('Email Opt-In');
-    }
-    if (formData.smsOptIn) {
-      tags.push('SMS Opt-In');
-    }
+    const timestamp = formData.timestamp || new Date().toISOString();
+    
+    // Build custom fields object with GHL field names
+    const customField: Record<string, any> = {
+      method: 'webform',
+      textshown: [
+        formData.emailConsentText || '',
+        formData.smsConsentText || ''
+      ].filter(t => t).join(' | '),
+      timestamp: timestamp,
+      ip: formData.ipAddress || 'unknown',
+      useragent: formData.userAgent || 'unknown',
+      pageurl: formData.pageUrl || 'unknown',
+      referrer: formData.referrer || 'direct',
+      consentsms: formData.smsOptIn || false,
+      consentemail: formData.emailOptIn || false,
+      evidenceid: formData.evidenceId || ''
+    };
     
     const ghlData: GHLContactData = {
       firstName: formData.firstName,
@@ -124,12 +141,22 @@ class GoHighLevelService {
       email: formData.email,
       phone: formData.phone,
       source: 'hensleys-homes.com - Contact Form',
-      tags
+      tags,
+      customField
     };
 
     const contact = await this.upsertContact(ghlData);
     
-    // Post the message as an inbound message to the contact's conversation
+    // Post system message with opt-in evidence
+    const systemMessage = `Opt In captured ${timestamp}, page ${formData.pageUrl || 'unknown'}, IP: ${formData.ipAddress || 'unknown'}, SMS = ${formData.smsOptIn || false}, EMAIL = ${formData.emailOptIn || false}`;
+    
+    try {
+      await this.postInboundMessage(contact.id, systemMessage);
+    } catch (error) {
+      console.warn('Failed to post system opt-in message:', error);
+    }
+    
+    // Post the user message as an inbound message to the contact's conversation
     if (formData.message && formData.message.trim()) {
       try {
         await this.postInboundMessage(contact.id, `Website Contact Form Message:\n\n${formData.message}`);
@@ -183,6 +210,12 @@ class GoHighLevelService {
       message: string;
       emailOptIn?: boolean;
       smsOptIn?: boolean;
+      emailConsentText?: string;
+      smsConsentText?: string;
+      userAgent?: string;
+      pageUrl?: string;
+      referrer?: string;
+      ipAddress?: string;
     },
     localStorageBackup: (data: any) => Promise<any>
   ): Promise<{
@@ -204,12 +237,21 @@ class GoHighLevelService {
     let ghlError = null;
     
     try {
-      // Convert null phone to undefined for GHL service and pass opt-in preferences
+      // Convert null phone to undefined for GHL service and pass all metadata
+      const timestamp = new Date().toISOString();
       const ghlFormData = {
         ...formData,
         phone: formData.phone || undefined,
         emailOptIn: formData.emailOptIn,
-        smsOptIn: formData.smsOptIn
+        smsOptIn: formData.smsOptIn,
+        emailConsentText: formData.emailConsentText,
+        smsConsentText: formData.smsConsentText,
+        userAgent: formData.userAgent,
+        pageUrl: formData.pageUrl,
+        referrer: formData.referrer,
+        ipAddress: formData.ipAddress,
+        evidenceId: localContact.id,
+        timestamp
       };
       
       ghlContact = await this.createContactFromForm(ghlFormData);

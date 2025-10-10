@@ -10,9 +10,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertContactSchema.parse(req.body);
       
+      // Capture IP address from request headers
+      const ipAddress = req.headers['x-forwarded-for'] 
+        ? (req.headers['x-forwarded-for'] as string).split(',')[0].trim()
+        : req.socket.remoteAddress || 'unknown';
+      
+      // Prepare data with IP and convert null to undefined for optional fields
+      const submissionData = {
+        ...validatedData,
+        ipAddress,
+        phone: validatedData.phone || undefined,
+        emailConsentText: validatedData.emailConsentText || undefined,
+        smsConsentText: validatedData.smsConsentText || undefined,
+        userAgent: validatedData.userAgent || undefined,
+        pageUrl: validatedData.pageUrl || undefined,
+        referrer: validatedData.referrer || undefined
+      };
+      
       // Process contact form submission with GHL integration
       const result = await ghlService.processContactFormSubmission(
-        validatedData,
+        submissionData,
         (data) => storage.createContact(data)
       );
       

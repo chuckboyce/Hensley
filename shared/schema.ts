@@ -19,6 +19,12 @@ export const contacts = pgTable("contacts", {
   message: text("message").notNull(),
   emailOptIn: boolean("email_opt_in").default(false).notNull(),
   smsOptIn: boolean("sms_opt_in").default(false).notNull(),
+  emailConsentText: text("email_consent_text"),
+  smsConsentText: text("sms_consent_text"),
+  userAgent: text("user_agent"),
+  pageUrl: text("page_url"),
+  referrer: text("referrer"),
+  ipAddress: text("ip_address"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -36,6 +42,12 @@ export const insertContactSchema = createInsertSchema(contacts).pick({
   message: true,
   emailOptIn: true,
   smsOptIn: true,
+  emailConsentText: true,
+  smsConsentText: true,
+  userAgent: true,
+  pageUrl: true,
+  referrer: true,
+  ipAddress: true,
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
