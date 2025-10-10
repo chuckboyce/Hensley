@@ -105,14 +105,26 @@ class GoHighLevelService {
     phone?: string;
     service: string;
     message: string;
+    emailOptIn?: boolean;
+    smsOptIn?: boolean;
   }): Promise<GHLContact> {
+    const tags = ['Website Lead', 'Real Estate Inquiry', formData.service];
+    
+    // Add opt-in tags based on user preferences
+    if (formData.emailOptIn) {
+      tags.push('Email Opt-In');
+    }
+    if (formData.smsOptIn) {
+      tags.push('SMS Opt-In');
+    }
+    
     const ghlData: GHLContactData = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
       source: 'hensleys-homes.com - Contact Form',
-      tags: ['Website Lead', 'Real Estate Inquiry', formData.service]
+      tags
     };
 
     const contact = await this.upsertContact(ghlData);
@@ -169,6 +181,8 @@ class GoHighLevelService {
       phone?: string | null;
       service: string;
       message: string;
+      emailOptIn?: boolean;
+      smsOptIn?: boolean;
     },
     localStorageBackup: (data: any) => Promise<any>
   ): Promise<{
@@ -190,10 +204,12 @@ class GoHighLevelService {
     let ghlError = null;
     
     try {
-      // Convert null phone to undefined for GHL service
+      // Convert null phone to undefined for GHL service and pass opt-in preferences
       const ghlFormData = {
         ...formData,
-        phone: formData.phone || undefined
+        phone: formData.phone || undefined,
+        emailOptIn: formData.emailOptIn,
+        smsOptIn: formData.smsOptIn
       };
       
       ghlContact = await this.createContactFromForm(ghlFormData);
