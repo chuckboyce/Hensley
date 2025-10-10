@@ -103,6 +103,9 @@ class GoHighLevelService {
       customFields
     };
 
+    console.log('📝 Updating custom fields for contact:', contactId);
+    console.log('📝 Payload:', JSON.stringify(payload, null, 2));
+
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -116,8 +119,12 @@ class GoHighLevelService {
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error('❌ Custom fields update failed:', errorText);
       throw new Error(`Failed to update custom fields for contact ${contactId}: ${errorText}`);
     }
+
+    const result = await response.json();
+    console.log('📝 GHL response:', JSON.stringify(result, null, 2));
   }
 
   /**
