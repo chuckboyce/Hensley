@@ -8,7 +8,7 @@
  * centralized here for easy maintenance and future enhancements.
  * 
  * Environment Variables Required:
- * - GHL_SECRET: GoHighLevel API key
+ * - GHL_SECRET: GoHighLevel API key (location access token)
  * - GHL_LOCATION_ID: GoHighLevel location identifier
  * 
  * Features:
@@ -17,7 +17,11 @@
  * - Website form integration
  * - Error handling with local backup
  * - Comprehensive logging
+ * 
+ * Uses @gohighlevel/api-client SDK for all API interactions
  */
+
+import { HighLevel } from '@gohighlevel/api-client';
 
 interface GHLContactData {
   firstName: string;
@@ -40,17 +44,21 @@ interface GHLContact {
 }
 
 class GoHighLevelService {
-  private apiKey: string;
+  private client: InstanceType<typeof HighLevel>;
   private locationId: string;
-  private baseUrl = 'https://services.leadconnectorhq.com';
 
   constructor() {
-    this.apiKey = process.env.GHL_SECRET || '';
+    const apiKey = process.env.GHL_SECRET || '';
     this.locationId = process.env.GHL_LOCATION_ID || '';
     
-    if (!this.apiKey || !this.locationId) {
+    if (!apiKey || !this.locationId) {
       throw new Error('GHL_SECRET and GHL_LOCATION_ID environment variables are required');
     }
+
+    // Initialize HighLevel SDK with private integration token
+    this.client = new HighLevel({
+      privateIntegrationToken: apiKey
+    });
   }
 
   /**
@@ -58,8 +66,6 @@ class GoHighLevelService {
    * Note: Custom fields are NOT supported in upsert endpoint - use updateContactCustomFields instead
    */
   async upsertContact(contactData: GHLContactData): Promise<GHLContact> {
-    const url = `${this.baseUrl}/contacts/upsert`;
-    
     const payload = {
       firstName: contactData.firstName,
       lastName: contactData.lastName,
@@ -70,23 +76,11 @@ class GoHighLevelService {
       tags: contactData.tags || []
     };
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
-        'Content-Type': 'application/json',
-        'Version': '2021-07-28'
-      },
-      body: JSON.stringify(payload)
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`GHL API Error (${response.status}): ${errorText}`);
-    }
-
-    const result = await response.json();
-    return result.contact || result;
+    const response = await this.client.contacts.upsertContact(payload);
+    
+    // The SDK returns the contact object - handle both possible response formats
+    const contact = (response as any).contact || response;
+    return contact as GHLContact;
   }
 
   /**
@@ -94,24 +88,11 @@ class GoHighLevelService {
    * Returns normalized format with key (from fieldKey) for easy mapping
    */
   async getCustomFieldDefinitions(): Promise<Array<{ id: string; key: string; name: string }>> {
-    const url = `${this.baseUrl}/locations/${this.locationId}/customFields`;
-    
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
-        'Accept': 'application/json',
-        'Version': '2021-07-28'
-      }
+    const response = await this.client.locations.getCustomFields({
+      locationId: this.locationId
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Failed to fetch custom field definitions: ${errorText}`);
-    }
-
-    const result = await response.json();
-    const rawFields = result.customFields || [];
+    const rawFields = response.customFields || [];
     
     // Normalize: GHL returns fieldKey, we map it to key for consistency
     return rawFields.map((field: any) => ({
@@ -129,8 +110,6 @@ class GoHighLevelService {
     contactId: string,
     customFields: Array<{ key: string; field_value: any }>
   ): Promise<void> {
-    const url = `${this.baseUrl}/contacts/${contactId}`;
-    
     // First, fetch custom field definitions to get their IDs
     console.log('📝 Fetching custom field definitions...');
     const fieldDefinitions = await this.getCustomFieldDefinitions();
@@ -155,32 +134,16 @@ class GoHighLevelService {
       };
     });
     
-    const payload = {
-      customFields: customFieldsWithIds
-    };
-
     console.log('📝 Updating custom fields for contact:', contactId);
-    console.log('📝 Payload:', JSON.stringify(payload, null, 2));
+    console.log('📝 Payload:', JSON.stringify({ customFields: customFieldsWithIds }, null, 2));
 
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Version': '2021-07-28'
-      },
-      body: JSON.stringify(payload)
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('❌ Custom fields update failed:', errorText);
-      throw new Error(`Failed to update custom fields for contact ${contactId}: ${errorText}`);
-    }
-
-    const result = await response.json();
-    console.log('📝 GHL response:', JSON.stringify(result, null, 2));
+    // Use SDK to update contact with custom fields
+    const response = await this.client.contacts.updateContact(
+      { contactId },
+      { customFields: customFieldsWithIds }
+    );
+    
+    console.log('📝 GHL response:', JSON.stringify(response, null, 2));
   }
 
   /**
@@ -277,30 +240,21 @@ class GoHighLevelService {
 
   /**
    * Posts an inbound message to a contact's conversation
+   * Uses the SDK's request method for direct API access
    */
   async postInboundMessage(contactId: string, message: string): Promise<void> {
-    const url = `${this.baseUrl}/conversations/messages/inbound`;
-    
     const payload = {
       type: 'SMS',
       contactId: contactId,
       message: message
     };
 
-    const response = await fetch(url, {
+    // Use SDK's request method for direct API endpoint access
+    await this.client.request({
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
-        'Content-Type': 'application/json',
-        'Version': '2021-07-28'
-      },
-      body: JSON.stringify(payload)
+      url: '/conversations/messages/inbound',
+      data: payload
     });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Failed to post inbound message to GHL contact ${contactId}: ${errorText}`);
-    }
   }
 
   /**
@@ -388,25 +342,18 @@ class GoHighLevelService {
    */
   async healthCheck(): Promise<{ status: 'connected' | 'error'; message: string }> {
     try {
-      // Test API connectivity by attempting to fetch a contact (this will fail if no contacts exist, but that's OK)
-      const url = `${this.baseUrl}/contacts/?limit=1`;
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json',
-          'Version': '2021-07-28'
-        }
+      // Test API connectivity by fetching contacts
+      const response = await this.client.contacts.getContacts({
+        locationId: this.locationId,
+        limit: 1
       });
       
-      if (response.status === 401) {
+      return { status: 'connected', message: 'GHL API connection successful' };
+    } catch (error: any) {
+      if (error.statusCode === 401) {
         return { status: 'error', message: 'Invalid API credentials' };
-      } else if (!response.ok) {
-        return { status: 'error', message: `API returned ${response.status}` };
       }
       
-      return { status: 'connected', message: 'GHL API connection successful' };
-    } catch (error) {
       return { 
         status: 'error', 
         message: error instanceof Error ? error.message : 'Unknown connection error' 
@@ -419,10 +366,10 @@ class GoHighLevelService {
    */
   getConfig() {
     return {
-      baseUrl: this.baseUrl,
       locationId: this.locationId ? '***configured***' : 'NOT SET',
-      apiKey: this.apiKey ? '***configured***' : 'NOT SET',
-      isConfigured: !!(this.apiKey && this.locationId)
+      apiKey: '***configured***',
+      isConfigured: true,
+      sdkVersion: 'Using @gohighlevel/api-client SDK'
     };
   }
 }
