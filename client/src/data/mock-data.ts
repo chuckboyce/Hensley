@@ -72,7 +72,7 @@ export const testimonials: Testimonial[] = [
   {
     id: '2',
     content: "As an investor, I've worked with Kevin Hensley on multiple properties. His property management service is top-notch - professional, responsive, and always looking out for my investment.",
-    clientName: "Michael Chen",
+    clientName: "Chuck Boyce",
     clientRole: "Property Investor",
     rating: 5,
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64"
