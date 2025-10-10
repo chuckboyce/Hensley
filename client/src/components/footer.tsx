@@ -81,7 +81,7 @@ export default function Footer() {
                   data-testid="img-eho-logo"
                 />
                 <img 
-                  src="/attached_assets/realtor_logo_1760104830430.png" 
+                  src={eho_logo} 
                   alt="Realtor" 
                   className="h-12 w-auto"
                   data-testid="img-realtor-logo"
