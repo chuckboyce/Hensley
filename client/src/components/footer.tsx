@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-
 import ehoLogo from "@assets/eho_logo_1760104830421.png";
 import realtorLogo from "@assets/realtor_logo_1760104830430.png";
 
