@@ -205,8 +205,8 @@ class GoHighLevelService {
       { key: 'contact.useragent', field_value: formData.userAgent || 'unknown' },
       { key: 'contact.pageurl', field_value: formData.pageUrl || 'unknown' },
       { key: 'contact.referrer', field_value: formData.referrer || 'direct' },
-      { key: 'contact.consentsms', field_value: formData.smsOptIn || false },
-      { key: 'contact.consentemail', field_value: formData.emailOptIn || false },
+      { key: 'contact.consentsms', field_value: formData.smsOptIn ? 'Agree to SMS' : '' },
+      { key: 'contact.consentemail', field_value: formData.emailOptIn ? 'Agree to Email' : '' },
       { key: 'contact.evidenceid', field_value: formData.evidenceId || '' }
     ];
     
