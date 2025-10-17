@@ -47,6 +47,38 @@ app.use((req, res, next) => {
     throw err;
   });
 
+  // Sitemap.xml route - must be before Vite middleware
+  app.get("/sitemap.xml", async (req, res) => {
+    try {
+      const baseUrl = "https://hensleys-homes.com";
+      const currentDate = new Date().toISOString().split('T')[0];
+
+      const pages = [
+        { url: baseUrl, lastmod: currentDate, changefreq: 'weekly', priority: '1.0' },
+        { url: `${baseUrl}#services`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
+        { url: `${baseUrl}#properties`, lastmod: currentDate, changefreq: 'daily', priority: '0.9' },
+        { url: `${baseUrl}#testimonials`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}#contact`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' }
+      ];
+
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages.map(page => `  <url>
+    <loc>${page.url}</loc>
+    <lastmod>${page.lastmod}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+
+      res.header('Content-Type', 'application/xml');
+      res.send(xml);
+    } catch (error) {
+      console.error("Error generating sitemap:", error);
+      res.status(500).send("Error generating sitemap");
+    }
+  });
+
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
