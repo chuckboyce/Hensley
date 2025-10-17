@@ -49,6 +49,16 @@ Preferred communication style: Simple, everyday language.
 - **Server-Side Rendering**: Static HTML with client-side hydration
 - **Progressive Enhancement**: Graceful degradation for users without JavaScript
 
+## SEO and Discoverability
+- **Structured Data**: JSON-LD schemas for Organization, RealEstateAgent, WebSite, ProfessionalService, and FAQPage
+- **Meta Tags**: Comprehensive title, description, keywords, and social media tags (Open Graph, Twitter Cards)
+- **Sitemap.xml**: Auto-generated XML sitemap at `/sitemap.xml` for search engine crawlers
+  - Includes all main sections with proper priority and change frequency
+  - Updates automatically with current date
+  - Ready for expansion with future blog posts and property listings
+- **Google Analytics**: Tracking configured with ID G-W0TB4Y83E8
+- **Canonical URLs**: Proper canonical tags to prevent duplicate content issues
+
 # External Dependencies
 
 ## Database and Storage

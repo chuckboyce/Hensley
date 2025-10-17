@@ -2,6 +2,26 @@
 
 All notable changes to the Kevin Hensley real estate website will be documented in this file.
 
+## [1.2.0] - 2025-10-17
+
+### Added
+- **Sitemap.xml**: Auto-generated XML sitemap for improved SEO and search engine discoverability
+  - Available at `/sitemap.xml` endpoint
+  - Includes all main website sections (home, services, properties, testimonials, contact)
+  - Properly formatted with lastmod dates, change frequency, and priority values
+  - Updates automatically with current date on each request
+  - Ready for future expansion with blog posts and individual property listings
+
+### Fixed
+- **GoHighLevel Checkbox Fields**: Consent checkboxes now properly populate in GHL
+  - Changed from boolean values to text values ("Agree to SMS", "Agree to Email")
+  - Email and SMS consent checkboxes now correctly display as checked in GoHighLevel
+
+### Technical Details
+- Sitemap route registered in `server/index.ts` before Vite middleware to ensure proper routing
+- XML format follows sitemap.org protocol specification
+- Documentation updated in `replit.md` with SEO implementation details
+
 ## [1.1.0] - 2025-10-10
 
 ### Changed
