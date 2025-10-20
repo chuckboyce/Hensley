@@ -67,7 +67,7 @@ export const testimonials: Testimonial[] = [
     clientName: "Sarah Johnson",
     clientRole: "First-time Buyer",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b977?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64"
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=64&h=64&fit=crop&crop=faces"
   },
   {
     id: '2',
