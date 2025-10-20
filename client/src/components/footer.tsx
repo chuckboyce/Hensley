@@ -161,7 +161,7 @@ export default function Footer() {
           
           <div className="border-t border-border mt-8 pt-8 text-center">
             <p className="text-sm text-muted-foreground">
-              © 2024 Hensley's Homes. All rights reserved. | Licensed Real Estate Professional | 
+              © 2025 Hensley's Homes. All rights reserved. | Licensed Real Estate Professional | 
               <a href="/fair-housing" className="hover:text-primary transition-colors ml-1" data-testid="footer-fair-housing">Fair Housing</a> | 
               <a href="/privacy-policy" className="hover:text-primary transition-colors ml-1" data-testid="footer-privacy">Privacy Policy</a> | 
               <a href="/terms-of-use" className="hover:text-primary transition-colors ml-1" data-testid="footer-terms">Terms of Service</a>
