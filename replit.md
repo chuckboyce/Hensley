@@ -52,6 +52,10 @@ Preferred communication style: Simple, everyday language.
 ## SEO and Discoverability
 - **Structured Data**: JSON-LD schemas for Organization, RealEstateAgent, WebSite, ProfessionalService, and FAQPage
 - **Meta Tags**: Comprehensive title, description, keywords, and social media tags (Open Graph, Twitter Cards)
+- **Robots.txt**: Dynamic robots.txt at `/robots.txt` with environment-aware configuration
+  - Allows all search engines to crawl the entire site
+  - Points to sitemap.xml for efficient discovery
+  - Uses dynamic host detection for multi-environment support
 - **Sitemap.xml**: Auto-generated XML sitemap at `/sitemap.xml` for search engine crawlers
   - Includes all main sections with proper priority and change frequency
   - Updates automatically with current date

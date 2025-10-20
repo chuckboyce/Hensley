@@ -47,6 +47,24 @@ app.use((req, res, next) => {
     throw err;
   });
 
+  // Robots.txt route - must be before Vite middleware
+  app.get("/robots.txt", (req, res) => {
+    // Use request host or fallback to production domain
+    const protocol = req.protocol;
+    const host = req.get('host') || 'hensleys-homes.com';
+    const baseUrl = `${protocol}://${host}`;
+    
+    const robotsTxt = `# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: ${baseUrl}/sitemap.xml`;
+
+    res.header('Content-Type', 'text/plain');
+    res.send(robotsTxt);
+  });
+
   // Sitemap.xml route - must be before Vite middleware
   app.get("/sitemap.xml", async (req, res) => {
     try {
