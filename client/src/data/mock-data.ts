@@ -64,7 +64,7 @@ export const testimonials: Testimonial[] = [
   {
     id: '1',
     content: "Kevin Hensley made buying our first home such a smooth experience. His knowledge of the local market and attention to detail gave us confidence throughout the entire process.",
-    clientName: "Sarah Johnson",
+    clientName: "Sarah",
     clientRole: "First-time Buyer",
     rating: 5,
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=64&h=64&fit=crop&crop=faces"
@@ -72,7 +72,7 @@ export const testimonials: Testimonial[] = [
   {
     id: '2',
     content: "As an investor, I've worked with Kevin Hensley on multiple properties. His property management service is top-notch - professional, responsive, and always looking out for my investment.",
-    clientName: "Chuck Boyce",
+    clientName: "Chuck",
     clientRole: "Property Investor",
     rating: 5,
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64"
@@ -80,7 +80,7 @@ export const testimonials: Testimonial[] = [
   {
     id: '3',
     content: "We've rented through Kevin Hensley for three years now. Any maintenance issues are handled promptly, and communication is always clear and professional. Highly recommended!",
-    clientName: "Emma Rodriguez",
+    clientName: "Emma",
     clientRole: "Long-term Tenant",
     rating: 5,
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64"
@@ -88,7 +88,7 @@ export const testimonials: Testimonial[] = [
   {
     id: '4',
     content: "Kevin Hensley helped us sell our home in just two weeks! His marketing strategy and pricing were spot on. We couldn't be happier with the results and his professional approach.",
-    clientName: "David & Lisa Thompson",
+    clientName: "David & Lisa",
     clientRole: "Home Sellers",
     rating: 5,
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64"
