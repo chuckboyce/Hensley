@@ -45,7 +45,7 @@ export default function Portal() {
             <Button
               asChild
               size="lg"
-              className="bg-white hover:bg-gray-100 text-primary px-8 py-6 text-lg font-semibold"
+              className="bg-background hover:bg-background/90 text-white px-8 py-6 text-lg font-semibold"
               data-testid="button-owner-portal"
             >
               <a href="https://74458621.app.doorloop.com/auth/login" target="_blank" rel="noopener noreferrer">
@@ -56,8 +56,7 @@ export default function Portal() {
             <Button
               asChild
               size="lg"
-              variant="outline"
-              className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold"
+              className="bg-background hover:bg-background/90 text-white px-8 py-6 text-lg font-semibold"
               data-testid="button-tenant-portal"
             >
               <a href="https://74458621.app.doorloop.com/auth/login" target="_blank" rel="noopener noreferrer">
