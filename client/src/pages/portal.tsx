@@ -38,35 +38,8 @@ export default function Portal() {
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Property Portal
           </h1>
-          <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto">
             Secure portal access for property owners and tenants. Manage your properties, payments, and maintenance requests all in one place.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-background hover:bg-background/90 text-white px-8 py-6 text-lg font-semibold"
-              data-testid="button-owner-portal"
-            >
-              <a href="https://74458621.app.doorloop.com/auth/login" target="_blank" rel="noopener noreferrer">
-                <Home className="mr-2 h-5 w-5" />
-                Owner Portal Login
-              </a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="bg-background hover:bg-background/90 text-white px-8 py-6 text-lg font-semibold"
-              data-testid="button-tenant-portal"
-            >
-              <a href="https://74458621.app.doorloop.com/auth/login" target="_blank" rel="noopener noreferrer">
-                <Key className="mr-2 h-5 w-5" />
-                Tenant Portal Login
-              </a>
-            </Button>
-          </div>
-          <p className="text-sm text-primary-foreground/70 mt-6">
-            🔒 Powered by DoorLoop • Secure Access • 24/7 Support
           </p>
         </div>
       </section>
@@ -239,6 +212,9 @@ export default function Portal() {
           </div>
           <p className="text-sm text-muted-foreground mt-8">
             Hensley's Homes | Licensed Real Estate Professional | Serving Delaware & Maryland
+          </p>
+          <p className="text-sm text-muted-foreground mt-4">
+            🔒 Powered by DoorLoop • Secure Access • 24/7 Support
           </p>
         </div>
       </section>
