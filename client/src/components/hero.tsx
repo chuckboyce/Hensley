@@ -60,7 +60,7 @@ export default function Hero() {
             >
               Get Free Consultation
             </Button>
-            <Link href="/portal">
+            <Link href="/portal" className="hidden sm:block">
               <Button 
                 variant="outline"
                 className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border-2 border-white px-8 py-4 rounded-lg font-semibold text-lg"
