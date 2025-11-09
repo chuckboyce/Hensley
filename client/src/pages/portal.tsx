@@ -36,7 +36,7 @@ export default function Portal() {
       <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-20">
         <div className="container mx-auto px-4 lg:px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Hensley's Homes Property Portal
+            Property Portal
           </h1>
           <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
             Secure portal access for property owners and tenants. Manage your properties, payments, and maintenance requests all in one place.
