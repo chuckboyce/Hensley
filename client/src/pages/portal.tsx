@@ -1,17 +1,45 @@
 import { Button } from "@/components/ui/button";
-import { Home, Key, FileText, CreditCard, Wrench, BarChart3 } from "lucide-react";
+import { Home, Key, FileText, CreditCard, Wrench, BarChart3, Phone, Mail, MessageSquare } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Portal() {
   return (
     <div className="min-h-screen bg-background">
+      {/* Header with Branding */}
+      <header className="bg-background border-b border-border py-4">
+        <div className="container mx-auto px-4 lg:px-6">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center space-x-3">
+              <div className="h-12 w-12 bg-white rounded-lg flex items-center justify-center p-1 border border-border">
+                <img 
+                  src="/hensleys-homes-logo.png" 
+                  alt="Hensley's Homes Logo" 
+                  className="w-full h-full object-contain rounded"
+                />
+              </div>
+              <img 
+                src="/hensleys-homes-logotype.png" 
+                alt="Hensley's Homes" 
+                className="h-8 object-contain"
+              />
+            </Link>
+            <Link href="/">
+              <Button variant="ghost">
+                ← Back to Home
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-20">
         <div className="container mx-auto px-4 lg:px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Property Management Portal
+            Hensley's Homes Property Portal
           </h1>
           <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-            Secure access for property owners and tenants. Manage your properties, payments, and maintenance requests all in one place.
+            Secure portal access for property owners and tenants. Manage your properties, payments, and maintenance requests all in one place.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -59,19 +87,23 @@ export default function Portal() {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start">
                   <span className="text-primary mr-2">✓</span>
-                  <span className="text-muted-foreground">View financial statements and reports</span>
+                  <span className="text-muted-foreground">Detailed financial statements & custom reports</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary mr-2">✓</span>
-                  <span className="text-muted-foreground">Monitor property performance and occupancy</span>
+                  <span className="text-muted-foreground">Real-time property performance analytics</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary mr-2">✓</span>
-                  <span className="text-muted-foreground">Track maintenance and repairs</span>
+                  <span className="text-muted-foreground">FREE unlimited eSignatures for documents</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary mr-2">✓</span>
-                  <span className="text-muted-foreground">Access documents and lease agreements</span>
+                  <span className="text-muted-foreground">QuickBooks Online sync & accounting tools</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary mr-2">✓</span>
+                  <span className="text-muted-foreground">VIP priority support via phone, email & chat</span>
                 </li>
               </ul>
               <Button
@@ -97,19 +129,23 @@ export default function Portal() {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start">
                   <span className="text-primary mr-2">✓</span>
-                  <span className="text-muted-foreground">Pay rent online securely</span>
+                  <span className="text-muted-foreground">Pay rent online via FREE ACH or credit/debit card</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary mr-2">✓</span>
-                  <span className="text-muted-foreground">Submit and track maintenance requests</span>
+                  <span className="text-muted-foreground">Submit maintenance requests with photos & real-time tracking</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary mr-2">✓</span>
-                  <span className="text-muted-foreground">View lease details and documents</span>
+                  <span className="text-muted-foreground">Access lease agreements & sign documents electronically</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary mr-2">✓</span>
-                  <span className="text-muted-foreground">Communicate with property management</span>
+                  <span className="text-muted-foreground">Direct messaging with property management team</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary mr-2">✓</span>
+                  <span className="text-muted-foreground">Receive important announcements via email & SMS</span>
                 </li>
               </ul>
               <Button
@@ -130,49 +166,52 @@ export default function Portal() {
       {/* Features Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4 lg:px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">Portal Features</h2>
+          <h2 className="text-3xl font-bold text-center mb-4">Premium Portal Features</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Powered by DoorLoop Premium - Professional property management tools trusted by thousands
+          </p>
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="text-center">
               <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CreditCard className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Online Payments</h3>
-              <p className="text-muted-foreground">Secure rent and fee payments with multiple payment options</p>
+              <h3 className="font-semibold text-lg mb-2">FREE ACH Payments</h3>
+              <p className="text-muted-foreground">No transaction fees for ACH rent payments. Credit/debit also available.</p>
             </div>
             <div className="text-center">
               <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Wrench className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Maintenance Requests</h3>
-              <p className="text-muted-foreground">Submit and track repair requests with photo uploads</p>
+              <h3 className="font-semibold text-lg mb-2">Maintenance Tracking</h3>
+              <p className="text-muted-foreground">Real-time request tracking with vendor management & photo uploads</p>
             </div>
             <div className="text-center">
               <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FileText className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Document Access</h3>
-              <p className="text-muted-foreground">View and download leases, notices, and important documents</p>
+              <h3 className="font-semibold text-lg mb-2">Unlimited eSignatures</h3>
+              <p className="text-muted-foreground">Sign leases & documents electronically at no extra cost</p>
             </div>
             <div className="text-center">
               <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <BarChart3 className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Financial Reports</h3>
-              <p className="text-muted-foreground">Detailed statements and analytics for property owners</p>
+              <h3 className="font-semibold text-lg mb-2">Custom Dashboards</h3>
+              <p className="text-muted-foreground">Personalized analytics with KPIs tailored to your portfolio</p>
             </div>
             <div className="text-center">
               <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Home className="h-8 w-8 text-primary" />
+                <MessageSquare className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Property Management</h3>
-              <p className="text-muted-foreground">Complete oversight of all properties and units</p>
+              <h3 className="font-semibold text-lg mb-2">VIP Support</h3>
+              <p className="text-muted-foreground">Priority assistance via phone, email, chat & Zoom</p>
             </div>
             <div className="text-center">
               <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Key className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Secure Access</h3>
-              <p className="text-muted-foreground">Bank-level encryption and data protection</p>
+              <h3 className="font-semibold text-lg mb-2">Bank-Level Security</h3>
+              <p className="text-muted-foreground">256-bit encryption & unlimited secure data storage</p>
             </div>
           </div>
         </div>
@@ -183,20 +222,25 @@ export default function Portal() {
         <div className="container mx-auto px-4 lg:px-6 text-center">
           <h2 className="text-2xl font-semibold mb-4">Need Help?</h2>
           <p className="text-muted-foreground mb-6">
-            Our team is here to assist you with any questions about accessing or using the portal.
+            Kevin Hensley and his team are here to assist you with any questions about accessing or using the portal.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild variant="outline" size="lg">
               <a href="tel:(302) 218-0130">
+                <Phone className="mr-2 h-5 w-5" />
                 Call (302) 218-0130
               </a>
             </Button>
             <Button asChild variant="outline" size="lg">
               <a href="mailto:kevin@hensleys-homes.com">
+                <Mail className="mr-2 h-5 w-5" />
                 Email Support
               </a>
             </Button>
           </div>
+          <p className="text-sm text-muted-foreground mt-8">
+            Hensley's Homes | Licensed Real Estate Professional | Serving Delaware & Maryland
+          </p>
         </div>
       </section>
     </div>
