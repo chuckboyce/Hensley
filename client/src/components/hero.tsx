@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { LogIn } from "lucide-react";
+import { Link } from "wouter";
 import ConsultationModal from "@/components/consultation-modal";
 
 export default function Hero() {
@@ -58,6 +60,16 @@ export default function Hero() {
             >
               Get Free Consultation
             </Button>
+            <Link href="/portal">
+              <Button 
+                variant="outline"
+                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border-2 border-white px-8 py-4 rounded-lg font-semibold text-lg"
+                data-testid="button-portal-login"
+              >
+                <LogIn className="mr-2 h-5 w-5" />
+                Portal Login
+              </Button>
+            </Link>
           </div>
         </div>
         

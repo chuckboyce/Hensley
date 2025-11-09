@@ -92,6 +92,16 @@ export default function Header() {
                 <Phone className="h-4 w-4" />
                 <span>(302) 218-0130</span>
               </a>
+              <Link href="/portal">
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="hidden md:inline-flex"
+                  data-testid="header-portal-login"
+                >
+                  Portal Login
+                </Button>
+              </Link>
               <Button
                 variant="ghost"
                 size="sm"
@@ -151,6 +161,14 @@ export default function Header() {
                     data-testid="mobile-nav-contact">
                 Contact
               </span>
+            </Link>
+            <Link href="/portal" onClick={() => setMobileMenuOpen(false)}>
+              <Button 
+                className="mt-4 w-full"
+                data-testid="mobile-nav-portal"
+              >
+                Portal Login
+              </Button>
             </Link>
           </nav>
         </div>
