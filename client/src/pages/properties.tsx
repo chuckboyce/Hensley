@@ -6,7 +6,7 @@ import { useLocation, Link } from "wouter";
 import { Bed, Bath, Square, MapPin, DollarSign } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import comingSoonImage from "@assets/stock_images/professional_real_es_060e5987.jpg";
+import comingSoonImage from "@assets/generated-image (1)_1762730474875.png";
 
 export default function Properties() {
   const [, setLocation] = useLocation();
