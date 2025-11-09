@@ -64,14 +64,10 @@ export default function ManageListings() {
 
   // Fetch all properties
   const { data: properties, isLoading: propertiesLoading } = useQuery({
-    queryKey: ['/api/admin/properties'],
+    queryKey: ['/api/properties'],
     enabled: isAuthenticated,
     queryFn: async () => {
-      const response = await fetch('/api/admin/properties', {
-        headers: {
-          "Authorization": `Bearer ${password}`
-        }
-      });
+      const response = await fetch('/api/properties');
       if (!response.ok) throw new Error('Failed to fetch properties');
       return response.json();
     }
@@ -80,20 +76,20 @@ export default function ManageListings() {
   // Update status mutation
   const updateStatusMutation = useMutation({
     mutationFn: async ({ listingKey, status }: { listingKey: string; status: string }) => {
-      const response = await fetch(`/api/admin/properties/${listingKey}`, {
+      const response = await fetch(`/api/admin/properties/${listingKey}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${password}`
         },
-        body: JSON.stringify({ standardStatus: status })
+        body: JSON.stringify({ status })
       });
       
       if (!response.ok) throw new Error('Failed to update status');
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/properties'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/properties'] });
       toast({
         title: "Success",
         description: "Status updated"
@@ -122,7 +118,7 @@ export default function ManageListings() {
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/properties'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/properties'] });
       toast({
         title: "Success",
         description: "Listing deleted"
