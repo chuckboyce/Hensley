@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema } from "@shared/schema";
 import { ghlService } from "./services/ghl";
+import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
 
 // Simple admin password middleware
 function adminAuth(req: Request, res: Response, next: NextFunction) {
@@ -180,6 +181,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching property media:", error);
       res.status(500).json({ error: "Failed to fetch property media" });
+    }
+  });
+
+  // Admin: Parse BrightMLS text (preview before saving)
+  app.post("/api/admin/parse-listing", adminAuth, async (req, res) => {
+    try {
+      const { text } = req.body;
+      
+      if (!text) {
+        return res.status(400).json({ error: "Text is required" });
+      }
+      
+      const parsed = parseBrightMLSText(text);
+      res.json(parsed);
+    } catch (error) {
+      console.error("Error parsing listing text:", error);
+      res.status(500).json({ error: "Failed to parse listing text" });
     }
   });
 
