@@ -33,12 +33,23 @@ export default function Portal() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-20">
-        <div className="container mx-auto px-4 lg:px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+      <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-32 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop)',
+          }}
+        />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/85 via-gray-900/80 to-gray-900/85" />
+        
+        {/* Content */}
+        <div className="container mx-auto px-4 lg:px-6 text-center relative z-10">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg">
             Property Portal
           </h1>
-          <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto">
+          <p className="text-xl text-white/95 max-w-2xl mx-auto drop-shadow-md">
             Secure portal access for property owners and tenants. Manage your properties, payments, and maintenance requests all in one place.
           </p>
         </div>
