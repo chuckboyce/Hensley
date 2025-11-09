@@ -4,6 +4,9 @@ import { storage } from "./storage";
 import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema } from "@shared/schema";
 import { ghlService } from "./services/ghl";
 import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
+import multer from "multer";
+import path from "path";
+import { randomUUID } from "crypto";
 
 // Simple admin password middleware
 function adminAuth(req: Request, res: Response, next: NextFunction) {
@@ -26,6 +29,32 @@ function adminAuth(req: Request, res: Response, next: NextFunction) {
   
   next();
 }
+
+// Configure multer for image uploads
+const imageStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads/');
+  },
+  filename: (req, file, cb) => {
+    const uniqueName = `${randomUUID()}${path.extname(file.originalname)}`;
+    cb(null, uniqueName);
+  }
+});
+
+const imageUpload = multer({
+  storage: imageStorage,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed.'));
+    }
+  }
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission
@@ -198,6 +227,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error parsing listing text:", error);
       res.status(500).json({ error: "Failed to parse listing text" });
+    }
+  });
+
+  // Admin: Upload property image
+  app.post("/api/admin/upload-image", adminAuth, imageUpload.single('image'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No image file provided" });
+      }
+      
+      const imageUrl = `/uploads/${req.file.filename}`;
+      res.json({ imageUrl });
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      res.status(400).json({ error: error instanceof Error ? error.message : "Failed to upload image" });
     }
   });
 

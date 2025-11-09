@@ -59,9 +59,9 @@ export default function Properties() {
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {properties.map((property: any) => {
-                  // Get photos - use coming soon placeholder if no photos available
+                  // Get main image - priority order: uploaded image, first media URL, coming soon placeholder
                   const photos = property.media || [];
-                  const mainPhoto = photos[0]?.mediaUrl || comingSoonImage;
+                  const mainPhoto = property.imageUrl || photos[0]?.mediaUrl || comingSoonImage;
                   
                   return (
                     <Card key={property.listingKey} className="overflow-hidden hover:shadow-lg transition-shadow" data-testid={`property-card-${property.listingKey}`}>

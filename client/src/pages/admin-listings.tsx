@@ -33,7 +33,8 @@ export default function AdminListings() {
     propertyType: "Residential",
     subdivision: "",
     schoolDistrict: "",
-    listingUrl: ""
+    listingUrl: "",
+    imageUrl: ""
   });
   
   const [photos, setPhotos] = useState<string[]>(['']);
@@ -137,7 +138,8 @@ export default function AdminListings() {
         propertyType: data.propertyType || "Residential",
         subdivision: data.subdivision || "",
         schoolDistrict: data.schoolDistrict || "",
-        listingUrl: ""
+        listingUrl: "",
+        imageUrl: ""
       });
       
       toast({
@@ -223,6 +225,7 @@ export default function AdminListings() {
         yearBuilt: formData.yearBuilt ? parseInt(formData.yearBuilt) : undefined,
         publicRemarks: formData.description || "",
         listingUrl: formData.listingUrl || undefined,
+        imageUrl: formData.imageUrl || undefined,
         listingOfficeName: "RE/MAX Eagle Realty",
         listingAgentName: "Kevin Hensley"
       };
@@ -305,7 +308,8 @@ export default function AdminListings() {
         propertyType: "Residential",
         subdivision: "",
         schoolDistrict: "",
-        listingUrl: ""
+        listingUrl: "",
+        imageUrl: ""
       });
       setPhotos(['']);
     } catch (error) {
@@ -554,7 +558,63 @@ export default function AdminListings() {
             </Card>
 
             <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Step 3: Add Photos</h2>
+              <h2 className="text-xl font-semibold mb-4">Step 3: Upload Main Image (Optional)</h2>
+              <div className="space-y-4">
+                <div>
+                  <Label>Upload Property Image</Label>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        try {
+                          const uploadData = new FormData();
+                          uploadData.append('image', file);
+                          
+                          const response = await fetch('/api/admin/upload-image', {
+                            method: 'POST',
+                            headers: {
+                              'Authorization': `Bearer ${password}`
+                            },
+                            body: uploadData
+                          });
+                          
+                          if (response.ok) {
+                            const { imageUrl } = await response.json();
+                            setFormData(prev => ({...prev, imageUrl}));
+                            toast({
+                              title: "Success",
+                              description: "Image uploaded successfully"
+                            });
+                          } else {
+                            throw new Error('Upload failed');
+                          }
+                        } catch (error) {
+                          toast({
+                            title: "Error",
+                            description: "Failed to upload image",
+                            variant: "destructive"
+                          });
+                        }
+                      }
+                    }}
+                    data-testid="input-image-upload"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Upload a single main image for this property (max 5MB, JPEG/PNG/WebP/GIF)
+                  </p>
+                  {formData.imageUrl && (
+                    <div className="mt-2">
+                      <img src={formData.imageUrl} alt="Preview" className="max-w-sm rounded border" />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Step 4: Add Photo URLs (Optional)</h2>
               <div className="space-y-3">
                 {photos.map((photo, index) => (
                   <div key={index}>
