@@ -6,6 +6,7 @@ import { useLocation, Link } from "wouter";
 import { Bed, Bath, Square, MapPin, DollarSign } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import comingSoonImage from "@assets/stock_images/professional_real_es_060e5987.jpg";
 
 export default function Properties() {
   const [, setLocation] = useLocation();
@@ -58,9 +59,9 @@ export default function Properties() {
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {properties.map((property: any) => {
-                  // Get photos
+                  // Get photos - use coming soon placeholder if no photos available
                   const photos = property.media || [];
-                  const mainPhoto = photos[0]?.mediaUrl || 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80';
+                  const mainPhoto = photos[0]?.mediaUrl || comingSoonImage;
                   
                   return (
                     <Card key={property.listingKey} className="overflow-hidden hover:shadow-lg transition-shadow" data-testid={`property-card-${property.listingKey}`}>
