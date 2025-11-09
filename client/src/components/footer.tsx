@@ -143,6 +143,13 @@ export default function Footer() {
                 >
                   Testimonials
                 </button>
+                <Link 
+                  href="/portal"
+                  className="block text-muted-foreground hover:text-primary transition-colors"
+                  data-testid="footer-link-portal"
+                >
+                  Portal Login
+                </Link>
               </nav>
             </div>
             
