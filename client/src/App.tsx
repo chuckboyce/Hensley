@@ -10,6 +10,7 @@ import PrivacyPolicy from "@/pages/privacy-policy";
 import TermsOfUse from "@/pages/terms-of-use";
 import PropertyDetail from "@/pages/property-detail";
 import IdxTest from "@/pages/idx-test";
+import DoorLoopTest from "@/pages/doorloop-test";
 import NotFound from "@/pages/not-found";
 
 // GoHighLevel Chat Widget Component
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/fair-housing" component={FairHousing} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-use" component={TermsOfUse} />
+      <Route path="/doorloop-test" component={DoorLoopTest} />
       {/* Property routes hidden until IDX approval */}
       {/* <Route path="/properties/:listingKey" component={PropertyDetail} /> */}
       {/* <Route path="/idx-test" component={IdxTest} /> */}
