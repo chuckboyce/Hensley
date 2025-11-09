@@ -121,6 +121,7 @@ export const properties = pgTable("properties", {
   publicRemarks: text("public_remarks"),
   virtualTourURLUnbranded: text("virtual_tour_url_unbranded"),
   virtualTourURLBranded: text("virtual_tour_url_branded"),
+  listingUrl: text("listing_url"), // Link to full listing on RE/MAX or other site
   
   // Attribution (IDX compliance)
   listingOfficeName: text("listing_office_name").notNull(),
@@ -190,6 +191,7 @@ export const insertPropertySchema = createInsertSchema(properties).pick({
   publicRemarks: true,
   virtualTourURLUnbranded: true,
   virtualTourURLBranded: true,
+  listingUrl: true,
   listingOfficeName: true,
   listingOfficePhone: true,
   listingAgentName: true,

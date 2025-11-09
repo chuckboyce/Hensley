@@ -32,7 +32,8 @@ export default function AdminListings() {
     description: "",
     propertyType: "Residential",
     subdivision: "",
-    schoolDistrict: ""
+    schoolDistrict: "",
+    listingUrl: ""
   });
   
   const [photos, setPhotos] = useState<string[]>(['']);
@@ -135,7 +136,8 @@ export default function AdminListings() {
         description: data.description || "",
         propertyType: data.propertyType || "Residential",
         subdivision: data.subdivision || "",
-        schoolDistrict: data.schoolDistrict || ""
+        schoolDistrict: data.schoolDistrict || "",
+        listingUrl: ""
       });
       
       toast({
@@ -220,6 +222,7 @@ export default function AdminListings() {
         lotSizeUnits: formData.lotSizeAcres ? "Acres" : undefined,
         yearBuilt: formData.yearBuilt ? parseInt(formData.yearBuilt) : undefined,
         publicRemarks: formData.description || "",
+        listingUrl: formData.listingUrl || undefined,
         listingOfficeName: "RE/MAX Eagle Realty",
         listingAgentName: "Kevin Hensley"
       };
@@ -301,7 +304,8 @@ export default function AdminListings() {
         description: "",
         propertyType: "Residential",
         subdivision: "",
-        schoolDistrict: ""
+        schoolDistrict: "",
+        listingUrl: ""
       });
       setPhotos(['']);
     } catch (error) {
@@ -532,6 +536,19 @@ export default function AdminListings() {
                     placeholder="Property description..."
                     className="min-h-[100px]"
                   />
+                </div>
+
+                <div>
+                  <Label>RE/MAX Listing URL</Label>
+                  <Input
+                    value={formData.listingUrl}
+                    onChange={(e) => setFormData({...formData, listingUrl: e.target.value})}
+                    placeholder="https://www.remax.com/property/..."
+                    data-testid="input-listing-url"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Link to the full listing on RE/MAX website
+                  </p>
                 </div>
               </div>
             </Card>

@@ -135,11 +135,24 @@ export default function Properties() {
 
                         {/* Actions */}
                         <div className="flex gap-2">
-                          <Link href={`/contact?property=${property.listingKey}`}>
-                            <Button className="flex-1" data-testid={`button-contact-${property.listingKey}`}>
-                              Request Info
-                            </Button>
-                          </Link>
+                          {property.listingUrl ? (
+                            <a 
+                              href={property.listingUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="flex-1"
+                            >
+                              <Button className="w-full" data-testid={`button-view-listing-${property.listingKey}`}>
+                                View Full Listing
+                              </Button>
+                            </a>
+                          ) : (
+                            <Link href={`/contact?property=${property.listingKey}`}>
+                              <Button className="flex-1" data-testid={`button-contact-${property.listingKey}`}>
+                                Request Info
+                              </Button>
+                            </Link>
+                          )}
                         </div>
                       </div>
                     </Card>
