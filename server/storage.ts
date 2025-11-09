@@ -13,6 +13,8 @@ export interface IStorage {
   listProperties(): Promise<Property[]>;
   getProperty(listingKey: string): Promise<Property | undefined>;
   createProperty(property: InsertProperty): Promise<Property>;
+  updatePropertyStatus(listingKey: string, status: string): Promise<Property | undefined>;
+  deleteProperty(listingKey: string): Promise<boolean>;
   getPropertyMedia(listingKey: string): Promise<PropertyMedia[]>;
   createPropertyMedia(media: InsertPropertyMedia): Promise<PropertyMedia>;
 }
@@ -72,6 +74,30 @@ export class DatabaseStorage implements IStorage {
       .values(insertProperty)
       .returning();
     return property;
+  }
+
+  async updatePropertyStatus(listingKey: string, status: string): Promise<Property | undefined> {
+    const [property] = await db
+      .update(properties)
+      .set({ standardStatus: status })
+      .where(eq(properties.listingKey, listingKey))
+      .returning();
+    return property || undefined;
+  }
+
+  async deleteProperty(listingKey: string): Promise<boolean> {
+    // Delete associated media first
+    await db
+      .delete(propertyMedia)
+      .where(eq(propertyMedia.listingKey, listingKey));
+    
+    // Delete the property
+    const result = await db
+      .delete(properties)
+      .where(eq(properties.listingKey, listingKey))
+      .returning();
+    
+    return result.length > 0;
   }
 
   async getPropertyMedia(listingKey: string): Promise<PropertyMedia[]> {

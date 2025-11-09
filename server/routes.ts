@@ -1,8 +1,30 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema } from "@shared/schema";
+import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema } from "@shared/schema";
 import { ghlService } from "./services/ghl";
+
+// Simple admin password middleware
+function adminAuth(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers.authorization;
+  const password = process.env.ADMIN_PASSWORD;
+  
+  if (!password) {
+    return res.status(500).json({ error: "Admin password not configured" });
+  }
+  
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: "Unauthorized - Missing credentials" });
+  }
+  
+  const token = authHeader.substring(7);
+  
+  if (token !== password) {
+    return res.status(401).json({ error: "Unauthorized - Invalid credentials" });
+  }
+  
+  next();
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission
@@ -158,6 +180,81 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching property media:", error);
       res.status(500).json({ error: "Failed to fetch property media" });
+    }
+  });
+
+  // Admin: Create property
+  app.post("/api/admin/properties", adminAuth, async (req, res) => {
+    try {
+      const validatedData = insertPropertySchema.parse(req.body);
+      const property = await storage.createProperty(validatedData);
+      res.json(property);
+    } catch (error) {
+      console.error("Error creating property:", error);
+      res.status(400).json({ error: error instanceof Error ? error.message : "Invalid property data" });
+    }
+  });
+
+  // Admin: Update property status
+  app.patch("/api/admin/properties/:listingKey/status", adminAuth, async (req, res) => {
+    try {
+      const { listingKey } = req.params as { listingKey: string };
+      const { status } = req.body;
+      
+      if (!status) {
+        return res.status(400).json({ error: "Status is required" });
+      }
+      
+      const property = await storage.updatePropertyStatus(listingKey, status);
+      if (!property) {
+        return res.status(404).json({ error: "Property not found" });
+      }
+      
+      res.json(property);
+    } catch (error) {
+      console.error("Error updating property status:", error);
+      res.status(500).json({ error: "Failed to update property status" });
+    }
+  });
+
+  // Admin: Delete property
+  app.delete("/api/admin/properties/:listingKey", adminAuth, async (req, res) => {
+    try {
+      const { listingKey } = req.params as { listingKey: string };
+      const deleted = await storage.deleteProperty(listingKey);
+      
+      if (!deleted) {
+        return res.status(404).json({ error: "Property not found" });
+      }
+      
+      res.json({ success: true, message: "Property deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting property:", error);
+      res.status(500).json({ error: "Failed to delete property" });
+    }
+  });
+
+  // Admin: Add property media
+  app.post("/api/admin/properties/:listingKey/media", adminAuth, async (req, res) => {
+    try {
+      const { listingKey } = req.params as { listingKey: string };
+      
+      // Check if property exists
+      const property = await storage.getProperty(listingKey);
+      if (!property) {
+        return res.status(404).json({ error: "Property not found" });
+      }
+      
+      const validatedData = insertPropertyMediaSchema.parse({
+        ...req.body,
+        listingKey
+      });
+      
+      const media = await storage.createPropertyMedia(validatedData);
+      res.json(media);
+    } catch (error) {
+      console.error("Error creating property media:", error);
+      res.status(400).json({ error: error instanceof Error ? error.message : "Invalid media data" });
     }
   });
 
