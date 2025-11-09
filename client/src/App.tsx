@@ -12,6 +12,7 @@ import PropertyDetail from "@/pages/property-detail";
 import IdxTest from "@/pages/idx-test";
 import DoorLoopTest from "@/pages/doorloop-test";
 import Portal from "@/pages/portal";
+import AdminListings from "@/pages/admin-listings";
 import NotFound from "@/pages/not-found";
 
 // GoHighLevel Chat Widget Component
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/contact" component={Contact} />
       <Route path="/portal" component={Portal} />
+      <Route path="/admin/listings" component={AdminListings} />
       <Route path="/fair-housing" component={FairHousing} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-use" component={TermsOfUse} />
