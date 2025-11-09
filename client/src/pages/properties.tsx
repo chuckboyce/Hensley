@@ -72,9 +72,21 @@ export default function Properties() {
                           alt={property.unparsedAddress}
                           className="w-full h-full object-cover"
                         />
-                        {property.standardStatus === "Active Under Contract" && (
-                          <Badge className="absolute top-4 right-4 bg-yellow-500">
-                            Under Contract
+                        {property.standardStatus && (
+                          <Badge 
+                            className={`absolute top-4 right-4 ${
+                              property.standardStatus === "Active" 
+                                ? "bg-green-600 hover:bg-green-600" 
+                                : property.standardStatus === "Active Under Contract"
+                                ? "bg-yellow-500 hover:bg-yellow-500"
+                                : property.standardStatus === "Pending"
+                                ? "bg-orange-500 hover:bg-orange-500"
+                                : property.standardStatus === "Sold"
+                                ? "bg-red-600 hover:bg-red-600"
+                                : "bg-gray-500 hover:bg-gray-500"
+                            }`}
+                          >
+                            {property.standardStatus}
                           </Badge>
                         )}
                       </div>
