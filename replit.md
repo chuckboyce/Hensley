@@ -4,6 +4,15 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
+**November 10, 2025**: Implemented semantic URL structure for improved SEO and user experience
+- Created dedicated service pages: /buy, /sell, /property-management
+- Created area-specific page: /areas/middletown-de for location-based content
+- Updated header navigation to link directly to service pages (removed scroll-based navigation)
+- Updated sitemap.xml to include all new semantic URLs with proper priority and changefreq
+- Added comprehensive SEO metadata in SEOHead component for all new routes
+- All pages feature full layouts with detailed content, benefits, and clear CTAs
+- Mobile navigation updated with same semantic URL structure
+
 **November 10, 2025**: Implemented dynamic canonical URLs and trailing slash consistency
 - Created SEOHead component to dynamically update canonical URLs based on current route
 - Ensured all routes follow consistent pattern without trailing slashes
