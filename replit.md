@@ -78,12 +78,15 @@ Preferred communication style: Simple, everyday language.
 - **Meta Tags**: Comprehensive title, description, keywords, and social media tags (Open Graph, Twitter Cards)
 - **Robots.txt**: Dynamic robots.txt at `/robots.txt` with environment-aware configuration
   - Allows all search engines to crawl the entire site
+  - Explicitly disallows /admin directory to prevent indexing of admin pages
   - Points to sitemap.xml for efficient discovery
   - Uses dynamic host detection for multi-environment support
 - **Sitemap.xml**: Auto-generated XML sitemap at `/sitemap.xml` for search engine crawlers
-  - Includes all main sections with proper priority and change frequency
+  - Includes only public pages (home, services, properties, testimonials, contact)
+  - Excludes all admin pages for security and SEO best practices
   - Updates automatically with current date
   - Ready for expansion with future blog posts and property listings
+- **Search Engine Notification**: Manual ping functionality to notify Google and Bing of sitemap updates
 - **Google Analytics**: Tracking configured with ID G-W0TB4Y83E8
 - **Canonical URLs**: Proper canonical tags to prevent duplicate content issues
 

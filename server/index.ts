@@ -60,6 +60,7 @@ app.use((req, res, next) => {
     const robotsTxt = `# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+Disallow: /admin
 
 # Sitemap
 Sitemap: ${baseUrl}/sitemap.xml`;
