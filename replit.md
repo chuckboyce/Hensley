@@ -1,6 +1,15 @@
 # Overview
 
-This is a full-stack real estate website application for "Kevin Hensley's Homes" - a local real estate agent and property management business. The application features a modern, responsive single-page website that showcases services, properties, testimonials, and includes a contact form for lead generation. Built with React and TypeScript on the frontend, Express.js on the backend, and designed with a clean, professional aesthetic using shadcn/ui components.
+This is a full-stack real estate website application for "Kevin Hensley's Homes" - a local real estate agent and property management business. The application features a modern, responsive single-page website that showcases services, properties, testimonials, and includes a contact form for lead generation. The site supports both property sales and rental listings with visual indicators. Built with React and TypeScript on the frontend, Express.js on the backend, and designed with a clean, professional aesthetic using shadcn/ui components.
+
+# Recent Changes
+
+**November 10, 2025**: Added rental property support
+- Added `isRental` boolean field to properties database schema
+- Admin panel now includes checkbox to mark properties as rentals
+- Public properties page displays blue "FOR RENT" badge (top-left) on rental property images
+- Manage listings page shows "RENTAL" badge next to rental property addresses
+- Database automatically defaults isRental to false for all existing properties
 
 # User Preferences
 
