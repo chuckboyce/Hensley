@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
-import { ArrowLeft, Plus, Trash2, Edit } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Edit, Globe } from "lucide-react";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 
 export default function ManageListings() {
@@ -172,6 +172,36 @@ export default function ManageListings() {
     }
   });
 
+  // Ping search engines mutation
+  const pingSearchEnginesMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch('/api/admin/ping-search-engines', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${password}`
+        }
+      });
+      
+      if (!response.ok) throw new Error('Failed to ping search engines');
+      return response.json();
+    },
+    onSuccess: (data) => {
+      const { results } = data;
+      const successCount = (results.google ? 1 : 0) + (results.bing ? 1 : 0);
+      toast({
+        title: "Success",
+        description: `Pinged ${successCount} search engine${successCount !== 1 ? 's' : ''} successfully`
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to ping search engines",
+        variant: "destructive"
+      });
+    }
+  });
+
   const handleOpenEdit = (property: any) => {
     setEditingProperty(property);
     setEditFormData({
@@ -260,6 +290,15 @@ export default function ManageListings() {
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Manage Listings</h1>
           <div className="flex gap-4">
+            <Button
+              onClick={() => pingSearchEnginesMutation.mutate()}
+              disabled={pingSearchEnginesMutation.isPending}
+              variant="secondary"
+              data-testid="button-ping-search-engines"
+            >
+              <Globe className="mr-2 h-4 w-4" />
+              {pingSearchEnginesMutation.isPending ? "Pinging..." : "Ping Search Engines"}
+            </Button>
             <Link href="/admin/listings">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
