@@ -30,10 +30,11 @@ export default function Hero() {
         <img 
           src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" 
           alt="Modern luxury home exterior" 
-          width="2070"
-          height="1380"
+          width={2070}
+          height={1380}
           loading="eager"
-          fetchPriority="high"
+          // @ts-ignore - fetchpriority is valid HTML but not in React types yet
+          fetchpriority="high"
           className="w-full h-full object-cover" 
         />
       </div>

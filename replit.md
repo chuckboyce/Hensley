@@ -4,6 +4,15 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
+**November 10, 2025**: Implemented Core Web Vitals performance optimizations
+- Added hero image preload with fetchpriority=high for LCP optimization (target: < 2.5s)
+- Implemented lazy loading for admin/portal pages using React.lazy() with Suspense
+- Configured long-cache headers in Express: 1 year for versioned assets, 1 day for static files
+- Added explicit width/height attributes to header logos and hero image to prevent CLS (target: < 0.1)
+- Deferred non-critical JavaScript (Google Analytics, GoHighLevel chat widget) for better INP (target: < 200ms)
+- Optimized bundle size by code-splitting non-critical routes (Portal, AdminListings, ManageListings, DoorLoopTest)
+- Performance targets: LCP < 2.5s, CLS < 0.1, INP < 200ms on mobile
+
 **November 10, 2025**: Implemented semantic URL structure for improved SEO and user experience
 - Created dedicated service pages: /buy, /sell, /property-management
 - Created area-specific page: /areas/middletown-de for location-based content
