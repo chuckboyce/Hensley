@@ -4,6 +4,13 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
+**November 10, 2025**: Added search engine ping functionality
+- Created utility function to ping Google and Bing with sitemap URL
+- Added POST `/api/admin/ping-search-engines` endpoint to notify search engines of sitemap updates
+- Implemented "Ping Search Engines" button on manage-listings page for manual submission
+- Automatic notification to Google Search Console and Bing Webmaster Tools
+- Success feedback shows how many search engines were successfully notified
+
 **November 10, 2025**: Added property edit functionality
 - Implemented edit dialog on manage-listings page for updating property details
 - Added `updatePropertyDetailsSchema` for validating partial updates (imageUrl and isRental only)
