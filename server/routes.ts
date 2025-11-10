@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema, updatePropertyDetailsSchema } from "@shared/schema";
 import { ghlService } from "./services/ghl";
 import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
+import { pingSearchEngines } from "./utils/search-engine-ping";
 import multer from "multer";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -345,6 +346,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error creating property media:", error);
       res.status(400).json({ error: error instanceof Error ? error.message : "Invalid media data" });
+    }
+  });
+
+  // Admin: Ping search engines with sitemap
+  app.post("/api/admin/ping-search-engines", adminAuth, async (req, res) => {
+    try {
+      // Get the base URL from the request or use default
+      const protocol = req.protocol;
+      const host = req.get('host') || 'hensleys-homes.com';
+      const sitemapUrl = `${protocol}://${host}/sitemap.xml`;
+      
+      console.log(`Pinging search engines with sitemap: ${sitemapUrl}`);
+      const results = await pingSearchEngines(sitemapUrl);
+      
+      res.json({
+        success: true,
+        sitemapUrl,
+        results
+      });
+    } catch (error) {
+      console.error("Error pinging search engines:", error);
+      res.status(500).json({ error: "Failed to ping search engines" });
     }
   });
 
