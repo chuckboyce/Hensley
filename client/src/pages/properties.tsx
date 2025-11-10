@@ -72,6 +72,14 @@ export default function Properties() {
                           alt={property.unparsedAddress}
                           className="w-full h-full object-cover"
                         />
+                        {property.isRental && (
+                          <Badge 
+                            className="absolute top-4 left-4 bg-blue-600 hover:bg-blue-600 text-white font-bold"
+                            data-testid="badge-for-rent"
+                          >
+                            FOR RENT
+                          </Badge>
+                        )}
                         {property.standardStatus && (
                           <Badge 
                             className={`absolute top-4 right-4 ${

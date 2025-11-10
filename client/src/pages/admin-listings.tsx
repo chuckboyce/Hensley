@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { ArrowLeft, Upload, Eye, Save } from "lucide-react";
@@ -34,7 +35,8 @@ export default function AdminListings() {
     subdivision: "",
     schoolDistrict: "",
     listingUrl: "",
-    imageUrl: ""
+    imageUrl: "",
+    isRental: false
   });
   
   const [photos, setPhotos] = useState<string[]>(['']);
@@ -139,7 +141,8 @@ export default function AdminListings() {
         subdivision: data.subdivision || "",
         schoolDistrict: data.schoolDistrict || "",
         listingUrl: "",
-        imageUrl: ""
+        imageUrl: "",
+        isRental: false
       });
       
       toast({
@@ -226,6 +229,7 @@ export default function AdminListings() {
         publicRemarks: formData.description || "",
         listingUrl: formData.listingUrl || undefined,
         imageUrl: formData.imageUrl || undefined,
+        isRental: formData.isRental,
         listingOfficeName: "RE/MAX Eagle Realty",
         listingAgentName: "Kevin Hensley"
       };
@@ -309,7 +313,8 @@ export default function AdminListings() {
         subdivision: "",
         schoolDistrict: "",
         listingUrl: "",
-        imageUrl: ""
+        imageUrl: "",
+        isRental: false
       });
       setPhotos(['']);
     } catch (error) {
@@ -421,6 +426,18 @@ export default function AdminListings() {
                       </SelectContent>
                     </Select>
                   </div>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <Checkbox 
+                    id="isRental" 
+                    checked={formData.isRental}
+                    onCheckedChange={(checked) => setFormData({...formData, isRental: checked as boolean})}
+                    data-testid="checkbox-rental"
+                  />
+                  <Label htmlFor="isRental" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    This is a rental property (will show "FOR RENT" badge)
+                  </Label>
                 </div>
 
                 <div>

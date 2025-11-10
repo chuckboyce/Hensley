@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { ArrowLeft, Plus, Trash2 } from "lucide-react";
@@ -218,7 +219,14 @@ export default function ManageListings() {
                   {properties.map((property: any) => (
                     <tr key={property.listingKey} className="border-b">
                       <td className="p-3">
-                        <div className="font-medium">{property.unparsedAddress}</div>
+                        <div className="flex items-center gap-2">
+                          <div className="font-medium">{property.unparsedAddress}</div>
+                          {property.isRental && (
+                            <Badge variant="secondary" className="text-xs">
+                              RENTAL
+                            </Badge>
+                          )}
+                        </div>
                       </td>
                       <td className="p-3">
                         ${parseInt(property.listPrice).toLocaleString()}
