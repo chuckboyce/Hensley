@@ -6,15 +6,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
-import { ArrowLeft, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Edit } from "lucide-react";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 
 export default function ManageListings() {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editingProperty, setEditingProperty] = useState<any>(null);
+  const [editFormData, setEditFormData] = useState({ imageUrl: "", isRental: false });
   const { toast } = useToast();
 
   const handleLogin = async () => {
@@ -133,6 +138,89 @@ export default function ManageListings() {
       });
     }
   });
+
+  // Edit mutation
+  const editMutation = useMutation({
+    mutationFn: async ({ listingKey, updates }: { listingKey: string; updates: any }) => {
+      const response = await fetch(`/api/admin/properties/${listingKey}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${password}`
+        },
+        body: JSON.stringify(updates)
+      });
+      
+      if (!response.ok) throw new Error('Failed to update property');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/properties'] });
+      setEditDialogOpen(false);
+      setEditingProperty(null);
+      toast({
+        title: "Success",
+        description: "Property updated successfully"
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update property",
+        variant: "destructive"
+      });
+    }
+  });
+
+  const handleOpenEdit = (property: any) => {
+    setEditingProperty(property);
+    setEditFormData({
+      imageUrl: property.imageUrl || "",
+      isRental: property.isRental || false
+    });
+    setEditDialogOpen(true);
+  };
+
+  const handleImageUpload = async (file: File) => {
+    try {
+      const uploadData = new FormData();
+      uploadData.append('image', file);
+      
+      const response = await fetch('/api/admin/upload-image', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${password}`
+        },
+        body: uploadData
+      });
+      
+      if (response.ok) {
+        const { imageUrl } = await response.json();
+        setEditFormData(prev => ({ ...prev, imageUrl }));
+        toast({
+          title: "Success",
+          description: "Image uploaded successfully"
+        });
+      } else {
+        throw new Error('Upload failed');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to upload image",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleSaveEdit = () => {
+    if (!editingProperty) return;
+    
+    editMutation.mutate({
+      listingKey: editingProperty.listingKey,
+      updates: editFormData
+    });
+  };
 
   if (!isAuthenticated) {
     return (
@@ -258,18 +346,28 @@ export default function ManageListings() {
                         </Select>
                       </td>
                       <td className="p-3">
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => {
-                            if (confirm('Are you sure you want to delete this listing?')) {
-                              deleteMutation.mutate(property.listingKey);
-                            }
-                          }}
-                          data-testid={`button-delete-${property.listingKey}`}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <div className="flex gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleOpenEdit(property)}
+                            data-testid={`button-edit-${property.listingKey}`}
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => {
+                              if (confirm('Are you sure you want to delete this listing?')) {
+                                deleteMutation.mutate(property.listingKey);
+                              }
+                            }}
+                            data-testid={`button-delete-${property.listingKey}`}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -278,6 +376,72 @@ export default function ManageListings() {
             </div>
           </Card>
         )}
+
+        {/* Edit Dialog */}
+        <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Edit Property</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div>
+                <Label>Property Image</Label>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      await handleImageUpload(file);
+                    }
+                  }}
+                  data-testid="input-edit-image-upload"
+                />
+                {editFormData.imageUrl && (
+                  <div className="mt-2">
+                    <img 
+                      src={editFormData.imageUrl} 
+                      alt="Property preview" 
+                      className="w-full h-48 object-cover rounded-md"
+                    />
+                  </div>
+                )}
+                <p className="text-xs text-muted-foreground mt-1">
+                  Upload a main image for this property (max 5MB, JPEG/PNG/WebP/GIF)
+                </p>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="editIsRental" 
+                  checked={editFormData.isRental}
+                  onCheckedChange={(checked) => setEditFormData(prev => ({ ...prev, isRental: checked as boolean }))}
+                  data-testid="checkbox-edit-rental"
+                />
+                <Label htmlFor="editIsRental" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  This is a rental property (will show "FOR RENT" badge)
+                </Label>
+              </div>
+
+              <div className="flex gap-2 justify-end pt-4">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setEditDialogOpen(false)}
+                  data-testid="button-cancel-edit"
+                >
+                  Cancel
+                </Button>
+                <Button 
+                  onClick={handleSaveEdit}
+                  disabled={editMutation.isPending}
+                  data-testid="button-save-edit"
+                >
+                  {editMutation.isPending ? "Saving..." : "Save Changes"}
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

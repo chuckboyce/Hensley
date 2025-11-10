@@ -14,6 +14,7 @@ export interface IStorage {
   getProperty(listingKey: string): Promise<Property | undefined>;
   createProperty(property: InsertProperty): Promise<Property>;
   updatePropertyStatus(listingKey: string, status: string): Promise<Property | undefined>;
+  updateProperty(listingKey: string, updates: Partial<InsertProperty>): Promise<Property | undefined>;
   deleteProperty(listingKey: string): Promise<boolean>;
   getPropertyMedia(listingKey: string): Promise<PropertyMedia[]>;
   createPropertyMedia(media: InsertPropertyMedia): Promise<PropertyMedia>;

@@ -279,6 +279,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin: Update property (for editing image and rental status)
+  app.patch("/api/admin/properties/:listingKey", adminAuth, async (req, res) => {
+    try {
+      const { listingKey } = req.params as { listingKey: string };
+      const updates = req.body;
+      
+      const updated = await storage.updateProperty(listingKey, updates);
+      
+      if (!updated) {
+        return res.status(404).json({ error: "Property not found" });
+      }
+      
+      res.json(updated);
+    } catch (error) {
+      console.error("Error updating property:", error);
+      res.status(500).json({ error: "Failed to update property" });
+    }
+  });
+
   // Admin: Delete property
   app.delete("/api/admin/properties/:listingKey", adminAuth, async (req, res) => {
     try {
