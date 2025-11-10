@@ -202,6 +202,23 @@ export const insertPropertySchema = createInsertSchema(properties).pick({
   listingAgentPhone: true,
 });
 
+// Schema for updating property details (imageUrl and isRental only)
+export const updatePropertyDetailsSchema = insertPropertySchema
+  .pick({
+    imageUrl: true,
+    isRental: true,
+  })
+  .partial()
+  .superRefine((data, ctx) => {
+    // Ensure at least one field is provided
+    if (data.imageUrl === undefined && data.isRental === undefined) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "At least one field (imageUrl or isRental) must be provided",
+      });
+    }
+  });
+
 export const insertPropertyMediaSchema = createInsertSchema(propertyMedia).pick({
   mediaKey: true,
   listingKey: true,
@@ -213,5 +230,6 @@ export const insertPropertyMediaSchema = createInsertSchema(propertyMedia).pick(
 
 export type InsertProperty = z.infer<typeof insertPropertySchema>;
 export type Property = typeof properties.$inferSelect;
+export type UpdatePropertyDetails = z.infer<typeof updatePropertyDetailsSchema>;
 export type InsertPropertyMedia = z.infer<typeof insertPropertyMediaSchema>;
 export type PropertyMedia = typeof propertyMedia.$inferSelect;

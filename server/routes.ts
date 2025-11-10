@@ -1,7 +1,7 @@
 import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema } from "@shared/schema";
+import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema, updatePropertyDetailsSchema } from "@shared/schema";
 import { ghlService } from "./services/ghl";
 import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
 import multer from "multer";
@@ -279,13 +279,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin: Update property (for editing image and rental status)
+  // Admin: Update property details (image and rental status)
   app.patch("/api/admin/properties/:listingKey", adminAuth, async (req, res) => {
     try {
       const { listingKey } = req.params as { listingKey: string };
-      const updates = req.body;
       
-      const updated = await storage.updateProperty(listingKey, updates);
+      // Validate request body using safeParse
+      const result = updatePropertyDetailsSchema.safeParse(req.body);
+      
+      if (!result.success) {
+        return res.status(400).json({ 
+          error: "Validation failed", 
+          details: result.error.errors 
+        });
+      }
+      
+      const updated = await storage.updatePropertyDetails(listingKey, result.data);
       
       if (!updated) {
         return res.status(404).json({ error: "Property not found" });

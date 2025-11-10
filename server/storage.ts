@@ -1,5 +1,5 @@
 // Database integration blueprint: javascript_database
-import { users, contacts, properties, propertyMedia, type User, type InsertUser, type Contact, type InsertContact, type Property, type InsertProperty, type PropertyMedia, type InsertPropertyMedia } from "@shared/schema";
+import { users, contacts, properties, propertyMedia, type User, type InsertUser, type Contact, type InsertContact, type Property, type InsertProperty, type UpdatePropertyDetails, type PropertyMedia, type InsertPropertyMedia } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc } from "drizzle-orm";
 import { randomUUID } from "crypto";
@@ -14,7 +14,7 @@ export interface IStorage {
   getProperty(listingKey: string): Promise<Property | undefined>;
   createProperty(property: InsertProperty): Promise<Property>;
   updatePropertyStatus(listingKey: string, status: string): Promise<Property | undefined>;
-  updateProperty(listingKey: string, updates: Partial<InsertProperty>): Promise<Property | undefined>;
+  updatePropertyDetails(listingKey: string, updates: UpdatePropertyDetails): Promise<Property | undefined>;
   deleteProperty(listingKey: string): Promise<boolean>;
   getPropertyMedia(listingKey: string): Promise<PropertyMedia[]>;
   createPropertyMedia(media: InsertPropertyMedia): Promise<PropertyMedia>;
@@ -83,6 +83,31 @@ export class DatabaseStorage implements IStorage {
       .set({ standardStatus: status })
       .where(eq(properties.listingKey, listingKey))
       .returning();
+    return property || undefined;
+  }
+
+  async updatePropertyDetails(listingKey: string, updates: UpdatePropertyDetails): Promise<Property | undefined> {
+    // Build update object, excluding undefined fields
+    const updateData: Partial<{ imageUrl: string | null; isRental: boolean }> = {};
+    
+    if (updates.imageUrl !== undefined) {
+      updateData.imageUrl = updates.imageUrl;
+    }
+    if (updates.isRental !== undefined) {
+      updateData.isRental = updates.isRental;
+    }
+    
+    // Guard against empty updates (should be caught by schema, but defensive check)
+    if (Object.keys(updateData).length === 0) {
+      throw new Error("No fields to update");
+    }
+    
+    const [property] = await db
+      .update(properties)
+      .set(updateData)
+      .where(eq(properties.listingKey, listingKey))
+      .returning();
+    
     return property || undefined;
   }
 
