@@ -13,6 +13,22 @@ const PAGE_META: Record<string, PageMeta> = {
     title: "Kevin Hensley's Homes - Delaware & Maryland Real Estate | Property Management",
     description: "Kevin Hensley's Homes provides expert real estate services in Delaware and Maryland. Specializing in home sales, property management, and investment consulting. Contact us for a free consultation today."
   },
+  '/buy': {
+    title: "Buy a Home in Delaware & Maryland - Kevin Hensley's Homes",
+    description: "Find your dream home in Delaware or Maryland with expert guidance. Comprehensive market analysis, property tours, and professional negotiation services. Start your home search today."
+  },
+  '/sell': {
+    title: "Sell Your Home in Delaware & Maryland - Kevin Hensley's Homes",
+    description: "Sell your Delaware or Maryland home for top dollar. Professional photography, strategic marketing, and expert negotiation. Get your free home valuation today."
+  },
+  '/property-management': {
+    title: "Property Management Services - Delaware & Maryland | Kevin Hensley's Homes",
+    description: "Professional property management in Delaware and Maryland. Tenant screening, rent collection, maintenance coordination, and 24/7 support. Maximize your rental income with peace of mind."
+  },
+  '/areas/middletown-de': {
+    title: "Middletown DE Real Estate - Homes for Sale | Kevin Hensley's Homes",
+    description: "Discover Middletown, Delaware real estate. One of DE's fastest-growing communities with top schools, modern amenities, and easy access to major cities. Browse homes and schedule tours."
+  },
   '/contact': {
     title: "Contact Us - Kevin Hensley's Homes | Delaware & Maryland Real Estate",
     description: "Get in touch with Kevin Hensley's Homes for all your real estate needs in Delaware and Maryland. Call (302) 218-0130 or submit our online form for a free consultation."

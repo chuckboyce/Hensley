@@ -77,10 +77,12 @@ Sitemap: ${baseUrl}/sitemap.xml`;
 
       const pages = [
         { url: baseUrl, lastmod: currentDate, changefreq: 'weekly', priority: '1.0' },
-        { url: `${baseUrl}#services`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
-        { url: `${baseUrl}#properties`, lastmod: currentDate, changefreq: 'daily', priority: '0.9' },
-        { url: `${baseUrl}#testimonials`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
-        { url: `${baseUrl}#contact`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' }
+        { url: `${baseUrl}/buy`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
+        { url: `${baseUrl}/sell`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
+        { url: `${baseUrl}/property-management`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
+        { url: `${baseUrl}/properties`, lastmod: currentDate, changefreq: 'daily', priority: '0.8' },
+        { url: `${baseUrl}/areas/middletown-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/contact`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' }
       ];
 
       const xml = `<?xml version="1.0" encoding="UTF-8"?>

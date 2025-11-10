@@ -5,6 +5,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SEOHead } from "@/components/seo-head";
 import Home from "@/pages/home";
+import Buy from "@/pages/buy";
+import Sell from "@/pages/sell";
+import PropertyManagement from "@/pages/property-management";
+import MiddletownDE from "@/pages/areas/middletown-de";
 import Contact from "@/pages/contact";
 import FairHousing from "@/pages/fair-housing";
 import PrivacyPolicy from "@/pages/privacy-policy";
@@ -29,6 +33,10 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/buy" component={Buy} />
+      <Route path="/sell" component={Sell} />
+      <Route path="/property-management" component={PropertyManagement} />
+      <Route path="/areas/middletown-de" component={MiddletownDE} />
       <Route path="/contact" component={Contact} />
       <Route path="/portal" component={Portal} />
       <Route path="/properties" component={Properties} />

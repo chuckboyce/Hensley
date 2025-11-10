@@ -39,40 +39,36 @@ export default function Header() {
             </div>
             
             <nav className="hidden md:flex items-center space-x-8">
-              <button 
-                onClick={() => scrollToSection('home')} 
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                data-testid="nav-home"
-              >
-                Home
-              </button>
-              <button 
-                onClick={() => scrollToSection('about')} 
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                data-testid="nav-about"
-              >
-                About
-              </button>
-              <button 
-                onClick={() => scrollToSection('services')} 
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                data-testid="nav-services"
-              >
-                Services
-              </button>
+              <Link href="/">
+                <span className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      data-testid="nav-home">
+                  Home
+                </span>
+              </Link>
+              <Link href="/buy">
+                <span className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      data-testid="nav-buy">
+                  Buy
+                </span>
+              </Link>
+              <Link href="/sell">
+                <span className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      data-testid="nav-sell">
+                  Sell
+                </span>
+              </Link>
+              <Link href="/property-management">
+                <span className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      data-testid="nav-property-management">
+                  Property Management
+                </span>
+              </Link>
               <Link href="/properties">
                 <span className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                       data-testid="nav-properties">
                   Properties
                 </span>
               </Link>
-              <button 
-                onClick={() => scrollToSection('testimonials')} 
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                data-testid="nav-testimonials"
-              >
-                Testimonials
-              </button>
               <Link href="/contact">
                 <span className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                       data-testid="nav-contact">
@@ -118,27 +114,30 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur" data-testid="mobile-menu">
           <nav className="flex flex-col space-y-4 p-6">
-            <button 
-              onClick={() => scrollToSection('home')} 
-              className="text-lg font-medium text-foreground text-left"
-              data-testid="mobile-nav-home"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('about')} 
-              className="text-lg font-medium text-muted-foreground hover:text-foreground text-left"
-              data-testid="mobile-nav-about"
-            >
-              About
-            </button>
-            <button 
-              onClick={() => scrollToSection('services')} 
-              className="text-lg font-medium text-muted-foreground hover:text-foreground text-left"
-              data-testid="mobile-nav-services"
-            >
-              Services
-            </button>
+            <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+              <span className="text-lg font-medium text-foreground text-left cursor-pointer"
+                    data-testid="mobile-nav-home">
+                Home
+              </span>
+            </Link>
+            <Link href="/buy" onClick={() => setMobileMenuOpen(false)}>
+              <span className="text-lg font-medium text-muted-foreground hover:text-foreground text-left cursor-pointer"
+                    data-testid="mobile-nav-buy">
+                Buy
+              </span>
+            </Link>
+            <Link href="/sell" onClick={() => setMobileMenuOpen(false)}>
+              <span className="text-lg font-medium text-muted-foreground hover:text-foreground text-left cursor-pointer"
+                    data-testid="mobile-nav-sell">
+                Sell
+              </span>
+            </Link>
+            <Link href="/property-management" onClick={() => setMobileMenuOpen(false)}>
+              <span className="text-lg font-medium text-muted-foreground hover:text-foreground text-left cursor-pointer"
+                    data-testid="mobile-nav-property-management">
+                Property Management
+              </span>
+            </Link>
             <Link href="/properties" onClick={() => setMobileMenuOpen(false)}>
               <span className="text-lg font-medium text-muted-foreground hover:text-foreground text-left cursor-pointer"
                     data-testid="mobile-nav-properties">
