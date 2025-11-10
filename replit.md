@@ -4,6 +4,14 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
+**November 10, 2025**: Added property edit functionality
+- Implemented edit dialog on manage-listings page for updating property details
+- Added `updatePropertyDetailsSchema` for validating partial updates (imageUrl and isRental only)
+- Created narrowly-scoped `updatePropertyDetails` storage method to prevent accidental field updates
+- PATCH `/api/admin/properties/:listingKey` endpoint with safeParse validation returning 400 for all invalid payloads
+- Edit modal supports image upload (via existing upload endpoint) and rental checkbox
+- Proper error handling with detailed validation feedback
+
 **November 10, 2025**: Added rental property support
 - Added `isRental` boolean field to properties database schema
 - Admin panel now includes checkbox to mark properties as rentals
