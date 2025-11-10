@@ -6,6 +6,30 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Performance: Cache headers for static assets
+app.use((req, res, next) => {
+  // Check if request is for a static asset with hash/version (Vite adds content hashes)
+  const isVersionedAsset = /\.(js|css|woff2?|ttf|eot|svg|png|jpe?g|gif|webp|avif|ico)(\?.*)?$/.test(req.url) && 
+                          req.url.includes('-') && 
+                          req.url.match(/[a-f0-9]{8,}/);
+  
+  // Check if it's any static asset
+  const isStaticAsset = /\.(js|css|woff2?|ttf|eot|svg|png|jpe?g|gif|webp|avif|ico)(\?.*)?$/.test(req.url);
+  
+  if (isVersionedAsset) {
+    // Long-term cache for versioned assets (1 year, immutable)
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+  } else if (isStaticAsset) {
+    // Medium-term cache for non-versioned assets (1 day)
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+  } else if (req.url.endsWith('.html') || req.url === '/') {
+    // No cache for HTML to ensure fresh content
+    res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+  }
+  
+  next();
+});
+
 // Serve uploaded images
 app.use('/uploads', express.static('public/uploads'));
 
