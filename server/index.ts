@@ -33,6 +33,9 @@ app.use((req, res, next) => {
 // Serve uploaded images
 app.use('/uploads', express.static('public/uploads'));
 
+// Serve static files from public directory (hero images, logos, etc.)
+app.use(express.static('public'));
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
