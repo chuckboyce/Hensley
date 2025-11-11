@@ -27,31 +27,14 @@ export default function Hero() {
   return (
     <section id="home" className="relative">
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/60">
-        <picture>
-          {/* AVIF format - best compression */}
-          <source 
-            type="image/avif"
-            srcSet="/hero-mobile.avif 640w, /hero-tablet.avif 1024w, /hero-desktop.avif 1920w, /hero-2x.avif 2560w"
-            sizes="100vw"
-          />
-          {/* WebP format - good compression and wide support */}
-          <source 
-            type="image/webp"
-            srcSet="/hero-mobile.webp 640w, /hero-tablet.webp 1024w, /hero-desktop.webp 1920w, /hero-2x.webp 2560w"
-            sizes="100vw"
-          />
-          {/* JPEG fallback for older browsers */}
-          <img 
-            src="/hero-desktop.jpg" 
-            srcSet="/hero-mobile.jpg 640w, /hero-tablet.jpg 1024w, /hero-desktop.jpg 1920w, /hero-2x.jpg 2560w"
-            sizes="100vw"
-            alt="Modern luxury home exterior" 
-            width={1920}
-            height={1280}
-            loading="eager"
-            className="w-full h-full object-cover" 
-          />
-        </picture>
+        <img 
+          src="/hero-desktop.jpg" 
+          alt="Modern luxury home exterior" 
+          width={1920}
+          height={1280}
+          loading="eager"
+          className="w-full h-full object-cover" 
+        />
       </div>
       
       <div className="relative z-10 container mx-auto px-4 lg:px-6 py-24 lg:py-32">
