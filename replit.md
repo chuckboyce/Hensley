@@ -4,12 +4,21 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
+**November 11, 2025**: Optimized hero image for LCP performance
+- Downloaded and self-hosted hero image (originally 825KB from Unsplash)
+- Created image optimization script using Sharp to generate responsive images in AVIF, WebP, and JPEG formats
+- Generated 4 responsive sizes: mobile (640w), tablet (1024w), desktop (1920w), 2x/retina (2560w)
+- Achieved 85-90% file size reduction on mobile (123KB AVIF, 82KB WebP vs 825KB original)
+- Implemented responsive picture element with format fallbacks (AVIF → WebP → JPEG)
+- Updated preload tags with media queries for viewport-specific image loading
+- Removed GoHighLevel chat widget per user request
+
 **November 10, 2025**: Implemented Core Web Vitals performance optimizations
 - Added hero image preload with fetchpriority=high for LCP optimization (target: < 2.5s)
 - Implemented lazy loading for admin/portal pages using React.lazy() with Suspense
 - Configured long-cache headers in Express: 1 year for versioned assets, 1 day for static files
 - Added explicit width/height attributes to header logos and hero image to prevent CLS (target: < 0.1)
-- Deferred non-critical JavaScript (Google Analytics, GoHighLevel chat widget) for better INP (target: < 200ms)
+- Deferred non-critical JavaScript (Google Analytics) for better INP (target: < 200ms)
 - Optimized bundle size by code-splitting non-critical routes (Portal, AdminListings, ManageListings, DoorLoopTest)
 - Performance targets: LCP < 2.5s, CLS < 0.1, INP < 200ms on mobile
 
