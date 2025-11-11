@@ -6,11 +6,14 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 **November 11, 2025**: Optimized hero image for LCP performance
 - Downloaded and self-hosted hero image (originally 825KB from Unsplash)
-- Created image optimization script using Sharp to generate responsive images in AVIF, WebP, and JPEG formats
+- Created image optimization script (`scripts/optimize-hero-image.ts`) using Sharp
 - Generated 4 responsive sizes: mobile (640w), tablet (1024w), desktop (1920w), 2x/retina (2560w)
+- Generated 3 formats per size: AVIF, WebP, JPEG (12 total optimized images)
 - Achieved 85-90% file size reduction on mobile (123KB AVIF, 82KB WebP vs 825KB original)
 - Implemented responsive picture element with format fallbacks (AVIF → WebP → JPEG)
 - Updated preload tags with media queries for viewport-specific image loading
+- Images stored in `client/public/` directory for Vite serving in development
+- Added `express.static('public')` middleware in server/index.ts for production
 - Removed GoHighLevel chat widget per user request
 
 **November 10, 2025**: Implemented Core Web Vitals performance optimizations
