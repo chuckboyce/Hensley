@@ -5,9 +5,11 @@ import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema, u
 import { ghlService } from "./services/ghl";
 import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
 import { pingSearchEngines } from "./utils/search-engine-ping";
+import { optimizePropertyImage } from "./utils/image-optimizer";
 import multer from "multer";
 import path from "path";
 import { randomUUID } from "crypto";
+import fs from "fs/promises";
 
 // Simple admin password middleware
 function adminAuth(req: Request, res: Response, next: NextFunction) {
@@ -31,21 +33,11 @@ function adminAuth(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
-// Configure multer for image uploads
-const imageStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/uploads/');
-  },
-  filename: (req, file, cb) => {
-    const uniqueName = `${randomUUID()}${path.extname(file.originalname)}`;
-    cb(null, uniqueName);
-  }
-});
-
+// Configure multer for image uploads (memory storage for optimization)
 const imageUpload = multer({
-  storage: imageStorage,
+  storage: multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB limit
+    fileSize: 10 * 1024 * 1024, // 10MB limit (pre-optimization)
   },
   fileFilter: (req, file, cb) => {
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
@@ -231,15 +223,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin: Upload property image
+  // Admin: Upload property image (with automatic optimization)
   app.post("/api/admin/upload-image", adminAuth, imageUpload.single('image'), async (req, res) => {
     try {
       if (!req.file) {
         return res.status(400).json({ error: "No image file provided" });
       }
       
-      const imageUrl = `/uploads/${req.file.filename}`;
-      res.json({ imageUrl });
+      const optimized = await optimizePropertyImage(req.file.buffer, req.file.originalname);
+      
+      const largestJpeg = optimized.variants
+        .filter(v => v.format === 'jpeg')
+        .sort((a, b) => b.width - a.width)[0];
+      
+      res.json({ 
+        imageUrl: largestJpeg?.url || optimized.variants[0]?.url,
+        variants: optimized.variants,
+        placeholder: optimized.placeholder,
+        originalFilename: optimized.originalFilename
+      });
     } catch (error) {
       console.error("Error uploading image:", error);
       res.status(400).json({ error: error instanceof Error ? error.message : "Failed to upload image" });

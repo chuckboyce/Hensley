@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer, decimal, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, decimal, boolean, jsonb, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -122,7 +122,8 @@ export const properties = pgTable("properties", {
   virtualTourURLUnbranded: text("virtual_tour_url_unbranded"),
   virtualTourURLBranded: text("virtual_tour_url_branded"),
   listingUrl: text("listing_url"), // Link to full listing on RE/MAX or other site
-  imageUrl: text("image_url"), // Uploaded property image
+  imageUrl: text("image_url"), // Uploaded property image (DEPRECATED - use hero_media_id)
+  heroMediaId: varchar("hero_media_id"), // FK to property_media for hero image with variants
   isRental: boolean("is_rental").default(false).notNull(), // For sale vs for rent
   
   // Attribution (IDX compliance)
@@ -141,12 +142,25 @@ export const propertyMedia = pgTable("property_media", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   mediaKey: text("media_key").notNull().unique(),
   listingKey: text("listing_key").notNull(), // Foreign key to properties
-  mediaUrl: text("media_url").notNull(),
+  mediaUrl: text("media_url").notNull(), // Legacy single URL (DEPRECATED - use variants)
   mediaOrder: integer("media_order").default(0),
   caption: text("caption"),
   mediaType: text("media_type").default("Photo"), // Photo, VirtualTour, etc.
+  
+  // Responsive image optimization fields
+  variants: jsonb("variants").notNull().default('[]'), // Array of {format, width, url, fileSize}
+  placeholder: text("placeholder"), // Base64-encoded blur placeholder
+  originalFilename: text("original_filename"),
+  originalWidth: integer("original_width"),
+  originalHeight: integer("original_height"),
+  originalFilesize: integer("original_filesize"),
+  usage: text("usage").default("gallery"), // "gallery", "hero", "floorplan"
+  
   createdAt: timestamp("created_at").defaultNow().notNull(),
-});
+}, (table) => ({
+  listingKeyIdx: index("property_media_listing_key_idx").on(table.listingKey),
+  listingKeyUsageIdx: index("property_media_listing_key_usage_idx").on(table.listingKey, table.usage),
+}));
 
 export const insertPropertySchema = createInsertSchema(properties).pick({
   listingKey: true,
