@@ -6,6 +6,7 @@ import { useLocation, Link } from "wouter";
 import { Bed, Bath, Square, MapPin, DollarSign } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { ResponsivePropertyImage } from "@/components/responsive-property-image";
 import comingSoonImage from "@assets/generated-image (1)_1762730474875.png";
 
 export default function Properties() {
@@ -67,10 +68,14 @@ export default function Properties() {
                     <Card key={property.listingKey} className="overflow-hidden hover:shadow-lg transition-shadow" data-testid={`property-card-${property.listingKey}`}>
                       {/* Property Image */}
                       <div className="relative h-64 bg-muted">
-                        <img 
-                          src={mainPhoto} 
+                        <ResponsivePropertyImage
+                          variants={property.imageVariants}
+                          placeholder={property.imagePlaceholder}
+                          fallbackUrl={mainPhoto}
                           alt={property.unparsedAddress}
                           className="w-full h-full object-cover"
+                          loading="lazy"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         {property.isRental && (
                           <Badge 
