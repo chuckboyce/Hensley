@@ -163,7 +163,10 @@ export default function ManageListings() {
         body: JSON.stringify(updates)
       });
       
-      if (!response.ok) throw new Error('Failed to update property');
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || error.details?.[0]?.message || 'Failed to update property');
+      }
       return response.json();
     },
     onSuccess: () => {
@@ -175,10 +178,10 @@ export default function ManageListings() {
         description: "Property updated successfully"
       });
     },
-    onError: () => {
+    onError: (error) => {
       toast({
         title: "Error",
-        description: "Failed to update property",
+        description: error instanceof Error ? error.message : "Failed to update property",
         variant: "destructive"
       });
     }
@@ -269,7 +272,7 @@ export default function ManageListings() {
     const updates: any = {};
     
     // Only add fields that have actual values (not empty strings)
-    if (editFormData.listPrice) updates.listPrice = parseFloat(editFormData.listPrice);
+    if (editFormData.listPrice) updates.listPrice = editFormData.listPrice;
     if (editFormData.bedroomsTotal) updates.bedroomsTotal = parseInt(editFormData.bedroomsTotal);
     if (editFormData.bathroomsFull) updates.bathroomsFull = parseInt(editFormData.bathroomsFull);
     if (editFormData.bathroomsHalf) updates.bathroomsHalf = parseInt(editFormData.bathroomsHalf);
