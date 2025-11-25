@@ -264,9 +264,27 @@ export default function ManageListings() {
   const handleSaveEdit = () => {
     if (!editingProperty) return;
     
+    // Convert numeric string fields to numbers
+    const updates = {
+      ...editFormData,
+      listPrice: editFormData.listPrice ? parseFloat(editFormData.listPrice) : undefined,
+      bedroomsTotal: editFormData.bedroomsTotal ? parseInt(editFormData.bedroomsTotal) : undefined,
+      bathroomsFull: editFormData.bathroomsFull ? parseInt(editFormData.bathroomsFull) : undefined,
+      bathroomsHalf: editFormData.bathroomsHalf ? parseInt(editFormData.bathroomsHalf) : undefined,
+      livingArea: editFormData.livingArea ? parseInt(editFormData.livingArea) : undefined,
+      yearBuilt: editFormData.yearBuilt ? parseInt(editFormData.yearBuilt) : undefined,
+    };
+    
+    // Remove empty string values to allow schema validation
+    Object.keys(updates).forEach(key => {
+      if (updates[key as keyof typeof updates] === '') {
+        delete updates[key as keyof typeof updates];
+      }
+    });
+    
     editMutation.mutate({
       listingKey: editingProperty.listingKey,
-      updates: editFormData
+      updates
     });
   };
 
