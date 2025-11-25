@@ -264,23 +264,28 @@ export default function ManageListings() {
   const handleSaveEdit = () => {
     if (!editingProperty) return;
     
-    // Convert numeric string fields to numbers
-    const updates = {
-      ...editFormData,
-      listPrice: editFormData.listPrice ? parseFloat(editFormData.listPrice) : undefined,
-      bedroomsTotal: editFormData.bedroomsTotal ? parseInt(editFormData.bedroomsTotal) : undefined,
-      bathroomsFull: editFormData.bathroomsFull ? parseInt(editFormData.bathroomsFull) : undefined,
-      bathroomsHalf: editFormData.bathroomsHalf ? parseInt(editFormData.bathroomsHalf) : undefined,
-      livingArea: editFormData.livingArea ? parseInt(editFormData.livingArea) : undefined,
-      yearBuilt: editFormData.yearBuilt ? parseInt(editFormData.yearBuilt) : undefined,
-    };
+    const updates: any = {};
     
-    // Remove empty string values to allow schema validation
-    Object.keys(updates).forEach(key => {
-      if (updates[key as keyof typeof updates] === '') {
-        delete updates[key as keyof typeof updates];
-      }
-    });
+    // Only add fields that have actual values (not empty strings)
+    if (editFormData.listPrice) updates.listPrice = parseFloat(editFormData.listPrice);
+    if (editFormData.bedroomsTotal) updates.bedroomsTotal = parseInt(editFormData.bedroomsTotal);
+    if (editFormData.bathroomsFull) updates.bathroomsFull = parseInt(editFormData.bathroomsFull);
+    if (editFormData.bathroomsHalf) updates.bathroomsHalf = parseInt(editFormData.bathroomsHalf);
+    if (editFormData.livingArea) updates.livingArea = parseInt(editFormData.livingArea);
+    if (editFormData.yearBuilt) updates.yearBuilt = parseInt(editFormData.yearBuilt);
+    if (editFormData.publicRemarks) updates.publicRemarks = editFormData.publicRemarks;
+    if (editFormData.imageUrl) updates.imageUrl = editFormData.imageUrl;
+    if (editFormData.isRental !== undefined) updates.isRental = editFormData.isRental;
+    
+    // Check if at least one field has been updated
+    if (Object.keys(updates).length === 0) {
+      toast({
+        title: "Error",
+        description: "Please update at least one field",
+        variant: "destructive"
+      });
+      return;
+    }
     
     editMutation.mutate({
       listingKey: editingProperty.listingKey,
