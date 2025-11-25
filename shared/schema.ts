@@ -226,6 +226,7 @@ export const updatePropertyDetailsSchema = insertPropertySchema
     livingArea: true,
     yearBuilt: true,
     publicRemarks: true,
+    listingUrl: true,
     imageUrl: true,
     isRental: true,
   })

@@ -111,6 +111,9 @@ export class DatabaseStorage implements IStorage {
     if (updates.publicRemarks !== undefined) {
       updateData.publicRemarks = updates.publicRemarks;
     }
+    if (updates.listingUrl !== undefined) {
+      updateData.listingUrl = updates.listingUrl;
+    }
     if (updates.imageUrl !== undefined) {
       updateData.imageUrl = updates.imageUrl;
     }

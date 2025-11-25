@@ -28,6 +28,7 @@ export default function ManageListings() {
     livingArea: "", 
     yearBuilt: "", 
     publicRemarks: "", 
+    listingUrl: "", 
     imageUrl: "", 
     isRental: false 
   });
@@ -223,6 +224,7 @@ export default function ManageListings() {
       livingArea: property.livingArea || "",
       yearBuilt: property.yearBuilt || "",
       publicRemarks: property.publicRemarks || "",
+      listingUrl: property.listingUrl || "",
       imageUrl: property.imageUrl || "",
       isRental: property.isRental || false
     });
@@ -274,6 +276,7 @@ export default function ManageListings() {
     if (editFormData.livingArea) updates.livingArea = parseInt(editFormData.livingArea);
     if (editFormData.yearBuilt) updates.yearBuilt = parseInt(editFormData.yearBuilt);
     if (editFormData.publicRemarks) updates.publicRemarks = editFormData.publicRemarks;
+    if (editFormData.listingUrl) updates.listingUrl = editFormData.listingUrl;
     if (editFormData.imageUrl) updates.imageUrl = editFormData.imageUrl;
     if (editFormData.isRental !== undefined) updates.isRental = editFormData.isRental;
     
@@ -542,6 +545,18 @@ export default function ManageListings() {
                   placeholder="Property description..."
                   className="h-24 resize-none"
                   data-testid="textarea-edit-remarks"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="editListingUrl">RE/MAX Listing URL</Label>
+                <Input
+                  id="editListingUrl"
+                  type="url"
+                  value={editFormData.listingUrl}
+                  onChange={(e) => setEditFormData(prev => ({ ...prev, listingUrl: e.target.value }))}
+                  placeholder="https://example.remax.com/..."
+                  data-testid="input-edit-listing-url"
                 />
               </div>
 
