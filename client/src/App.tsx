@@ -60,6 +60,7 @@ function Router() {
         
         {/* Lazy-loaded admin and portal pages */}
         <Route path="/portal" component={Portal} />
+        <Route path="/admin" component={AdminListings} />
         <Route path="/admin/listings" component={AdminListings} />
         <Route path="/admin/manage-listings" component={ManageListings} />
         <Route path="/doorloop-test" component={DoorLoopTest} />
