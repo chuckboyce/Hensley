@@ -64,6 +64,12 @@ export default function Properties() {
                   const photos = property.media || [];
                   const mainPhoto = property.imageUrl || photos[0]?.mediaUrl || comingSoonImage;
                   
+                  // Check if property was recently updated (within 24 hours)
+                  const lastUpdated = new Date(property.lastUpdated);
+                  const now = new Date();
+                  const hoursAgo = (now.getTime() - lastUpdated.getTime()) / (1000 * 60 * 60);
+                  const isRecentlyUpdated = hoursAgo < 24;
+                  
                   return (
                     <Card key={property.listingKey} className="overflow-hidden hover:shadow-lg transition-shadow" data-testid={`property-card-${property.listingKey}`}>
                       {/* Property Image */}
@@ -83,6 +89,14 @@ export default function Properties() {
                             data-testid="badge-for-rent"
                           >
                             FOR RENT
+                          </Badge>
+                        )}
+                        {isRecentlyUpdated && (
+                          <Badge 
+                            className="absolute top-4 left-4 ml-28 bg-purple-600 hover:bg-purple-600 text-white font-bold"
+                            data-testid="badge-updated"
+                          >
+                            UPDATED
                           </Badge>
                         )}
                         {property.standardStatus && (

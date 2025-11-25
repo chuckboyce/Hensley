@@ -88,8 +88,29 @@ export class DatabaseStorage implements IStorage {
 
   async updatePropertyDetails(listingKey: string, updates: UpdatePropertyDetails): Promise<Property | undefined> {
     // Build update object, excluding undefined fields
-    const updateData: Partial<{ imageUrl: string | null; isRental: boolean }> = {};
+    const updateData: any = { lastUpdated: new Date() };
     
+    if (updates.listPrice !== undefined) {
+      updateData.listPrice = updates.listPrice;
+    }
+    if (updates.bedroomsTotal !== undefined) {
+      updateData.bedroomsTotal = updates.bedroomsTotal;
+    }
+    if (updates.bathroomsFull !== undefined) {
+      updateData.bathroomsFull = updates.bathroomsFull;
+    }
+    if (updates.bathroomsHalf !== undefined) {
+      updateData.bathroomsHalf = updates.bathroomsHalf;
+    }
+    if (updates.livingArea !== undefined) {
+      updateData.livingArea = updates.livingArea;
+    }
+    if (updates.yearBuilt !== undefined) {
+      updateData.yearBuilt = updates.yearBuilt;
+    }
+    if (updates.publicRemarks !== undefined) {
+      updateData.publicRemarks = updates.publicRemarks;
+    }
     if (updates.imageUrl !== undefined) {
       updateData.imageUrl = updates.imageUrl;
     }
@@ -98,7 +119,7 @@ export class DatabaseStorage implements IStorage {
     }
     
     // Guard against empty updates (should be caught by schema, but defensive check)
-    if (Object.keys(updateData).length === 0) {
+    if (Object.keys(updateData).length === 1) { // Only has lastUpdated
       throw new Error("No fields to update");
     }
     
