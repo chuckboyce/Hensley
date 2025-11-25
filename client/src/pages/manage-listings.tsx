@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -435,11 +436,92 @@ export default function ManageListings() {
 
         {/* Edit Dialog */}
         <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Edit Property</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 py-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="editListPrice">List Price ($)</Label>
+                  <Input
+                    id="editListPrice"
+                    type="number"
+                    value={editFormData.listPrice}
+                    onChange={(e) => setEditFormData(prev => ({ ...prev, listPrice: e.target.value }))}
+                    placeholder="e.g., 350000"
+                    data-testid="input-edit-list-price"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="editYearBuilt">Year Built</Label>
+                  <Input
+                    id="editYearBuilt"
+                    type="number"
+                    value={editFormData.yearBuilt}
+                    onChange={(e) => setEditFormData(prev => ({ ...prev, yearBuilt: e.target.value }))}
+                    placeholder="e.g., 1995"
+                    data-testid="input-edit-year-built"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="editBedrooms">Bedrooms</Label>
+                  <Input
+                    id="editBedrooms"
+                    type="number"
+                    value={editFormData.bedroomsTotal}
+                    onChange={(e) => setEditFormData(prev => ({ ...prev, bedroomsTotal: e.target.value }))}
+                    placeholder="e.g., 4"
+                    data-testid="input-edit-bedrooms"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="editBathroomsFull">Full Bathrooms</Label>
+                  <Input
+                    id="editBathroomsFull"
+                    type="number"
+                    value={editFormData.bathroomsFull}
+                    onChange={(e) => setEditFormData(prev => ({ ...prev, bathroomsFull: e.target.value }))}
+                    placeholder="e.g., 2"
+                    data-testid="input-edit-bathrooms-full"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="editBathroomsHalf">Half Bathrooms</Label>
+                  <Input
+                    id="editBathroomsHalf"
+                    type="number"
+                    value={editFormData.bathroomsHalf}
+                    onChange={(e) => setEditFormData(prev => ({ ...prev, bathroomsHalf: e.target.value }))}
+                    placeholder="e.g., 1"
+                    data-testid="input-edit-bathrooms-half"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="editLivingArea">Living Area (Sq Ft)</Label>
+                  <Input
+                    id="editLivingArea"
+                    type="number"
+                    value={editFormData.livingArea}
+                    onChange={(e) => setEditFormData(prev => ({ ...prev, livingArea: e.target.value }))}
+                    placeholder="e.g., 2200"
+                    data-testid="input-edit-living-area"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="editRemarks">Description</Label>
+                <Textarea
+                  id="editRemarks"
+                  value={editFormData.publicRemarks}
+                  onChange={(e) => setEditFormData(prev => ({ ...prev, publicRemarks: e.target.value }))}
+                  placeholder="Property description..."
+                  className="h-24 resize-none"
+                  data-testid="textarea-edit-remarks"
+                />
+              </div>
+
               <div>
                 <Label>Property Image</Label>
                 <Input
