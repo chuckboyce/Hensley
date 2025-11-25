@@ -144,10 +144,10 @@ export default function Properties() {
                               <span>{property.bedroomsTotal} Beds</span>
                             </div>
                           )}
-                          {property.bathroomsFull && (
+                          {(property.bathroomsFull || property.bathroomsHalf) && (
                             <div className="flex items-center gap-1.5 text-sm">
                               <Bath className="h-4 w-4 text-muted-foreground" />
-                              <span>{property.bathroomsFull} Baths</span>
+                              <span>{(property.bathroomsFull || 0) + (property.bathroomsHalf || 0) * 0.5} Baths</span>
                             </div>
                           )}
                           {property.livingArea && (

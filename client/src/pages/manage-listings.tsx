@@ -400,7 +400,7 @@ export default function ManageListings() {
                         ${parseInt(property.listPrice).toLocaleString()}
                       </td>
                       <td className="p-3">
-                        {property.bedroomsTotal || 0} bed / {property.bathroomsFull || 0} bath
+                        {property.bedroomsTotal || 0} bed / {(property.bathroomsFull || 0) + (property.bathroomsHalf || 0) * 0.5} bath
                       </td>
                       <td className="p-3 font-mono text-sm">
                         {property.listingId}
