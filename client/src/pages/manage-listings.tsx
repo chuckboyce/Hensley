@@ -202,11 +202,18 @@ export default function ManageListings() {
     },
     onSuccess: (data) => {
       const { results } = data;
-      const successCount = (results.google ? 1 : 0) + (results.bing ? 1 : 0);
-      toast({
-        title: "Success",
-        description: `Pinged ${successCount} search engine${successCount !== 1 ? 's' : ''} successfully`
-      });
+      if (results.message) {
+        toast({
+          title: "Notice",
+          description: results.message
+        });
+      } else {
+        const successCount = (results.google ? 1 : 0) + (results.bing ? 1 : 0);
+        toast({
+          title: "Success",
+          description: `Pinged ${successCount} search engine${successCount !== 1 ? 's' : ''} successfully`
+        });
+      }
     },
     onError: () => {
       toast({

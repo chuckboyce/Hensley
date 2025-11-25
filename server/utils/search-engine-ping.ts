@@ -1,28 +1,23 @@
-export async function pingSearchEngines(sitemapUrl: string): Promise<{ google: boolean; bing: boolean }> {
-  const results = {
+export interface PingResult {
+  google: boolean;
+  bing: boolean;
+  message: string;
+}
+
+export async function pingSearchEngines(sitemapUrl: string): Promise<PingResult> {
+  // Note: Both Google and Bing have deprecated their ping endpoints as of 2023-2024
+  // Google: Returns 404 - recommends using Google Search Console
+  // Bing: Returns 410 (Gone) - recommends using Bing Webmaster Tools or IndexNow
+  
+  console.log(`Sitemap URL: ${sitemapUrl}`);
+  console.log("Note: Traditional ping endpoints have been deprecated by search engines.");
+  console.log("Please submit your sitemap directly through:");
+  console.log("- Google Search Console: https://search.google.com/search-console");
+  console.log("- Bing Webmaster Tools: https://www.bing.com/webmasters");
+  
+  return {
     google: false,
-    bing: false
+    bing: false,
+    message: "Search engine ping endpoints have been deprecated. Please submit your sitemap manually through Google Search Console and Bing Webmaster Tools."
   };
-
-  // Ping Google
-  try {
-    const googlePingUrl = `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;
-    const googleResponse = await fetch(googlePingUrl);
-    results.google = googleResponse.ok;
-    console.log(`Google ping: ${results.google ? 'SUCCESS' : 'FAILED'} (${googleResponse.status})`);
-  } catch (error) {
-    console.error("Error pinging Google:", error);
-  }
-
-  // Ping Bing
-  try {
-    const bingPingUrl = `https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;
-    const bingResponse = await fetch(bingPingUrl);
-    results.bing = bingResponse.ok;
-    console.log(`Bing ping: ${results.bing ? 'SUCCESS' : 'FAILED'} (${bingResponse.status})`);
-  } catch (error) {
-    console.error("Error pinging Bing:", error);
-  }
-
-  return results;
 }
