@@ -216,19 +216,26 @@ export const insertPropertySchema = createInsertSchema(properties).pick({
   listingAgentPhone: true,
 });
 
-// Schema for updating property details (imageUrl and isRental only)
+// Schema for updating property details
 export const updatePropertyDetailsSchema = insertPropertySchema
   .pick({
+    listPrice: true,
+    bedroomsTotal: true,
+    bathroomsFull: true,
+    bathroomsHalf: true,
+    livingArea: true,
+    yearBuilt: true,
+    publicRemarks: true,
     imageUrl: true,
     isRental: true,
   })
   .partial()
   .superRefine((data, ctx) => {
     // Ensure at least one field is provided
-    if (data.imageUrl === undefined && data.isRental === undefined) {
+    if (Object.values(data).every(v => v === undefined)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "At least one field (imageUrl or isRental) must be provided",
+        message: "At least one field must be provided",
       });
     }
   });

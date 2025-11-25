@@ -19,7 +19,17 @@ export default function ManageListings() {
   const [isLoading, setIsLoading] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingProperty, setEditingProperty] = useState<any>(null);
-  const [editFormData, setEditFormData] = useState({ imageUrl: "", isRental: false });
+  const [editFormData, setEditFormData] = useState({ 
+    listPrice: "", 
+    bedroomsTotal: "", 
+    bathroomsFull: "", 
+    bathroomsHalf: "", 
+    livingArea: "", 
+    yearBuilt: "", 
+    publicRemarks: "", 
+    imageUrl: "", 
+    isRental: false 
+  });
   const { toast } = useToast();
 
   const handleLogin = async () => {
@@ -205,6 +215,13 @@ export default function ManageListings() {
   const handleOpenEdit = (property: any) => {
     setEditingProperty(property);
     setEditFormData({
+      listPrice: property.listPrice || "",
+      bedroomsTotal: property.bedroomsTotal || "",
+      bathroomsFull: property.bathroomsFull || "",
+      bathroomsHalf: property.bathroomsHalf || "",
+      livingArea: property.livingArea || "",
+      yearBuilt: property.yearBuilt || "",
+      publicRemarks: property.publicRemarks || "",
       imageUrl: property.imageUrl || "",
       isRental: property.isRental || false
     });
