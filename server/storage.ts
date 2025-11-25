@@ -58,7 +58,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(properties)
-      .orderBy(desc(properties.createdAt));
+      .orderBy(desc(properties.listingId));
   }
 
   async getProperty(listingKey: string): Promise<Property | undefined> {
