@@ -4,6 +4,17 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
+**November 26, 2025**: Mobile performance optimization
+- Updated hero image preloading with media queries for responsive loading (mobile/tablet/desktop WebP)
+- Changed hero component to use picture element with responsive sources (WebP with JPEG fallback)
+- Made Google Fonts non-render-blocking with preload and font-display swap pattern
+- Removed 180+ lines of inline JSON-LD from index.html, moved to React StructuredData component
+- Added Organization and FAQ schema generators to structuredData.ts utility
+- Added lazy loading (loading="lazy") and decoding="async" to all below-fold images
+- Added explicit width/height attributes to prevent CLS on about, service-area, testimonials, footer
+- Removed unused framer-motion package (~100KB bundle savings)
+- Verified recharts is code-split to only load on admin pages
+
 **November 11, 2025**: Optimized hero image for LCP performance
 - Downloaded and self-hosted hero image (originally 825KB from Unsplash)
 - Created image optimization script (`scripts/optimize-hero-image.ts`) using Sharp
