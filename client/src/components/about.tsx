@@ -15,6 +15,10 @@ export default function About() {
             <img 
               src={IMG_0525} 
               alt="Professional headshot of Kevin Hensley, local real estate agent" 
+              loading="lazy"
+              decoding="async"
+              width={400}
+              height={500}
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto" 
             />
           </div>

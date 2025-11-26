@@ -22,6 +22,10 @@ export default function ServiceArea() {
             <img 
               src={middletownImage}
               alt="Historic downtown Middletown, DE with monument and local buildings" 
+              loading="lazy"
+              decoding="async"
+              width={600}
+              height={400}
               className="rounded-xl shadow-lg w-full" 
             />
           </div>

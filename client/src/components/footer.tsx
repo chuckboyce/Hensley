@@ -62,6 +62,10 @@ export default function Footer() {
                   <img 
                     src="/hensleys-homes-logo.png" 
                     alt="Hensley's Homes Logo" 
+                    loading="lazy"
+                    decoding="async"
+                    width={40}
+                    height={40}
                     className="w-full h-full object-contain rounded"
                   />
                 </div>
@@ -69,6 +73,10 @@ export default function Footer() {
                   <img 
                     src="/hensleys-homes-logotype.png" 
                     alt="Hensley's Homes" 
+                    loading="lazy"
+                    decoding="async"
+                    width={120}
+                    height={32}
                     className="h-8 object-contain"
                   />
                 </div>
@@ -80,12 +88,20 @@ export default function Footer() {
                 <img 
                   src={ehoLogo} 
                   alt="Equal Housing Opportunity" 
+                  loading="lazy"
+                  decoding="async"
+                  width={48}
+                  height={48}
                   className="h-12 w-auto"
                   data-testid="img-eho-logo"
                 />
                 <img 
                   src={realtorLogo} 
                   alt="Realtor" 
+                  loading="lazy"
+                  decoding="async"
+                  width={48}
+                  height={48}
                   className="h-12 w-auto"
                   data-testid="img-realtor-logo"
                 />
