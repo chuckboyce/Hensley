@@ -179,6 +179,86 @@ export function createServiceData(service: {
 }
 
 /**
+ * Creates Organization structured data
+ */
+export function createOrganizationData(): StructuredDataProps {
+  return {
+    type: 'Organization',
+    data: {
+      name: "Kevin Hensley's Homes",
+      alternateName: "Hensley's Homes",
+      description: "Professional real estate services in Delaware and Maryland including home sales, property management, and investment consulting",
+      url: "https://hensleys-homes.com",
+      logo: "https://hensleys-homes.com/hensleys-homes-logo.png",
+      image: "https://hensleys-homes.com/hensleys-homes-logo.png",
+      telephone: "(302) 218-0130",
+      areaServed: [
+        { "@type": "State", "name": "Delaware" },
+        { "@type": "State", "name": "Maryland" }
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressRegion: "DE",
+        addressCountry: "US"
+      },
+      sameAs: [
+        "https://www.facebook.com/kevin.hensley.5",
+        "https://www.facebook.com/HensleysHomes"
+      ],
+      founder: {
+        "@type": "Person",
+        name: "Kevin Hensley"
+      }
+    }
+  };
+}
+
+/**
+ * Creates FAQPage structured data
+ */
+export function createFAQData(): StructuredDataProps {
+  return {
+    type: 'FAQPage',
+    data: {
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What areas do you serve?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Kevin Hensley's Homes provides real estate services throughout Delaware and Maryland, specializing in residential properties and property management."
+          }
+        },
+        {
+          "@type": "Question",
+          name: "Do you offer property management services?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes, we provide comprehensive property management services including tenant screening, rent collection, maintenance coordination, and property marketing."
+          }
+        },
+        {
+          "@type": "Question",
+          name: "How can I schedule a consultation?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "You can schedule a free consultation by calling (302) 218-0130 or using the contact form on our website. We offer both in-person and virtual consultations."
+          }
+        },
+        {
+          "@type": "Question",
+          name: "What makes your real estate services different?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "We combine local market expertise with personalized service, offering comprehensive real estate solutions including sales, property management, and investment consulting all under one roof."
+          }
+        }
+      ]
+    }
+  };
+}
+
+/**
  * Creates comprehensive RealEstateAgent structured data
  */
 export function createRealEstateAgentData(): StructuredDataProps {
