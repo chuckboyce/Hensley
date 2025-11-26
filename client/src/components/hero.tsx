@@ -27,14 +27,42 @@ export default function Hero() {
   return (
     <section id="home" className="relative">
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/60">
-        <img 
-          src="/hero-desktop.jpg" 
-          alt="Modern luxury home exterior" 
-          width={1920}
-          height={1280}
-          loading="eager"
-          className="w-full h-full object-cover" 
-        />
+        <picture>
+          <source 
+            media="(max-width: 640px)" 
+            srcSet="/hero-mobile.webp" 
+            type="image/webp"
+          />
+          <source 
+            media="(max-width: 640px)" 
+            srcSet="/hero-mobile.jpg" 
+            type="image/jpeg"
+          />
+          <source 
+            media="(max-width: 1024px)" 
+            srcSet="/hero-tablet.webp" 
+            type="image/webp"
+          />
+          <source 
+            media="(max-width: 1024px)" 
+            srcSet="/hero-tablet.jpg" 
+            type="image/jpeg"
+          />
+          <source 
+            srcSet="/hero-desktop.webp" 
+            type="image/webp"
+          />
+          <img 
+            src="/hero-desktop.jpg" 
+            alt="Modern luxury home exterior" 
+            width={1920}
+            height={1280}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover" 
+          />
+        </picture>
       </div>
       
       <div className="relative z-10 container mx-auto px-4 lg:px-6 py-24 lg:py-32">

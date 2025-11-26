@@ -45,15 +45,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Preload Critical Assets for LCP -->
-    <!-- Preload hero image for faster loading -->
-    <link rel="preload" as="image" href="/hero-desktop.jpg" type="image/jpeg" fetchpriority="high">
+    <!-- Preload Critical Assets for LCP - Responsive hero images -->
+    <link rel="preload" as="image" href="/hero-mobile.webp" type="image/webp" media="(max-width: 640px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/hero-tablet.webp" type="image/webp" media="(min-width: 641px) and (max-width: 1024px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/hero-desktop.webp" type="image/webp" media="(min-width: 1025px)" fetchpriority="high">
     <!-- Logo preloads -->
     <link rel="preload" as="image" href="/hensleys-homes-logo.png" type="image/png">
     <link rel="preload" as="image" href="/hensleys-homes-logotype.png" type="image/png">
     
-    <!-- Font Loading - Only Inter (the actual font used) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Loading - Non-render-blocking with preload and swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
     
     <!-- Google tag (gtag.js) - Deferred for better INP -->
     <script defer src="https://www.googletagmanager.com/gtag/js?id=G-W0TB4Y83E8"></script>
