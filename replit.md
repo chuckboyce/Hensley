@@ -15,6 +15,8 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 - Admin manage-listings page shows "EXPIRED" badge for inactive listings
 - Listings not found in latest scrape are automatically marked as inactive
 - Eliminates manual photo uploads and listing updates
+- Stealth mode: Cloudflare bypass tactics (automation detection disabled, human-like behavior, updated user agent)
+- Smart caching: Uses local history file to avoid re-scraping listings with complete data
 
 **November 26, 2025**: Mobile performance optimization
 - Updated hero image preloading with media queries for responsive loading (mobile/tablet/desktop WebP)

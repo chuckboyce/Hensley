@@ -180,10 +180,13 @@ export class DatabaseStorage implements IStorage {
     const priceStr = scraped.price.replace(/[$,]/g, '');
     const listPrice = priceStr || '0';
     
-    // Parse bedrooms/bathrooms from scraped attributes
+    // Parse bedrooms/bathrooms from scraped attributes (handle both old and new field names)
     const bedroomsTotal = scraped['Bedrooms'] ? parseInt(scraped['Bedrooms']) : undefined;
-    const bathroomsFull = scraped['Bathrooms'] ? parseInt(scraped['Bathrooms']) : undefined;
-    const livingArea = scraped['Square Feet'] ? parseInt(scraped['Square Feet'].replace(/,/g, '')) : undefined;
+    const bathroomsFull = (scraped['Bathrooms'] || scraped['Full Bathrooms']) 
+      ? parseInt(scraped['Bathrooms'] || scraped['Full Bathrooms']) 
+      : undefined;
+    const livingAreaStr = scraped['Square Feet'] || scraped['Sqr Footage'] || '';
+    const livingArea = livingAreaStr ? parseInt(livingAreaStr.replace(/,/g, '')) : undefined;
     const yearBuilt = scraped['Year Built'] ? parseInt(scraped['Year Built']) : undefined;
     
     if (existing) {

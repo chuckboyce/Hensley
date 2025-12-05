@@ -206,7 +206,7 @@ async def run_agent():
     if not os.path.exists(DEBUG_DIR): os.makedirs(DEBUG_DIR)
 
     history = await load_history()
-    all_listings = []  # Return ALL listings found on page
+    new_listings_found = []
     
     async with async_playwright() as p:
         # --- REPLIT LAUNCH CONFIG ---
@@ -251,15 +251,9 @@ async def run_agent():
             for item in listings:
                 listing_id = item['mlsid']
                 
-                # Check history + data completeness - use cached data if available
+                # Check history + data completeness
                 if listing_id in history:
-                    cached = history[listing_id]
-                    if cached.get('description') and len(cached['description']) > 10:
-                        # Use cached data for this listing
-                        cached['mlsid'] = listing_id  # Ensure mlsid is present
-                        cached['price'] = item['price']  # Update price from current scrape
-                        cached['address'] = item['address']  # Update address from current scrape
-                        all_listings.append(cached)
+                    if history[listing_id].get('description') and len(history[listing_id]['description']) > 10:
                         continue 
 
                 try:
@@ -271,9 +265,6 @@ async def run_agent():
                     # Verify not blocked
                     if not await ensure_page_loaded(detail_page):
                         await detail_page.close()
-                        # Still add basic info even if details fail
-                        item['date_found'] = str(datetime.now())
-                        all_listings.append(item)
                         continue
                     
                     await human_like_interaction(detail_page)
@@ -290,17 +281,15 @@ async def run_agent():
                     
                     item['date_found'] = str(datetime.now())
                     history[listing_id] = item
-                    all_listings.append(item)
+                    new_listings_found.append(item)
 
                 except Exception:
-                    # Still add basic info even if details fail
-                    item['date_found'] = str(datetime.now())
-                    all_listings.append(item)
+                    pass
 
-            # Always save history after processing
-            await save_history(history)
+            if len(new_listings_found) > 0:
+                await save_history(history)
                 
-            return all_listings
+            return new_listings_found
 
         except Exception:
             return []
@@ -308,9 +297,9 @@ async def run_agent():
             await browser.close()
 
 if __name__ == "__main__":
-    all_items = asyncio.run(run_agent())
+    new_items = asyncio.run(run_agent())
     
     # --- OUTPUT FOR NODE.JS BACKEND ---
     print("__DATA_START__")
-    print(json.dumps(all_items))
+    print(json.dumps(new_items))
     print("__DATA_END__")
