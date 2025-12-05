@@ -4,6 +4,18 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
+**December 5, 2025**: Automated RE/MAX listing scraper integration
+- Created Python/Playwright scraper (`scripts/scrape-listings.py`) to extract listings from kevin-hensley.remax.com
+- Extracts MLS ID, address, price, cover photo URL, description, bedrooms, bathrooms, square feet, year built
+- Added database fields: `isActive` (boolean), `lastSeen` (timestamp), `dateFound` (timestamp) for listing lifecycle tracking
+- Created sync script (`scripts/sync-listings.ts`) that runs Python scraper and updates database
+- Added `POST /api/admin/sync-listings` endpoint to trigger sync from admin panel
+- Added `GET /api/admin/properties/all` endpoint for admin to see all listings including expired
+- Public `/api/properties` endpoint now only returns active listings
+- Admin manage-listings page shows "EXPIRED" badge for inactive listings
+- Listings not found in latest scrape are automatically marked as inactive
+- Eliminates manual photo uploads and listing updates
+
 **November 26, 2025**: Mobile performance optimization
 - Updated hero image preloading with media queries for responsive loading (mobile/tablet/desktop WebP)
 - Changed hero component to use picture element with responsive sources (WebP with JPEG fallback)
