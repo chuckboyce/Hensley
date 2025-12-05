@@ -129,7 +129,7 @@ export default function Properties() {
                         <div className="flex items-start gap-2 text-sm mb-4">
                           <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-muted-foreground" />
                           <div>
-                            <div className="font-medium">{property.streetNumber} {property.streetName}</div>
+                            <div className="font-medium">{property.unparsedAddress || `${property.streetNumber || ''} ${property.streetName || ''}`.trim()}</div>
                             <div className="text-muted-foreground">
                               {property.city}, {property.stateOrProvince} {property.postalCode}
                             </div>
