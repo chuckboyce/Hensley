@@ -199,6 +199,13 @@ export default function Properties() {
                 })}
               </div>
             )}
+            
+            {/* Disclaimer */}
+            <div className="mt-12 p-6 bg-muted rounded-lg border border-border">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Some properties which appear for sale on this website may no longer be available because they are under contract, have Closed or are no longer being offered for sale.
+              </p>
+            </div>
           </div>
         </section>
 
