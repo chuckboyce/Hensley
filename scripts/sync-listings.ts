@@ -17,7 +17,8 @@ async function runPythonScraper(): Promise<ScrapedListing[]> {
     const pythonProcess = spawn('python3', ['scripts/scrape-listings.py'], {
       env: {
         ...process.env,
-        LD_LIBRARY_PATH: process.env.PYTHON_LD_LIBRARY_PATH || '',
+        LD_LIBRARY_PATH: '/lib/x86_64-linux-gnu:' + (process.env.LD_LIBRARY_PATH || ''),
+        NIX_LD: '/nix/store/k7zgvzp2r31zkg9xqgjim7mbknryv6bs-glibc-2.39-52/lib/ld-linux-x86-64.so.2',
       }
     });
 
