@@ -426,13 +426,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
-      const mlsIds = Object.keys(listingData);
-      console.log(`[Webhook] Processing ${mlsIds.length} listings...`);
+      // Filter to only valid MLS IDs (e.g., DENC2093782, MDDO12345, etc.)
+      // Skip metadata keys like "type", "timestamp", "listings", "count", "message"
+      const mlsIdPattern = /^[A-Z]{2,4}\d+$/;
+      const allKeys = Object.keys(listingData);
+      const mlsIds = allKeys.filter(key => mlsIdPattern.test(key));
+      
+      console.log(`[Webhook] Received ${allKeys.length} keys, ${mlsIds.length} are valid MLS IDs...`);
       
       if (mlsIds.length === 0) {
         return res.status(400).json({ 
           success: false, 
-          error: "No listings provided" 
+          error: "No valid MLS IDs found. Keys should match pattern like DENC2093782." 
         });
       }
       
