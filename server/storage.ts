@@ -189,6 +189,10 @@ export class DatabaseStorage implements IStorage {
     const livingArea = livingAreaStr ? parseInt(livingAreaStr.replace(/,/g, '')) : undefined;
     const yearBuilt = scraped['Year Built'] ? parseInt(scraped['Year Built']) : undefined;
     
+    // Extract city and zip from scraped data
+    const city = scraped['City'] || '';
+    const postalCode = scraped['Zip'] || '';
+    
     if (existing) {
       // Update existing property
       const [property] = await db
@@ -203,6 +207,8 @@ export class DatabaseStorage implements IStorage {
           bathroomsFull: bathroomsFull ?? existing.bathroomsFull,
           livingArea: livingArea ?? existing.livingArea,
           yearBuilt: yearBuilt ?? existing.yearBuilt,
+          city: city || existing.city,
+          postalCode: postalCode || existing.postalCode,
           isActive: true,
           lastSeen: now,
           lastUpdated: now,
@@ -225,9 +231,9 @@ export class DatabaseStorage implements IStorage {
           standardStatus: 'Active',
           listPrice: listPrice,
           unparsedAddress: scraped.address,
-          city: 'Delaware', // Default - will be parsed from address if available
+          city: city || 'Delaware',
           stateOrProvince: 'DE',
-          postalCode: '',
+          postalCode: postalCode,
           propertyType: 'Residential',
           listingUrl: scraped.detail_url || scraped.url,
           imageUrl: scraped.cover_photo_url || '',

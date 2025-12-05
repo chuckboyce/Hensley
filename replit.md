@@ -5,18 +5,16 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 # Recent Changes
 
 **December 5, 2025**: Automated RE/MAX listing scraper integration
-- Created Python/Playwright scraper (`scripts/scrape-listings.py`) to extract listings from kevin-hensley.remax.com
-- Extracts MLS ID, address, price, cover photo URL, description, bedrooms, bathrooms, square feet, year built
+- Created webhook endpoint `POST /api/webhook/listings` to receive listing data from external scraper
+- Webhook accepts JSON object with MLS IDs as keys, processes listings, and marks missing ones as expired
 - Added database fields: `isActive` (boolean), `lastSeen` (timestamp), `dateFound` (timestamp) for listing lifecycle tracking
-- Created sync script (`scripts/sync-listings.ts`) that runs Python scraper and updates database
-- Added `POST /api/admin/sync-listings` endpoint to trigger sync from admin panel
 - Added `GET /api/admin/properties/all` endpoint for admin to see all listings including expired
 - Public `/api/properties` endpoint now only returns active listings
 - Admin manage-listings page shows "EXPIRED" badge for inactive listings
-- Listings not found in latest scrape are automatically marked as inactive
+- Listings not found in webhook payload are automatically marked as inactive
+- Auto-detects rental listings based on Type="Rentals" or price under $10,000
 - Eliminates manual photo uploads and listing updates
-- Stealth mode: Cloudflare bypass tactics (automation detection disabled, human-like behavior, updated user agent)
-- Smart caching: Uses local history file to avoid re-scraping listings with complete data
+- Python scraper runs locally with Cloudflare bypass tactics, pushes data to webhook
 
 **November 26, 2025**: Mobile performance optimization
 - Updated hero image preloading with media queries for responsive loading (mobile/tablet/desktop WebP)

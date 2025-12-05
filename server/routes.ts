@@ -411,6 +411,113 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Webhook: Receive listing data from external scraper
+  app.post("/api/webhook/listings", adminAuth, async (req, res) => {
+    try {
+      console.log("[Webhook] Received listing data push...");
+      
+      const listingData = req.body;
+      
+      // Validate that we received an object
+      if (!listingData || typeof listingData !== 'object') {
+        return res.status(400).json({ 
+          success: false, 
+          error: "Invalid data format. Expected JSON object with MLS IDs as keys." 
+        });
+      }
+      
+      const mlsIds = Object.keys(listingData);
+      console.log(`[Webhook] Processing ${mlsIds.length} listings...`);
+      
+      if (mlsIds.length === 0) {
+        return res.status(400).json({ 
+          success: false, 
+          error: "No listings provided" 
+        });
+      }
+      
+      let newCount = 0;
+      let updatedCount = 0;
+      const errors: string[] = [];
+      
+      // Process each listing
+      for (const mlsId of mlsIds) {
+        try {
+          const listing = listingData[mlsId];
+          
+          // Convert to ScrapedListing format
+          const scraped = {
+            mlsid: listing.mlsid || mlsId,
+            address: listing.address || '',
+            price: listing.price || listing.Price || '0',
+            url: listing.url || '',
+            detail_url: listing.detail_url || listing.url || '',
+            cover_photo_url: listing.cover_photo_url || '',
+            description: listing.description || '',
+            Bedrooms: listing.Bedrooms || listing['Bedrooms'] || '',
+            Bathrooms: listing['Full Bathrooms'] || listing.Bathrooms || '',
+            'Full Bathrooms': listing['Full Bathrooms'] || '',
+            'Square Feet': listing['Sqr Footage'] || listing['Square Feet'] || '',
+            'Sqr Footage': listing['Sqr Footage'] || '',
+            'Year Built': listing['Year Built'] || '',
+            // Additional fields
+            City: listing.City || '',
+            County: listing.County || '',
+            Zip: listing.Zip || '',
+            Neighborhood: listing.Neighborhood || '',
+            Style: listing.Style || '',
+            Type: listing.Type || '',
+            'Listing Status': listing['Listing Status'] || 'Active',
+          };
+          
+          // Determine if this is a rental based on Type or price
+          const isRental = listing.Type === 'Rentals' || 
+            (listing.price && !listing.price.includes(',') && parseInt(listing.price.replace(/[$,]/g, '')) < 10000);
+          
+          const { property, isNew } = await storage.upsertPropertyFromScraper(scraped);
+          
+          // Update rental status if needed
+          if (isRental && !property.isRental) {
+            await storage.updatePropertyDetails(property.listingKey, { isRental: true });
+          }
+          
+          if (isNew) {
+            newCount++;
+            console.log(`[Webhook] New listing: ${mlsId} - ${listing.address}`);
+          } else {
+            updatedCount++;
+          }
+        } catch (err: any) {
+          console.error(`[Webhook] Error processing ${mlsId}:`, err.message);
+          errors.push(`${mlsId}: ${err.message}`);
+        }
+      }
+      
+      // Mark listings not in this batch as inactive
+      const expiredCount = await storage.markInactiveExcept(mlsIds);
+      
+      console.log(`[Webhook] Sync complete: ${newCount} new, ${updatedCount} updated, ${expiredCount} expired`);
+      
+      res.json({
+        success: true,
+        summary: {
+          received: mlsIds.length,
+          newListings: newCount,
+          updatedListings: updatedCount,
+          expiredListings: expiredCount,
+        },
+        errors: errors.length > 0 ? errors : undefined,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error) {
+      console.error("[Webhook] Error processing listings:", error);
+      res.status(500).json({ 
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to process listings" 
+      });
+    }
+  });
+
   // Get only active properties (for public display)
   app.get("/api/properties/active", async (req, res) => {
     try {
