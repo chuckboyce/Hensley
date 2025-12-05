@@ -132,6 +132,11 @@ export const properties = pgTable("properties", {
   listingAgentName: text("listing_agent_name").notNull(),
   listingAgentPhone: text("listing_agent_phone"),
   
+  // Scraper tracking fields
+  isActive: boolean("is_active").default(true).notNull(), // False when listing no longer appears on agent page
+  lastSeen: timestamp("last_seen").defaultNow().notNull(), // Last time scraper saw this listing
+  dateFound: timestamp("date_found").defaultNow().notNull(), // When listing was first discovered by scraper
+  
   // System fields
   lastUpdated: timestamp("last_updated").defaultNow().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -214,6 +219,9 @@ export const insertPropertySchema = createInsertSchema(properties).pick({
   listingOfficePhone: true,
   listingAgentName: true,
   listingAgentPhone: true,
+  isActive: true,
+  lastSeen: true,
+  dateFound: true,
 });
 
 // Schema for updating property details

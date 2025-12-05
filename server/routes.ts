@@ -6,6 +6,7 @@ import { ghlService } from "./services/ghl";
 import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
 import { pingSearchEngines } from "./utils/search-engine-ping";
 import { optimizePropertyImage } from "./utils/image-optimizer";
+import { syncListings } from "../scripts/sync-listings";
 import multer from "multer";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -370,6 +371,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error pinging search engines:", error);
       res.status(500).json({ error: "Failed to ping search engines" });
+    }
+  });
+
+  // Admin: Sync listings from RE/MAX website
+  app.post("/api/admin/sync-listings", adminAuth, async (req, res) => {
+    try {
+      console.log("[API] Starting listing sync...");
+      const result = await syncListings();
+      
+      res.json({
+        success: result.success,
+        summary: {
+          newListings: result.newListings,
+          updatedListings: result.updatedListings,
+          expiredListings: result.expiredListings,
+        },
+        errors: result.errors,
+        timestamp: result.timestamp,
+      });
+    } catch (error) {
+      console.error("Error syncing listings:", error);
+      res.status(500).json({ 
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to sync listings" 
+      });
+    }
+  });
+
+  // Get only active properties (for public display)
+  app.get("/api/properties/active", async (req, res) => {
+    try {
+      const activeProperties = await storage.listActiveProperties();
+      res.json(activeProperties);
+    } catch (error) {
+      console.error("Error fetching active properties:", error);
+      res.status(500).json({ error: "Failed to fetch properties" });
     }
   });
 

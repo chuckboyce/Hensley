@@ -1,8 +1,23 @@
 // Database integration blueprint: javascript_database
 import { users, contacts, properties, propertyMedia, type User, type InsertUser, type Contact, type InsertContact, type Property, type InsertProperty, type UpdatePropertyDetails, type PropertyMedia, type InsertPropertyMedia } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, notInArray, and, lt, sql } from "drizzle-orm";
 import { randomUUID } from "crypto";
+
+// Type for scraped listing data
+export interface ScrapedListing {
+  mlsid: string;
+  address: string;
+  price: string;
+  url: string;
+  detail_url?: string;
+  cover_photo_url?: string;
+  description?: string;
+  date_scraped?: string;
+  is_new?: boolean;
+  // Additional attributes from page details
+  [key: string]: any;
+}
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -11,10 +26,14 @@ export interface IStorage {
   createContact(contact: InsertContact): Promise<Contact>;
   getContacts(): Promise<Contact[]>;
   listProperties(): Promise<Property[]>;
+  listActiveProperties(): Promise<Property[]>;
   getProperty(listingKey: string): Promise<Property | undefined>;
+  getPropertyByMlsId(mlsId: string): Promise<Property | undefined>;
   createProperty(property: InsertProperty): Promise<Property>;
   updatePropertyStatus(listingKey: string, status: string): Promise<Property | undefined>;
   updatePropertyDetails(listingKey: string, updates: UpdatePropertyDetails): Promise<Property | undefined>;
+  upsertPropertyFromScraper(scraped: ScrapedListing): Promise<{ property: Property; isNew: boolean }>;
+  markInactiveExcept(activeMlsIds: string[]): Promise<number>;
   deleteProperty(listingKey: string): Promise<boolean>;
   getPropertyMedia(listingKey: string): Promise<PropertyMedia[]>;
   createPropertyMedia(media: InsertPropertyMedia): Promise<PropertyMedia>;
@@ -61,11 +80,27 @@ export class DatabaseStorage implements IStorage {
       .orderBy(desc(properties.listingId));
   }
 
+  async listActiveProperties(): Promise<Property[]> {
+    return await db
+      .select()
+      .from(properties)
+      .where(eq(properties.isActive, true))
+      .orderBy(desc(properties.listingId));
+  }
+
   async getProperty(listingKey: string): Promise<Property | undefined> {
     const [property] = await db
       .select()
       .from(properties)
       .where(eq(properties.listingKey, listingKey));
+    return property || undefined;
+  }
+
+  async getPropertyByMlsId(mlsId: string): Promise<Property | undefined> {
+    const [property] = await db
+      .select()
+      .from(properties)
+      .where(eq(properties.listingId, mlsId));
     return property || undefined;
   }
 
@@ -133,6 +168,104 @@ export class DatabaseStorage implements IStorage {
       .returning();
     
     return property || undefined;
+  }
+
+  async upsertPropertyFromScraper(scraped: ScrapedListing): Promise<{ property: Property; isNew: boolean }> {
+    const now = new Date();
+    
+    // Check if property already exists by MLS ID
+    const existing = await this.getPropertyByMlsId(scraped.mlsid);
+    
+    // Parse price - remove $ and commas
+    const priceStr = scraped.price.replace(/[$,]/g, '');
+    const listPrice = priceStr || '0';
+    
+    // Parse bedrooms/bathrooms from scraped attributes
+    const bedroomsTotal = scraped['Bedrooms'] ? parseInt(scraped['Bedrooms']) : undefined;
+    const bathroomsFull = scraped['Bathrooms'] ? parseInt(scraped['Bathrooms']) : undefined;
+    const livingArea = scraped['Square Feet'] ? parseInt(scraped['Square Feet'].replace(/,/g, '')) : undefined;
+    const yearBuilt = scraped['Year Built'] ? parseInt(scraped['Year Built']) : undefined;
+    
+    if (existing) {
+      // Update existing property
+      const [property] = await db
+        .update(properties)
+        .set({
+          listPrice: listPrice,
+          unparsedAddress: scraped.address,
+          listingUrl: scraped.detail_url || scraped.url,
+          imageUrl: scraped.cover_photo_url || existing.imageUrl,
+          publicRemarks: scraped.description || existing.publicRemarks,
+          bedroomsTotal: bedroomsTotal ?? existing.bedroomsTotal,
+          bathroomsFull: bathroomsFull ?? existing.bathroomsFull,
+          livingArea: livingArea ?? existing.livingArea,
+          yearBuilt: yearBuilt ?? existing.yearBuilt,
+          isActive: true,
+          lastSeen: now,
+          lastUpdated: now,
+        })
+        .where(eq(properties.listingKey, existing.listingKey))
+        .returning();
+      
+      return { property, isNew: false };
+    } else {
+      // Create new property
+      const listingKey = `remax-${scraped.mlsid}`;
+      
+      const [property] = await db
+        .insert(properties)
+        .values({
+          listingKey,
+          listingId: scraped.mlsid,
+          mlsId: 'BrightMLS',
+          mlsName: 'BrightMLS',
+          standardStatus: 'Active',
+          listPrice: listPrice,
+          unparsedAddress: scraped.address,
+          city: 'Delaware', // Default - will be parsed from address if available
+          stateOrProvince: 'DE',
+          postalCode: '',
+          propertyType: 'Residential',
+          listingUrl: scraped.detail_url || scraped.url,
+          imageUrl: scraped.cover_photo_url || '',
+          publicRemarks: scraped.description || '',
+          bedroomsTotal,
+          bathroomsFull,
+          livingArea,
+          yearBuilt,
+          listingOfficeName: 'RE/MAX',
+          listingAgentName: 'Kevin Hensley',
+          isActive: true,
+          lastSeen: now,
+          dateFound: now,
+        })
+        .returning();
+      
+      return { property, isNew: true };
+    }
+  }
+
+  async markInactiveExcept(activeMlsIds: string[]): Promise<number> {
+    if (activeMlsIds.length === 0) {
+      // If no active listings, don't mark everything as inactive - this is likely an error
+      return 0;
+    }
+    
+    const result = await db
+      .update(properties)
+      .set({ 
+        isActive: false,
+        lastUpdated: new Date()
+      })
+      .where(
+        and(
+          eq(properties.isActive, true),
+          notInArray(properties.listingId, activeMlsIds)
+        )
+      )
+      .returning();
+    
+    return result.length;
   }
 
   async deleteProperty(listingKey: string): Promise<boolean> {
