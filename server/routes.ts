@@ -169,8 +169,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // List all properties
+  // List active properties (public)
   app.get("/api/properties", async (req, res) => {
+    try {
+      // Show only active listings to the public
+      const properties = await storage.listActiveProperties();
+      res.json(properties);
+    } catch (error) {
+      console.error("Error listing properties:", error);
+      res.status(500).json({ error: "Failed to list properties" });
+    }
+  });
+
+  // List all properties including inactive (admin)
+  app.get("/api/admin/properties/all", adminAuth, async (req, res) => {
     try {
       const properties = await storage.listProperties();
       res.json(properties);

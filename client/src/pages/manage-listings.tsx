@@ -80,12 +80,16 @@ export default function ManageListings() {
     }
   };
 
-  // Fetch all properties
+  // Fetch all properties including inactive (admin view)
   const { data: properties, isLoading: propertiesLoading } = useQuery({
-    queryKey: ['/api/properties'],
+    queryKey: ['/api/admin/properties/all'],
     enabled: isAuthenticated,
     queryFn: async () => {
-      const response = await fetch('/api/properties');
+      const response = await fetch('/api/admin/properties/all', {
+        headers: {
+          'Authorization': `Bearer ${password}`
+        }
+      });
       if (!response.ok) throw new Error('Failed to fetch properties');
       return response.json();
     }
@@ -107,7 +111,7 @@ export default function ManageListings() {
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/properties'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/properties/all'] });
       toast({
         title: "Success",
         description: "Status updated"
@@ -136,7 +140,7 @@ export default function ManageListings() {
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/properties'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/properties/all'] });
       toast({
         title: "Success",
         description: "Listing deleted"
@@ -170,7 +174,7 @@ export default function ManageListings() {
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/properties'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/properties/all'] });
       setEditDialogOpen(false);
       setEditingProperty(null);
       toast({
@@ -241,7 +245,7 @@ export default function ManageListings() {
       return response.json();
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['/api/properties'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/properties/all'] });
       const { summary } = data;
       toast({
         title: "Sync Complete",
