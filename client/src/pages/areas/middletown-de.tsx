@@ -3,7 +3,7 @@ import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler } from "lucide-react";
+import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
@@ -405,8 +405,134 @@ export default function MiddletownDE() {
           </div>
         </section>
 
-        {/* Explore Other Areas */}
+        {/* Local Resources */}
         <section className="py-16">
+          <div className="container mx-auto px-4 lg:px-6">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+                Local Resources
+              </h2>
+              <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                Helpful links for new residents and homebuyers in Middletown
+              </p>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Municipal Government */}
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                        <Landmark className="h-5 w-5 text-primary" />
+                      </div>
+                      <h3 className="font-bold text-lg">Municipal Government</h3>
+                    </div>
+                    <ul className="space-y-3">
+                      <li>
+                        <a href="https://www.middletown.delaware.gov" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
+                          <span><strong>Town of Middletown</strong> — Official website for news, events, and community info</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.middletown.delaware.gov/town-hall" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
+                          <span><strong>Town Hall</strong> — Permits, records, taxes, and local administration</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.middletown.delaware.gov/utilities" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
+                          <span><strong>Utilities Department</strong> — Water, sewer, trash, and meter applications</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                {/* Electric Service */}
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-10 w-10 bg-amber-500/10 rounded-lg flex items-center justify-center">
+                        <Zap className="h-5 w-5 text-amber-600" />
+                      </div>
+                      <h3 className="font-bold text-lg">Electric Service</h3>
+                    </div>
+                    <ul className="space-y-3">
+                      <li>
+                        <a href="https://www.middletown.delaware.gov/electric" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
+                          <span><strong>Middletown Electric</strong> — Town-owned electric with stable rates via DEMEC</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://efficiencysmart.org" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
+                          <span><strong>Efficiency Smart</strong> — Free energy audits, rebates, and home improvement incentives</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                {/* Water & Wastewater */}
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-10 w-10 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                        <Droplets className="h-5 w-5 text-blue-600" />
+                      </div>
+                      <h3 className="font-bold text-lg">Water & Wastewater</h3>
+                    </div>
+                    <ul className="space-y-3">
+                      <li>
+                        <a href="https://www.middletown.delaware.gov/water-wastewater" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
+                          <span><strong>Municipal Water/Wastewater</strong> — Drinking water, sewer, and fire hydrant maintenance</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.artesianwater.com" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
+                          <span><strong>Artesian Water</strong> — Private water provider for some newer developments</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                {/* Community Info */}
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center">
+                        <Leaf className="h-5 w-5 text-green-600" />
+                      </div>
+                      <h3 className="font-bold text-lg">Community Info</h3>
+                    </div>
+                    <ul className="space-y-3">
+                      <li>
+                        <a href="https://www.middletown.delaware.gov/history" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
+                          <span><strong>Town History</strong> — Local heritage and community development information</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://ecode360.com/MI4162" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
+                          <span><strong>Municipal Codes</strong> — Water, plumbing, and infrastructure standards</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Explore Other Areas */}
+        <section className="py-16 bg-secondary/30">
           <div className="container mx-auto px-4 lg:px-6">
             <h2 className="text-3xl font-bold text-center mb-8">
               Explore Nearby Areas
