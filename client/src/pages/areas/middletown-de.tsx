@@ -162,7 +162,7 @@ export default function MiddletownDE() {
                     Townhomes & single-family homes perfect for first-time buyers
                   </p>
                   <Link href="/buy">
-                    <Button variant="outline" size="sm" data-testid="button-starter-homes">View Homes</Button>
+                    <Button size="sm" data-testid="button-starter-homes">View Homes</Button>
                   </Link>
                 </CardContent>
               </Card>
@@ -188,7 +188,7 @@ export default function MiddletownDE() {
                     Premium properties, golf communities & custom estates
                   </p>
                   <Link href="/buy">
-                    <Button variant="outline" size="sm" data-testid="button-luxury-homes">View Homes</Button>
+                    <Button size="sm" data-testid="button-luxury-homes">View Homes</Button>
                   </Link>
                 </CardContent>
               </Card>
