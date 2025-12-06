@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Home, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler } from "lucide-react";
+import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
@@ -128,29 +128,16 @@ export default function MiddletownDE() {
             <div className="absolute inset-0 bg-black/40" />
           </div>
           <div className="relative z-10 container mx-auto px-4 lg:px-6 text-center text-white">
-            <div className="mb-6">
+            <div>
               <p className="text-sm uppercase tracking-[0.3em] text-white/80 mb-2">
                 Discover
               </p>
-              <p className="text-5xl md:text-7xl font-semibold tracking-wide font-serif" style={{ fontVariant: 'small-caps' }}>
+              <p className="text-5xl md:text-7xl font-bold tracking-wide font-serif" style={{ fontVariant: 'small-caps' }}>
                 Middletown
               </p>
-              <p className="text-xl md:text-2xl font-medium tracking-[0.2em] mt-2 text-white/90 font-serif">
+              <p className="text-xl md:text-2xl font-bold tracking-[0.2em] mt-2 text-white/90 font-serif">
                 DELAWARE
               </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/buy">
-                <Button size="lg" data-testid="button-see-homes">
-                  <Home className="mr-2 h-5 w-5" />
-                  Browse Homes
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button size="lg" variant="secondary" data-testid="button-contact">
-                  Contact Kevin
-                </Button>
-              </Link>
             </div>
           </div>
         </section>
