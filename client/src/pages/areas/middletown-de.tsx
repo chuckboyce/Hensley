@@ -132,11 +132,11 @@ export default function MiddletownDE() {
               <p className="text-sm uppercase tracking-[0.3em] text-white/80 mb-2">
                 Discover
               </p>
-              <p className="text-5xl md:text-7xl font-bold tracking-tight">
+              <p className="text-5xl md:text-7xl font-semibold tracking-wide" style={{ fontVariant: 'small-caps' }}>
                 Middletown
               </p>
-              <p className="text-2xl md:text-3xl font-light tracking-wide mt-1 text-white/90">
-                Delaware
+              <p className="text-xl md:text-2xl font-medium tracking-[0.2em] mt-2 text-white/90">
+                DELAWARE
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
