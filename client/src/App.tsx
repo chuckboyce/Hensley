@@ -4,7 +4,9 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SEOHead } from "@/components/seo-head";
-import { lazy, Suspense, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowUp } from "lucide-react";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -22,6 +24,37 @@ function ScrollToTop() {
   }, [location]);
   
   return null;
+}
+
+function ScrollToTopButton() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <Button
+      onClick={scrollToTop}
+      size="icon"
+      className="fixed bottom-6 right-6 z-50 rounded-full shadow-lg"
+      aria-label="Scroll to top"
+      data-testid="button-scroll-to-top"
+    >
+      <ArrowUp className="h-5 w-5" />
+    </Button>
+  );
 }
 
 // Critical pages - loaded immediately
@@ -100,6 +133,7 @@ function App() {
         <SEOHead />
         <Toaster />
         <Router />
+        <ScrollToTopButton />
         <ChatWidget />
       </TooltipProvider>
     </QueryClientProvider>
