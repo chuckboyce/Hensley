@@ -7,6 +7,7 @@ import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser
 import { pingSearchEngines } from "./utils/search-engine-ping";
 import { optimizePropertyImage } from "./utils/image-optimizer";
 import { syncListings } from "../scripts/sync-listings";
+import { generatePropertySummary } from "./aiSummary";
 import multer from "multer";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -411,6 +412,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Background function to generate AI summaries for properties
+  async function generateSummariesInBackground() {
+    try {
+      const propertiesNeedingSummary = await storage.getPropertiesNeedingSummary();
+      
+      if (propertiesNeedingSummary.length === 0) {
+        console.log("[AI Summary] No properties need summary generation");
+        return;
+      }
+      
+      console.log(`[AI Summary] Generating summaries for ${propertiesNeedingSummary.length} properties...`);
+      
+      for (const property of propertiesNeedingSummary) {
+        try {
+          const summary = await generatePropertySummary({
+            address: property.unparsedAddress,
+            city: property.city,
+            stateOrProvince: property.stateOrProvince,
+            postalCode: property.postalCode,
+            listPrice: property.listPrice,
+            bedroomsTotal: property.bedroomsTotal,
+            bathroomsFull: property.bathroomsFull,
+            livingArea: property.livingArea,
+            yearBuilt: property.yearBuilt,
+            publicRemarks: property.publicRemarks,
+            isRental: property.isRental,
+          });
+          
+          await storage.updateSchemaSummary(property.listingKey, summary);
+          console.log(`[AI Summary] Generated summary for ${property.listingKey}: ${summary.substring(0, 50)}...`);
+          
+          // Small delay between API calls to respect rate limits
+          await new Promise(resolve => setTimeout(resolve, 300));
+        } catch (err) {
+          console.error(`[AI Summary] Error generating summary for ${property.listingKey}:`, err);
+        }
+      }
+      
+      console.log("[AI Summary] Finished generating summaries");
+    } catch (error) {
+      console.error("[AI Summary] Error in background summary generation:", error);
+    }
+  }
+
   // Webhook: Receive listing data from external scraper
   app.post("/api/webhook/listings", adminAuth, async (req, res) => {
     try {
@@ -509,6 +554,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const expiredCount = await storage.markInactiveExcept(mlsIds);
       
       console.log(`[Webhook] Sync complete: ${newCount} new, ${updatedCount} updated, ${expiredCount} expired`);
+      
+      // Generate AI summaries for properties that need them (async, don't block response)
+      generateSummariesInBackground().catch(err => {
+        console.error("[Webhook] Error generating AI summaries:", err);
+      });
       
       res.json({
         success: true,

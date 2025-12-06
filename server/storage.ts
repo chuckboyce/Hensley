@@ -1,7 +1,7 @@
 // Database integration blueprint: javascript_database
 import { users, contacts, properties, propertyMedia, type User, type InsertUser, type Contact, type InsertContact, type Property, type InsertProperty, type UpdatePropertyDetails, type PropertyMedia, type InsertPropertyMedia } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, notInArray, and, lt, sql } from "drizzle-orm";
+import { eq, desc, notInArray, and, lt, or, isNull, sql } from "drizzle-orm";
 import { randomUUID } from "crypto";
 
 // Type for scraped listing data
@@ -306,6 +306,37 @@ export class DatabaseStorage implements IStorage {
       .values(insertMedia)
       .returning();
     return media;
+  }
+
+  async updateSchemaSummary(listingKey: string, summary: string): Promise<void> {
+    await db
+      .update(properties)
+      .set({
+        schemaSummary: summary,
+        schemaUpdatedAt: new Date(),
+      })
+      .where(eq(properties.listingKey, listingKey));
+  }
+
+  async getPropertiesNeedingSummary(): Promise<Property[]> {
+    // Get active properties that either:
+    // 1. Have no schema summary yet
+    // 2. Have a summary older than 60 days
+    const sixtyDaysAgo = new Date();
+    sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
+    
+    return await db
+      .select()
+      .from(properties)
+      .where(
+        and(
+          eq(properties.isActive, true),
+          or(
+            isNull(properties.schemaSummary),
+            lt(properties.schemaUpdatedAt, sixtyDaysAgo)
+          )
+        )
+      );
   }
 }
 

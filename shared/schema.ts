@@ -137,6 +137,10 @@ export const properties = pgTable("properties", {
   lastSeen: timestamp("last_seen").defaultNow().notNull(), // Last time scraper saw this listing
   dateFound: timestamp("date_found").defaultNow().notNull(), // When listing was first discovered by scraper
   
+  // AI-generated schema markup fields
+  schemaSummary: text("schema_summary"), // AI-summarized description for schema markup (max 300 chars)
+  schemaUpdatedAt: timestamp("schema_updated_at"), // When the schema summary was last generated
+  
   // System fields
   lastUpdated: timestamp("last_updated").defaultNow().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
