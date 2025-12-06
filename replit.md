@@ -4,32 +4,25 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
-**December 6, 2025**: AI-powered schema markup for SEO/AEO
-- Added OpenAI integration for generating property description summaries
-- Created AI summarization service (server/aiSummary.ts) with rate limiting, exponential backoff, error handling for 429/5xx
-- Added `schemaSummary` and `schemaUpdatedAt` fields to properties database schema for caching AI summaries (60-day TTL)
-- Created comprehensive schema generator (server/utils/schemaGenerator.ts) producing valid JSON-LD with:
-  - Organization, WebSite, RealEstateAgent, and ItemList schemas
-  - Property-specific schemas with MLS identifiers, addresses, pricing, bedrooms/baths, sqft
-  - Proper property type detection (SingleFamilyResidence, Apartment, Residence)
-  - Rental price specification support
-- Added `/api/schema/properties` and `/api/schema/property/:listingKey` endpoints for schema JSON-LD
-- Implemented server-side schema injection for /properties page in production (ensures crawlers see schema without JS)
-- Webhook now triggers background AI summary generation after processing listings
-- Client-side PropertySchemaInjector component for development testing
-- Schema cached for 5 minutes, refreshed with current property data on each request
+**December 6, 2025**: AI-Enhanced Search Engine Visibility
 
-**December 5, 2025**: Automated RE/MAX listing scraper integration
-- Created webhook endpoint `POST /api/webhook/listings` to receive listing data from external scraper
-- Webhook accepts JSON object with MLS IDs as keys, processes listings, and marks missing ones as expired
-- Added database fields: `isActive` (boolean), `lastSeen` (timestamp), `dateFound` (timestamp) for listing lifecycle tracking
-- Added `GET /api/admin/properties/all` endpoint for admin to see all listings including expired
-- Public `/api/properties` endpoint now only returns active listings
-- Admin manage-listings page shows "EXPIRED" badge for inactive listings
-- Listings not found in webhook payload are automatically marked as inactive
-- Auto-detects rental listings based on Type="Rentals" or price under $10,000
-- Eliminates manual photo uploads and listing updates
-- Python scraper runs locally with Cloudflare bypass tactics, pushes data to webhook
+*Client Summary: Your property listings now include AI-written descriptions optimized for Google and AI search engines. This helps your listings appear in more search results and provides better answers when people ask AI assistants about homes in your area.*
+
+- Each property listing now has an AI-generated summary highlighting key selling points
+- Added structured data that helps Google understand your listings as real estate properties
+- Summaries update automatically when new listings are added
+- Admin page now shows which listings have AI summaries and when they were created
+- Added "Generate AI Summaries" button in admin panel to refresh descriptions anytime
+
+**December 5, 2025**: Automated Listing Sync
+
+*Client Summary: Your website now automatically stays in sync with your RE/MAX listings. New properties appear on your site within minutes, and sold/expired listings are automatically removed - no manual updates needed.*
+
+- Website receives automatic updates whenever your RE/MAX listings change
+- New listings appear on the site automatically with photos and details
+- Sold or expired listings are automatically marked as inactive
+- Rental properties are detected and labeled automatically
+- Admin page shows listing status including any expired properties
 
 **November 26, 2025**: Mobile performance optimization
 - Updated hero image preloading with media queries for responsive loading (mobile/tablet/desktop WebP)
