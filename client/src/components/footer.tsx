@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import ehoLogo from "@assets/eho_logo_1760104830421.png";
 import realtorLogo from "@assets/realtor_logo_1760104830430.png";
+import remaxLogo from "@assets/remax_2025_logo_1760103527751.png";
 import ConsultationModal from "@/components/consultation-modal";
 
 export default function Footer() {
@@ -57,19 +58,19 @@ export default function Footer() {
           <div className="grid md:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="md:col-span-2">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center p-1 border border-border">
-                  <img 
-                    src="/hensleys-homes-logo.png" 
-                    alt="Hensley's Homes Logo" 
-                    loading="lazy"
-                    decoding="async"
-                    width={40}
-                    height={40}
-                    className="w-full h-full object-contain rounded"
-                  />
-                </div>
-                <div className="flex items-center">
+              <div className="flex items-center gap-6 mb-4">
+                <div className="flex items-center space-x-2">
+                  <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center p-1 border border-border">
+                    <img 
+                      src="/hensleys-homes-logo.png" 
+                      alt="Hensley's Homes Logo" 
+                      loading="lazy"
+                      decoding="async"
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-contain rounded"
+                    />
+                  </div>
                   <img 
                     src="/hensleys-homes-logotype.png" 
                     alt="Hensley's Homes" 
@@ -80,6 +81,17 @@ export default function Footer() {
                     className="h-8 object-contain"
                   />
                 </div>
+                <div className="h-8 w-px bg-border" />
+                <img 
+                  src={remaxLogo} 
+                  alt="RE/MAX Eagle Realty" 
+                  loading="lazy"
+                  decoding="async"
+                  width={120}
+                  height={40}
+                  className="h-10 object-contain"
+                  data-testid="img-remax-logo"
+                />
               </div>
               <p className="text-muted-foreground mb-4 max-w-md">
                 Your trusted local partner for real estate sales and property management services. Serving the community with integrity and expertise.
