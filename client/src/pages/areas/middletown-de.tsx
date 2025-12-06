@@ -159,83 +159,6 @@ export default function MiddletownDE() {
           </div>
         </section>
 
-        {/* Why Middletown - Visual Grid */}
-        <section className="py-16">
-          <div className="container mx-auto px-4 lg:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              Why Families Love Middletown
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {highlights.map((item, index) => (
-                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                  <CardContent className="pt-8 pb-6">
-                    <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <item.icon className="h-8 w-8 text-primary" />
-                    </div>
-                    <h3 className="font-bold text-lg mb-1">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.desc}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Housing Market - Price Tiers */}
-        <section className="py-16 bg-secondary/30">
-          <div className="container mx-auto px-4 lg:px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Find Your Price Range
-              </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">
-                From starter homes to luxury estates, Middletown has options for every budget
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <Card className="overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-3 bg-blue-500" />
-                <CardContent className="pt-6 text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">$375K–$475K</div>
-                  <h3 className="font-semibold text-lg mb-2">Starter Homes</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    Townhomes & single-family homes perfect for first-time buyers
-                  </p>
-                  <Link href="/buy">
-                    <Button size="sm" data-testid="button-starter-homes">View Homes</Button>
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="overflow-hidden hover:shadow-xl transition-shadow border-primary">
-                <div className="h-3 bg-primary" />
-                <CardContent className="pt-6 text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">$500K–$650K</div>
-                  <h3 className="font-semibold text-lg mb-2">Move-Up Homes</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    Spacious layouts with modern amenities for growing families
-                  </p>
-                  <Link href="/buy">
-                    <Button size="sm" data-testid="button-moveup-homes">View Homes</Button>
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-3 bg-amber-500" />
-                <CardContent className="pt-6 text-center">
-                  <div className="text-3xl font-bold text-amber-600 mb-2">$700K+</div>
-                  <h3 className="font-semibold text-lg mb-2">Luxury Homes</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    Premium properties, golf communities & custom estates
-                  </p>
-                  <Link href="/buy">
-                    <Button size="sm" data-testid="button-luxury-homes">View Homes</Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
         {/* Spotlight Listing */}
         {spotlightProperty && (
           <section className="py-16">
@@ -357,6 +280,83 @@ export default function MiddletownDE() {
             </div>
           </section>
         )}
+
+        {/* Why Middletown - Visual Grid */}
+        <section className="py-16">
+          <div className="container mx-auto px-4 lg:px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Why Families Love Middletown
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {highlights.map((item, index) => (
+                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                  <CardContent className="pt-8 pb-6">
+                    <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <item.icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                    <p className="text-muted-foreground">{item.desc}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Housing Market - Price Tiers */}
+        <section className="py-16 bg-secondary/30">
+          <div className="container mx-auto px-4 lg:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Find Your Price Range
+              </h2>
+              <p className="text-muted-foreground max-w-xl mx-auto">
+                From starter homes to luxury estates, Middletown has options for every budget
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="h-3 bg-blue-500" />
+                <CardContent className="pt-6 text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">$375K–$475K</div>
+                  <h3 className="font-semibold text-lg mb-2">Starter Homes</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Townhomes & single-family homes perfect for first-time buyers
+                  </p>
+                  <Link href="/buy">
+                    <Button size="sm" data-testid="button-starter-homes">View Homes</Button>
+                  </Link>
+                </CardContent>
+              </Card>
+              <Card className="overflow-hidden hover:shadow-xl transition-shadow border-primary">
+                <div className="h-3 bg-primary" />
+                <CardContent className="pt-6 text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">$500K–$650K</div>
+                  <h3 className="font-semibold text-lg mb-2">Move-Up Homes</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Spacious layouts with modern amenities for growing families
+                  </p>
+                  <Link href="/buy">
+                    <Button size="sm" data-testid="button-moveup-homes">View Homes</Button>
+                  </Link>
+                </CardContent>
+              </Card>
+              <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="h-3 bg-amber-500" />
+                <CardContent className="pt-6 text-center">
+                  <div className="text-3xl font-bold text-amber-600 mb-2">$700K+</div>
+                  <h3 className="font-semibold text-lg mb-2">Luxury Homes</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Premium properties, golf communities & custom estates
+                  </p>
+                  <Link href="/buy">
+                    <Button size="sm" data-testid="button-luxury-homes">View Homes</Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
 
         {/* Popular Neighborhoods */}
         <section className="py-16 bg-secondary/30">
