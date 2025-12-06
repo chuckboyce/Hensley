@@ -2,6 +2,30 @@
 
 All notable changes to the Kevin Hensley real estate website will be documented in this file.
 
+## [1.4.0] - 2025-12-06
+
+### AI-Enhanced Search Engine Visibility
+
+*Your property listings now include AI-written descriptions optimized for Google and AI search engines. This helps your listings appear in more search results and provides better answers when people ask AI assistants about homes in your area.*
+
+- Each property listing now has an AI-generated summary highlighting key selling points
+- Added structured data that helps Google understand your listings as real estate properties
+- Summaries update automatically when new listings are added
+- Admin page now shows which listings have AI summaries and when they were created
+- Added "Generate AI Summaries" button in admin panel to refresh descriptions anytime
+
+## [1.3.0] - 2025-12-05
+
+### Automated Listing Sync
+
+*Your website now automatically stays in sync with your RE/MAX listings. New properties appear on your site within minutes, and sold/expired listings are automatically removed - no manual updates needed.*
+
+- Website receives automatic updates whenever your RE/MAX listings change
+- New listings appear on the site automatically with photos and details
+- Sold or expired listings are automatically marked as inactive
+- Rental properties are detected and labeled automatically
+- Admin page shows listing status including any expired properties
+
 ## [1.2.0] - 2025-10-17
 
 ### Added
