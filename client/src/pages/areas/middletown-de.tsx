@@ -1,18 +1,26 @@
 import { Link } from "wouter";
 import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Home, TrendingUp, GraduationCap, Building, Clock, Users, TreePine, ShoppingBag, Car } from "lucide-react";
+import { MapPin, Home, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
+import type { Property } from "@shared/schema";
+
+const MIDDLETOWN_ZIP = "19709";
 
 export default function MiddletownDE() {
+  const { data: properties = [], isLoading } = useQuery<Property[]>({
+    queryKey: ['/api/properties/zip', MIDDLETOWN_ZIP],
+  });
+
   useEffect(() => {
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.id = 'middletown-schema';
-    script.textContent = JSON.stringify({
+    const placeScript = document.createElement('script');
+    placeScript.type = 'application/ld+json';
+    placeScript.id = 'middletown-place-schema';
+    placeScript.textContent = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Place",
       "@id": "https://hensleyshomes.com/areas/middletown-de/#place",
@@ -33,15 +41,62 @@ export default function MiddletownDE() {
       }
     });
     
-    const existing = document.getElementById('middletown-schema');
-    if (existing) existing.remove();
-    document.head.appendChild(script);
+    const existingPlace = document.getElementById('middletown-place-schema');
+    if (existingPlace) existingPlace.remove();
+    document.head.appendChild(placeScript);
     
     return () => {
-      const el = document.getElementById('middletown-schema');
+      const el = document.getElementById('middletown-place-schema');
       if (el) el.remove();
     };
   }, []);
+
+  useEffect(() => {
+    if (properties.length === 0) return;
+    
+    const propertySchemas = properties.slice(0, 6).map((property) => ({
+      "@type": property.isRental ? "Residence" : "SingleFamilyResidence",
+      "@id": `https://hensleyshomes.com/properties#${property.listingKey}`,
+      "name": `${property.bedroomsTotal || 0} Bed, ${property.bathroomsFull || 0} Bath ${property.isRental ? 'Rental' : 'Home'} in Middletown`,
+      "description": property.schemaSummary || property.publicRemarks?.substring(0, 200) || `${property.bedroomsTotal} bedroom home in Middletown, DE`,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": property.unparsedAddress,
+        "addressLocality": "Middletown",
+        "addressRegion": "DE",
+        "postalCode": "19709",
+        "addressCountry": "US"
+      },
+      "numberOfRooms": property.bedroomsTotal,
+      "numberOfBathroomsTotal": property.bathroomsFull,
+      ...(property.imageUrl && { "image": property.imageUrl }),
+      ...(property.listPrice && {
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": property.listPrice,
+          "availability": "https://schema.org/InStock"
+        }
+      })
+    }));
+
+    const listingsScript = document.createElement('script');
+    listingsScript.type = 'application/ld+json';
+    listingsScript.id = 'middletown-listings-schema';
+    listingsScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": propertySchemas
+    });
+    
+    const existingListings = document.getElementById('middletown-listings-schema');
+    if (existingListings) existingListings.remove();
+    document.head.appendChild(listingsScript);
+    
+    return () => {
+      const el = document.getElementById('middletown-listings-schema');
+      if (el) el.remove();
+    };
+  }, [properties]);
 
   const neighborhoods = [
     { name: "Parkside", type: "New Construction" },
@@ -201,8 +256,80 @@ export default function MiddletownDE() {
           </div>
         </section>
 
+        {/* Active Listings */}
+        {properties.length > 0 && (
+          <section className="py-16">
+            <div className="container mx-auto px-4 lg:px-6">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Homes for Sale in Middletown
+                </h2>
+                <p className="text-muted-foreground max-w-xl mx-auto">
+                  {properties.length} active listing{properties.length !== 1 ? 's' : ''} in the 19709 zip code
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                {properties.slice(0, 6).map((property) => (
+                  <Card key={property.listingKey} className="overflow-hidden hover:shadow-xl transition-shadow">
+                    {property.imageUrl && (
+                      <div className="aspect-video relative overflow-hidden">
+                        <img 
+                          src={property.imageUrl} 
+                          alt={property.unparsedAddress || 'Property'} 
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        {property.isRental && (
+                          <span className="absolute top-2 left-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded">
+                            FOR RENT
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    <CardContent className="p-4">
+                      <div className="text-2xl font-bold text-primary mb-1">
+                        ${property.listPrice?.toLocaleString()}
+                        {property.isRental && <span className="text-sm font-normal">/mo</span>}
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-1">
+                        {property.unparsedAddress}
+                      </p>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        {property.bedroomsTotal && (
+                          <span className="flex items-center gap-1">
+                            <Bed className="h-4 w-4" /> {property.bedroomsTotal} bed
+                          </span>
+                        )}
+                        {property.bathroomsFull && (
+                          <span className="flex items-center gap-1">
+                            <Bath className="h-4 w-4" /> {property.bathroomsFull} bath
+                          </span>
+                        )}
+                        {property.livingArea && (
+                          <span className="flex items-center gap-1">
+                            <Ruler className="h-4 w-4" /> {property.livingArea.toLocaleString()} sqft
+                          </span>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+              {properties.length > 6 && (
+                <div className="text-center mt-8">
+                  <Link href="/properties">
+                    <Button size="lg" data-testid="button-view-all-listings">
+                      View All {properties.length} Listings
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
         {/* Popular Neighborhoods */}
-        <section className="py-16">
+        <section className="py-16 bg-secondary/30">
           <div className="container mx-auto px-4 lg:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Popular Neighborhoods

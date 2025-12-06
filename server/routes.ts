@@ -620,6 +620,51 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get properties by zip code (for location pages)
+  app.get("/api/properties/zip/:zipCode", async (req, res) => {
+    try {
+      const { zipCode } = req.params;
+      const activeProperties = await storage.listActiveProperties();
+      const filteredProperties = activeProperties.filter(
+        (p) => p.postalCode === zipCode
+      );
+      res.json(filteredProperties);
+    } catch (error) {
+      console.error("Error fetching properties by zip:", error);
+      res.status(500).json({ error: "Failed to fetch properties" });
+    }
+  });
+
+  // Get schema for properties by zip code (for location pages SEO)
+  app.get("/api/schema/properties/zip/:zipCode", async (req, res) => {
+    try {
+      const { zipCode } = req.params;
+      const protocol = req.protocol;
+      const host = req.get('host') || 'hensleyshomes.com';
+      const baseUrl = host.includes('localhost') || host.includes('replit') 
+        ? `${protocol}://${host}` 
+        : 'https://hensleyshomes.com';
+      
+      const activeProperties = await storage.listActiveProperties();
+      const filteredProperties = activeProperties.filter(
+        (p) => p.postalCode === zipCode
+      );
+      
+      if (filteredProperties.length === 0) {
+        return res.json({ "@context": "https://schema.org", "@graph": [] });
+      }
+      
+      const schemaJson = generateFullPageSchema(filteredProperties, baseUrl);
+      
+      res.header('Content-Type', 'application/ld+json');
+      res.header('Cache-Control', 'public, max-age=3600');
+      res.send(schemaJson);
+    } catch (error) {
+      console.error("Error generating zip schema:", error);
+      res.status(500).json({ error: "Failed to generate schema" });
+    }
+  });
+
   // Get JSON-LD schema for properties page (for SEO/AEO)
   app.get("/api/schema/properties", async (req, res) => {
     try {
