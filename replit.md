@@ -94,7 +94,8 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # User Preferences
 
-Preferred communication style: Simple, everyday language.
+- Preferred communication style: Simple, everyday language.
+- When updating Recent Changes, always include a client summary in italics that's suitable for invoices or status reports. Focus on results and benefits, not technical details.
 
 # System Architecture
 
