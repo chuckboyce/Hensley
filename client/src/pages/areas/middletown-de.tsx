@@ -128,9 +128,17 @@ export default function MiddletownDE() {
             <div className="absolute inset-0 bg-black/40" />
           </div>
           <div className="relative z-10 container mx-auto px-4 lg:px-6 text-center text-white">
-            <p className="text-2xl md:text-3xl font-semibold mb-4">
-              Middletown, Delaware
-            </p>
+            <div className="mb-6">
+              <p className="text-sm uppercase tracking-[0.3em] text-white/80 mb-2">
+                Discover
+              </p>
+              <p className="text-5xl md:text-7xl font-bold tracking-tight">
+                Middletown
+              </p>
+              <p className="text-2xl md:text-3xl font-light tracking-wide mt-1 text-white/90">
+                Delaware
+              </p>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/buy">
                 <Button size="lg" data-testid="button-see-homes">
