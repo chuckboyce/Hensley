@@ -268,7 +268,7 @@ export default function MiddletownDE() {
                   <CardContent className="md:w-1/2 p-6 flex flex-col justify-between">
                     <div>
                       <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                        ${Number(spotlightProperty.listPrice).toLocaleString()}
+                        ${Math.round(Number(spotlightProperty.listPrice)).toLocaleString()}
                         {spotlightProperty.isRental && <span className="text-lg font-normal">/mo</span>}
                       </div>
                       <p className="text-lg text-foreground mb-4">
