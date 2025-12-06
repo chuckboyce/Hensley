@@ -104,16 +104,16 @@ export default function MiddletownDE() {
                 <div className="text-sm opacity-80">to Wilmington</div>
               </div>
               <div>
-                <div className="text-3xl md:text-4xl font-bold">A+</div>
-                <div className="text-sm opacity-80">School District</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-bold">$425K</div>
-                <div className="text-sm opacity-80">Median Home Price</div>
-              </div>
-              <div>
                 <div className="text-3xl md:text-4xl font-bold">#1</div>
-                <div className="text-sm opacity-80">Growth in DE</div>
+                <div className="text-sm opacity-80">School District (Niche)</div>
+              </div>
+              <div>
+                <div className="text-3xl md:text-4xl font-bold">$520K</div>
+                <div className="text-sm opacity-80">Median Price (Jan 2025)</div>
+              </div>
+              <div>
+                <div className="text-3xl md:text-4xl font-bold">206%</div>
+                <div className="text-sm opacity-80">Growth 2000-2010</div>
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@ export default function MiddletownDE() {
               <Card className="overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="h-3 bg-blue-500" />
                 <CardContent className="pt-6 text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">$350K–$425K</div>
+                  <div className="text-3xl font-bold text-blue-600 mb-2">$375K–$475K</div>
                   <h3 className="font-semibold text-lg mb-2">Starter Homes</h3>
                   <p className="text-muted-foreground text-sm mb-4">
                     Townhomes & single-family homes perfect for first-time buyers
@@ -169,7 +169,7 @@ export default function MiddletownDE() {
               <Card className="overflow-hidden hover:shadow-xl transition-shadow border-primary">
                 <div className="h-3 bg-primary" />
                 <CardContent className="pt-6 text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">$475K–$650K</div>
+                  <div className="text-3xl font-bold text-primary mb-2">$500K–$650K</div>
                   <h3 className="font-semibold text-lg mb-2">Move-Up Homes</h3>
                   <p className="text-muted-foreground text-sm mb-4">
                     Spacious layouts with modern amenities for growing families
