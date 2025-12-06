@@ -1,9 +1,11 @@
 import { Link } from "wouter";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { MapPin, Home, TrendingUp, GraduationCap, Building, Clock, Users, Compass } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { MapPin, Home, TrendingUp, GraduationCap, Building, Clock, Users, TreePine, ShoppingBag, Car } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
 
 export default function MiddletownDE() {
   useEffect(() => {
@@ -41,335 +43,260 @@ export default function MiddletownDE() {
     };
   }, []);
 
+  const neighborhoods = [
+    { name: "Parkside", type: "New Construction" },
+    { name: "The Estates at St. Anne's", type: "Luxury" },
+    { name: "Bayberry", type: "Established" },
+    { name: "Hyetts Corner", type: "Family-Friendly" },
+    { name: "Town of Whitehall", type: "Master Planned" },
+    { name: "Legacy at Odessa National", type: "Golf Course" }
+  ];
+
+  const highlights = [
+    { icon: GraduationCap, title: "Top Schools", desc: "Appoquinimink District" },
+    { icon: Building, title: "New Construction", desc: "Modern communities" },
+    { icon: TreePine, title: "Parks & Trails", desc: "Silver Lake Park" },
+    { icon: ShoppingBag, title: "Local Shops", desc: "Main Street charm" }
+  ];
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
       
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-b from-primary/5 to-background py-20">
+        {/* Hero Section with Image */}
+        <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${middletownHero})` }}
+          >
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+          <div className="relative z-10 container mx-auto px-4 lg:px-6 text-center text-white">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+              Middletown, Delaware
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto opacity-90">
+              Delaware's fastest-growing community with small-town charm
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/buy">
+                <Button size="lg" data-testid="button-see-homes">
+                  <Home className="mr-2 h-5 w-5" />
+                  Browse Homes
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button size="lg" variant="secondary" data-testid="button-contact">
+                  Contact Kevin
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Stats */}
+        <section className="py-12 bg-primary text-primary-foreground">
           <div className="container mx-auto px-4 lg:px-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <MapPin className="h-16 w-16 text-primary mx-auto mb-6" />
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                Middletown, Delaware
-              </h1>
-              <p className="text-xl text-muted-foreground mb-8">
-                Welcome to Middletown — one of Delaware's most desirable and fastest-growing communities.
-                Whether you're searching for a new construction home, ready to move up, or buying your
-                first place, Middletown offers a blend of comfort, convenience, and small-town charm.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/buy">
-                  <Button size="lg" data-testid="button-see-homes">
-                    <Home className="mr-2 h-5 w-5" />
-                    See Homes
-                  </Button>
-                </Link>
-                <Link href="/sell">
-                  <Button size="lg" variant="outline" data-testid="button-get-home-value">
-                    Get Home Value
-                  </Button>
-                </Link>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-3xl md:text-4xl font-bold">25 min</div>
+                <div className="text-sm opacity-80">to Wilmington</div>
+              </div>
+              <div>
+                <div className="text-3xl md:text-4xl font-bold">A+</div>
+                <div className="text-sm opacity-80">School District</div>
+              </div>
+              <div>
+                <div className="text-3xl md:text-4xl font-bold">$425K</div>
+                <div className="text-sm opacity-80">Median Home Price</div>
+              </div>
+              <div>
+                <div className="text-3xl md:text-4xl font-bold">#1</div>
+                <div className="text-sm opacity-80">Growth in DE</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* About Middletown */}
-        <section className="py-20">
+        {/* Why Middletown - Visual Grid */}
+        <section className="py-16">
           <div className="container mx-auto px-4 lg:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                About Middletown
-              </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Over the last two decades, Middletown has experienced tremendous growth — new schools,
-                parks, restaurants, and entire neighborhoods — while maintaining the friendly,
-                community-driven feel residents love. From parades to festivals and everyday moments with
-                neighbors, Middletown is the kind of place where people feel connected and supported.
-              </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Why Families Love Middletown
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {highlights.map((item, index) => (
+                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                  <CardContent className="pt-8 pb-6">
+                    <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <item.icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                    <p className="text-muted-foreground">{item.desc}</p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Housing Market Overview */}
-        <section className="py-20 bg-secondary/50">
+        {/* Housing Market - Price Tiers */}
+        <section className="py-16 bg-secondary/30">
           <div className="container mx-auto px-4 lg:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 text-center">
-                Housing Market Overview
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Find Your Price Range
               </h2>
-              <p className="text-lg text-muted-foreground text-center mb-12">
-                Middletown offers a wide variety of homes including modern townhomes, amenity-rich planned
-                communities, golf course neighborhoods, and luxury properties. It's also one of the most
-                active new construction markets in Delaware.
+              <p className="text-muted-foreground max-w-xl mx-auto">
+                From starter homes to luxury estates, Middletown has options for every budget
               </p>
-              
-              <div className="grid md:grid-cols-3 gap-8 text-center">
-                <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
-                  <div className="text-3xl font-bold text-primary mb-2">$350K–$425K</div>
-                  <h3 className="font-semibold mb-2">Starter Homes</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Perfect for first-time buyers
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="h-3 bg-blue-500" />
+                <CardContent className="pt-6 text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">$350K–$425K</div>
+                  <h3 className="font-semibold text-lg mb-2">Starter Homes</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Townhomes & single-family homes perfect for first-time buyers
                   </p>
-                </div>
-                <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
+                  <Link href="/buy">
+                    <Button variant="outline" size="sm" data-testid="button-starter-homes">View Homes</Button>
+                  </Link>
+                </CardContent>
+              </Card>
+              <Card className="overflow-hidden hover:shadow-xl transition-shadow border-primary">
+                <div className="h-3 bg-primary" />
+                <CardContent className="pt-6 text-center">
                   <div className="text-3xl font-bold text-primary mb-2">$475K–$650K</div>
-                  <h3 className="font-semibold mb-2">Move-Up Homes</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Growing families and upgraders
+                  <h3 className="font-semibold text-lg mb-2">Move-Up Homes</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Spacious layouts with modern amenities for growing families
                   </p>
-                </div>
-                <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
-                  <div className="text-3xl font-bold text-primary mb-2">$700K+</div>
-                  <h3 className="font-semibold mb-2">Luxury Homes</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Premium properties and estates
+                  <Link href="/buy">
+                    <Button size="sm" data-testid="button-moveup-homes">View Homes</Button>
+                  </Link>
+                </CardContent>
+              </Card>
+              <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="h-3 bg-amber-500" />
+                <CardContent className="pt-6 text-center">
+                  <div className="text-3xl font-bold text-amber-600 mb-2">$700K+</div>
+                  <h3 className="font-semibold text-lg mb-2">Luxury Homes</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Premium properties, golf communities & custom estates
                   </p>
-                </div>
-              </div>
+                  <Link href="/buy">
+                    <Button variant="outline" size="sm" data-testid="button-luxury-homes">View Homes</Button>
+                  </Link>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
 
-        {/* New Construction */}
-        <section className="py-20">
+        {/* Popular Neighborhoods */}
+        <section className="py-16">
+          <div className="container mx-auto px-4 lg:px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Popular Neighborhoods
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+              {neighborhoods.map((hood) => (
+                <Card key={hood.name} className="hover:shadow-md transition-shadow cursor-pointer">
+                  <CardContent className="p-4 flex items-center gap-4">
+                    <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MapPin className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">{hood.name}</h3>
+                      <p className="text-sm text-muted-foreground">{hood.type}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Commute Times */}
+        <section className="py-16 bg-secondary/30">
           <div className="container mx-auto px-4 lg:px-6">
             <div className="max-w-4xl mx-auto">
-              <div className="flex items-start mb-6">
-                <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <Building className="h-6 w-6 text-primary" />
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-14 w-14 bg-primary rounded-full flex items-center justify-center">
+                  <Car className="h-7 w-7 text-primary-foreground" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-foreground mb-4">
-                    New Construction in Middletown
-                  </h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    New construction is one of Middletown's biggest attractions. Buyers can choose from modern
-                    floor plans, energy-efficient designs, smart home upgrades, and community amenities like
-                    pools, walking trails, and clubhouses. Several builders continue to expand the area with
-                    fresh, thoughtfully planned developments.
-                  </p>
+                  <h2 className="text-3xl font-bold">Easy Commutes</h2>
+                  <p className="text-muted-foreground">Direct Route 1 access to major destinations</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Neighborhoods */}
-        <section className="py-20 bg-secondary/50">
-          <div className="container mx-auto px-4 lg:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 text-center">
-                Neighborhood Highlights
-              </h2>
-              <p className="text-lg text-muted-foreground text-center mb-8">
-                Popular neighborhoods in Middletown include:
-              </p>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  "Parkside",
-                  "The Estates at St. Anne's",
-                  "Bayberry North & South",
-                  "Hyetts Corner / Hyetts Crossing",
-                  "The Town of Whitehall",
-                  "Legacy at Odessa National"
-                ].map((neighborhood) => (
-                  <div key={neighborhood} className="bg-card rounded-lg p-4 border border-border flex items-center">
-                    <MapPin className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                    <span className="font-medium">{neighborhood}</span>
-                  </div>
+                  { dest: "Wilmington", time: "25 min" },
+                  { dest: "Newark", time: "20 min" },
+                  { dest: "Philadelphia", time: "55 min" },
+                  { dest: "Dover", time: "35 min" }
+                ].map((route) => (
+                  <Card key={route.dest}>
+                    <CardContent className="p-4 text-center">
+                      <div className="text-2xl font-bold text-primary">{route.time}</div>
+                      <div className="text-sm text-muted-foreground">{route.dest}</div>
+                    </CardContent>
+                  </Card>
                 ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Schools */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 lg:px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-start mb-8">
-                <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <GraduationCap className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-foreground mb-4">
-                    Schools
-                  </h2>
-                  <p className="text-lg text-muted-foreground mb-6">
-                    Middletown is part of the highly rated Appoquinimink School District — one of Delaware's
-                    top-performing districts.
-                  </p>
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-4 ml-16">
-                {[
-                  "Middletown High School",
-                  "Appoquinimink High School",
-                  "Louis L. Redding Middle School",
-                  "Silver Lake Elementary",
-                  "Cedar Lane Elementary"
-                ].map((school) => (
-                  <div key={school} className="flex items-center">
-                    <div className="h-2 w-2 bg-primary rounded-full mr-3"></div>
-                    <span>{school}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Things to Do */}
-        <section className="py-20 bg-secondary/50">
-          <div className="container mx-auto px-4 lg:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-                Things to Do
-              </h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  { icon: MapPin, text: "Historic Downtown Middletown / Main Street" },
-                  { icon: Users, text: "Middletown Peach Festival (annual tradition)" },
-                  { icon: Compass, text: "Silver Lake Park" },
-                  { icon: Building, text: "Local restaurants, breweries, and boutique shopping" },
-                  { icon: Users, text: "Year-round community events and seasonal celebrations" }
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start bg-card rounded-lg p-4 border border-border">
-                    <item.icon className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                    <span>{item.text}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Commute */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 lg:px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-start mb-8">
-                <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <Clock className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-foreground mb-4">
-                    Commute & Accessibility
-                  </h2>
-                  <p className="text-lg text-muted-foreground">
-                    With immediate access to Route 1, Middletown provides quick travel options for work or
-                    weekend plans.
-                  </p>
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-4 ml-16">
-                <div className="flex items-center justify-between bg-card rounded-lg p-4 border border-border">
-                  <span className="font-medium">Wilmington</span>
-                  <span className="text-primary font-semibold">25–35 min</span>
-                </div>
-                <div className="flex items-center justify-between bg-card rounded-lg p-4 border border-border">
-                  <span className="font-medium">Newark</span>
-                  <span className="text-primary font-semibold">20–30 min</span>
-                </div>
-                <div className="flex items-center justify-between bg-card rounded-lg p-4 border border-border">
-                  <span className="font-medium">Philadelphia Airport</span>
-                  <span className="text-primary font-semibold">50–60 min</span>
-                </div>
-                <div className="flex items-center justify-between bg-card rounded-lg p-4 border border-border">
-                  <span className="font-medium">Dover</span>
-                  <span className="text-primary font-semibold">~35 min</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Who It's For */}
-        <section className="py-20 bg-secondary/50">
-          <div className="container mx-auto px-4 lg:px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-start">
-                <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <Users className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-foreground mb-4">
-                    Who Middletown is Best For
-                  </h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    Middletown is ideal for families, commuters, first-time buyers, and anyone seeking modern
-                    home options, strong schools, and a welcoming, active community.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Explore Other Areas */}
-        <section className="py-20">
+        <section className="py-16">
           <div className="container mx-auto px-4 lg:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-                Explore Nearby Areas
-              </h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Link href="/areas/townsend-de">
-                  <div className="bg-card rounded-lg p-4 border border-border hover:border-primary transition-colors cursor-pointer text-center">
-                    <MapPin className="h-6 w-6 text-primary mx-auto mb-2" />
-                    <span className="font-medium">Townsend, DE</span>
-                  </div>
+            <h2 className="text-3xl font-bold text-center mb-8">
+              Explore Nearby Areas
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+              {[
+                { name: "Townsend", href: "/areas/townsend-de" },
+                { name: "Bear", href: "/areas/bear-de" },
+                { name: "New Castle", href: "/areas/new-castle-de" },
+                { name: "Hockessin", href: "/areas/hockessin-de" }
+              ].map((area) => (
+                <Link key={area.name} href={area.href}>
+                  <Card className="hover:border-primary transition-colors cursor-pointer">
+                    <CardContent className="p-4 text-center">
+                      <MapPin className="h-6 w-6 text-primary mx-auto mb-2" />
+                      <span className="font-medium">{area.name}, DE</span>
+                    </CardContent>
+                  </Card>
                 </Link>
-                <Link href="/areas/bear-de">
-                  <div className="bg-card rounded-lg p-4 border border-border hover:border-primary transition-colors cursor-pointer text-center">
-                    <MapPin className="h-6 w-6 text-primary mx-auto mb-2" />
-                    <span className="font-medium">Bear, DE</span>
-                  </div>
-                </Link>
-                <Link href="/areas/new-castle-de">
-                  <div className="bg-card rounded-lg p-4 border border-border hover:border-primary transition-colors cursor-pointer text-center">
-                    <MapPin className="h-6 w-6 text-primary mx-auto mb-2" />
-                    <span className="font-medium">New Castle, DE</span>
-                  </div>
-                </Link>
-                <Link href="/areas/hockessin-de">
-                  <div className="bg-card rounded-lg p-4 border border-border hover:border-primary transition-colors cursor-pointer text-center">
-                    <MapPin className="h-6 w-6 text-primary mx-auto mb-2" />
-                    <span className="font-medium">Hockessin, DE</span>
-                  </div>
-                </Link>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-primary text-primary-foreground">
+        <section className="py-16 bg-primary text-primary-foreground">
           <div className="container mx-auto px-4 lg:px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Explore Middletown?
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to Call Middletown Home?
             </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-              Whether you're buying or selling, I'm here to help you navigate the Middletown market with
-              confidence and local expertise.
+            <p className="text-xl mb-8 max-w-xl mx-auto opacity-90">
+              Let me help you find your perfect place in this amazing community
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/buy">
-                <Button size="lg" variant="secondary" data-testid="button-cta-see-homes">
-                  See Homes
+                <Button size="lg" variant="secondary" data-testid="button-cta-browse">
+                  <Home className="mr-2 h-5 w-5" />
+                  Browse Homes
                 </Button>
               </Link>
-              <Link href="/sell">
-                <Button size="lg" variant="outline" className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary" data-testid="button-cta-get-value">
-                  Get Home Value
-                </Button>
-              </Link>
-              <Link href="/property-management">
-                <Button size="lg" variant="outline" className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary" data-testid="button-cta-property-mgmt">
-                  Property Management
+              <Link href="/contact">
+                <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" data-testid="button-cta-contact">
+                  Schedule a Call
                 </Button>
               </Link>
             </div>
