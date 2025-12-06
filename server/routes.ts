@@ -413,6 +413,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin: Manually trigger AI summary generation for all properties
+  app.post("/api/admin/generate-summaries", adminAuth, async (req, res) => {
+    try {
+      const propertiesNeedingSummary = await storage.getPropertiesNeedingSummary();
+      
+      if (propertiesNeedingSummary.length === 0) {
+        return res.json({
+          success: true,
+          message: "No properties need summary generation",
+          generated: 0
+        });
+      }
+      
+      // Start background generation and respond immediately
+      res.json({
+        success: true,
+        message: `Starting AI summary generation for ${propertiesNeedingSummary.length} properties...`,
+        propertiesQueued: propertiesNeedingSummary.length
+      });
+      
+      // Generate summaries in background after response
+      generateSummariesInBackground();
+    } catch (error) {
+      console.error("Error triggering summary generation:", error);
+      res.status(500).json({ error: "Failed to trigger summary generation" });
+    }
+  });
+
   // Background function to generate AI summaries for properties
   async function generateSummariesInBackground() {
     try {
