@@ -278,30 +278,10 @@ export default function MiddletownDE() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 bg-primary text-primary-foreground">
-          <div className="container mx-auto px-4 lg:px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Call Middletown Home?
-            </h2>
-            <p className="text-xl mb-8 max-w-xl mx-auto opacity-90">
-              Let me help you find your perfect place in this amazing community
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/buy">
-                <Button size="lg" variant="secondary" data-testid="button-cta-browse">
-                  <Home className="mr-2 h-5 w-5" />
-                  Browse Homes
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" data-testid="button-cta-contact">
-                  Schedule a Call
-                </Button>
-              </Link>
-            </div>
-            
-            <p className="text-xs text-primary-foreground/60 text-center max-w-3xl mx-auto mt-12">
+        {/* Sources Footnote */}
+        <section className="py-8 bg-secondary/30">
+          <div className="container mx-auto px-4 lg:px-6">
+            <p className="text-xs text-muted-foreground text-center max-w-3xl mx-auto">
               Sources: Median home price from Rocket Homes (January 2025). 
               School district ranking from Niche.com (2024-25). 
               Population growth data from U.S. Census Bureau (2000-2010). 
