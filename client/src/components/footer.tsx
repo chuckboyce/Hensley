@@ -93,6 +93,11 @@ export default function Footer() {
                   data-testid="img-remax-logo"
                 />
               </div>
+              <div className="mb-4">
+                <p className="font-semibold text-foreground">Kevin Hensley</p>
+                <p className="text-sm text-muted-foreground">Associate Broker</p>
+                <p className="text-xs text-muted-foreground mt-1">License# 324709 | RB-0003526</p>
+              </div>
               <p className="text-muted-foreground mb-4 max-w-md">
                 Your trusted local partner for real estate sales and property management services. Serving the community with integrity and expertise.
               </p>
