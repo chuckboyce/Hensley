@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,9 +12,30 @@ import type { Property } from "@shared/schema";
 const MIDDLETOWN_ZIP = "19709";
 
 export default function MiddletownDE() {
-  const { data: properties = [], isLoading } = useQuery<Property[]>({
+  const { data: properties = [] } = useQuery<Property[]>({
     queryKey: ['/api/properties/zip', MIDDLETOWN_ZIP],
   });
+
+  const spotlightProperty = useMemo(() => {
+    if (properties.length === 0) return null;
+    
+    const salesListings = properties.filter(p => !p.isRental);
+    const rentalListings = properties.filter(p => p.isRental);
+    
+    if (salesListings.length > 0) {
+      return salesListings.reduce((highest, current) => 
+        Number(current.listPrice) > Number(highest.listPrice) ? current : highest
+      );
+    }
+    
+    if (rentalListings.length > 0) {
+      return rentalListings.reduce((highest, current) => 
+        Number(current.listPrice) > Number(highest.listPrice) ? current : highest
+      );
+    }
+    
+    return null;
+  }, [properties]);
 
   useEffect(() => {
     const placeScript = document.createElement('script');
@@ -50,53 +71,6 @@ export default function MiddletownDE() {
       if (el) el.remove();
     };
   }, []);
-
-  useEffect(() => {
-    if (properties.length === 0) return;
-    
-    const propertySchemas = properties.slice(0, 6).map((property) => ({
-      "@type": property.isRental ? "Residence" : "SingleFamilyResidence",
-      "@id": `https://hensleyshomes.com/properties#${property.listingKey}`,
-      "name": `${property.bedroomsTotal || 0} Bed, ${property.bathroomsFull || 0} Bath ${property.isRental ? 'Rental' : 'Home'} in Middletown`,
-      "description": property.schemaSummary || property.publicRemarks?.substring(0, 200) || `${property.bedroomsTotal} bedroom home in Middletown, DE`,
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": property.unparsedAddress,
-        "addressLocality": "Middletown",
-        "addressRegion": "DE",
-        "postalCode": "19709",
-        "addressCountry": "US"
-      },
-      "numberOfRooms": property.bedroomsTotal,
-      "numberOfBathroomsTotal": property.bathroomsFull,
-      ...(property.imageUrl && { "image": property.imageUrl }),
-      ...(property.listPrice && {
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "USD",
-          "price": property.listPrice,
-          "availability": "https://schema.org/InStock"
-        }
-      })
-    }));
-
-    const listingsScript = document.createElement('script');
-    listingsScript.type = 'application/ld+json';
-    listingsScript.id = 'middletown-listings-schema';
-    listingsScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": propertySchemas
-    });
-    
-    const existingListings = document.getElementById('middletown-listings-schema');
-    if (existingListings) existingListings.remove();
-    document.head.appendChild(listingsScript);
-    
-    return () => {
-      const el = document.getElementById('middletown-listings-schema');
-      if (el) el.remove();
-    };
-  }, [properties]);
 
   const neighborhoods = [
     { name: "Parkside", type: "New Construction" },
@@ -262,74 +236,124 @@ export default function MiddletownDE() {
           </div>
         </section>
 
-        {/* Active Listings */}
-        {properties.length > 0 && (
+        {/* Spotlight Listing */}
+        {spotlightProperty && (
           <section className="py-16">
             <div className="container mx-auto px-4 lg:px-6">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Homes for Sale in Middletown
+                  {spotlightProperty.isRental ? 'Featured Rental' : 'Featured Home'} in Middletown
                 </h2>
                 <p className="text-muted-foreground max-w-xl mx-auto">
-                  {properties.length} active listing{properties.length !== 1 ? 's' : ''} in the 19709 zip code
+                  {spotlightProperty.isRental 
+                    ? 'Premium rental property available now' 
+                    : 'Exceptional property currently on the market'}
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                {properties.slice(0, 6).map((property) => (
-                  <Card key={property.listingKey} className="overflow-hidden hover:shadow-xl transition-shadow">
-                    {property.imageUrl && (
-                      <div className="aspect-video relative overflow-hidden">
-                        <img 
-                          src={property.imageUrl} 
-                          alt={property.unparsedAddress || 'Property'} 
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                        {property.isRental && (
-                          <span className="absolute top-2 left-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded">
-                            FOR RENT
-                          </span>
-                        )}
+              <Card className="overflow-hidden hover:shadow-xl transition-shadow max-w-4xl mx-auto">
+                <div className="md:flex">
+                  {spotlightProperty.imageUrl && (
+                    <div className="md:w-1/2 aspect-video md:aspect-auto relative overflow-hidden">
+                      <img 
+                        src={spotlightProperty.imageUrl} 
+                        alt={spotlightProperty.unparsedAddress || 'Property'} 
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <span className={`absolute top-3 left-3 ${spotlightProperty.isRental ? 'bg-blue-600' : 'bg-primary'} text-white text-sm font-semibold px-3 py-1.5 rounded`}>
+                        {spotlightProperty.isRental ? 'FOR RENT' : 'FOR SALE'}
+                      </span>
+                    </div>
+                  )}
+                  <CardContent className="md:w-1/2 p-6 flex flex-col justify-between">
+                    <div>
+                      <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                        ${Number(spotlightProperty.listPrice).toLocaleString()}
+                        {spotlightProperty.isRental && <span className="text-lg font-normal">/mo</span>}
                       </div>
-                    )}
-                    <CardContent className="p-4">
-                      <div className="text-2xl font-bold text-primary mb-1">
-                        ${property.listPrice?.toLocaleString()}
-                        {property.isRental && <span className="text-sm font-normal">/mo</span>}
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-3 line-clamp-1">
-                        {property.unparsedAddress}
+                      <p className="text-lg text-foreground mb-4">
+                        {spotlightProperty.unparsedAddress}
                       </p>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        {property.bedroomsTotal && (
-                          <span className="flex items-center gap-1">
-                            <Bed className="h-4 w-4" /> {property.bedroomsTotal} bed
-                          </span>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        {spotlightProperty.city}, {spotlightProperty.stateOrProvince} {spotlightProperty.postalCode}
+                      </p>
+                      
+                      <div className="grid grid-cols-2 gap-4 mb-6">
+                        {spotlightProperty.bedroomsTotal && (
+                          <div className="flex items-center gap-2">
+                            <Bed className="h-5 w-5 text-primary" />
+                            <span className="font-medium">{spotlightProperty.bedroomsTotal}</span>
+                            <span className="text-muted-foreground">Bedrooms</span>
+                          </div>
                         )}
-                        {property.bathroomsFull && (
-                          <span className="flex items-center gap-1">
-                            <Bath className="h-4 w-4" /> {property.bathroomsFull} bath
-                          </span>
+                        {(spotlightProperty.bathroomsFull || spotlightProperty.bathroomsHalf) && (
+                          <div className="flex items-center gap-2">
+                            <Bath className="h-5 w-5 text-primary" />
+                            <span className="font-medium">
+                              {spotlightProperty.bathroomsFull || 0}
+                              {spotlightProperty.bathroomsHalf ? `.${spotlightProperty.bathroomsHalf}` : ''}
+                            </span>
+                            <span className="text-muted-foreground">Bathrooms</span>
+                          </div>
                         )}
-                        {property.livingArea && (
-                          <span className="flex items-center gap-1">
-                            <Ruler className="h-4 w-4" /> {property.livingArea.toLocaleString()} sqft
-                          </span>
+                        {spotlightProperty.livingArea && (
+                          <div className="flex items-center gap-2">
+                            <Ruler className="h-5 w-5 text-primary" />
+                            <span className="font-medium">{spotlightProperty.livingArea.toLocaleString()}</span>
+                            <span className="text-muted-foreground">Sq Ft</span>
+                          </div>
+                        )}
+                        {spotlightProperty.yearBuilt && (
+                          <div className="flex items-center gap-2">
+                            <Building className="h-5 w-5 text-primary" />
+                            <span className="font-medium">{spotlightProperty.yearBuilt}</span>
+                            <span className="text-muted-foreground">Built</span>
+                          </div>
+                        )}
+                        {spotlightProperty.garageSpaces && (
+                          <div className="flex items-center gap-2">
+                            <Car className="h-5 w-5 text-primary" />
+                            <span className="font-medium">{spotlightProperty.garageSpaces}</span>
+                            <span className="text-muted-foreground">Garage</span>
+                          </div>
+                        )}
+                        {spotlightProperty.lotSizeArea && (
+                          <div className="flex items-center gap-2">
+                            <TreePine className="h-5 w-5 text-primary" />
+                            <span className="font-medium">{Number(spotlightProperty.lotSizeArea).toFixed(2)}</span>
+                            <span className="text-muted-foreground">{spotlightProperty.lotSizeUnits || 'Acres'}</span>
+                          </div>
                         )}
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-              {properties.length > 6 && (
-                <div className="text-center mt-8">
-                  <Link href="/properties">
-                    <Button size="lg" data-testid="button-view-all-listings">
-                      View All {properties.length} Listings
-                    </Button>
-                  </Link>
+
+                      {spotlightProperty.propertySubType && (
+                        <p className="text-sm text-muted-foreground mb-4">
+                          <span className="font-medium">Property Type:</span> {spotlightProperty.propertySubType}
+                        </p>
+                      )}
+
+                      {spotlightProperty.daysOnMarket !== null && spotlightProperty.daysOnMarket !== undefined && (
+                        <p className="text-sm text-muted-foreground mb-4">
+                          <span className="font-medium">Days on Market:</span> {spotlightProperty.daysOnMarket}
+                        </p>
+                      )}
+                    </div>
+
+                    {spotlightProperty.listingUrl && (
+                      <a 
+                        href={spotlightProperty.listingUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-block"
+                      >
+                        <Button size="lg" className="w-full" data-testid="button-view-full-listing">
+                          View Full Listing on RE/MAX
+                        </Button>
+                      </a>
+                    )}
+                  </CardContent>
                 </div>
-              )}
+              </Card>
             </div>
           </section>
         )}
