@@ -261,6 +261,37 @@ export default function ManageListings() {
     }
   });
 
+  // Generate AI summaries for schema markup
+  const generateSummariesMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch('/api/admin/generate-summaries', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${password}`
+        }
+      });
+      
+      if (!response.ok) throw new Error('Failed to generate summaries');
+      return response.json();
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/properties/all'] });
+      toast({
+        title: "AI Summaries",
+        description: data.propertiesQueued 
+          ? `Generating ${data.propertiesQueued} summaries in background...` 
+          : data.message
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to generate summaries",
+        variant: "destructive"
+      });
+    }
+  });
+
   const handleOpenEdit = (property: any) => {
     setEditingProperty(property);
     setEditFormData({
@@ -398,6 +429,14 @@ export default function ManageListings() {
               <Globe className="mr-2 h-4 w-4" />
               {pingSearchEnginesMutation.isPending ? "Pinging..." : "Ping Search Engines"}
             </Button>
+            <Button
+              onClick={() => generateSummariesMutation.mutate()}
+              disabled={generateSummariesMutation.isPending}
+              variant="outline"
+              data-testid="button-generate-summaries"
+            >
+              {generateSummariesMutation.isPending ? "Generating..." : "Generate AI Summaries"}
+            </Button>
             <Link href="/admin/listings">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
@@ -437,6 +476,7 @@ export default function ManageListings() {
                     <th className="text-left p-3">Price</th>
                     <th className="text-left p-3">Beds/Baths</th>
                     <th className="text-left p-3">MLS#</th>
+                    <th className="text-left p-3">Schema</th>
                     <th className="text-left p-3">Status</th>
                     <th className="text-left p-3">Actions</th>
                   </tr>
@@ -467,6 +507,22 @@ export default function ManageListings() {
                       </td>
                       <td className="p-3 font-mono text-sm">
                         {property.listingId}
+                      </td>
+                      <td className="p-3">
+                        {property.schemaSummary ? (
+                          <div className="max-w-[200px]" title={property.schemaSummary}>
+                            <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+                              AI ✓
+                            </Badge>
+                            <div className="text-xs text-muted-foreground mt-1 truncate">
+                              {new Date(property.schemaUpdatedAt).toLocaleDateString()}
+                            </div>
+                          </div>
+                        ) : (
+                          <Badge variant="outline" className="text-xs text-muted-foreground">
+                            Pending
+                          </Badge>
+                        )}
                       </td>
                       <td className="p-3">
                         <Select
