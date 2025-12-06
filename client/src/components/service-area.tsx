@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { serviceAreas } from "@/data/mock-data";
 import middletownImage from "@assets/Middletown_DE_1757012981537.jpg";
 import ConsultationModal from "@/components/consultation-modal";
+
+const areaLinks: Record<string, string> = {
+  "Middletown": "/areas/middletown-de"
+};
 
 export default function ServiceArea() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,12 +42,27 @@ export default function ServiceArea() {
             </p>
             
             <div className="grid grid-cols-2 gap-4">
-              {serviceAreas.map((area, index) => (
-                <div key={index} className="bg-muted rounded-lg p-4 text-center" data-testid={`service-area-${index}`}>
-                  <h4 className="font-semibold text-foreground mb-1">{area.name}</h4>
-                  <p className="text-sm text-muted-foreground">{area.description}</p>
-                </div>
-              ))}
+              {serviceAreas.map((area, index) => {
+                const link = areaLinks[area.name];
+                const content = (
+                  <>
+                    <h4 className="font-semibold text-foreground mb-1">{area.name}</h4>
+                    <p className="text-sm text-muted-foreground">{area.description}</p>
+                  </>
+                );
+                
+                return link ? (
+                  <Link key={index} href={link}>
+                    <div className="bg-muted rounded-lg p-4 text-center hover:bg-muted/80 transition-colors cursor-pointer" data-testid={`service-area-${index}`}>
+                      {content}
+                    </div>
+                  </Link>
+                ) : (
+                  <div key={index} className="bg-muted rounded-lg p-4 text-center" data-testid={`service-area-${index}`}>
+                    {content}
+                  </div>
+                );
+              })}
             </div>
             
             <div className="flex justify-center">
