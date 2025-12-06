@@ -416,7 +416,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       console.log("[Webhook] Received listing data push...");
       
-      const listingData = req.body;
+      let listingData = req.body;
       
       // Validate that we received an object
       if (!listingData || typeof listingData !== 'object') {
@@ -424,6 +424,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           success: false, 
           error: "Invalid data format. Expected JSON object with MLS IDs as keys." 
         });
+      }
+      
+      // Support wrapped format: { listings: { DENC123: {...}, ... } }
+      // If there's a "listings" key containing an object, use that instead
+      if (listingData.listings && typeof listingData.listings === 'object') {
+        console.log("[Webhook] Found wrapped format with 'listings' key, unwrapping...");
+        listingData = listingData.listings;
       }
       
       // Filter to only valid MLS IDs (e.g., DENC2093782, MDDO12345, etc.)
