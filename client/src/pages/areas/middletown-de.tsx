@@ -120,25 +120,17 @@ export default function MiddletownDE() {
       
       <main className="flex-1">
         {/* Hero Section with Image */}
-        <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center">
+        <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center">
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${middletownHero})` }}
           >
-            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute inset-0 bg-black/40" />
           </div>
           <div className="relative z-10 container mx-auto px-4 lg:px-6 text-center text-white">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Middletown, DE Real Estate: Homes for Sale & Community Guide
-            </h1>
-            <div className="max-w-3xl mx-auto mb-8 space-y-4">
-              <p className="text-lg md:text-xl opacity-95">
-                Looking to buy a home in Middletown, Delaware? Discover why families, first-time buyers, and commuters are choosing Delaware's fastest-growing community. With top-rated Appoquinimink schools, new construction neighborhoods, and easy access to Wilmington and Philadelphia, Middletown offers the perfect blend of suburban convenience and small-town charm.
-              </p>
-              <p className="text-base md:text-lg opacity-85">
-                As your local Middletown real estate expert, I'll help you find the right home in communities like Parkside, Bayberry, Whitehall, and more. Whether you're searching for a starter home, move-up property, or luxury estate, let's explore what Middletown has to offer.
-              </p>
-            </div>
+            <p className="text-2xl md:text-3xl font-semibold mb-4">
+              Middletown, Delaware
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/buy">
                 <Button size="lg" data-testid="button-see-homes">
@@ -151,6 +143,25 @@ export default function MiddletownDE() {
                   Contact Kevin
                 </Button>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* SEO Content Section */}
+        <section className="py-12 bg-background">
+          <div className="container mx-auto px-4 lg:px-6">
+            <div className="max-w-4xl mx-auto">
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Middletown, DE Real Estate: Homes for Sale & Community Guide
+              </h1>
+              <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                <p>
+                  Looking to buy a home in Middletown, Delaware? Discover why families, first-time buyers, and commuters are choosing Delaware's fastest-growing community. With top-rated Appoquinimink schools, new construction neighborhoods, and easy access to Wilmington and Philadelphia, Middletown offers the perfect blend of suburban convenience and small-town charm.
+                </p>
+                <p>
+                  As your local Middletown real estate expert, I'll help you find the right home in communities like Parkside, Bayberry, Whitehall, and more. Whether you're searching for a starter home, move-up property, or luxury estate, let's explore what Middletown has to offer.
+                </p>
+              </div>
             </div>
           </div>
         </section>
