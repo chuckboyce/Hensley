@@ -317,41 +317,32 @@ export default function MiddletownDE() {
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               <Card className="overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="h-3 bg-blue-500" />
-                <CardContent className="pt-6 text-center">
+                <CardContent className="pt-6 pb-6 text-center">
                   <div className="text-3xl font-bold text-blue-600 mb-2">$375K–$475K</div>
                   <h3 className="font-semibold text-lg mb-2">Starter Homes</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
+                  <p className="text-muted-foreground text-sm">
                     Townhomes & single-family homes perfect for first-time buyers
                   </p>
-                  <Link href="/buy">
-                    <Button size="sm" data-testid="button-starter-homes">View Homes</Button>
-                  </Link>
                 </CardContent>
               </Card>
               <Card className="overflow-hidden hover:shadow-xl transition-shadow border-primary">
                 <div className="h-3 bg-primary" />
-                <CardContent className="pt-6 text-center">
+                <CardContent className="pt-6 pb-6 text-center">
                   <div className="text-3xl font-bold text-primary mb-2">$500K–$650K</div>
                   <h3 className="font-semibold text-lg mb-2">Move-Up Homes</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
+                  <p className="text-muted-foreground text-sm">
                     Spacious layouts with modern amenities for growing families
                   </p>
-                  <Link href="/buy">
-                    <Button size="sm" data-testid="button-moveup-homes">View Homes</Button>
-                  </Link>
                 </CardContent>
               </Card>
               <Card className="overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="h-3 bg-amber-500" />
-                <CardContent className="pt-6 text-center">
+                <CardContent className="pt-6 pb-6 text-center">
                   <div className="text-3xl font-bold text-amber-600 mb-2">$700K+</div>
                   <h3 className="font-semibold text-lg mb-2">Luxury Homes</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
+                  <p className="text-muted-foreground text-sm">
                     Premium properties, golf communities & custom estates
                   </p>
-                  <Link href="/buy">
-                    <Button size="sm" data-testid="button-luxury-homes">View Homes</Button>
-                  </Link>
                 </CardContent>
               </Card>
             </div>
