@@ -1,6 +1,10 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { generateFullPageSchema } from "./utils/schemaGenerator";
+import { storage } from "./storage";
+import fs from "fs";
+import path from "path";
 
 const app = express();
 app.use(express.json());
@@ -129,6 +133,58 @@ ${pages.map(page => `  <url>
       res.status(500).send("Error generating sitemap");
     }
   });
+
+  // Server-side rendered properties page with schema injection for SEO
+  // This ensures search engines see the JSON-LD without JavaScript execution
+  // In production, this serves HTML with pre-injected schema
+  // In development, this falls through to Vite (client-side injection used for testing)
+  if (app.get("env") !== "development") {
+    // Cache the HTML template for performance
+    let cachedHtml: string | null = null;
+    let cacheTime = 0;
+    const CACHE_TTL = 60 * 1000; // 1 minute cache for HTML template
+    
+    app.get("/properties", async (req, res, next) => {
+      try {
+        const baseUrl = "https://hensleyshomes.com";
+        const properties = await storage.listActiveProperties();
+        const schemaJson = generateFullPageSchema(properties, baseUrl);
+        
+        // Production build outputs to dist/public (same as serveStatic uses)
+        const htmlPath = path.resolve(import.meta.dirname, "public", "index.html");
+        
+        // Use cached template if available and fresh
+        const now = Date.now();
+        if (!cachedHtml || (now - cacheTime) > CACHE_TTL) {
+          if (!fs.existsSync(htmlPath)) {
+            console.warn("[SSR Properties] HTML file not found at:", htmlPath);
+            return next();
+          }
+          cachedHtml = fs.readFileSync(htmlPath, 'utf-8');
+          cacheTime = now;
+        }
+        
+        let html = cachedHtml;
+        
+        // Inject the schema before closing head tag
+        const schemaScript = `<script type="application/ld+json" id="ssr-property-schema">${schemaJson}</script>`;
+        html = html.replace('</head>', `${schemaScript}\n</head>`);
+        
+        // Also update meta tags for this specific page
+        html = html.replace(
+          /<title>.*?<\/title>/,
+          `<title>Available Properties | Kevin Hensley's Homes</title>`
+        );
+        
+        res.header('Content-Type', 'text/html');
+        res.header('Cache-Control', 'public, max-age=300'); // Cache for 5 minutes
+        res.send(html);
+      } catch (error) {
+        console.error("[SSR Properties] Error:", error);
+        next();
+      }
+    });
+  }
 
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route

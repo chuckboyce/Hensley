@@ -8,6 +8,7 @@ import { pingSearchEngines } from "./utils/search-engine-ping";
 import { optimizePropertyImage } from "./utils/image-optimizer";
 import { syncListings } from "../scripts/sync-listings";
 import { generatePropertySummary } from "./aiSummary";
+import { generateFullPageSchema, generatePropertySchema, generatePropertyListSchema } from "./utils/schemaGenerator";
 import multer from "multer";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -588,6 +589,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching active properties:", error);
       res.status(500).json({ error: "Failed to fetch properties" });
+    }
+  });
+
+  // Get JSON-LD schema for properties page (for SEO/AEO)
+  app.get("/api/schema/properties", async (req, res) => {
+    try {
+      const protocol = req.protocol;
+      const host = req.get('host') || 'hensleyshomes.com';
+      const baseUrl = host.includes('localhost') || host.includes('replit') 
+        ? `${protocol}://${host}` 
+        : 'https://hensleyshomes.com';
+      
+      const activeProperties = await storage.listActiveProperties();
+      const schemaJson = generateFullPageSchema(activeProperties, baseUrl);
+      
+      res.header('Content-Type', 'application/ld+json');
+      res.header('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+      res.send(schemaJson);
+    } catch (error) {
+      console.error("Error generating schema:", error);
+      res.status(500).json({ error: "Failed to generate schema" });
+    }
+  });
+
+  // Get JSON-LD schema for a single property
+  app.get("/api/schema/property/:listingKey", async (req, res) => {
+    try {
+      const { listingKey } = req.params;
+      const property = await storage.getProperty(listingKey);
+      
+      if (!property) {
+        return res.status(404).json({ error: "Property not found" });
+      }
+      
+      const protocol = req.protocol;
+      const host = req.get('host') || 'hensleyshomes.com';
+      const baseUrl = host.includes('localhost') || host.includes('replit') 
+        ? `${protocol}://${host}` 
+        : 'https://hensleyshomes.com';
+      
+      const schema = generatePropertySchema({ property, baseUrl });
+      
+      res.header('Content-Type', 'application/ld+json');
+      res.header('Cache-Control', 'public, max-age=3600');
+      res.send(JSON.stringify(schema));
+    } catch (error) {
+      console.error("Error generating property schema:", error);
+      res.status(500).json({ error: "Failed to generate schema" });
     }
   });
 

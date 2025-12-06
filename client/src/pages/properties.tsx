@@ -7,6 +7,7 @@ import { Bed, Bath, Square, MapPin, DollarSign } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { ResponsivePropertyImage } from "@/components/responsive-property-image";
+import PropertySchemaInjector from "@/components/PropertySchemaInjector";
 import comingSoonImage from "@assets/generated-image (1)_1762730474875.png";
 
 export default function Properties() {
@@ -23,6 +24,7 @@ export default function Properties() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <PropertySchemaInjector />
       <Header />
       
       <main className="flex-1">

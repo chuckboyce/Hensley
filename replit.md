@@ -4,6 +4,21 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
+**December 6, 2025**: AI-powered schema markup for SEO/AEO
+- Added OpenAI integration for generating property description summaries
+- Created AI summarization service (server/aiSummary.ts) with rate limiting, exponential backoff, error handling for 429/5xx
+- Added `schemaSummary` and `schemaUpdatedAt` fields to properties database schema for caching AI summaries (60-day TTL)
+- Created comprehensive schema generator (server/utils/schemaGenerator.ts) producing valid JSON-LD with:
+  - Organization, WebSite, RealEstateAgent, and ItemList schemas
+  - Property-specific schemas with MLS identifiers, addresses, pricing, bedrooms/baths, sqft
+  - Proper property type detection (SingleFamilyResidence, Apartment, Residence)
+  - Rental price specification support
+- Added `/api/schema/properties` and `/api/schema/property/:listingKey` endpoints for schema JSON-LD
+- Implemented server-side schema injection for /properties page in production (ensures crawlers see schema without JS)
+- Webhook now triggers background AI summary generation after processing listings
+- Client-side PropertySchemaInjector component for development testing
+- Schema cached for 5 minutes, refreshed with current property data on each request
+
 **December 5, 2025**: Automated RE/MAX listing scraper integration
 - Created webhook endpoint `POST /api/webhook/listings` to receive listing data from external scraper
 - Webhook accepts JSON object with MLS IDs as keys, processes listings, and marks missing ones as expired
