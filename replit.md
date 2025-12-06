@@ -97,6 +97,7 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 - **Communication Style**: Simple, everyday language. Avoid technical jargon.
 - **Recent Changes Format**: Always include a client summary in italics that's suitable for invoices or status reports. Focus on results and benefits, not technical details.
 - **Documentation Updates**: Update the Recent Changes section in this file at each checkpoint.
+- **Navigation Behavior**: Always scroll to top of page on route change, unless landing on a specific anchor (hash link). This is implemented via the `ScrollToTop` component in `App.tsx`.
 
 # System Architecture
 
