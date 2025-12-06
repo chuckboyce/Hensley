@@ -300,17 +300,12 @@ export default function MiddletownDE() {
                 </Button>
               </Link>
             </div>
-          </div>
-        </section>
-
-        {/* Sources Footnote */}
-        <section className="py-6 border-t border-border">
-          <div className="container mx-auto px-4 lg:px-6">
-            <p className="text-xs text-muted-foreground text-center max-w-3xl mx-auto">
-              <strong>Sources:</strong> Median home price from Rocket Homes (January 2025). 
+            
+            <p className="text-xs text-primary-foreground/60 text-center max-w-3xl mx-auto mt-12">
+              Sources: Median home price from Rocket Homes (January 2025). 
               School district ranking from Niche.com (2024-25). 
               Population growth data from U.S. Census Bureau (2000-2010). 
-              Commute times are estimates and may vary based on traffic conditions.
+              Commute times are estimates and may vary.
             </p>
           </div>
         </section>
