@@ -1,0 +1,168 @@
+import { Helmet } from "react-helmet";
+
+export default function MiddletownDE() {
+  return (
+    <div className="space-y-16">
+      <Helmet>
+        <title>Middletown, DE Real Estate & Community Guide | Hensley’s Homes</title>
+        <meta
+          name="description"
+          content="Explore Middletown, DE with local Realtor Kevin Hensley. Learn about neighborhoods, schools, new construction communities, commutes, and what makes Middletown one of Delaware’s fastest-growing places to live."
+        />
+        <link rel="canonical" href="https://hensleyshomes.com/areas/middletown-de" />
+
+        {/* JSON-LD Schema */}
+        <script type="application/ld+json">
+          {`
+          {
+            "@context": "https://schema.org",
+            "@type": "Place",
+            "@id": "https://hensleyshomes.com/areas/middletown-de/#place",
+            "name": "Middletown, Delaware",
+            "description": "Community guide for Middletown, DE including neighborhoods, new construction, schools, commutes, and insights from local Realtor Kevin Hensley.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Middletown",
+              "addressRegion": "DE",
+              "postalCode": "19709",
+              "addressCountry": "US"
+            },
+            "areaServed": "Middletown, Delaware",
+            "url": "https://hensleyshomes.com/areas/middletown-de",
+            "author": {
+              "@type": "RealEstateAgent",
+              "@id": "https://hensleyshomes.com/#kevin-hensley"
+            }
+          }
+          `}
+        </script>
+      </Helmet>
+
+      {/* Hero Section */}
+      <section className="max-w-5xl mx-auto space-y-6">
+        <h1 className="text-4xl font-bold">Middletown, Delaware</h1>
+        <p className="text-xl leading-relaxed">
+          Welcome to Middletown — one of Delaware’s most desirable and fastest-growing communities.
+          Whether you're searching for a new construction home, ready to move up, or buying your
+          first place, Middletown offers a blend of comfort, convenience, and small-town charm.
+        </p>
+      </section>
+
+      {/* About */}
+      <section className="max-w-5xl mx-auto space-y-4">
+        <h2 className="text-3xl font-semibold">About Middletown</h2>
+        <p>
+          Over the last two decades, Middletown has experienced tremendous growth — new schools,
+          parks, restaurants, and entire neighborhoods — while maintaining the friendly,
+          community-driven feel residents love. From parades to festivals and everyday moments with
+          neighbors, Middletown is the kind of place where people feel connected and supported.
+        </p>
+      </section>
+
+      {/* Housing Overview */}
+      <section className="max-w-5xl mx-auto space-y-4">
+        <h2 className="text-3xl font-semibold">Housing Market Overview</h2>
+        <p>
+          Middletown offers a wide variety of homes including modern townhomes, amenity-rich planned
+          communities, golf course neighborhoods, and luxury properties. It’s also one of the most
+          active new construction markets in Delaware.
+        </p>
+        <ul className="list-disc ml-6">
+          <li>Starter Homes: $350,000–$425,000</li>
+          <li>Move-Up Homes: $475,000–$650,000</li>
+          <li>Luxury Homes: $700,000+</li>
+        </ul>
+      </section>
+
+      {/* New Construction */}
+      <section className="max-w-5xl mx-auto space-y-4">
+        <h2 className="text-3xl font-semibold">New Construction in Middletown</h2>
+        <p>
+          New construction is one of Middletown’s biggest attractions. Buyers can choose from modern
+          floor plans, energy-efficient designs, smart home upgrades, and community amenities like
+          pools, walking trails, and clubhouses. Several builders continue to expand the area with
+          fresh, thoughtfully planned developments.
+        </p>
+      </section>
+
+      {/* Neighborhoods */}
+      <section className="max-w-5xl mx-auto space-y-4">
+        <h2 className="text-3xl font-semibold">Neighborhood Highlights</h2>
+        <p>Popular neighborhoods in Middletown include:</p>
+        <ul className="list-disc ml-6">
+          <li>Parkside</li>
+          <li>The Estates at St. Anne’s</li>
+          <li>Bayberry North & Bayberry South</li>
+          <li>Hyetts Corner / Hyetts Crossing</li>
+          <li>The Town of Whitehall</li>
+          <li>Legacy at Odessa National</li>
+        </ul>
+      </section>
+
+      {/* Schools */}
+      <section className="max-w-5xl mx-auto space-y-4">
+        <h2 className="text-3xl font-semibold">Schools</h2>
+        <p>
+          Middletown is part of the highly rated Appoquinimink School District — one of Delaware’s
+          top-performing districts.
+        </p>
+        <ul className="list-disc ml-6">
+          <li>Middletown High School</li>
+          <li>Appoquinimink High School</li>
+          <li>Louis L. Redding Middle School</li>
+          <li>Silver Lake Elementary</li>
+          <li>Cedar Lane Elementary</li>
+        </ul>
+      </section>
+
+      {/* Things to Do */}
+      <section className="max-w-5xl mx-auto space-y-4">
+        <h2 className="text-3xl font-semibold">Things to Do</h2>
+        <ul className="list-disc ml-6">
+          <li>Historic Downtown Middletown / Main Street</li>
+          <li>Middletown Peach Festival (annual tradition)</li>
+          <li>Silver Lake Park</li>
+          <li>Local restaurants, breweries, and boutique shopping</li>
+          <li>Year-round community events and seasonal celebrations</li>
+        </ul>
+      </section>
+
+      {/* Commute */}
+      <section className="max-w-5xl mx-auto space-y-4">
+        <h2 className="text-3xl font-semibold">Commute & Accessibility</h2>
+        <p>
+          With immediate access to Route 1, Middletown provides quick travel options for work or
+          weekend plans.
+        </p>
+        <ul className="list-disc ml-6">
+          <li>Wilmington: 25–35 minutes</li>
+          <li>Newark: 20–30 minutes</li>
+          <li>Philadelphia Airport: 50–60 minutes</li>
+          <li>Dover: ~35 minutes</li>
+        </ul>
+      </section>
+
+      {/* Who It's For */}
+      <section className="max-w-5xl mx-auto space-y-4">
+        <h2 className="text-3xl font-semibold">Who Middletown is Best For</h2>
+        <p>
+          Middletown is ideal for families, commuters, first-time buyers, and anyone seeking modern
+          home options, strong schools, and a welcoming, active community.
+        </p>
+      </section>
+
+      {/* CTA */}
+      <section className="max-w-5xl mx-auto space-y-6">
+        <h2 className="text-3xl font-semibold">Ready to Explore Middletown?</h2>
+        <p>
+          Whether you're buying or selling, I'm here to help you navigate the Middletown market with
+          confidence and local expertise.
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <a href="/buy" className="btn-primary">See Homes</a>
+          <a href="/sell" className="btn-secondary">Get Home Value</a>
+        </div>
+      </section>
+    </div>
+  );
+}

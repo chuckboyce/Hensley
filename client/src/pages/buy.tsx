@@ -168,6 +168,47 @@ export default function Buy() {
           </div>
         </section>
 
+        {/* Service Areas */}
+        <section className="py-20 bg-secondary/50">
+          <div className="container mx-auto px-4 lg:px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Areas We Serve
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8">
+                Explore homes in Delaware's most desirable communities
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link href="/areas/middletown-de">
+                  <Button variant="outline" size="lg" data-testid="link-middletown-de">
+                    Middletown, DE
+                  </Button>
+                </Link>
+                <Link href="/areas/townsend-de">
+                  <Button variant="outline" size="lg">
+                    Townsend, DE
+                  </Button>
+                </Link>
+                <Link href="/areas/bear-de">
+                  <Button variant="outline" size="lg">
+                    Bear, DE
+                  </Button>
+                </Link>
+                <Link href="/areas/new-castle-de">
+                  <Button variant="outline" size="lg">
+                    New Castle, DE
+                  </Button>
+                </Link>
+                <Link href="/areas/hockessin-de">
+                  <Button variant="outline" size="lg">
+                    Hockessin, DE
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-20 bg-primary text-primary-foreground">
           <div className="container mx-auto px-4 lg:px-6 text-center">

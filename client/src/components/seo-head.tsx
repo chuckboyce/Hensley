@@ -26,8 +26,8 @@ const PAGE_META: Record<string, PageMeta> = {
     description: "Professional property management in Delaware and Maryland. Tenant screening, rent collection, maintenance coordination, and 24/7 support. Maximize your rental income with peace of mind."
   },
   '/areas/middletown-de': {
-    title: "Middletown DE Real Estate - Homes for Sale | Kevin Hensley's Homes",
-    description: "Discover Middletown, Delaware real estate. One of DE's fastest-growing communities with top schools, modern amenities, and easy access to major cities. Browse homes and schedule tours."
+    title: "Middletown, DE Real Estate & Community Guide | Hensley's Homes",
+    description: "Explore Middletown, DE with local Realtor Kevin Hensley. Learn about neighborhoods, schools, new construction communities, commutes, and what makes Middletown one of Delaware's fastest-growing places to live."
   },
   '/contact': {
     title: "Contact Us - Kevin Hensley's Homes | Delaware & Maryland Real Estate",
