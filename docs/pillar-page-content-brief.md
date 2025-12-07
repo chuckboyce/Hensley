@@ -65,16 +65,34 @@ Provide 3 price tiers relevant to the local market:
 
 ---
 
-### 6. Popular Neighborhoods
-List exactly 6 neighborhoods with type labels:
+### 6. Neighborhood Highlights & Resources
+Provide detailed information for 6-10 neighborhoods. Each neighborhood needs:
 
-| Neighborhood Name | Type |
-|-------------------|------|
-| Example: Parkside | New Construction |
-| Example: The Estates at St. Anne's | Luxury |
-| Example: Bayberry | Established |
+| Field | Description |
+|-------|-------------|
+| **Name** | Official neighborhood/community name |
+| **Type** | Category label (see options below) |
+| **Description** | 2-3 sentences covering: character, amenities, lifestyle, who it's ideal for |
+| **Link URL** | HOA website, community page, or builder site |
+| **Link Text** | Descriptive link label (e.g., "Parkside HOA / Community Site") |
 
-Type options: New Construction, Luxury, Established, Family-Friendly, Master Planned, Golf Course, Historic, Waterfront, etc.
+**Type options**: New Construction, Luxury, Established, Family-Friendly, Master Planned, Golf Course, Historic, Waterfront, 55+ Active Adult, etc.
+
+**Example format**:
+```
+Neighborhood: Parkside
+Type: New Construction
+Description: A beautifully planned community known for its tree-lined streets, large parks, and resort-style amenities including a clubhouse, pool, tennis courts, and walking paths. The neighborhood has a strong sense of community with regular events and a warm, welcoming feel.
+Link: https://parkisdemc.com
+Link Text: Parkside HOA / Community Site
+```
+
+**Guidelines for descriptions**:
+- Highlight unique features and amenities
+- Mention architectural style or home types if notable
+- Include lifestyle benefits (walkability, golf, low-maintenance, etc.)
+- Note proximity to schools, shopping, or Route 1 if relevant
+- Identify target buyer (families, active adults, luxury buyers, first-time buyers)
 
 ---
 

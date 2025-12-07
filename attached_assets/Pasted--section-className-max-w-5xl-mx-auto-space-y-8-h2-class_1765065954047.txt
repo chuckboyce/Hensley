@@ -1,0 +1,184 @@
+<section className="max-w-5xl mx-auto space-y-8">
+  <h2 className="text-3xl font-semibold">Neighborhood Highlights & Resources</h2>
+  <p>Explore some of Middletown’s most desirable communities, each offering its own character, amenities, and lifestyle benefits.</p>
+
+  {/* Parkside */}
+  <div>
+    <h3 className="text-2xl font-semibold">Parkside</h3>
+    <p>
+      Parkside is a beautifully planned community known for its tree-lined streets, large parks, and
+      resort-style amenities including a clubhouse, pool, tennis courts, and walking paths. The
+      neighborhood has a strong sense of community with regular events and a warm, welcoming feel.
+    </p>
+    <p>
+      <a
+        href="https://parkisdemc.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        Parkside HOA / Community Site
+      </a>
+    </p>
+  </div>
+
+  {/* Estates at St. Anne’s */}
+  <div>
+    <h3 className="text-2xl font-semibold">The Estates at St. Anne’s</h3>
+    <p>
+      An upscale golf course community featuring spacious homes, scenic fairway views, peaceful
+      streets, and easy access to Route 1. Residents enjoy elegant architecture, open landscapes, and
+      a quiet, refined atmosphere perfect for those who appreciate a more private setting.
+    </p>
+    <p>
+      <a
+        href="https://stannesgolf.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        St. Anne’s Golf Course & Community Info
+      </a>
+    </p>
+  </div>
+
+  {/* Bayberry North */}
+  <div>
+    <h3 className="text-2xl font-semibold">Bayberry North</h3>
+    <p>
+      Part of the award-winning Bayberry master-planned community, Bayberry North features beautiful
+      streetscapes, walking trails, lakes, and parks. The neighborhood is known for its welcoming
+      atmosphere and close proximity to future commercial amenities in the Bayberry Town Center.
+    </p>
+    <p>
+      <a
+        href="https://odhometeam.com/locations/middletown/bayberry-north/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        Bayberry North Community Overview
+      </a>
+    </p>
+  </div>
+
+  {/* Bayberry South (HOA) */}
+  <div>
+    <h3 className="text-2xl font-semibold">Bayberry South</h3>
+    <p>
+      Bayberry South includes modern homes, extensive open space, playgrounds, and beautiful community
+      design. The active HOA helps maintain high standards for the neighborhood, making it a popular
+      choice for families seeking a polished, well-kept community.
+    </p>
+    <p>
+      <a
+        href="https://www.vbsmc.net"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        Bayberry South HOA (VBSMC)
+      </a>
+    </p>
+  </div>
+
+  {/* Meadows at Bayberry */}
+  <div>
+    <h3 className="text-2xl font-semibold">Meadows at Bayberry</h3>
+    <p>
+      Located within the broader Bayberry master plan, The Meadows offers new construction homes,
+      attractive lot layouts, and access to trails, parks, and scenic community features. It’s ideal
+      for buyers seeking modern designs in a thoughtfully planned environment.
+    </p>
+    <p>
+      <a
+        href="https://www.blenheimhomes.com/new-home-communities/bayberry-middletown/meadows-at-bayberry/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        Meadows at Bayberry Community Page
+      </a>
+    </p>
+  </div>
+
+  {/* Overlook at Bayberry */}
+  <div>
+    <h3 className="text-2xl font-semibold">The Overlook at Bayberry</h3>
+    <p>
+      One of Bayberry’s newest neighborhoods, The Overlook offers modern home designs, scenic open
+      spaces, and convenient access to future retail, dining, and community amenities in the upcoming
+      Bayberry Town Center. A great fit for buyers wanting fresh, contemporary living.
+    </p>
+    <p>
+      <a
+        href="https://www.newhomesource.com/community/de/middletown/the-overlook-at-bayberry-by-blenheim-homes-l-p/207573"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        Overlook at Bayberry Overview
+      </a>
+    </p>
+  </div>
+
+  {/* Ponds at Bayberry (55+) */}
+  <div>
+    <h3 className="text-2xl font-semibold">The Ponds at Bayberry (55+ Active Adult)</h3>
+    <p>
+      The Ponds is Bayberry’s premier 55+ community, offering low-maintenance living with beautifully
+      designed homes, neighborhood gathering spaces, walking trails, and convenient access to parks
+      and open areas. A strong choice for active adults seeking comfort and community.
+    </p>
+    <p>
+      <a
+        href="https://www.55places.com/delaware/communities/the-ponds-at-bayberry"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        Ponds at Bayberry (55+) Community Info
+      </a>
+    </p>
+  </div>
+
+  {/* Town of Whitehall */}
+  <div>
+    <h3 className="text-2xl font-semibold">The Town of Whitehall</h3>
+    <p>
+      A beautifully designed “new urbanism” community blending homes, shops, parks, community events,
+      and walkability. Whitehall emphasizes front-porch living, architectural charm, and a connected
+      community feel. It’s one of Middletown’s most visually distinctive developments.
+    </p>
+    <p>
+      <a
+        href="https://whitehallde.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        The Town of Whitehall Official Site
+      </a>
+    </p>
+  </div>
+
+  {/* Hyetts Corner / Hyetts Crossing */}
+  <div>
+    <h3 className="text-2xl font-semibold">Hyetts Corner / Hyetts Crossing</h3>
+    <p>
+      These newer communities feature modern floor plans, energy-efficient homes, and convenient
+      access to Route 1. With attractive pricing and contemporary layouts, they appeal to buyers
+      looking for newer construction within the Middletown school district.
+    </p>
+    <p>
+      <a
+        href="https://www.lennar.com/new-homes/delaware/middletown/hyetts-crossing"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        Hyetts Crossing Community Info
+      </a>
+    </p>
+  </div>
+</section>
