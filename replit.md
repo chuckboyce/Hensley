@@ -205,13 +205,16 @@ This full-stack real estate website, "Kevin Hensley's Homes," is a responsive si
 - Chesapeake City, MD
 
 ## Missing Pillar Pages (Queued for Future Development)
-**Delaware (8 pages):**
+**Delaware (11 pages):**
 - Newark, DE
 - Pike Creek, DE
 - Glasgow, DE
 - St. Georges, DE
 - Clayton, DE
 - Dover, DE
+- New Castle County (regional page)
+- Sussex County (regional page)
+- Kent County (regional page)
 
 **Maryland (3 pages):**
 - Aberdeen, MD

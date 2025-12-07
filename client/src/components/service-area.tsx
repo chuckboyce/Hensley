@@ -7,7 +7,9 @@ import middletownImage from "@assets/Middletown_DE_1757012981537.jpg";
 import ConsultationModal from "@/components/consultation-modal";
 
 const areaLinks: Record<string, string> = {
-  "Middletown": "/areas/middletown-de"
+  "Middletown": "/areas/middletown-de",
+  "Smyrna": "/areas/smyrna-de",
+  "Bear": "/areas/bear-de"
 };
 
 export default function ServiceArea() {
