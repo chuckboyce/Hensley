@@ -95,13 +95,6 @@ export default function TownsendDE() {
       linkText: "Lennar Delaware Communities"
     },
     { 
-      name: "Pine Tree Estates", 
-      type: "Rural / Larger Lots",
-      description: "Pine Tree Estates provides spacious lots, quiet surroundings, and a more rural feel while still being close to Middletown amenities. Many homes offer large yards, detached garages, and wooded backdrops.",
-      link: "https://www.realtor.com/realestateandhomes-search/Townsend_DE",
-      linkText: "Townsend Community Listings Overview"
-    },
-    { 
       name: "Blackbird Landing", 
       type: "Country Living",
       description: "Nestled near Blackbird State Forest, this neighborhood offers a peaceful countryside setting with wildlife, nature trails, and large properties. Perfect for buyers who want a retreat-like environment with easy access to Route 13 and Route 1.",

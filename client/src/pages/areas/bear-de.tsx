@@ -100,13 +100,6 @@ export default function BearDE() {
       description: "A popular 55+ community offering low-maintenance homes, quiet streets, and proximity to shopping and medical services. Great for active adults seeking a comfortable, well-kept neighborhood.",
       link: "https://www.villageofredlioncreek.com",
       linkText: "Village of Red Lion Creek Community Site"
-    },
-    { 
-      name: "Wrangle Hill Estates", 
-      type: "Established / Family-Friendly",
-      description: "Offers traditional single-family homes with mature trees and easy access to Route 40. Attractive for buyers wanting a stable neighborhood close to parks, retail, and restaurants.",
-      link: "https://www.realtor.com/realestateandhomes-search/Bear_DE",
-      linkText: "Wrangle Hill Estates Overview"
     }
   ];
 

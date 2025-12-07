@@ -72,43 +72,7 @@ export default function HockessinDE() {
     };
   }, []);
 
-  const neighborhoods = [
-    { 
-      name: "North Star", 
-      type: "Luxury / Established",
-      description: "One of Hockessin's most sought-after areas with large custom homes, rolling hills, and wooded scenery. Ideal for buyers wanting privacy, beauty, and premium housing.",
-      link: "https://www.realtor.com/realestateandhomes-search/Hockessin_DE",
-      linkText: "North Star Listings"
-    },
-    { 
-      name: "Hockessin Hunt", 
-      type: "Family-Friendly",
-      description: "A popular neighborhood featuring traditional homes, walkable streets, and a friendly community atmosphere. Close to parks, shopping, and Route 41.",
-      link: "https://www.realtor.com/realestateandhomes-search/Hockessin_DE",
-      linkText: "Hockessin Hunt Overview"
-    },
-    { 
-      name: "Limestone Hills", 
-      type: "Established",
-      description: "Known for mature landscaping, well-maintained homes, and convenient access to Wilmington and Pike Creek. Highly desirable for commuters and families alike.",
-      link: "https://www.realtor.com/realestateandhomes-search/Hockessin_DE",
-      linkText: "Limestone Hills Community"
-    },
-    { 
-      name: "Wellington Hills", 
-      type: "Luxury / Scenic",
-      description: "Offers attractive custom homes on spacious lots with beautiful natural surroundings. Perfect for buyers who appreciate upscale living in a quiet setting.",
-      link: "https://www.realtor.com/realestateandhomes-search/Hockessin_DE",
-      linkText: "Wellington Hills Info"
-    },
-    { 
-      name: "West Riding", 
-      type: "Established / Family-Friendly",
-      description: "A long-standing community with classic homes, tree-lined streets, and proximity to schools and recreation. Known for its stability and charm.",
-      link: "https://www.realtor.com/realestateandhomes-search/Hockessin_DE",
-      linkText: "West Riding Overview"
-    }
-  ];
+  const neighborhoods = [];
 
   const highlights = [
     { icon: GraduationCap, title: "Top Schools", desc: "Red Clay District (#2 in DE)" },
