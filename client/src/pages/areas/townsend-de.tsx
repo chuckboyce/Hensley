@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, GraduationCap, Home, TreePine, Heart, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf, Building } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import townsendHero from "@assets/generated_images/townsend_de_aerial_rural_view.png";
 import type { Property } from "@shared/schema";
 
 const TOWNSEND_ZIP = "19734";
@@ -128,9 +129,14 @@ export default function TownsendDE() {
       <Header />
       
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center bg-gradient-to-br from-green-800 to-green-900">
-          <div className="absolute inset-0 bg-black/30" />
+        {/* Hero Section with Image */}
+        <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${townsendHero})` }}
+          >
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
           <div className="relative z-10 container mx-auto px-4 lg:px-6 text-center text-white">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-white/80 mb-2">
