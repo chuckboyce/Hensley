@@ -256,10 +256,12 @@ export default function SmyrnaDE() {
                         </div>
                       </div>
                       <p className="text-muted-foreground text-sm mb-4 flex-1">{hood.description}</p>
-                      <a href={hood.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
-                        <ExternalLink className="h-4 w-4" />
-                        {hood.linkText}
-                      </a>
+                      {hood.link && (
+                        <a href={hood.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
+                          <ExternalLink className="h-4 w-4" />
+                          {hood.linkText}
+                        </a>
+                      )}
                     </CardContent>
                   </Card>
                 ))}
