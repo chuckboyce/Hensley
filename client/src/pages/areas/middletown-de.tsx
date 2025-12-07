@@ -75,50 +75,29 @@ export default function MiddletownDE() {
   const neighborhoods = [
     { 
       name: "Parkside", 
-      type: "New Construction",
+      type: "Luxury",
       description: "A beautifully planned community known for its tree-lined streets, large parks, and resort-style amenities including a clubhouse, pool, tennis courts, and walking paths. The neighborhood has a strong sense of community with regular events and a warm, welcoming feel.",
       link: "https://parkisdemc.com",
       linkText: "Parkside HOA / Community Site"
     },
     { 
       name: "The Estates at St. Anne's", 
-      type: "Luxury",
+      type: "Golf Course",
       description: "An upscale golf course community featuring spacious homes, scenic fairway views, peaceful streets, and easy access to Route 1. Residents enjoy elegant architecture, open landscapes, and a quiet, refined atmosphere perfect for those who appreciate a more private setting.",
       link: "https://stannesgolf.com",
       linkText: "St. Anne's Golf Course & Community Info"
     },
     { 
-      name: "Bayberry North", 
+      name: "Bayberry", 
       type: "Master Planned",
-      description: "Part of the award-winning Bayberry master-planned community, Bayberry North features beautiful streetscapes, walking trails, lakes, and parks. The neighborhood is known for its welcoming atmosphere and close proximity to future commercial amenities in the Bayberry Town Center.",
-      link: "https://odhometeam.com/locations/middletown/bayberry-north/",
-      linkText: "Bayberry North Community Overview"
-    },
-    { 
-      name: "Bayberry South", 
-      type: "Established",
-      description: "Bayberry South includes modern homes, extensive open space, playgrounds, and beautiful community design. The active HOA helps maintain high standards for the neighborhood, making it a popular choice for families seeking a polished, well-kept community.",
+      description: "An award-winning master-planned community featuring multiple neighborhoods with beautiful streetscapes, walking trails, lakes, and parks. Bayberry offers a range of home styles from new construction to established sections, with the upcoming Bayberry Town Center bringing retail and dining options.",
       link: "https://www.vbsmc.net",
-      linkText: "Bayberry South HOA (VBSMC)"
-    },
-    { 
-      name: "Meadows at Bayberry", 
-      type: "New Construction",
-      description: "Located within the broader Bayberry master plan, The Meadows offers new construction homes, attractive lot layouts, and access to trails, parks, and scenic community features. It's ideal for buyers seeking modern designs in a thoughtfully planned environment.",
-      link: "https://www.blenheimhomes.com/new-home-communities/bayberry-middletown/meadows-at-bayberry/",
-      linkText: "Meadows at Bayberry Community Page"
-    },
-    { 
-      name: "The Overlook at Bayberry", 
-      type: "New Construction",
-      description: "One of Bayberry's newest neighborhoods, The Overlook offers modern home designs, scenic open spaces, and convenient access to future retail, dining, and community amenities in the upcoming Bayberry Town Center. A great fit for buyers wanting fresh, contemporary living.",
-      link: "https://www.newhomesource.com/community/de/middletown/the-overlook-at-bayberry-by-blenheim-homes-l-p/207573",
-      linkText: "Overlook at Bayberry Overview"
+      linkText: "Bayberry Community HOA"
     },
     { 
       name: "The Ponds at Bayberry", 
       type: "55+ Active Adult",
-      description: "The Ponds is Bayberry's premier 55+ community, offering low-maintenance living with beautifully designed homes, neighborhood gathering spaces, walking trails, and convenient access to parks and open areas. A strong choice for active adults seeking comfort and community.",
+      description: "Bayberry's premier 55+ community offering low-maintenance living with beautifully designed homes, neighborhood gathering spaces, walking trails, and convenient access to parks and open areas. A strong choice for active adults seeking comfort and community.",
       link: "https://www.55places.com/delaware/communities/the-ponds-at-bayberry",
       linkText: "Ponds at Bayberry (55+) Community Info"
     },
@@ -416,35 +395,33 @@ export default function MiddletownDE() {
               <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
                 Explore some of Middletown's most desirable communities, each offering its own character, amenities, and lifestyle benefits.
               </p>
-              <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 {neighborhoods.map((hood) => (
-                  <Card key={hood.name} className="hover:shadow-md transition-shadow">
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                          <MapPin className="h-6 w-6 text-primary" />
+                  <Card key={hood.name} className="hover:shadow-md transition-shadow h-full">
+                    <CardContent className="p-6 h-full flex flex-col">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <MapPin className="h-5 w-5 text-primary" />
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <h3 className="font-bold text-xl">{hood.name}</h3>
-                            <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
-                              {hood.type}
-                            </span>
-                          </div>
-                          <p className="text-muted-foreground mb-3">
-                            {hood.description}
-                          </p>
-                          <a 
-                            href={hood.link} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
-                          >
-                            <ExternalLink className="h-4 w-4" />
-                            {hood.linkText}
-                          </a>
+                        <div>
+                          <h3 className="font-bold text-lg">{hood.name}</h3>
+                          <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                            {hood.type}
+                          </span>
                         </div>
                       </div>
+                      <p className="text-muted-foreground text-sm mb-4 flex-1">
+                        {hood.description}
+                      </p>
+                      <a 
+                        href={hood.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                        {hood.linkText}
+                      </a>
                     </CardContent>
                   </Card>
                 ))}

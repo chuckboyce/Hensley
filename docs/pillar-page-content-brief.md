@@ -66,7 +66,7 @@ Provide 3 price tiers relevant to the local market:
 ---
 
 ### 6. Neighborhood Highlights & Resources
-Provide detailed information for 6-10 neighborhoods. Each neighborhood needs:
+Provide detailed information for exactly 6 neighborhoods (displayed in 2-column grid). Each neighborhood needs:
 
 | Field | Description |
 |-------|-------------|
