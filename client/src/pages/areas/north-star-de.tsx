@@ -328,6 +328,11 @@ export default function NorthStarDE() {
             <div className="grid grid-cols-2 md:grid-cols-1 gap-4 max-w-xl mx-auto">
               {[
                 { name: "Wilmington", href: "/areas/wilmington-de" }
+                // TODO: Add these when pages are created:
+                // { name: "Pike Creek", href: "/areas/pike-creek-de" },
+                // { name: "Hockessin", href: "/areas/hockessin-de" },
+                // { name: "Newark", href: "/areas/newark-de" },
+                // { name: "Greenville", href: "/areas/greenville-de" }
               ].map((area) => (
                 <Link key={area.name} href={area.href}>
                   <Card className="hover:border-primary transition-colors cursor-pointer h-full">

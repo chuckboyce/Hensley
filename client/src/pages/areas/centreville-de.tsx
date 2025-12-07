@@ -323,6 +323,10 @@ export default function CentrevilleDe() {
               {[
                 { name: "Wilmington", href: "/areas/wilmington-de" },
                 { name: "North Star", href: "/areas/north-star-de" }
+                // TODO: Add these when pages are created:
+                // { name: "Greenville", href: "/areas/greenville-de" },
+                // { name: "Hockessin", href: "/areas/hockessin-de" },
+                // { name: "Pike Creek", href: "/areas/pike-creek-de" }
               ].map((area) => (
                 <Link key={area.name} href={area.href}>
                   <Card className="hover:border-primary transition-colors cursor-pointer h-full">

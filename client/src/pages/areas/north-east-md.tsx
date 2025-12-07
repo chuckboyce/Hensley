@@ -328,6 +328,12 @@ export default function NorthEastMD() {
             <div className="grid grid-cols-2 md:grid-cols-1 gap-4 max-w-xl mx-auto">
               {[
                 { name: "Perryville, MD", href: "/areas/perryville-md" }
+                // TODO: Add these when pages are created:
+                // { name: "Elkton, MD", href: "/areas/elkton-md" },
+                // { name: "Charlestown, MD", href: "/areas/charlestown-md" },
+                // { name: "Chesapeake City, MD", href: "/areas/chesapeake-city-md" },
+                // { name: "Havre de Grace, MD", href: "/areas/havre-de-grace-md" },
+                // { name: "Newark, DE", href: "/areas/newark-de" }
               ].map((area) => (
                 <Link key={area.name} href={area.href}>
                   <Card className="hover:border-primary transition-colors cursor-pointer h-full">
