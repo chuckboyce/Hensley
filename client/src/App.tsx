@@ -63,6 +63,7 @@ import Buy from "@/pages/buy";
 import Sell from "@/pages/sell";
 import PropertyManagement from "@/pages/property-management";
 import MiddletownDE from "@/pages/areas/middletown-de";
+import TownsendDE from "@/pages/areas/townsend-de";
 import Contact from "@/pages/contact";
 import Properties from "@/pages/properties";
 import FairHousing from "@/pages/fair-housing";
@@ -103,6 +104,7 @@ function Router() {
         <Route path="/sell" component={Sell} />
         <Route path="/property-management" component={PropertyManagement} />
         <Route path="/areas/middletown-de" component={MiddletownDE} />
+        <Route path="/areas/townsend-de" component={TownsendDE} />
         <Route path="/contact" component={Contact} />
         <Route path="/properties" component={Properties} />
         <Route path="/fair-housing" component={FairHousing} />
