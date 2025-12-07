@@ -66,6 +66,9 @@ import MiddletownDE from "@/pages/areas/middletown-de";
 import TownsendDE from "@/pages/areas/townsend-de";
 import BearDE from "@/pages/areas/bear-de";
 import HockessinDE from "@/pages/areas/hockessin-de";
+import NewCastleDE from "@/pages/areas/new-castle-de";
+import OdessaDE from "@/pages/areas/odessa-de";
+import SmyrnaDE from "@/pages/areas/smyrna-de";
 import Contact from "@/pages/contact";
 import Properties from "@/pages/properties";
 import FairHousing from "@/pages/fair-housing";
@@ -109,6 +112,9 @@ function Router() {
         <Route path="/areas/townsend-de" component={TownsendDE} />
         <Route path="/areas/bear-de" component={BearDE} />
         <Route path="/areas/hockessin-de" component={HockessinDE} />
+        <Route path="/areas/new-castle-de" component={NewCastleDE} />
+        <Route path="/areas/odessa-de" component={OdessaDE} />
+        <Route path="/areas/smyrna-de" component={SmyrnaDE} />
         <Route path="/contact" component={Contact} />
         <Route path="/properties" component={Properties} />
         <Route path="/fair-housing" component={FairHousing} />

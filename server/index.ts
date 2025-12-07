@@ -116,6 +116,9 @@ Sitemap: ${baseUrl}/sitemap.xml`;
         { url: `${baseUrl}/areas/townsend-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/bear-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/hockessin-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/new-castle-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/odessa-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/smyrna-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/contact`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' }
       ];
 
