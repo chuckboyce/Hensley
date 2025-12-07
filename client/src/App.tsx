@@ -69,6 +69,9 @@ import HockessinDE from "@/pages/areas/hockessin-de";
 import NewCastleDE from "@/pages/areas/new-castle-de";
 import OdessaDE from "@/pages/areas/odessa-de";
 import SmyrnaDE from "@/pages/areas/smyrna-de";
+import ChesapeakeCityMD from "@/pages/areas/chesapeake-city-md";
+import ElktonMD from "@/pages/areas/elkton-md";
+import DelawareCityDE from "@/pages/areas/delaware-city-de";
 import Contact from "@/pages/contact";
 import Properties from "@/pages/properties";
 import FairHousing from "@/pages/fair-housing";
@@ -115,6 +118,9 @@ function Router() {
         <Route path="/areas/new-castle-de" component={NewCastleDE} />
         <Route path="/areas/odessa-de" component={OdessaDE} />
         <Route path="/areas/smyrna-de" component={SmyrnaDE} />
+        <Route path="/areas/chesapeake-city-md" component={ChesapeakeCityMD} />
+        <Route path="/areas/elkton-md" component={ElktonMD} />
+        <Route path="/areas/delaware-city-de" component={DelawareCityDE} />
         <Route path="/contact" component={Contact} />
         <Route path="/properties" component={Properties} />
         <Route path="/fair-housing" component={FairHousing} />
