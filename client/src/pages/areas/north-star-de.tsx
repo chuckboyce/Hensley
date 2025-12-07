@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
@@ -314,6 +315,33 @@ export default function NorthStarDE() {
                   </Card>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16">
+          <div className="container mx-auto px-4 lg:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Nearby Areas</h2>
+              <p className="text-muted-foreground max-w-xl mx-auto">Discover neighboring communities</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+              {[
+                { name: "Pike Creek", href: "/areas/pike-creek-de" },
+                { name: "Hockessin", href: "/areas/hockessin-de" },
+                { name: "Newark", href: "/areas/newark-de" },
+                { name: "Greenville", href: "/areas/greenville-de" },
+                { name: "Wilmington", href: "/areas/wilmington-de" }
+              ].map((area) => (
+                <Link key={area.name} href={area.href}>
+                  <Card className="hover:border-primary transition-colors cursor-pointer h-full">
+                    <CardContent className="p-4 text-center">
+                      <MapPin className="h-6 w-6 text-primary mx-auto mb-2" />
+                      <span className="font-medium text-sm">{area.name}</span>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
