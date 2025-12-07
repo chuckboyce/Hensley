@@ -107,13 +107,6 @@ export default function TownsendDE() {
       description: "Nestled near Blackbird State Forest, this neighborhood offers a peaceful countryside setting with wildlife, nature trails, and large properties. Perfect for buyers who want a retreat-like environment with easy access to Route 13 and Route 1.",
       link: "https://www.destateparks.com/Explore/Blackbird",
       linkText: "Blackbird Forest & Nature Area Info"
-    },
-    { 
-      name: "Spring Oaks", 
-      type: "Family-Friendly",
-      description: "Spring Oaks features modern home designs, quiet streets, and convenient access to schools and Middletown shopping corridors. Its clean layout and inviting community atmosphere make it a popular choice for families.",
-      link: "https://www.newhomesource.com",
-      linkText: "Spring Oaks Community Overview"
     }
   ];
 

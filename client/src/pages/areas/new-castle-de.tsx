@@ -103,13 +103,6 @@ export default function NewCastleDE() {
       description: "Centrally located with a mix of home styles and quick access to Route 9 and downtown New Castle. Attractive for commuters wanting affordability and convenience.",
       link: "https://www.realtor.com/realestateandhomes-search/New-Castle_DE",
       linkText: "Washington Park Overview"
-    },
-    { 
-      name: "Rivercrest", 
-      type: "Newer Construction",
-      description: "A modern community featuring contemporary floor plans and attractive curb appeal. Ideal for buyers seeking a newer home close to the river and major highways.",
-      link: "https://www.newhomesource.com",
-      linkText: "Rivercrest Community Info"
     }
   ];
 

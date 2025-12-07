@@ -91,13 +91,6 @@ export default function OdessaDE() {
       linkText: "Fieldsboro Community Info"
     },
     { 
-      name: "Silver Maple Farm", 
-      type: "Newer Construction",
-      description: "A modern neighborhood near Middletown offering spacious homes, open layouts, and walkable streets. Great for families seeking newer development within minutes of Odessa.",
-      link: "https://www.newhomesource.com",
-      linkText: "Silver Maple Farm Overview"
-    },
-    { 
       name: "Cantwell Ridge", 
       type: "Established / Family-Friendly",
       description: "A quiet, well-maintained community offering traditional homes, tree-lined streets, and proximity to Appoquinimink schools.",

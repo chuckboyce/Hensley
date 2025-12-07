@@ -107,13 +107,6 @@ export default function HockessinDE() {
       description: "A long-standing community with classic homes, tree-lined streets, and proximity to schools and recreation. Known for its stability and charm.",
       link: "https://www.realtor.com/realestateandhomes-search/Hockessin_DE",
       linkText: "West Riding Overview"
-    },
-    { 
-      name: "Dennison Ridge", 
-      type: "Newer Construction",
-      description: "A newer community with modern homes, open layouts, and attractive amenities. Appeals to buyers wanting an updated home close to major routes.",
-      link: "https://www.newhomesource.com",
-      linkText: "Dennison Ridge Community Info"
     }
   ];
 

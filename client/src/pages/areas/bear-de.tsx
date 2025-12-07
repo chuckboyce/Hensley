@@ -107,13 +107,6 @@ export default function BearDE() {
       description: "Offers traditional single-family homes with mature trees and easy access to Route 40. Attractive for buyers wanting a stable neighborhood close to parks, retail, and restaurants.",
       link: "https://www.realtor.com/realestateandhomes-search/Bear_DE",
       linkText: "Wrangle Hill Estates Overview"
-    },
-    { 
-      name: "Clairborne", 
-      type: "Newer Construction",
-      description: "A growing community with modern homes, open layouts, and walkable streets. Clairborne is appealing for buyers who want a contemporary feel in a convenient location near Route 7 and 40.",
-      link: "https://www.newhomesource.com",
-      linkText: "Clairborne Community Info"
     }
   ];
 

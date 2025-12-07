@@ -84,13 +84,6 @@ export default function SmyrnaDE() {
       linkText: "Garrisons Lake Green Overview"
     },
     { 
-      name: "Brenford Station", 
-      type: "Newer Construction",
-      description: "A modern community featuring attractive single-family homes, sidewalks, and a neighborhood feel. Appeals to buyers wanting newer construction in a convenient location.",
-      link: "https://www.newhomesource.com",
-      linkText: "Brenford Station Community Info"
-    },
-    { 
       name: "Glenwood", 
       type: "Established",
       description: "Offers well-maintained homes, quiet streets, and a friendly atmosphere. Close to local schools and town amenities.",
