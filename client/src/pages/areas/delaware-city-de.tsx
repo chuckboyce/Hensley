@@ -5,6 +5,7 @@ import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath,
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import delawareCityHero from "@assets/generated_images/delaware_city_waterfront_and_historic_district.png";
 import type { Property } from "@shared/schema";
 
 const DELAWARE_CITY_ZIP = "19706";
@@ -120,17 +121,26 @@ export default function DelawareCityDE() {
     <>
       <Header />
       <main>
-        {/* Hero Section */}
-        <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800">
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="relative container mx-auto px-4 text-center text-white">
-            <div className="text-sm uppercase tracking-widest mb-4 opacity-90">Charming Riverfront Community</div>
-            <h1 className="font-serif text-6xl md:text-8xl font-bold mb-6 uppercase" style={{ fontVariant: 'small-caps' }}>
-              <span>Delaware City</span> <span className="uppercase tracking-wider">DE</span>
-            </h1>
-            <p className="text-xl md:text-2xl max-w-2xl mx-auto text-gray-200">
-              Historic riverfront living with scenic beauty and walkable charm
-            </p>
+        {/* Hero Section with Image */}
+        <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${delawareCityHero})` }}
+          >
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+          <div className="relative z-10 container mx-auto px-4 text-center text-white">
+            <div>
+              <p className="text-sm uppercase tracking-[0.3em] text-white/80 mb-2">
+                Discover
+              </p>
+              <p className="text-5xl md:text-7xl font-bold tracking-wide font-serif" style={{ fontVariant: 'small-caps' }}>
+                Delaware City
+              </p>
+              <p className="text-xl md:text-2xl font-bold tracking-[0.2em] mt-2 text-white/90 font-serif">
+                DELAWARE
+              </p>
+            </div>
           </div>
         </section>
 

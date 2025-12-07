@@ -5,6 +5,7 @@ import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath,
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import chesapeakeCityHero from "@assets/generated_images/chesapeake_city_waterfront_aerial_view.png";
 import type { Property } from "@shared/schema";
 
 const CHESAPEAKE_CITY_ZIP = "21915";
@@ -118,17 +119,26 @@ export default function ChesapeakeCityMD() {
     <>
       <Header />
       <main>
-        {/* Hero Section */}
-        <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800">
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="relative container mx-auto px-4 text-center text-white">
-            <div className="text-sm uppercase tracking-widest mb-4 opacity-90">Waterfront Living</div>
-            <h1 className="font-serif text-6xl md:text-8xl font-bold mb-6 uppercase" style={{ fontVariant: 'small-caps' }}>
-              <span>Chesapeake City</span> <span className="uppercase tracking-wider">MD</span>
-            </h1>
-            <p className="text-xl md:text-2xl max-w-2xl mx-auto text-gray-200">
-              Picturesque waterfront charm meets coastal living along the Chesapeake & Delaware Canal
-            </p>
+        {/* Hero Section with Image */}
+        <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${chesapeakeCityHero})` }}
+          >
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+          <div className="relative z-10 container mx-auto px-4 text-center text-white">
+            <div>
+              <p className="text-sm uppercase tracking-[0.3em] text-white/80 mb-2">
+                Discover
+              </p>
+              <p className="text-5xl md:text-7xl font-bold tracking-wide font-serif" style={{ fontVariant: 'small-caps' }}>
+                Chesapeake City
+              </p>
+              <p className="text-xl md:text-2xl font-bold tracking-[0.2em] mt-2 text-white/90 font-serif">
+                MARYLAND
+              </p>
+            </div>
           </div>
         </section>
 
