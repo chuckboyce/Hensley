@@ -84,6 +84,16 @@ export default function OdessaDE() {
       linkText: "Odessa National Golf Club"
     },
     { 
+      name: "Fieldsboro", 
+      type: "Rural / Scenic",
+      description: "Located near Odessa's outskirts, Fieldsboro provides open land, quiet surroundings, and larger lots. Appeals to buyers who want country living with proximity to major routes."
+    },
+    { 
+      name: "Cantwell Ridge", 
+      type: "Established / Family-Friendly",
+      description: "A quiet, well-maintained community offering traditional homes, tree-lined streets, and proximity to Appoquinimink schools."
+    },
+    { 
       name: "Bay View Road Area", 
       type: "Rural / Waterfront Access",
       description: "Known for scenic landscapes, water access points along the Appoquinimink River, and homes with larger lots. A great fit for buyers who value privacy and nature.",

@@ -79,23 +79,17 @@ export default function SmyrnaDE() {
     { 
       name: "Garrisons Lake Green", 
       type: "Established / Family-Friendly",
-      description: "Popular neighborhood near Garrisons Lake Golf Course, offering traditional homes, mature trees, and convenient access to Route 13. Great for families and commuters alike.",
-      link: "https://www.realtor.com/realestateandhomes-search/Smyrna_DE",
-      linkText: "Garrisons Lake Green Overview"
+      description: "Popular neighborhood near Garrisons Lake Golf Course, offering traditional homes, mature trees, and convenient access to Route 13. Great for families and commuters alike."
     },
     { 
       name: "Glenwood", 
       type: "Established",
-      description: "Offers well-maintained homes, quiet streets, and a friendly atmosphere. Close to local schools and town amenities.",
-      link: "https://www.realtor.com/realestateandhomes-search/Smyrna_DE",
-      linkText: "Glenwood Listings"
+      description: "Offers well-maintained homes, quiet streets, and a friendly atmosphere. Close to local schools and town amenities."
     },
     { 
       name: "Cambria Village", 
       type: "Townhome / Starter-Friendly",
-      description: "Provides affordable townhome living with easy access to Route 13 and downtown Smyrna. Attractive for first-time buyers.",
-      link: "https://www.realtor.com/realestateandhomes-search/Smyrna_DE",
-      linkText: "Cambria Village Overview"
+      description: "Provides affordable townhome living with easy access to Route 13 and downtown Smyrna. Attractive for first-time buyers."
     },
     { 
       name: "Garrisons Lake", 

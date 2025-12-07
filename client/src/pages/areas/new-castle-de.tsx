@@ -75,6 +75,26 @@ export default function NewCastleDE() {
       description: "Known for cobblestone streets, 18th-century architecture, and stunning riverfront views. A rare opportunity to live in one of the most historically preserved areas in the Mid-Atlantic.",
       link: "https://newcastlecity.delaware.gov",
       linkText: "Historic New Castle Information"
+    },
+    { 
+      name: "Jefferson Farms", 
+      type: "Established / Family-Friendly",
+      description: "A well-known community featuring traditional homes, tree-lined streets, and easy access to Route 13 and Route 9. Popular among families for its affordability and central location."
+    },
+    { 
+      name: "Swanwyck", 
+      type: "Established",
+      description: "One of New Castle's classic neighborhoods with mid-century homes and large yards. Close to shopping, schools, and major highways, it offers convenience and value for buyers."
+    },
+    { 
+      name: "Llangollen", 
+      type: "Family-Friendly",
+      description: "Offers spacious homes, mature trees, and a suburban feel while remaining close to employment hubs in Wilmington and Newark."
+    },
+    { 
+      name: "Washington Park", 
+      type: "Established",
+      description: "Centrally located with a mix of home styles and quick access to Route 9 and downtown New Castle. Attractive for commuters wanting affordability and convenience."
     }
   ];
 
