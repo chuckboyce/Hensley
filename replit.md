@@ -1,231 +1,106 @@
 # Overview
 
-This is a full-stack real estate website application for "Kevin Hensley's Homes" - a local real estate agent and property management business. The application features a modern, responsive single-page website that showcases services, properties, testimonials, and includes a contact form for lead generation. The site supports both property sales and rental listings with visual indicators. Built with React and TypeScript on the frontend, Express.js on the backend, and designed with a clean, professional aesthetic using shadcn/ui components.
-
-# Recent Changes
-
-**December 7, 2025**: Four New Pillar Pages + Spelling Redirect
-
-*Client Summary: Added four new area pages (Centreville DE, North Star DE, Perryville MD, and North East MD) with AI-generated hero images. Also set up a spelling redirect from "Centerville" (common misspelling) to the correct "Centreville" to capture search traffic.*
-
-- Created Centreville, DE luxury estate pillar page at /areas/centreville-de
-- Created North Star, DE upscale suburban pillar page at /areas/north-star-de
-- Created Perryville, MD waterfront commuter-friendly page at /areas/perryville-md
-- Created North East, MD vibrant waterfront page at /areas/north-east-md
-- Set up 301 redirect from /areas/centerville-de to /areas/centreville-de (captures misspelled searches)
-- AI-generated hero images for all four pages with appropriate golden hour lighting
-- All neighborhood links filtered to exclude forbidden domains
-
-**December 7, 2025**: Townsend, DE Pillar Page & Image Generation Workflow
-
-*Client Summary: Added a new community page for Townsend, Delaware with the same professional format as the Middletown page. Also established a workflow for automatically generating hero images when creating new area pages.*
-
-- Created Townsend, DE pillar page at /areas/townsend-de
-- AI-generated hero image showing Townsend's rural-suburban character
-- Updated pillar page content brief with image generation instructions
-- Added implementation workflow documentation for future area pages
-
-**December 6, 2025**: AI-Enhanced Search Engine Visibility
-
-*Client Summary: Your property listings now include AI-written descriptions optimized for Google and AI search engines. This helps your listings appear in more search results and provides better answers when people ask AI assistants about homes in your area.*
-
-- Each property listing now has an AI-generated summary highlighting key selling points
-- Added structured data that helps Google understand your listings as real estate properties
-- Summaries update automatically when new listings are added
-- Admin page now shows which listings have AI summaries and when they were created
-- Added "Generate AI Summaries" button in admin panel to refresh descriptions anytime
-
-**December 5, 2025**: Automated Listing Sync
-
-*Client Summary: Your website now automatically stays in sync with your RE/MAX listings. New properties appear on your site within minutes, and sold/expired listings are automatically removed - no manual updates needed.*
-
-- Website receives automatic updates whenever your RE/MAX listings change
-- New listings appear on the site automatically with photos and details
-- Sold or expired listings are automatically marked as inactive
-- Rental properties are detected and labeled automatically
-- Admin page shows listing status including any expired properties
-
-**November 26, 2025**: Mobile Performance Optimization
-
-*Client Summary: Your website now loads faster on phones and tablets. Images load more efficiently based on screen size, and the site feels snappier overall - especially important since most home buyers browse on mobile.*
-
-- Optimized image loading for different screen sizes (mobile, tablet, desktop)
-- Improved font loading so text appears faster
-- Images below the fold now load only when needed
-- Reduced overall page weight for faster mobile performance
-
-**November 11, 2025**: Hero Image Optimization
-
-*Client Summary: The main photo on your homepage now loads 85-90% faster, especially on mobile devices. This improves the first impression visitors get when they land on your site.*
-
-- Optimized the main homepage image from 825KB down to ~80KB on mobile
-- Created multiple sizes for different devices (phone, tablet, desktop, retina)
-- Images now load in modern formats that are smaller and faster
-- Removed the GoHighLevel chat widget as requested
-
-**November 10, 2025**: Website Speed Improvements
-
-*Client Summary: Your website now meets Google's "Core Web Vitals" standards for speed and responsiveness. This helps with search rankings and gives visitors a better experience.*
-
-- Homepage loads faster with optimized image loading
-- Admin pages load separately so they don't slow down the public site
-- Set up proper caching so returning visitors see pages instantly
-- Optimized for Google's speed metrics (LCP, CLS, INP)
-
-**November 10, 2025**: Dedicated Service Pages
-
-*Client Summary: Your website now has separate pages for each service (buying, selling, property management) and for specific areas like Middletown, DE. This helps people find you when searching for these specific services.*
-
-- Created dedicated pages: /buy, /sell, /property-management
-- Created location page: /areas/middletown-de
-- Updated navigation to link directly to these new pages
-- Each page has its own search-optimized content
-
-**November 10, 2025**: SEO URL Improvements
-
-*Client Summary: Cleaned up your website's URLs so Google can better understand and index your pages. This helps prevent duplicate content issues that could hurt search rankings.*
-
-- All pages now have consistent, clean URLs
-- Each page has proper titles and descriptions for search engines
-- Social media sharing now shows correct previews
-
-**November 10, 2025**: Search Engine Notification
-
-*Client Summary: Added a button in your admin panel to notify Google and Bing whenever you make changes to your site. This helps search engines discover your updates faster.*
-
-- "Ping Search Engines" button in admin panel
-- Notifies both Google and Bing of sitemap updates
-- Shows confirmation of successful notifications
-
-**November 10, 2025**: Property Editing
-
-*Client Summary: You can now edit property details directly from the admin panel without needing to re-enter everything. Makes quick updates much easier.*
-
-- Edit button on each listing in admin panel
-- Update photos and mark properties as rentals
-- Changes save immediately
-
-**November 10, 2025**: Rental Property Support
-
-*Client Summary: Your website now supports rental listings alongside sales. Rentals are clearly marked with a blue "FOR RENT" badge so visitors can easily tell them apart.*
-
-- Properties can be marked as rentals in admin panel
-- Blue "FOR RENT" badge displays on rental listings
-- Rentals show in the same property grid as sales
+This full-stack real estate website, "Kevin Hensley's Homes," is a responsive single-page application built for a local real estate agent. It showcases services, property listings (sales and rentals), testimonials, and includes a contact form for lead generation. The application features a modern, clean design, leveraging React, TypeScript, Express.js, and shadcn/ui. Its purpose is to enhance online presence, attract potential clients, and streamline property showcasing. The site dynamically generates and optimizes content, including AI-written property descriptions and community pillar pages, to improve search engine visibility and user engagement.
 
 # User Preferences
 
 - **Communication Style**: Simple, everyday language. Avoid technical jargon.
 - **Recent Changes Format**: Always include a client summary in italics that's suitable for invoices or status reports. Focus on results and benefits, not technical details.
 - **Documentation Updates**: Update the Recent Changes section in this file at each checkpoint.
-- **Navigation Behavior**: Always scroll to top of page on route change, unless landing on a specific anchor (hash link). This is implemented via the `ScrollToTop` component in `App.tsx`.
-
-# Pillar Page Forbidden Domains
-
-The following domains have been excluded from all pillar page neighborhood sections (communities without links simply don't display the external link icon):
-- **realtor.com** - Too generic, not specialized for local communities
-- **newhomesource.com** - Generic new construction (excluded to reduce noise)
-- **destateparks.com** - Not applicable for all states (MD pages removed)
-- **55places.com** - Not relevant to target market
-
-When adding future pillar pages, automatically filter out these domains from neighborhood link sections.
+- **Navigation Behavior**: Always scroll to top of page on route change, unless landing on a specific anchor (hash link).
 
 # System Architecture
 
 ## Frontend Architecture
-- **Framework**: React 18 with TypeScript in a single-page application (SPA) structure
-- **Routing**: Wouter for lightweight client-side routing
-- **Build Tool**: Vite for fast development and optimized production builds
-- **Styling**: Tailwind CSS with custom CSS variables for theming
-- **Component Library**: shadcn/ui components built on Radix UI primitives
-- **State Management**: TanStack Query (React Query) for server state management
+- **Framework**: React 18 with TypeScript (SPA)
+- **Routing**: Wouter
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS with custom CSS variables
+- **Component Library**: shadcn/ui (built on Radix UI)
+- **State Management**: TanStack Query (React Query) for server state
 - **Form Handling**: React Hook Form with Zod validation
+- **UI/UX Decisions**: Clean, professional aesthetic; responsive design; optimized image loading for various screen sizes; efficient font loading; lazy loading for images below the fold.
 
 ## Backend Architecture
-- **Runtime**: Node.js with Express.js web framework
-- **Language**: TypeScript with ES modules
+- **Runtime**: Node.js with Express.js
+- **Language**: TypeScript (ES modules)
 - **API Design**: RESTful API with JSON responses
-- **Request Handling**: Express middleware for JSON parsing, URL encoding, and request logging
-- **Error Handling**: Centralized error handling middleware with structured JSON responses
+- **Request Handling**: Express middleware (JSON parsing, URL encoding, logging)
+- **Error Handling**: Centralized middleware with structured JSON responses
 
 ## Data Storage Solutions
-- **Primary Database**: PostgreSQL with Drizzle ORM for type-safe database operations
+- **Primary Database**: PostgreSQL with Drizzle ORM
 - **Database Provider**: Neon Database (serverless PostgreSQL)
-- **Development Storage**: In-memory storage implementation for rapid development
-- **Schema Management**: Drizzle Kit for database migrations and schema changes
-- **Data Validation**: Zod schemas for runtime type checking and validation
+- **Development Storage**: In-memory for rapid development
+- **Schema Management**: Drizzle Kit for migrations
+- **Data Validation**: Zod schemas
 
 ## Authentication and Authorization
-- **Current Implementation**: Basic contact form submission without authentication
-- **Session Management**: Connect-pg-simple for PostgreSQL session storage (configured but not actively used)
-- **Security**: CORS enabled, request logging, and input validation
+- **Current Implementation**: Basic contact form (no user authentication)
+- **Session Management**: connect-pg-simple for PostgreSQL session storage (configured)
 
 ## Development and Deployment
-- **Development Server**: Vite dev server with hot module replacement (HMR)
-- **Production Build**: Vite for frontend, esbuild for backend bundling
-- **Static Assets**: Served through Express with Vite middleware in development
-- **Environment Configuration**: Environment variables for database connection and feature flags
+- **Development Server**: Vite with HMR
+- **Production Build**: Vite (frontend), esbuild (backend)
+- **Environment Configuration**: Environment variables
 
 ## Key Design Patterns
-- **Separation of Concerns**: Clear separation between client, server, and shared code
-- **Type Safety**: End-to-end TypeScript with shared types between frontend and backend
-- **Component Composition**: Reusable UI components with consistent design system
+- **Separation of Concerns**: Clear client/server/shared code
+- **Type Safety**: End-to-end TypeScript
+- **Component Composition**: Reusable UI components
 - **Server-Side Rendering**: Static HTML with client-side hydration
-- **Progressive Enhancement**: Graceful degradation for users without JavaScript
+- **Progressive Enhancement**: Graceful degradation
 
 ## SEO and Discoverability
-- **Structured Data**: JSON-LD schemas for Organization, RealEstateAgent, WebSite, ProfessionalService, and FAQPage
-- **Meta Tags**: Comprehensive title, description, keywords, and social media tags (Open Graph, Twitter Cards)
-- **Robots.txt**: Dynamic robots.txt at `/robots.txt` with environment-aware configuration
-  - Allows all search engines to crawl the entire site
-  - Explicitly disallows /admin directory to prevent indexing of admin pages
-  - Points to sitemap.xml for efficient discovery
-  - Uses dynamic host detection for multi-environment support
-- **Sitemap.xml**: Auto-generated XML sitemap at `/sitemap.xml` for search engine crawlers
-  - Includes only public pages (home, services, properties, testimonials, contact)
-  - Excludes all admin pages for security and SEO best practices
-  - Updates automatically with current date
-  - Ready for expansion with future blog posts and property listings
-- **Search Engine Notification**: Manual ping functionality to notify Google and Bing of sitemap updates
-- **Google Analytics**: Tracking configured with ID G-W0TB4Y83E8
-- **Canonical URLs**: Proper canonical tags to prevent duplicate content issues
+- **Structured Data**: JSON-LD schemas (Organization, RealEstateAgent, WebSite, ProfessionalService, FAQPage)
+- **Meta Tags**: Comprehensive titles, descriptions, keywords, Open Graph, Twitter Cards
+- **Robots.txt**: Dynamic, environment-aware configuration (disallows `/admin`, points to sitemap)
+- **Sitemap.xml**: Auto-generated XML sitemap for public pages
+- **Search Engine Notification**: Manual ping functionality for Google and Bing
+- **Google Analytics**: Tracking via ID G-W0TB4Y83E8
+- **Canonical URLs**: Proper canonical tags
+
+## Feature Specifications
+- **Property Listings**: Supports both sales and rental listings with visual indicators.
+- **AI-Enhanced Content**: AI-generated property summaries and hero images for pillar pages, optimized for search engines.
+- **Automated Listing Sync**: Integration with RE/MAX for automatic updates of property listings.
+- **Pillar Pages**: Hierarchical community pages (e.g., Wilmington, DE and its sub-neighborhoods) with AI-generated images and filtered external links.
+- **Admin Panel**: Functionality to edit property details, generate AI summaries, and ping search engines.
+- **Performance Optimization**: Mobile-first approach with optimized image loading, font loading, and Core Web Vitals adherence.
+- **Dedicated Service Pages**: Separate pages for buying, selling, property management, and specific locations.
 
 # External Dependencies
 
 ## Database and Storage
-- **Neon Database**: Serverless PostgreSQL database hosting
-- **Drizzle ORM**: Type-safe database operations and schema management
-- **connect-pg-simple**: PostgreSQL session store for Express sessions
+- **Neon Database**: Serverless PostgreSQL hosting
+- **Drizzle ORM**: Type-safe database operations
+- **connect-pg-simple**: PostgreSQL session store
 
 ## UI and Styling
-- **Radix UI**: Accessible, unstyled UI primitives for complex components
-- **Tailwind CSS**: Utility-first CSS framework for responsive design
-- **Lucide React**: Icon library for consistent iconography
-- **Google Fonts**: Web fonts (Inter, DM Sans, Fira Code, Geist Mono, Architects Daughter)
+- **Radix UI**: Accessible UI primitives
+- **Tailwind CSS**: Utility-first CSS framework
+- **Lucide React**: Icon library
+- **Google Fonts**: Inter, DM Sans, Fira Code, Geist Mono, Architects Daughter
 
 ## Development Tools
-- **Vite**: Frontend build tool and development server
-- **esbuild**: Fast JavaScript/TypeScript bundler for backend
-- **PostCSS**: CSS processing with Tailwind CSS and Autoprefixer
-- **TypeScript**: Static type checking and compilation
+- **Vite**: Frontend build tool
+- **esbuild**: Backend bundler
+- **PostCSS**: CSS processing
+- **TypeScript**: Static type checking
 
 ## Third-Party Services
-- **Unsplash**: External image hosting for property photos and stock imagery
-- **Replit**: Development environment integration with custom plugins and banners
-- **GoHighLevel (GHL)**: CRM integration for lead capture and automated follow-up
-  - **SDK**: Uses official `@gohighlevel/api-client` npm package for all API interactions
-  - **Authentication**: Private integration token via `GHL_SECRET` environment variable
-  - **Custom Fields**: 10 compliance tracking fields (all prefixed with `contact.`):
-    - `contact.method`, `contact.textshown`, `contact.timetamp` (note typo in GHL), `contact.ip`
-    - `contact.useragent`, `contact.pageurl`, `contact.referrer`
-    - `contact.consentsms`, `contact.consentemail`, `contact.evidenceid`
-  - **Important**: Custom field names MUST include the `contact.` prefix when sending to GHL API
-  - **Custom Field IDs**: Field definitions are fetched dynamically to map field keys to their unique IDs
-  - **Fallback**: If custom fields aren't configured, contacts are created without them (metadata saved locally)
+- **Unsplash**: External image hosting
+- **Replit**: Development environment integration
+- **GoHighLevel (GHL)**: CRM integration for lead capture
+  - SDK: `@gohighlevel/api-client`
+  - Authentication: `GHL_SECRET` environment variable
+  - Custom Fields: 10 compliance tracking fields (prefixed with `contact.`)
+  - Custom Field IDs: Fetched dynamically
+  - Fallback: Contacts created without custom fields if not configured
 
 ## Runtime Libraries
-- **TanStack Query**: Server state management and caching
-- **React Hook Form**: Form state management and validation
-- **Zod**: Runtime type validation and schema definition
-- **date-fns**: Date manipulation and formatting utilities
+- **TanStack Query**: Server state management
+- **React Hook Form**: Form state management
+- **Zod**: Runtime type validation
+- **date-fns**: Date manipulation
 - **clsx/twMerge**: Conditional CSS class management

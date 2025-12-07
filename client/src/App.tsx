@@ -77,6 +77,11 @@ import CentrevilleMisspelled from "@/pages/areas/centerville-de";
 import NorthStarDE from "@/pages/areas/north-star-de";
 import PerryvilleMD from "@/pages/areas/perryville-md";
 import NorthEastMD from "@/pages/areas/north-east-md";
+import WilmingtonDE from "@/pages/areas/wilmington-de";
+import NorthWilmingtonDE from "@/pages/areas/wilmington-de/north-wilmington";
+import HighlandsDE from "@/pages/areas/wilmington-de/highlands";
+import FortyAcresDE from "@/pages/areas/wilmington-de/forty-acres";
+import TrolleySquareDE from "@/pages/areas/wilmington-de/trolley-square";
 import Contact from "@/pages/contact";
 import Properties from "@/pages/properties";
 import FairHousing from "@/pages/fair-housing";
@@ -131,6 +136,11 @@ function Router() {
         <Route path="/areas/north-star-de" component={NorthStarDE} />
         <Route path="/areas/perryville-md" component={PerryvilleMD} />
         <Route path="/areas/north-east-md" component={NorthEastMD} />
+        <Route path="/areas/wilmington-de" component={WilmingtonDE} />
+        <Route path="/areas/wilmington-de/north-wilmington" component={NorthWilmingtonDE} />
+        <Route path="/areas/wilmington-de/highlands" component={HighlandsDE} />
+        <Route path="/areas/wilmington-de/forty-acres" component={FortyAcresDE} />
+        <Route path="/areas/wilmington-de/trolley-square" component={TrolleySquareDE} />
         <Route path="/contact" component={Contact} />
         <Route path="/properties" component={Properties} />
         <Route path="/fair-housing" component={FairHousing} />
