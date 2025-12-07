@@ -114,6 +114,7 @@ Sitemap: ${baseUrl}/sitemap.xml`;
         { url: `${baseUrl}/properties`, lastmod: currentDate, changefreq: 'daily', priority: '0.8' },
         { url: `${baseUrl}/areas/middletown-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/townsend-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/bear-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/contact`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' }
       ];
 
