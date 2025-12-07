@@ -190,19 +190,28 @@ This full-stack real estate website, "Kevin Hensley's Homes," is a responsive si
 
 # Pillar Pages Status
 
-## Published Pillar Pages (33 Total)
-**Delaware (28 pages):**
-- Middletown, Laytonsville, Rehoboth Beach, Lewes, Milton, Georgetown, Smyrna, Harrington, New Castle, Hockessin (surrogate), Greenville (surrogate), Stanton (surrogate), Greenwood, Harrington, Bridgeville, Dewey Beach, Fenwick Island, South Bethany, Dagsboro, Frankford, Millville, Long Neck, Georgetown, Seaford, Centreville, North Star
+## Published Pillar Pages (19 Total)
+**Delaware (10 pages):**
+- Bear, DE
+- Centreville, DE
+- Delaware City, DE
+- Hockessin, DE
+- Middletown, DE
+- New Castle, DE
+- North Star, DE
+- Odessa, DE
+- Smyrna, DE
+- Townsend, DE
 
 **Wilmington, DE (Parent + 4 Sub-neighborhoods):**
 - Wilmington, DE (parent)
 - North Wilmington, Highlands, Forty Acres, Trolley Square (nested sub-pages)
 
-**Maryland (5 pages):**
-- Perryville, MD
-- North East, MD
-- Elkton, MD
+**Maryland (4 pages):**
 - Chesapeake City, MD
+- Elkton, MD
+- North East, MD
+- Perryville, MD
 
 ## Missing Pillar Pages (Queued for Future Development)
 **Delaware (11 pages):**
