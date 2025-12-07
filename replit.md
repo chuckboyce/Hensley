@@ -4,6 +4,18 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 
 # Recent Changes
 
+**December 7, 2025**: Four New Pillar Pages + Spelling Redirect
+
+*Client Summary: Added four new area pages (Centreville DE, North Star DE, Perryville MD, and North East MD) with AI-generated hero images. Also set up a spelling redirect from "Centerville" (common misspelling) to the correct "Centreville" to capture search traffic.*
+
+- Created Centreville, DE luxury estate pillar page at /areas/centreville-de
+- Created North Star, DE upscale suburban pillar page at /areas/north-star-de
+- Created Perryville, MD waterfront commuter-friendly page at /areas/perryville-md
+- Created North East, MD vibrant waterfront page at /areas/north-east-md
+- Set up 301 redirect from /areas/centerville-de to /areas/centreville-de (captures misspelled searches)
+- AI-generated hero images for all four pages with appropriate golden hour lighting
+- All neighborhood links filtered to exclude forbidden domains
+
 **December 7, 2025**: Townsend, DE Pillar Page & Image Generation Workflow
 
 *Client Summary: Added a new community page for Townsend, Delaware with the same professional format as the Middletown page. Also established a workflow for automatically generating hero images when creating new area pages.*
@@ -107,6 +119,16 @@ This is a full-stack real estate website application for "Kevin Hensley's Homes"
 - **Recent Changes Format**: Always include a client summary in italics that's suitable for invoices or status reports. Focus on results and benefits, not technical details.
 - **Documentation Updates**: Update the Recent Changes section in this file at each checkpoint.
 - **Navigation Behavior**: Always scroll to top of page on route change, unless landing on a specific anchor (hash link). This is implemented via the `ScrollToTop` component in `App.tsx`.
+
+# Pillar Page Forbidden Domains
+
+The following domains have been excluded from all pillar page neighborhood sections (communities without links simply don't display the external link icon):
+- **realtor.com** - Too generic, not specialized for local communities
+- **newhomesource.com** - Generic new construction (excluded to reduce noise)
+- **destateparks.com** - Not applicable for all states (MD pages removed)
+- **55places.com** - Not relevant to target market
+
+When adding future pillar pages, automatically filter out these domains from neighborhood link sections.
 
 # System Architecture
 

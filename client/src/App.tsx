@@ -72,6 +72,11 @@ import SmyrnaDE from "@/pages/areas/smyrna-de";
 import ChesapeakeCityMD from "@/pages/areas/chesapeake-city-md";
 import ElktonMD from "@/pages/areas/elkton-md";
 import DelawareCityDE from "@/pages/areas/delaware-city-de";
+import CentrevilleDe from "@/pages/areas/centreville-de";
+import CentrevilleMisspelled from "@/pages/areas/centerville-de";
+import NorthStarDE from "@/pages/areas/north-star-de";
+import PerryvilleMD from "@/pages/areas/perryville-md";
+import NorthEastMD from "@/pages/areas/north-east-md";
 import Contact from "@/pages/contact";
 import Properties from "@/pages/properties";
 import FairHousing from "@/pages/fair-housing";
@@ -121,6 +126,11 @@ function Router() {
         <Route path="/areas/chesapeake-city-md" component={ChesapeakeCityMD} />
         <Route path="/areas/elkton-md" component={ElktonMD} />
         <Route path="/areas/delaware-city-de" component={DelawareCityDE} />
+        <Route path="/areas/centreville-de" component={CentrevilleDe} />
+        <Route path="/areas/centerville-de" component={CentrevilleMisspelled} />
+        <Route path="/areas/north-star-de" component={NorthStarDE} />
+        <Route path="/areas/perryville-md" component={PerryvilleMD} />
+        <Route path="/areas/north-east-md" component={NorthEastMD} />
         <Route path="/contact" component={Contact} />
         <Route path="/properties" component={Properties} />
         <Route path="/fair-housing" component={FairHousing} />
