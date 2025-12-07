@@ -163,9 +163,44 @@ Provide the primary ZIP code for property filtering:
 ---
 
 ## Image Requirements
-Provide a suggestion for the hero image:
+
+### Hero Image
+If a hero image is provided by the user, use it. Otherwise, **generate a hero image** based on the area description.
+
+**Generation prompt guidelines:**
+- Aerial or street-level view capturing the town's character
+- Include key visual elements: housing types, landscape, natural features
+- Use warm, welcoming lighting (golden hour preferred)
+- Aspect ratio: 16:9
+- Style: Professional real estate photography
+
+**Example prompt structure:**
+```
+Aerial drone photograph of [TOWN], Delaware, featuring [key visual elements like open fields, residential neighborhoods, tree-lined roads, etc.], [lighting description], [atmosphere/mood], professional real estate photography style, high quality
+```
+
+**Negative prompt (always include):**
+```
+text, watermark, logo, urban city, high-rise buildings, crowded, traffic, night time, dark, gloomy, people, cars
+```
+
+### Scene Suggestion (for content brief)
+If submitting a content brief, provide:
 - **Scene description**: What the hero image should depict (e.g., "Aerial view of town center with church steeple," "Tree-lined residential street in fall," etc.)
-- **Mood**: Welcoming, established, family-friendly, etc.
+- **Mood**: Welcoming, established, family-friendly, rural, suburban, etc.
+- **Key visual elements**: Specific features to include (farmland, forests, golf courses, waterfront, etc.)
+
+---
+
+## Implementation Workflow
+
+When creating a new pillar page:
+
+1. **Create the page file** in `client/src/pages/areas/[town]-de.tsx` using the template
+2. **Generate hero image** if not provided, using the area description as guidance
+3. **Add route** to `client/src/App.tsx` (import and Route component)
+4. **Update sitemap** in `server/index.ts` to include the new page
+5. **Test** the page at `/areas/[town]-de`
 
 ---
 
