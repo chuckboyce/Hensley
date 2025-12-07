@@ -97,9 +97,7 @@ export default function MiddletownDE() {
     { 
       name: "The Ponds at Bayberry", 
       type: "55+ Active Adult",
-      description: "Bayberry's premier 55+ community offering low-maintenance living with beautifully designed homes, neighborhood gathering spaces, walking trails, and convenient access to parks and open areas. A strong choice for active adults seeking comfort and community.",
-      link: "https://www.55places.com/delaware/communities/the-ponds-at-bayberry",
-      linkText: "Ponds at Bayberry (55+) Community Info"
+      description: "Bayberry's premier 55+ community offering low-maintenance living with beautifully designed homes, neighborhood gathering spaces, walking trails, and convenient access to parks and open areas. A strong choice for active adults seeking comfort and community."
     },
     { 
       name: "The Town of Whitehall", 
