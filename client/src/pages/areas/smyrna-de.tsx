@@ -72,9 +72,7 @@ export default function SmyrnaDE() {
     { 
       name: "Woodland Beach", 
       type: "Waterfront / Scenic",
-      description: "A peaceful waterfront area offering scenic views and a quiet lifestyle. Ideal for buyers who enjoy nature, fishing, and access to the Delaware Bay.",
-      link: "https://www.destateparks.com",
-      linkText: "Woodland Beach Area Info"
+      description: "A peaceful waterfront area offering scenic views and a quiet lifestyle. Ideal for buyers who enjoy nature, fishing, and access to the Delaware Bay."
     },
     { 
       name: "Garrisons Lake Green", 
@@ -325,7 +323,6 @@ export default function SmyrnaDE() {
                     </div>
                     <ul className="space-y-3">
                       <li><a href="https://www.smyrna.delaware.gov/Facilities" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Lake Como</strong> — Swimming, trails & events</span></a></li>
-                      <li><a href="https://destateparks.com" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Garrisons Lake</strong> — Recreation area</span></a></li>
                     </ul>
                   </CardContent>
                 </Card>

@@ -97,9 +97,7 @@ export default function TownsendDE() {
     { 
       name: "Blackbird Landing", 
       type: "Country Living",
-      description: "Nestled near Blackbird State Forest, this neighborhood offers a peaceful countryside setting with wildlife, nature trails, and large properties. Perfect for buyers who want a retreat-like environment with easy access to Route 13 and Route 1.",
-      link: "https://www.destateparks.com/Explore/Blackbird",
-      linkText: "Blackbird Forest & Nature Area Info"
+      description: "Nestled near Blackbird State Forest, this neighborhood offers a peaceful countryside setting with wildlife, nature trails, and large properties. Perfect for buyers who want a retreat-like environment with easy access to Route 13 and Route 1."
     }
   ];
 
@@ -554,12 +552,6 @@ export default function TownsendDE() {
                       <h3 className="font-bold text-lg">Community Info</h3>
                     </div>
                     <ul className="space-y-3">
-                      <li>
-                        <a href="https://www.destateparks.com/Explore/Blackbird" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
-                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
-                          <span><strong>Blackbird State Forest</strong> — Trails, hiking, outdoor recreation</span>
-                        </a>
-                      </li>
                       <li>
                         <a href="https://www.townsend.delaware.gov/about" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
                           <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />

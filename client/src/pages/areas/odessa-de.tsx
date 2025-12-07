@@ -96,9 +96,7 @@ export default function OdessaDE() {
     { 
       name: "Bay View Road Area", 
       type: "Rural / Waterfront Access",
-      description: "Known for scenic landscapes, water access points along the Appoquinimink River, and homes with larger lots. A great fit for buyers who value privacy and nature.",
-      link: "https://destateparks.com",
-      linkText: "Appoquinimink Watershed Info"
+      description: "Known for scenic landscapes, water access points along the Appoquinimink River, and homes with larger lots. A great fit for buyers who value privacy and nature."
     }
   ];
 

@@ -488,12 +488,6 @@ export default function HockessinDE() {
                     </div>
                     <ul className="space-y-3">
                       <li>
-                        <a href="https://destateparks.com/parks/auburn" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
-                          <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
-                          <span><strong>Auburn Valley State Park</strong> — Scenic trails & nature</span>
-                        </a>
-                      </li>
-                      <li>
                         <a href="https://www.nccde.org" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
                           <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
                           <span><strong>Swift Park</strong> — Trails & recreation</span>
