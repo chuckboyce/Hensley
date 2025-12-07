@@ -47,13 +47,15 @@ This full-stack real estate website, "Kevin Hensley's Homes," is a responsive si
 
 **December 7, 2025**: Breadcrumbs & Enhanced Navigation Schema
 
-*Client Summary: Added visual breadcrumb navigation to all pillar pages with proper schema markup for search engines. This improves user experience and SEO by clearly showing page hierarchy and enabling breadcrumb rich snippets in search results.*
+*Client Summary: Added visual breadcrumb navigation to all 33 pillar pages with proper schema markup for search engines. This improves user experience and SEO by clearly showing page hierarchy and enabling breadcrumb rich snippets in search results.*
 
 - Created reusable Breadcrumb component with Home icon and chevron separators
-- Added breadcrumb JSON-LD schema for all pillar pages (3+ levels for nested pages)
-- Breadcrumbs integrated into: Centreville DE, Wilmington parent, and all 4 Wilmington neighborhoods
-- Supports hierarchical navigation: Home > Community > Neighborhood > Sub-neighborhood
-- Breadcrumb schema includes position numbers and URLs for search engine optimization
+- Added breadcrumb JSON-LD schema to all 33 pillar pages with proper itemListElement arrays and position numbers
+- Breadcrumbs support hierarchical navigation: Home > Community Type > City > Neighborhood (for nested pages)
+- Schema ID pattern: {lowercase-pagename}-breadcrumb-schema for consistent organization
+- Delaware pages: Delaware Communities > City Name hierarchy
+- Maryland pages: Maryland Communities > City Name hierarchy
+- Nested Wilmington neighborhoods: Delaware Communities > Wilmington > Neighborhood Name (4 levels deep)
 - Each page maintains its own Place schema + breadcrumb schema for complete semantic markup
 
 **December 7, 2025**: Final Pre-Launch Cleanup & Link Validation

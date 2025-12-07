@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
+import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -62,13 +63,47 @@ export default function PerryvilleMD() {
       }
     });
     
+    const breadcrumbScript = document.createElement('script');
+    breadcrumbScript.type = 'application/ld+json';
+    breadcrumbScript.id = 'perryville-md-breadcrumb-schema';
+    breadcrumbScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://hensleyshomes.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Maryland Communities",
+          "item": "https://hensleyshomes.com/areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Perryville, Maryland",
+          "item": "https://hensleyshomes.com/areas/perryville-md"
+        }
+      ]
+    });
+    
     const existingPlace = document.getElementById('perryville-place-schema');
     if (existingPlace) existingPlace.remove();
+    const existingBreadcrumb = document.getElementById('perryville-md-breadcrumb-schema');
+    if (existingBreadcrumb) existingBreadcrumb.remove();
+    
     document.head.appendChild(placeScript);
+    document.head.appendChild(breadcrumbScript);
     
     return () => {
       const el = document.getElementById('perryville-place-schema');
       if (el) el.remove();
+      const bc = document.getElementById('perryville-md-breadcrumb-schema');
+      if (bc) bc.remove();
     };
   }, []);
 
@@ -117,6 +152,12 @@ export default function PerryvilleMD() {
   return (
     <>
       <Header />
+      <Breadcrumb 
+        items={[
+          { label: "Maryland Communities", href: "/areas" },
+          { label: "Perryville, Maryland", current: true }
+        ]}
+      />
       <main>
         {/* Hero Section with Image */}
         <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center">

@@ -3,6 +3,7 @@ import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -62,13 +63,47 @@ export default function MiddletownDE() {
       }
     });
     
+    const breadcrumbScript = document.createElement('script');
+    breadcrumbScript.type = 'application/ld+json';
+    breadcrumbScript.id = 'middletown-de-breadcrumb-schema';
+    breadcrumbScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://hensleyshomes.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Delaware Communities",
+          "item": "https://hensleyshomes.com/areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Middletown, Delaware",
+          "item": "https://hensleyshomes.com/areas/middletown-de"
+        }
+      ]
+    });
+    
     const existingPlace = document.getElementById('middletown-place-schema');
     if (existingPlace) existingPlace.remove();
+    const existingBreadcrumb = document.getElementById('middletown-de-breadcrumb-schema');
+    if (existingBreadcrumb) existingBreadcrumb.remove();
+    
     document.head.appendChild(placeScript);
+    document.head.appendChild(breadcrumbScript);
     
     return () => {
       const el = document.getElementById('middletown-place-schema');
       if (el) el.remove();
+      const bc = document.getElementById('middletown-de-breadcrumb-schema');
+      if (bc) bc.remove();
     };
   }, []);
 
@@ -125,6 +160,12 @@ export default function MiddletownDE() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
+      <Breadcrumb 
+        items={[
+          { label: "Delaware Communities", href: "/areas" },
+          { label: "Middletown, Delaware", current: true }
+        ]}
+      />
       
       <main className="flex-1">
         {/* Hero Section with Image */}

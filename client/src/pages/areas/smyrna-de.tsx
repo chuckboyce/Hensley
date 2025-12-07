@@ -3,6 +3,7 @@ import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Home, TreePine, Heart, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf, Building, Waves } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -58,13 +59,47 @@ export default function SmyrnaDE() {
       }
     });
     
+    const breadcrumbScript = document.createElement('script');
+    breadcrumbScript.type = 'application/ld+json';
+    breadcrumbScript.id = 'smyrna-de-breadcrumb-schema';
+    breadcrumbScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://hensleyshomes.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Delaware Communities",
+          "item": "https://hensleyshomes.com/areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Smyrna, Delaware",
+          "item": "https://hensleyshomes.com/areas/smyrna-de"
+        }
+      ]
+    });
+    
     const existingPlace = document.getElementById('smyrna-place-schema');
     if (existingPlace) existingPlace.remove();
+    const existingBreadcrumb = document.getElementById('smyrna-de-breadcrumb-schema');
+    if (existingBreadcrumb) existingBreadcrumb.remove();
+    
     document.head.appendChild(placeScript);
+    document.head.appendChild(breadcrumbScript);
     
     return () => {
       const el = document.getElementById('smyrna-place-schema');
       if (el) el.remove();
+      const bc = document.getElementById('smyrna-de-breadcrumb-schema');
+      if (bc) bc.remove();
     };
   }, []);
 
@@ -108,6 +143,12 @@ export default function SmyrnaDE() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
+      <Breadcrumb 
+        items={[
+          { label: "Delaware Communities", href: "/areas" },
+          { label: "Smyrna, Delaware", current: true }
+        ]}
+      />
       <main className="flex-1">
         <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center">
           <div 
