@@ -6,6 +6,7 @@ import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath,
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { Breadcrumb } from "@/components/breadcrumb";
 import wilmingtonHero from "@assets/generated_images/wilmington_skyline_riverfront_and_parks.png";
 import type { Property } from "@shared/schema";
 
@@ -62,13 +63,47 @@ export default function WilmingtonDE() {
       }
     });
     
+    const breadcrumbScript = document.createElement('script');
+    breadcrumbScript.type = 'application/ld+json';
+    breadcrumbScript.id = 'wilmington-breadcrumb-schema';
+    breadcrumbScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://hensleyshomes.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Delaware Communities",
+          "item": "https://hensleyshomes.com/areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Wilmington, Delaware",
+          "item": "https://hensleyshomes.com/areas/wilmington-de"
+        }
+      ]
+    });
+    
     const existingPlace = document.getElementById('wilmington-place-schema');
     if (existingPlace) existingPlace.remove();
+    const existingBreadcrumb = document.getElementById('wilmington-breadcrumb-schema');
+    if (existingBreadcrumb) existingBreadcrumb.remove();
+    
     document.head.appendChild(placeScript);
+    document.head.appendChild(breadcrumbScript);
     
     return () => {
       const el = document.getElementById('wilmington-place-schema');
       if (el) el.remove();
+      const bc = document.getElementById('wilmington-breadcrumb-schema');
+      if (bc) bc.remove();
     };
   }, []);
 
@@ -124,6 +159,12 @@ export default function WilmingtonDE() {
   return (
     <>
       <Header />
+      <Breadcrumb 
+        items={[
+          { label: "Delaware Communities", href: "/areas" },
+          { label: "Wilmington, Delaware", current: true }
+        ]}
+      />
       <main>
         {/* Hero Section with Image */}
         <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center">
