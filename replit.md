@@ -104,3 +104,43 @@ This full-stack real estate website, "Kevin Hensley's Homes," is a responsive si
 - **Zod**: Runtime type validation
 - **date-fns**: Date manipulation
 - **clsx/twMerge**: Conditional CSS class management
+
+# Pillar Pages Status
+
+## Published Pillar Pages (27 Total)
+**Delaware (24 pages):**
+- Middletown, Laytonsville, Rehoboth Beach, Lewes, Milton, Georgetown, Smyrna, Harrington, New Castle, Hockessin (surrogate), Greenville (surrogate), Stanton (surrogate), Greenwood, Harrington, Bridgeville, Dewey Beach, Fenwick Island, South Bethany, Dagsboro, Frankford, Millville, Long Neck, Georgetown, Seaford
+
+**Wilmington, DE (Parent + 4 Sub-neighborhoods):**
+- Wilmington, DE (parent)
+- North Wilmington, Highlands, Forty Acres, Trolley Square (nested sub-pages)
+
+**Maryland (3 pages):**
+- Perryville, MD
+- North East, MD
+- Havre de Grace, MD (referenced but not yet created - link removed)
+
+## Missing Pillar Pages (Queued for Future Development)
+**Delaware (10 pages):**
+- Newark, DE
+- Pike Creek, DE
+- Glasgo​w, DE
+- St. Georges, DE
+- Clayton, DE
+- Dover, DE
+- Centreville, DE (note: Centerville misspelling redirects to Centreville page)
+- North Star, DE
+
+**Maryland (5 pages):**
+- Aberdeen, MD
+- Charlestown, MD
+- Elkton, MD
+- Chesapeake City, MD
+- Havre de Grace, MD
+
+## Design Consistency Notes
+- All pillar pages follow the same template with hero image, quick stats, spotlight property, price ranges, neighborhoods, highlights, and commute times
+- Hero format: "Discover" + town name (small-caps) + state (all-caps)
+- Spotlight: Highest-priced sale OR highest-priced rental if no sales available
+- Links: All external references filtered to exclude forbidden domains (newhomesource.com, realtor.com, destateparks.com, 55places.com)
+- Navigation: Nearby areas sections only link to published pillar pages to avoid 404 errors

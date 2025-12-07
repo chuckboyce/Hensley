@@ -315,13 +315,9 @@ export default function PerryvilleMD() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Nearby Areas</h2>
               <p className="text-muted-foreground max-w-xl mx-auto">Discover neighboring communities</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-1 gap-4 max-w-xl mx-auto">
               {[
-                { name: "North East, MD", href: "/areas/north-east-md" },
-                { name: "Havre de Grace, MD", href: "/areas/havre-de-grace-md" },
-                { name: "Aberdeen, MD", href: "/areas/aberdeen-md" },
-                { name: "Elkton, MD", href: "/areas/elkton-md" },
-                { name: "Charlestown, MD", href: "/areas/charlestown-md" }
+                { name: "North East, MD", href: "/areas/north-east-md" }
               ].map((area) => (
                 <Link key={area.name} href={area.href}>
                   <Card className="hover:border-primary transition-colors cursor-pointer h-full">

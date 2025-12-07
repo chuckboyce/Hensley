@@ -325,14 +325,9 @@ export default function NorthEastMD() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Nearby Areas</h2>
               <p className="text-muted-foreground max-w-xl mx-auto">Discover neighboring communities</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-1 gap-4 max-w-xl mx-auto">
               {[
-                { name: "Elkton, MD", href: "/areas/elkton-md" },
-                { name: "Perryville, MD", href: "/areas/perryville-md" },
-                { name: "Charlestown, MD", href: "/areas/charlestown-md" },
-                { name: "Chesapeake City, MD", href: "/areas/chesapeake-city-md" },
-                { name: "Havre de Grace, MD", href: "/areas/havre-de-grace-md" },
-                { name: "Newark, DE", href: "/areas/newark-de" }
+                { name: "Perryville, MD", href: "/areas/perryville-md" }
               ].map((area) => (
                 <Link key={area.name} href={area.href}>
                   <Card className="hover:border-primary transition-colors cursor-pointer h-full">

@@ -319,13 +319,10 @@ export default function CentrevilleDe() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Nearby Areas</h2>
               <p className="text-muted-foreground max-w-xl mx-auto">Discover neighboring communities</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {[
-                { name: "Greenville", href: "/areas/greenville-de" },
-                { name: "Hockessin", href: "/areas/hockessin-de" },
                 { name: "Wilmington", href: "/areas/wilmington-de" },
-                { name: "North Star", href: "/areas/north-star-de" },
-                { name: "Pike Creek", href: "/areas/pike-creek-de" }
+                { name: "North Star", href: "/areas/north-star-de" }
               ].map((area) => (
                 <Link key={area.name} href={area.href}>
                   <Card className="hover:border-primary transition-colors cursor-pointer h-full">
