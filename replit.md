@@ -230,9 +230,21 @@ This full-stack real estate website, "Kevin Hensley's Homes," is a responsive si
 - Charlestown, MD
 - Havre de Grace, MD
 
+**December 9, 2025**: Audio Property Tours
+
+*Client Summary: Added audio tour functionality to property detail pages. Visitors can now listen to 2-minute guided property tours with an interactive MP3 player, starting with 1415 Whispering Woods Road. Feature includes play/pause controls, progress bar, and time display.*
+
+- Created AudioPlayer component with play/pause controls, progress bar, and time display
+- Integrated MP3 player into property detail pages
+- Conditionally displays audio tour for properties with tours available
+- Started with 1415 Whispering Woods Road (Middletown, DE) sales listing
+- Player UI includes: play/pause button, interactive seek bar, current/total time display
+- Responsive design works on all screen sizes
+
 ## Design Consistency Notes
 - All pillar pages follow the same template with hero image, quick stats, spotlight property, price ranges, neighborhoods, highlights, and commute times
 - Hero format: "Discover" + town name (small-caps) + state (all-caps)
 - Spotlight: Highest-priced sale OR highest-priced rental if no sales available
 - Links: All external references filtered to exclude forbidden domains (newhomesource.com, realtor.com, destateparks.com, 55places.com)
 - Navigation: Nearby areas sections only link to published pillar pages to avoid 404 errors
+- Audio Tour Player: Appears in sidebar for properties with available tours; includes volume icon, play/pause button, seekable progress bar
