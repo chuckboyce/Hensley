@@ -17,8 +17,6 @@ import {
   Mail
 } from "lucide-react";
 import { type Property, type PropertyMedia } from "@shared/schema";
-import AudioPlayer from "@/components/audio-player";
-import whispperingWoodsAudio from "@assets/1415_Whispering_Woods_1765302937957.mp3";
 
 export default function PropertyDetail() {
   const { listingKey } = useParams<{ listingKey: string }>();
@@ -343,10 +341,7 @@ export default function PropertyDetail() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
-            {property.unparsedAddress?.includes("1415") && property.unparsedAddress?.includes("Whispering") && (
-              <AudioPlayer src={whispperingWoodsAudio} title="Property Audio Tour" duration="2:00" />
-            )}
+          <div>
             <Card className="sticky top-8">
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold text-foreground mb-4">Contact Agent</h3>

@@ -232,10 +232,10 @@ This full-stack real estate website, "Kevin Hensley's Homes," is a responsive si
 
 **December 9, 2025**: Audio Property Tours
 
-*Client Summary: Added audio tour functionality to property detail pages. Visitors can now listen to 2-minute guided property tours with an interactive MP3 player, starting with 1415 Whispering Woods Road. Feature includes play/pause controls, progress bar, and time display.*
+*Client Summary: Added audio tour functionality to property listing cards. Visitors can now listen to 2-minute guided property tours with an interactive MP3 player, starting with 1415 Whispering Woods Road. Feature includes play/pause controls, progress bar, and time display.*
 
 - Created AudioPlayer component with play/pause controls, progress bar, and time display
-- Integrated MP3 player into property detail pages
+- Integrated MP3 player into featured properties listing cards
 - Conditionally displays audio tour for properties with tours available
 - Started with 1415 Whispering Woods Road (Middletown, DE) sales listing
 - Player UI includes: play/pause button, interactive seek bar, current/total time display
@@ -247,4 +247,4 @@ This full-stack real estate website, "Kevin Hensley's Homes," is a responsive si
 - Spotlight: Highest-priced sale OR highest-priced rental if no sales available
 - Links: All external references filtered to exclude forbidden domains (newhomesource.com, realtor.com, destateparks.com, 55places.com)
 - Navigation: Nearby areas sections only link to published pillar pages to avoid 404 errors
-- Audio Tour Player: Appears in sidebar for properties with available tours; includes volume icon, play/pause button, seekable progress bar
+- Audio Tour Player: Appears on property listing cards for properties with available tours; includes volume icon, play/pause button, seekable progress bar
