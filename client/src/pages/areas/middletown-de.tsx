@@ -9,6 +9,8 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
 import type { Property } from "@shared/schema";
+import AudioPlayer from "@/components/audio-player";
+import whispperingWoodsAudio from "@assets/1415_Whispering_Woods_1765302937957.mp3";
 
 const MIDDLETOWN_ZIP = "19709";
 
@@ -337,18 +339,24 @@ export default function MiddletownDE() {
                       )}
                     </div>
 
-                    {spotlightProperty.listingUrl && (
-                      <a 
-                        href={spotlightProperty.listingUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-block"
-                      >
-                        <Button size="lg" className="w-full" data-testid="button-view-full-listing">
-                          View Full Listing on RE/MAX
-                        </Button>
-                      </a>
-                    )}
+                    <div className="space-y-4 mt-4">
+                      {spotlightProperty.unparsedAddress?.includes("1415") && spotlightProperty.unparsedAddress?.includes("Whispering") && (
+                        <AudioPlayer src={whispperingWoodsAudio} title="Audio Tour" duration="2:00" />
+                      )}
+                      
+                      {spotlightProperty.listingUrl && (
+                        <a 
+                          href={spotlightProperty.listingUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-block w-full"
+                        >
+                          <Button size="lg" className="w-full" data-testid="button-view-full-listing">
+                            View Full Listing on RE/MAX
+                          </Button>
+                        </a>
+                      )}
+                    </div>
                   </CardContent>
                 </div>
               </Card>
