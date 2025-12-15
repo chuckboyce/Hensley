@@ -62,6 +62,7 @@ import Home from "@/pages/home";
 import Buy from "@/pages/buy";
 import Sell from "@/pages/sell";
 import PropertyManagement from "@/pages/property-management";
+import AreasIndex from "@/pages/areas";
 import MiddletownDE from "@/pages/areas/middletown-de";
 import TownsendDE from "@/pages/areas/townsend-de";
 import BearDE from "@/pages/areas/bear-de";
@@ -121,6 +122,7 @@ function Router() {
         <Route path="/buy" component={Buy} />
         <Route path="/sell" component={Sell} />
         <Route path="/property-management" component={PropertyManagement} />
+        <Route path="/areas" component={AreasIndex} />
         <Route path="/areas/middletown-de" component={MiddletownDE} />
         <Route path="/areas/townsend-de" component={TownsendDE} />
         <Route path="/areas/bear-de" component={BearDE} />
