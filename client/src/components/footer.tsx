@@ -93,9 +93,12 @@ export default function Footer() {
                     className="h-10 object-contain"
                     data-testid="img-remax-logo"
                   />
-                  <p className="text-xs text-muted-foreground mt-2" data-testid="footer-office-address">
-                    RE/MAX Eagle Realty
-                  </p>
+                  <div className="text-xs text-muted-foreground mt-2 space-y-1" data-testid="footer-office-address">
+                    <p className="font-medium">RE/MAX Eagle Realty</p>
+                    <p>5609 DuPont Pkwy Ste 11</p>
+                    <p>Smyrna, DE 19977</p>
+                    <p>(302) 659-1320</p>
+                  </div>
                 </div>
               </div>
               <div className="mb-4">
