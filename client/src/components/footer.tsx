@@ -82,16 +82,21 @@ export default function Footer() {
                   />
                 </div>
                 <div className="h-8 w-px bg-border" />
-                <img 
-                  src={remaxLogo} 
-                  alt="RE/MAX Eagle Realty" 
-                  loading="lazy"
-                  decoding="async"
-                  width={120}
-                  height={40}
-                  className="h-10 object-contain"
-                  data-testid="img-remax-logo"
-                />
+                <div>
+                  <img 
+                    src={remaxLogo} 
+                    alt="RE/MAX Eagle Realty" 
+                    loading="lazy"
+                    decoding="async"
+                    width={120}
+                    height={40}
+                    className="h-10 object-contain"
+                    data-testid="img-remax-logo"
+                  />
+                  <p className="text-xs text-muted-foreground mt-2" data-testid="footer-office-address">
+                    RE/MAX Eagle Realty
+                  </p>
+                </div>
               </div>
               <div className="mb-4">
                 <p className="font-semibold text-foreground">Kevin Hensley</p>
