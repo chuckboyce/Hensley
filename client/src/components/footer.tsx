@@ -82,29 +82,29 @@ export default function Footer() {
                   />
                 </div>
                 <div className="h-8 w-px bg-border" />
-                <div>
-                  <img 
-                    src={remaxLogo} 
-                    alt="RE/MAX Eagle Realty" 
-                    loading="lazy"
-                    decoding="async"
-                    width={120}
-                    height={40}
-                    className="h-10 object-contain"
-                    data-testid="img-remax-logo"
-                  />
-                  <div className="text-xs text-muted-foreground mt-2 space-y-1" data-testid="footer-office-address">
-                    <p className="font-medium">RE/MAX Eagle Realty</p>
-                    <p>5609 DuPont Pkwy Ste 11</p>
-                    <p>Smyrna, DE 19977</p>
-                    <p>(302) 659-1320</p>
-                  </div>
-                </div>
+                <img 
+                  src={remaxLogo} 
+                  alt="RE/MAX Eagle Realty" 
+                  loading="lazy"
+                  decoding="async"
+                  width={120}
+                  height={40}
+                  className="h-10 object-contain"
+                  data-testid="img-remax-logo"
+                />
               </div>
-              <div className="mb-4">
-                <p className="font-semibold text-foreground">Kevin Hensley</p>
-                <p className="text-sm text-muted-foreground">Associate Broker</p>
-                <p className="text-xs text-muted-foreground mt-1">License# 324709 | RB-0003526</p>
+              <div className="mb-4 flex items-start gap-8">
+                <div>
+                  <p className="font-semibold text-foreground">Kevin Hensley</p>
+                  <p className="text-sm text-muted-foreground">Associate Broker</p>
+                  <p className="text-xs text-muted-foreground mt-1">License# 324709 | RB-0003526</p>
+                </div>
+                <div className="text-xs text-muted-foreground space-y-1" data-testid="footer-office-address">
+                  <p className="font-medium text-foreground">RE/MAX Eagle Realty</p>
+                  <p>5609 DuPont Pkwy Ste 11</p>
+                  <p>Smyrna, DE 19977</p>
+                  <p>(302) 659-1320</p>
+                </div>
               </div>
               <p className="text-muted-foreground mb-4 max-w-md">
                 Your trusted local partner for real estate sales and property management services. Serving the community with integrity and expertise.
