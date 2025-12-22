@@ -85,7 +85,7 @@ app.use((req, res, next) => {
   app.get("/robots.txt", (req, res) => {
     // Use request host or fallback to production domain
     const protocol = req.protocol;
-    const host = req.get('host') || 'hensleys-homes.com';
+    const host = req.get('host') || 'hensleyshomes.com';
     const baseUrl = `${protocol}://${host}`;
     
     const robotsTxt = `# https://www.robotstxt.org/robotstxt.html
@@ -103,7 +103,7 @@ Sitemap: ${baseUrl}/sitemap.xml`;
   // Sitemap.xml route - must be before Vite middleware
   app.get("/sitemap.xml", async (req, res) => {
     try {
-      const baseUrl = "https://hensleys-homes.com";
+      const baseUrl = "https://hensleyshomes.com";
       const currentDate = new Date().toISOString().split('T')[0];
 
       const pages = [

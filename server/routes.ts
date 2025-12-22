@@ -371,7 +371,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       // Get the base URL from the request or use default
       const protocol = req.protocol;
-      const host = req.get('host') || 'hensleys-homes.com';
+      const host = req.get('host') || 'hensleyshomes.com';
       const sitemapUrl = `${protocol}://${host}/sitemap.xml`;
       
       console.log(`Pinging search engines with sitemap: ${sitemapUrl}`);

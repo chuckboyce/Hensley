@@ -178,7 +178,7 @@ class GoHighLevelService {
       lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
-      source: 'hensleys-homes.com - Contact Form',
+      source: 'hensleyshomes.com - Contact Form',
       tags
     };
 
@@ -391,5 +391,5 @@ export const GHL_CONFIG = {
   BASE_URL: 'https://services.leadconnectorhq.com',
   DEFAULT_TAGS: ['Website Lead', 'Real Estate Inquiry'],
   DEFAULT_SOURCE: 'Website Contact Form',
-  LEAD_SOURCE_CUSTOM_FIELD: 'hensleys-homes.com'
+  LEAD_SOURCE_CUSTOM_FIELD: 'hensleyshomes.com'
 } as const;
