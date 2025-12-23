@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
-const BASE_URL = 'https://hensleys-homes.com';
+const BASE_URL = 'https://hensleyshomes.com';
 
 interface PageMeta {
   title: string;
