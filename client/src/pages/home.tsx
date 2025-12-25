@@ -14,14 +14,14 @@ export default function Home() {
   const homePageData = createWebPageData({
     name: "Kevin Hensley's Homes - Delaware & Maryland Real Estate",
     description: "Professional real estate services in Delaware and Maryland. Specializing in home sales, property management, and investment consulting. Contact us for a free consultation.",
-    url: "https://hensleys-homes.com",
+    url: "https://hensleyshomes.com",
     breadcrumbs: [
-      { name: "Home", url: "https://hensleys-homes.com" }
+      { name: "Home", url: "https://hensleyshomes.com" }
     ]
   });
 
   const breadcrumbData = createBreadcrumbData([
-    { name: "Home", url: "https://hensleys-homes.com" }
+    { name: "Home", url: "https://hensleyshomes.com" }
   ]);
 
   const realEstateAgentData = createRealEstateAgentData();

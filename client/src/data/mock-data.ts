@@ -116,7 +116,7 @@ export const agentInfo = {
 export const contactInfo = {
   phone: "(302) 218-0130",
   directPhone: "(302) 273-0057",
-  email: "kevin@hensleys-homes.com",
+  email: "kevin@hensleyshomes.com",
   website: "https://www.hensleyshomes.com",
   address: "5609 DuPont Pkwy Ste 11\nSmyrna, DE 19977"
 };

@@ -188,9 +188,9 @@ export function createOrganizationData(): StructuredDataProps {
       name: "Kevin Hensley's Homes",
       alternateName: "Hensley's Homes",
       description: "Professional real estate services in Delaware and Maryland including home sales, property management, and investment consulting",
-      url: "https://hensleys-homes.com",
-      logo: "https://hensleys-homes.com/hensleys-homes-logo.png",
-      image: "https://hensleys-homes.com/hensleys-homes-logo.png",
+      url: "https://hensleyshomes.com",
+      logo: "https://hensleyshomes.com/hensleys-homes-logo.png",
+      image: "https://hensleyshomes.com/hensleys-homes-logo.png",
       telephone: "(302) 218-0130",
       areaServed: [
         { "@type": "State", "name": "Delaware" },
@@ -267,9 +267,9 @@ export function createRealEstateAgentData(): StructuredDataProps {
     data: {
       name: "Kevin Hensley's Homes",
       description: "Licensed real estate professional specializing in residential sales and property management in Delaware and Maryland",
-      url: "https://hensleys-homes.com",
+      url: "https://hensleyshomes.com",
       telephone: "(302) 218-0130",
-      email: "info@hensleys-homes.com",
+      email: "info@hensleyshomes.com",
       areaServed: [
         {
           "@type": "State",

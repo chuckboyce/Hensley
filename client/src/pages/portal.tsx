@@ -215,7 +215,7 @@ export default function Portal() {
               </a>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <a href="mailto:kevin@hensleys-homes.com">
+              <a href="mailto:kevin@hensleyshomes.com">
                 <Mail className="mr-2 h-5 w-5" />
                 Email Support
               </a>
