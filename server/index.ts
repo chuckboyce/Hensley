@@ -54,7 +54,7 @@ app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   
   // Referrer-Policy: Control how much referrer information is shared
-  res.setHeader('Referrer-Policy', 'strict-no-referrer');
+  res.setHeader('Referrer-Policy', 'no-referrer');
   
   // Permissions-Policy: Restrict access to browser features and APIs
   res.setHeader('Permissions-Policy', 
