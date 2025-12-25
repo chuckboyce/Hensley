@@ -59,29 +59,20 @@ app.use((req, res, next) => {
   // Permissions-Policy: Restrict access to browser features and APIs
   res.setHeader('Permissions-Policy', 
     'accelerometer=(), ' +
-    'ambient-light-sensor=(), ' +
     'autoplay=(), ' +
-    'battery=(), ' +
     'camera=(), ' +
     'display-capture=(), ' +
-    'document-domain=(), ' +
     'encrypted-media=(), ' +
-    'execution-while-not-rendered=(), ' +
-    'execution-while-out-of-viewport=(), ' +
     'fullscreen=(self), ' +
     'geolocation=(), ' +
     'gyroscope=(), ' +
     'magnetometer=(), ' +
     'microphone=(), ' +
     'midi=(), ' +
-    'navigation-override=(), ' +
     'payment=(), ' +
     'picture-in-picture=(), ' +
     'publickey-credentials-get=(), ' +
-    'sync-xhr=(), ' +
     'usb=(), ' +
-    'vr=(), ' +
-    'wake-lock=(), ' +
     'xr-spatial-tracking=()'
   );
   
