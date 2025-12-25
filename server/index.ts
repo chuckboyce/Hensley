@@ -126,6 +126,11 @@ app.use((req, res, next) => {
     throw err;
   });
 
+  // 301 Redirect for /contact-us to /contact
+  app.get("/contact-us", (req, res) => {
+    res.redirect(301, "https://hensleyshomes.com/contact");
+  });
+
   // Robots.txt route - must be before Vite middleware
   app.get("/robots.txt", (req, res) => {
     // Use request host or fallback to production domain
