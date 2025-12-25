@@ -34,6 +34,60 @@ app.use((req, res, next) => {
   next();
 });
 
+// Security headers middleware
+app.use((req, res, next) => {
+  // Content-Security-Policy: Protect against XSS attacks
+  res.setHeader('Content-Security-Policy', 
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src 'self' https://fonts.gstatic.com data:; " +
+    "img-src 'self' https: data: blob:; " +
+    "media-src 'self' https: blob:; " +
+    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; " +
+    "frame-ancestors 'self'; " +
+    "base-uri 'self'; " +
+    "form-action 'self'"
+  );
+  
+  // X-Frame-Options: Prevent clickjacking attacks
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  
+  // Referrer-Policy: Control how much referrer information is shared
+  res.setHeader('Referrer-Policy', 'strict-no-referrer');
+  
+  // Permissions-Policy: Restrict access to browser features and APIs
+  res.setHeader('Permissions-Policy', 
+    'accelerometer=(), ' +
+    'ambient-light-sensor=(), ' +
+    'autoplay=(), ' +
+    'battery=(), ' +
+    'camera=(), ' +
+    'display-capture=(), ' +
+    'document-domain=(), ' +
+    'encrypted-media=(), ' +
+    'execution-while-not-rendered=(), ' +
+    'execution-while-out-of-viewport=(), ' +
+    'fullscreen=(self), ' +
+    'geolocation=(), ' +
+    'gyroscope=(), ' +
+    'magnetometer=(), ' +
+    'microphone=(), ' +
+    'midi=(), ' +
+    'navigation-override=(), ' +
+    'payment=(), ' +
+    'picture-in-picture=(), ' +
+    'publickey-credentials-get=(), ' +
+    'sync-xhr=(), ' +
+    'usb=(), ' +
+    'vr=(), ' +
+    'wake-lock=(), ' +
+    'xr-spatial-tracking=()'
+  );
+  
+  next();
+});
+
 // Serve uploaded images
 app.use('/uploads', express.static('public/uploads'));
 
