@@ -39,12 +39,12 @@ app.use((req, res, next) => {
   // Content-Security-Policy: Protect against XSS attacks
   res.setHeader('Content-Security-Policy', 
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://replit.com; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "font-src 'self' https://fonts.gstatic.com data:; " +
     "img-src 'self' https: data: blob:; " +
     "media-src 'self' https: blob:; " +
-    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; " +
+    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://static.cloudflareinsights.com; " +
     "frame-ancestors 'self'; " +
     "base-uri 'self'; " +
     "form-action 'self'"
