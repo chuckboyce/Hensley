@@ -157,11 +157,20 @@ Sitemap: ${baseUrl}/sitemap.xml`;
       const currentDate = new Date().toISOString().split('T')[0];
 
       const pages = [
+        // Home and main service pages
         { url: baseUrl, lastmod: currentDate, changefreq: 'weekly', priority: '1.0' },
         { url: `${baseUrl}/buy`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
         { url: `${baseUrl}/sell`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
         { url: `${baseUrl}/property-management`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
+        
+        // Properties and contact
         { url: `${baseUrl}/properties`, lastmod: currentDate, changefreq: 'daily', priority: '0.8' },
+        { url: `${baseUrl}/contact`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
+        
+        // Areas index
+        { url: `${baseUrl}/areas`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
+        
+        // Delaware pillar pages
         { url: `${baseUrl}/areas/middletown-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/townsend-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/bear-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
@@ -169,7 +178,27 @@ Sitemap: ${baseUrl}/sitemap.xml`;
         { url: `${baseUrl}/areas/new-castle-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/odessa-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/smyrna-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
-        { url: `${baseUrl}/contact`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' }
+        { url: `${baseUrl}/areas/delaware-city-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/centreville-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/north-star-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        
+        // Wilmington and sub-neighborhoods
+        { url: `${baseUrl}/areas/wilmington-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/wilmington-de/north-wilmington`, lastmod: currentDate, changefreq: 'monthly', priority: '0.6' },
+        { url: `${baseUrl}/areas/wilmington-de/highlands`, lastmod: currentDate, changefreq: 'monthly', priority: '0.6' },
+        { url: `${baseUrl}/areas/wilmington-de/forty-acres`, lastmod: currentDate, changefreq: 'monthly', priority: '0.6' },
+        { url: `${baseUrl}/areas/wilmington-de/trolley-square`, lastmod: currentDate, changefreq: 'monthly', priority: '0.6' },
+        
+        // Maryland pillar pages
+        { url: `${baseUrl}/areas/chesapeake-city-md`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/elkton-md`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/north-east-md`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/perryville-md`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        
+        // Legal pages
+        { url: `${baseUrl}/fair-housing`, lastmod: currentDate, changefreq: 'yearly', priority: '0.5' },
+        { url: `${baseUrl}/privacy-policy`, lastmod: currentDate, changefreq: 'yearly', priority: '0.5' },
+        { url: `${baseUrl}/terms-of-use`, lastmod: currentDate, changefreq: 'yearly', priority: '0.5' }
       ];
 
       const xml = `<?xml version="1.0" encoding="UTF-8"?>
