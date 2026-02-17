@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Home, TreePine, Heart, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf, Building } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import townsendHero from "@assets/generated_images/townsend_de_aerial_rural_view.png";
 import type { Property } from "@shared/schema";
 
@@ -634,6 +635,7 @@ export default function TownsendDE() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="townsend-de" locationName="Townsend, DE" />
 
         {/* Sources Footnote */}
         <section className="py-8 bg-secondary/30">

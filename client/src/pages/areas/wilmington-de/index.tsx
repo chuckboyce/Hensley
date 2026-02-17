@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/breadcrumb";
 import wilmingtonHero from "@assets/generated_images/wilmington_skyline_riverfront_and_parks.png";
@@ -404,6 +405,8 @@ export default function WilmingtonDE() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="wilmington-de" locationName="Wilmington, DE" />
+
       </main>
       <Footer />
     </>

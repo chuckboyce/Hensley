@@ -96,3 +96,17 @@
 - **Zod**: Runtime type validation
 - **date-fns**: Date manipulation
 - **clsx/twMerge**: Conditional CSS class management
+- **rss-parser**: RSS/Atom feed parsing for CMS content ingestion
+
+# Recent Changes
+
+## February 17, 2026 — Headless CMS & Local News System
+*Built a complete content management system that automatically pulls local news from RSS feeds, generates AI-powered summaries and FAQs tailored to each community, and displays them on all 19 location pages — boosting SEO with fresh, location-specific content and FAQ schema markup.*
+
+- Created database tables for RSS feed sources (`rss_feeds`) and articles (`cms_articles`) with AI summaries, FAQ storage, location tagging, and publish/draft workflow
+- Built RSS feed fetcher that imports articles from configured news sources with duplicate detection
+- Integrated OpenAI (gpt-4o-mini) to generate location-specific article summaries and FAQ sets using real estate keywords and the site's brand voice
+- Added admin CMS panel at `/admin/cms` with feed management, article review, AI content generation, editing, and publish/unpublish workflow
+- Created public JSON API (`/api/cms/articles`) for serving published content by location — designed API-first so other sites can consume it
+- Built reusable Local News & Updates component with FAQ JSON-LD schema markup for search engine visibility
+- Integrated Local News section into all 19 community pillar pages with location-specific content filtering

@@ -267,3 +267,61 @@ export type Property = typeof properties.$inferSelect;
 export type UpdatePropertyDetails = z.infer<typeof updatePropertyDetailsSchema>;
 export type InsertPropertyMedia = z.infer<typeof insertPropertyMediaSchema>;
 export type PropertyMedia = typeof propertyMedia.$inferSelect;
+
+// CMS: RSS Feed Sources
+export const rssFeeds = pgTable("rss_feeds", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  url: text("url").notNull().unique(),
+  locationTags: text("location_tags").array().notNull(),
+  isActive: boolean("is_active").default(true).notNull(),
+  lastFetched: timestamp("last_fetched"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// CMS: Articles from RSS feeds with AI-generated content
+export const cmsArticles = pgTable("cms_articles", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  feedId: varchar("feed_id"),
+  title: text("title").notNull(),
+  originalUrl: text("original_url").notNull().unique(),
+  originalSummary: text("original_summary"),
+  sourceName: text("source_name").notNull(),
+  publishedAt: timestamp("published_at"),
+  aiSummary: text("ai_summary"),
+  aiCommentary: text("ai_commentary"),
+  faqs: jsonb("faqs").default('[]'),
+  locationTags: text("location_tags").array().notNull(),
+  status: text("status").default("draft").notNull(),
+  slug: text("slug").notNull(),
+  publishedOnSiteAt: timestamp("published_on_site_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ({
+  statusIdx: index("cms_articles_status_idx").on(table.status),
+  slugIdx: index("cms_articles_slug_idx").on(table.slug),
+}));
+
+export const insertRssFeedSchema = createInsertSchema(rssFeeds).pick({
+  name: true,
+  url: true,
+  locationTags: true,
+  isActive: true,
+});
+
+export const insertCmsArticleSchema = createInsertSchema(cmsArticles).pick({
+  feedId: true,
+  title: true,
+  originalUrl: true,
+  originalSummary: true,
+  sourceName: true,
+  publishedAt: true,
+  locationTags: true,
+  slug: true,
+}).extend({
+  publishedAt: z.coerce.date().optional(),
+});
+
+export type InsertRssFeed = z.infer<typeof insertRssFeedSchema>;
+export type RssFeed = typeof rssFeeds.$inferSelect;
+export type InsertCmsArticle = z.infer<typeof insertCmsArticleSchema>;
+export type CmsArticle = typeof cmsArticles.$inferSelect;

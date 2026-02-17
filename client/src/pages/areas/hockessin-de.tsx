@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Home, TreePine, Heart, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf, Building, Mountain } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import hockessinHero from "@assets/generated_images/hockessin_de_scenic_upscale_aerial.png";
 import type { Property } from "@shared/schema";
 
@@ -621,6 +622,7 @@ export default function HockessinDE() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="hockessin-de" locationName="Hockessin, DE" />
 
         {/* Sources Footnote */}
         <section className="py-8 bg-secondary/30">

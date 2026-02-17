@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Home, TreePine, Heart, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf, Building, Waves } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import smyrnaHero from "@assets/generated_images/smyrna_de_growing_town_aerial.png";
 import type { Property } from "@shared/schema";
 
@@ -422,6 +423,8 @@ export default function SmyrnaDE() {
             </div>
           </div>
         </section>
+
+        <LocalNews locationTag="smyrna-de" locationName="Smyrna, DE" />
 
         <section className="py-8 bg-secondary/30">
           <div className="container mx-auto px-4 lg:px-6">

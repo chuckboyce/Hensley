@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Home, TreePine, Heart, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf, Building, Anchor } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import newCastleHero from "@assets/generated_images/new_castle_de_historic_waterfront_aerial.png";
 import type { Property } from "@shared/schema";
 
@@ -411,6 +412,7 @@ export default function NewCastleDE() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="new-castle-de" locationName="New Castle, DE" />
 
         <section className="py-8 bg-secondary/30">
           <div className="container mx-auto px-4 lg:px-6">

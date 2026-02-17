@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
 import type { Property } from "@shared/schema";
 import AudioPlayer from "@/components/audio-player";
+import LocalNews from "@/components/local-news";
 import whispperingWoodsAudio from "@assets/1415_Whispering_Woods_1765302937957.mp3";
 
 const MIDDLETOWN_ZIP = "19709";
@@ -662,6 +663,8 @@ export default function MiddletownDE() {
             </div>
           </div>
         </section>
+
+        <LocalNews locationTag="middletown-de" locationName="Middletown, DE" />
 
         {/* Sources Footnote */}
         <section className="py-8 bg-secondary/30">

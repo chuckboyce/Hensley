@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import northStarHero from "@assets/generated_images/north_star_luxury_suburban_neighborhoods.png";
 import type { Property } from "@shared/schema";
@@ -414,6 +415,8 @@ export default function NorthStarDE() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="north-star-de" locationName="North Star, DE" />
+
       </main>
       <Footer />
     </>

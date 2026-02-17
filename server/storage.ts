@@ -1,7 +1,7 @@
 // Database integration blueprint: javascript_database
-import { users, contacts, properties, propertyMedia, type User, type InsertUser, type Contact, type InsertContact, type Property, type InsertProperty, type UpdatePropertyDetails, type PropertyMedia, type InsertPropertyMedia } from "@shared/schema";
+import { users, contacts, properties, propertyMedia, rssFeeds, cmsArticles, type User, type InsertUser, type Contact, type InsertContact, type Property, type InsertProperty, type UpdatePropertyDetails, type PropertyMedia, type InsertPropertyMedia, type RssFeed, type InsertRssFeed, type CmsArticle, type InsertCmsArticle } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, notInArray, and, lt, or, isNull, sql } from "drizzle-orm";
+import { eq, desc, notInArray, and, lt, or, isNull, sql, arrayContains, inArray } from "drizzle-orm";
 import { randomUUID } from "crypto";
 
 // Type for scraped listing data
@@ -37,6 +37,22 @@ export interface IStorage {
   deleteProperty(listingKey: string): Promise<boolean>;
   getPropertyMedia(listingKey: string): Promise<PropertyMedia[]>;
   createPropertyMedia(media: InsertPropertyMedia): Promise<PropertyMedia>;
+  // CMS: RSS Feeds
+  listRssFeeds(): Promise<RssFeed[]>;
+  getRssFeed(id: string): Promise<RssFeed | undefined>;
+  createRssFeed(feed: InsertRssFeed): Promise<RssFeed>;
+  updateRssFeed(id: string, updates: Partial<InsertRssFeed>): Promise<RssFeed | undefined>;
+  deleteRssFeed(id: string): Promise<boolean>;
+  updateFeedLastFetched(id: string): Promise<void>;
+  // CMS: Articles
+  listCmsArticles(status?: string): Promise<CmsArticle[]>;
+  listCmsArticlesByLocation(locationTag: string): Promise<CmsArticle[]>;
+  getCmsArticle(id: string): Promise<CmsArticle | undefined>;
+  getCmsArticleByUrl(url: string): Promise<CmsArticle | undefined>;
+  createCmsArticle(article: InsertCmsArticle): Promise<CmsArticle>;
+  updateCmsArticle(id: string, updates: Partial<CmsArticle>): Promise<CmsArticle | undefined>;
+  deleteCmsArticle(id: string): Promise<boolean>;
+  publishCmsArticle(id: string): Promise<CmsArticle | undefined>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -319,9 +335,6 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getPropertiesNeedingSummary(): Promise<Property[]> {
-    // Get active properties that either:
-    // 1. Have no schema summary yet
-    // 2. Have a summary older than 60 days
     const sixtyDaysAgo = new Date();
     sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
     
@@ -337,6 +350,85 @@ export class DatabaseStorage implements IStorage {
           )
         )
       );
+  }
+
+  // CMS: RSS Feed methods
+  async listRssFeeds(): Promise<RssFeed[]> {
+    return await db.select().from(rssFeeds).orderBy(desc(rssFeeds.createdAt));
+  }
+
+  async getRssFeed(id: string): Promise<RssFeed | undefined> {
+    const [feed] = await db.select().from(rssFeeds).where(eq(rssFeeds.id, id));
+    return feed || undefined;
+  }
+
+  async createRssFeed(feed: InsertRssFeed): Promise<RssFeed> {
+    const [created] = await db.insert(rssFeeds).values(feed).returning();
+    return created;
+  }
+
+  async updateRssFeed(id: string, updates: Partial<InsertRssFeed>): Promise<RssFeed | undefined> {
+    const [updated] = await db.update(rssFeeds).set(updates).where(eq(rssFeeds.id, id)).returning();
+    return updated || undefined;
+  }
+
+  async deleteRssFeed(id: string): Promise<boolean> {
+    const result = await db.delete(rssFeeds).where(eq(rssFeeds.id, id)).returning();
+    return result.length > 0;
+  }
+
+  async updateFeedLastFetched(id: string): Promise<void> {
+    await db.update(rssFeeds).set({ lastFetched: new Date() }).where(eq(rssFeeds.id, id));
+  }
+
+  // CMS: Article methods
+  async listCmsArticles(status?: string): Promise<CmsArticle[]> {
+    if (status) {
+      return await db.select().from(cmsArticles).where(eq(cmsArticles.status, status)).orderBy(desc(cmsArticles.createdAt));
+    }
+    return await db.select().from(cmsArticles).orderBy(desc(cmsArticles.createdAt));
+  }
+
+  async listCmsArticlesByLocation(locationTag: string): Promise<CmsArticle[]> {
+    return await db.select().from(cmsArticles)
+      .where(and(
+        eq(cmsArticles.status, "published"),
+        arrayContains(cmsArticles.locationTags, [locationTag])
+      ))
+      .orderBy(desc(cmsArticles.publishedOnSiteAt));
+  }
+
+  async getCmsArticle(id: string): Promise<CmsArticle | undefined> {
+    const [article] = await db.select().from(cmsArticles).where(eq(cmsArticles.id, id));
+    return article || undefined;
+  }
+
+  async getCmsArticleByUrl(url: string): Promise<CmsArticle | undefined> {
+    const [article] = await db.select().from(cmsArticles).where(eq(cmsArticles.originalUrl, url));
+    return article || undefined;
+  }
+
+  async createCmsArticle(article: InsertCmsArticle): Promise<CmsArticle> {
+    const [created] = await db.insert(cmsArticles).values(article).returning();
+    return created;
+  }
+
+  async updateCmsArticle(id: string, updates: Partial<CmsArticle>): Promise<CmsArticle | undefined> {
+    const [updated] = await db.update(cmsArticles).set(updates).where(eq(cmsArticles.id, id)).returning();
+    return updated || undefined;
+  }
+
+  async deleteCmsArticle(id: string): Promise<boolean> {
+    const result = await db.delete(cmsArticles).where(eq(cmsArticles.id, id)).returning();
+    return result.length > 0;
+  }
+
+  async publishCmsArticle(id: string): Promise<CmsArticle | undefined> {
+    const [published] = await db.update(cmsArticles)
+      .set({ status: "published", publishedOnSiteAt: new Date() })
+      .where(eq(cmsArticles.id, id))
+      .returning();
+    return published || undefined;
   }
 }
 

@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/breadcrumb";
 import highlandsHero from "@assets/generated_images/highlands_luxury_historic_homes_and_parks.png";
@@ -393,6 +394,8 @@ export default function HighlandsDe() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="highlands-de" locationName="Highlands, DE" />
+
       </main>
       <Footer />
     </>

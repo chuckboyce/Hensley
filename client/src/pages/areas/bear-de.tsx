@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Home, TreePine, Heart, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf, Building, ShoppingBag } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import bearHero from "@assets/generated_images/bear_de_suburban_aerial_view.png";
 import type { Property } from "@shared/schema";
 
@@ -630,6 +631,7 @@ export default function BearDE() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="bear-de" locationName="Bear, DE" />
 
         {/* Sources Footnote */}
         <section className="py-8 bg-secondary/30">

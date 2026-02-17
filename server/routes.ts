@@ -1,7 +1,8 @@
 import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema, updatePropertyDetailsSchema } from "@shared/schema";
+import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema, updatePropertyDetailsSchema, insertRssFeedSchema } from "@shared/schema";
+import { fetchFeedArticles, fetchAllFeeds, generateArticleContent } from "./services/cms";
 import { ghlService } from "./services/ghl";
 import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
 import { pingSearchEngines } from "./utils/search-engine-ping";
@@ -710,6 +711,171 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error generating property schema:", error);
       res.status(500).json({ error: "Failed to generate schema" });
+    }
+  });
+
+  // ===== CMS: Admin RSS Feed Management =====
+  
+  app.get("/api/admin/cms/feeds", adminAuth, async (req, res) => {
+    try {
+      const feeds = await storage.listRssFeeds();
+      res.json(feeds);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/admin/cms/feeds", adminAuth, async (req, res) => {
+    try {
+      const validated = insertRssFeedSchema.parse(req.body);
+      const feed = await storage.createRssFeed(validated);
+      res.status(201).json(feed);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  app.patch("/api/admin/cms/feeds/:id", adminAuth, async (req, res) => {
+    try {
+      const feed = await storage.updateRssFeed(req.params.id, req.body);
+      if (!feed) return res.status(404).json({ error: "Feed not found" });
+      res.json(feed);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  app.delete("/api/admin/cms/feeds/:id", adminAuth, async (req, res) => {
+    try {
+      const deleted = await storage.deleteRssFeed(req.params.id);
+      if (!deleted) return res.status(404).json({ error: "Feed not found" });
+      res.json({ success: true });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/admin/cms/feeds/:id/fetch", adminAuth, async (req, res) => {
+    try {
+      const result = await fetchFeedArticles(req.params.id);
+      res.json(result);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/admin/cms/feeds/fetch-all", adminAuth, async (req, res) => {
+    try {
+      const result = await fetchAllFeeds();
+      res.json(result);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // ===== CMS: Admin Article Management =====
+
+  app.get("/api/admin/cms/articles", adminAuth, async (req, res) => {
+    try {
+      const status = req.query.status as string | undefined;
+      const articles = await storage.listCmsArticles(status);
+      res.json(articles);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/admin/cms/articles/:id", adminAuth, async (req, res) => {
+    try {
+      const article = await storage.getCmsArticle(req.params.id);
+      if (!article) return res.status(404).json({ error: "Article not found" });
+      res.json(article);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.patch("/api/admin/cms/articles/:id", adminAuth, async (req, res) => {
+    try {
+      const article = await storage.updateCmsArticle(req.params.id, req.body);
+      if (!article) return res.status(404).json({ error: "Article not found" });
+      res.json(article);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  app.delete("/api/admin/cms/articles/:id", adminAuth, async (req, res) => {
+    try {
+      const deleted = await storage.deleteCmsArticle(req.params.id);
+      if (!deleted) return res.status(404).json({ error: "Article not found" });
+      res.json({ success: true });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/admin/cms/articles/:id/generate", adminAuth, async (req, res) => {
+    try {
+      const article = await generateArticleContent(req.params.id);
+      if (!article) return res.status(404).json({ error: "Article not found" });
+      res.json(article);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/admin/cms/articles/:id/publish", adminAuth, async (req, res) => {
+    try {
+      const article = await storage.publishCmsArticle(req.params.id);
+      if (!article) return res.status(404).json({ error: "Article not found" });
+      res.json(article);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/admin/cms/articles/:id/unpublish", adminAuth, async (req, res) => {
+    try {
+      const article = await storage.updateCmsArticle(req.params.id, { status: "ai_generated" });
+      if (!article) return res.status(404).json({ error: "Article not found" });
+      res.json(article);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // ===== CMS: Public API (consumable by any site) =====
+
+  app.get("/api/cms/articles", async (req, res) => {
+    try {
+      const location = req.query.location as string | undefined;
+      const limit = parseInt(req.query.limit as string || '10', 10);
+
+      let articles;
+      if (location) {
+        articles = await storage.listCmsArticlesByLocation(location);
+      } else {
+        articles = await storage.listCmsArticles("published");
+      }
+
+      res.header('Cache-Control', 'public, max-age=300');
+      res.json(articles.slice(0, limit));
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/cms/articles/:slug", async (req, res) => {
+    try {
+      const articles = await storage.listCmsArticles("published");
+      const article = articles.find(a => a.slug === req.params.slug);
+      if (!article) return res.status(404).json({ error: "Article not found" });
+      
+      res.header('Cache-Control', 'public, max-age=300');
+      res.json(article);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
     }
   });
 

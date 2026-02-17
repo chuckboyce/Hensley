@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/breadcrumb";
 import centrevileHero from "@assets/generated_images/centreville_luxury_estates_and_rolling_hills.png";
@@ -408,6 +409,8 @@ export default function CentrevilleDe() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="centreville-de" locationName="Centreville, DE" />
+
       </main>
       <Footer />
     </>

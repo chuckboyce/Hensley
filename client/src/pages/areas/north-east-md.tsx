@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import northEastHero from "@assets/generated_images/north_east_waterfront_marina_and_main_street.png";
 import type { Property } from "@shared/schema";
@@ -415,6 +416,8 @@ export default function NorthEastMD() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="north-east-md" locationName="North East, MD" />
+
       </main>
       <Footer />
     </>

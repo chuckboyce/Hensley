@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import elktonHero from "@assets/generated_images/elkton_suburban_neighborhoods_aerial_view.png";
 import type { Property } from "@shared/schema";
@@ -375,6 +376,8 @@ export default function ElktonMD() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="elkton-md" locationName="Elkton, MD" />
+
       </main>
       <Footer />
     </>

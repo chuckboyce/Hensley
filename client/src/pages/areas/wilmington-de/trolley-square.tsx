@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import trolleySquareHero from "@assets/generated_images/trolley_square_walkable_historic_rowhomes.png";
 import type { Property } from "@shared/schema";
@@ -393,6 +394,8 @@ export default function TrolleySquareDe() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="trolley-square-de" locationName="Trolley Square, DE" />
+
       </main>
       <Footer />
     </>

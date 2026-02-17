@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import delawareCityHero from "@assets/generated_images/delaware_city_waterfront_and_historic_district.png";
 import type { Property } from "@shared/schema";
@@ -379,6 +380,8 @@ export default function DelawareCityDE() {
             </div>
           </div>
         </section>
+        <LocalNews locationTag="delaware-city-de" locationName="Delaware City, DE" />
+
       </main>
       <Footer />
     </>
