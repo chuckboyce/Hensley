@@ -85,6 +85,14 @@ export default function LocalNews({ locationTag, locationName, limit = 5 }: Loca
                         {article.title}
                       </h3>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        {article.sourceImageUrl && (
+                          <img
+                            src={article.sourceImageUrl}
+                            alt={article.sourceName}
+                            className="h-5 w-5 rounded-sm object-contain flex-shrink-0"
+                            loading="lazy"
+                          />
+                        )}
                         <span className="font-medium">{article.sourceName}</span>
                         {article.publishedAt && (
                           <>

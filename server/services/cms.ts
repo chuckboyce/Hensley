@@ -34,6 +34,11 @@ export async function fetchFeedArticles(feedId: string): Promise<{ added: number
   try {
     const parsed = await parser.parseURL(feed.url);
 
+    const feedImageUrl = (parsed as any).image?.url || null;
+    if (feedImageUrl && feedImageUrl !== feed.imageUrl) {
+      await storage.updateRssFeed(feed.id, { imageUrl: feedImageUrl } as any);
+    }
+
     for (const item of parsed.items) {
       if (!item.link || !item.title) continue;
 
@@ -52,6 +57,7 @@ export async function fetchFeedArticles(feedId: string): Promise<{ added: number
           originalUrl: item.link,
           originalSummary: item.contentSnippet || item.content || item.summary || null,
           sourceName: feed.name,
+          sourceImageUrl: feedImageUrl,
           publishedAt: item.pubDate ? new Date(item.pubDate) : undefined,
           locationTags: feed.locationTags,
           slug,
