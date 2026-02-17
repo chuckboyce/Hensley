@@ -98,6 +98,7 @@ const DoorLoopTest = lazy(() => import("@/pages/doorloop-test"));
 const PropertyDetail = lazy(() => import("@/pages/property-detail"));
 const IdxTest = lazy(() => import("@/pages/idx-test"));
 const AdminCms = lazy(() => import("@/pages/admin-cms"));
+const AdminDashboard = lazy(() => import("@/pages/admin-dashboard"));
 
 // GoHighLevel Chat Widget Component
 function ChatWidget() {
@@ -152,7 +153,7 @@ function Router() {
         
         {/* Lazy-loaded admin and portal pages */}
         <Route path="/portal" component={Portal} />
-        <Route path="/admin" component={AdminListings} />
+        <Route path="/admin" component={AdminDashboard} />
         <Route path="/admin/listings" component={AdminListings} />
         <Route path="/admin/manage-listings" component={ManageListings} />
         <Route path="/admin/cms" component={AdminCms} />
