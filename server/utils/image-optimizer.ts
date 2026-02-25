@@ -35,11 +35,13 @@ export async function optimizePropertyImage(
   
   const variants: ImageVariant[] = [];
   
-  for (const targetWidth of VARIANT_WIDTHS) {
-    if (targetWidth > originalWidth) {
-      continue;
-    }
-    
+  // Only generate sizes up to the original width.
+  // If the image is smaller than all target widths, use the original width
+  // so we always produce at least one variant.
+  const effectiveWidths = VARIANT_WIDTHS.filter(w => w <= originalWidth);
+  const widthsToProcess = effectiveWidths.length > 0 ? effectiveWidths : [originalWidth];
+  
+  for (const targetWidth of widthsToProcess) {
     const jpegFilename = `${baseId}-${targetWidth}w.jpg`;
     const webpFilename = `${baseId}-${targetWidth}w.webp`;
     const jpegPath = path.join(uploadDir, jpegFilename);

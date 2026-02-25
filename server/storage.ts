@@ -141,6 +141,9 @@ export class DatabaseStorage implements IStorage {
     // Build update object, excluding undefined fields
     const updateData: any = { lastUpdated: new Date() };
     
+    if (updates.unparsedAddress !== undefined) {
+      updateData.unparsedAddress = updates.unparsedAddress;
+    }
     if (updates.listPrice !== undefined) {
       updateData.listPrice = updates.listPrice;
     }
