@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,6 +28,92 @@ export default function Contact() {
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const schemas = [
+      {
+        id: 'structured-data-kevin-hensley-person',
+        schema: {
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: 'Kevin Hensley',
+          jobTitle: 'Broker / Team Leader',
+          worksFor: {
+            '@type': 'RealEstateAgent',
+            name: "RE/MAX Eagle Realty"
+          },
+          telephone: '(302) 218-0130',
+          hasCredential: [
+            {
+              '@type': 'EducationalOccupationalCredential',
+              credentialCategory: 'Real Estate License',
+              name: 'Delaware Associate Broker License RA-0020653',
+              recognizedBy: { '@type': 'Organization', name: 'Delaware Real Estate Commission' },
+              url: 'https://delpros.delaware.gov/oh_verifylicensedetails?pid=a0et00000031DQzAAM'
+            },
+            {
+              '@type': 'EducationalOccupationalCredential',
+              credentialCategory: 'Real Estate License',
+              name: 'Maryland Salesperson License 324709',
+              recognizedBy: { '@type': 'Organization', name: 'Maryland Real Estate Commission' }
+            }
+          ],
+          sameAs: ['https://www.facebook.com/kevin.hensley.5'],
+          url: 'https://hensleyshomes.com/contact'
+        }
+      },
+      {
+        id: 'structured-data-megan-donahue-person',
+        schema: {
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: 'Megan Donahue',
+          jobTitle: 'Licensed Realtor',
+          worksFor: {
+            '@type': 'RealEstateAgent',
+            name: 'RE/MAX Eagle Realty'
+          },
+          telephone: '(302) 275-6369',
+          knowsAbout: [
+            'New Home Construction',
+            'Delaware Real Estate',
+            'Kent County Real Estate',
+            'Sussex County Real Estate',
+            'Buyer Representation',
+            'Seller Representation',
+            'Market Analysis',
+            'Contract Negotiation'
+          ],
+          hasCredential: {
+            '@type': 'EducationalOccupationalCredential',
+            credentialCategory: 'Real Estate License',
+            name: 'Delaware Salesperson License RS-0040029',
+            recognizedBy: { '@type': 'Organization', name: 'Delaware Real Estate Commission' },
+            url: 'https://delpros.delaware.gov/oh_verifylicensedetails?pid=a0ecs00000LydonAAB'
+          },
+          sameAs: ['https://www.facebook.com/megan.j.donahue.7'],
+          url: 'https://hensleyshomes.com/contact'
+        }
+      }
+    ];
+
+    schemas.forEach(({ id, schema }) => {
+      const existing = document.getElementById(id);
+      if (existing) existing.remove();
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = id;
+      script.innerHTML = JSON.stringify(schema, null, 2);
+      document.head.appendChild(script);
+    });
+
+    return () => {
+      schemas.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+      });
+    };
+  }, []);
 
   const contactMutation = useMutation({
     mutationFn: async (data: FormSubmissionData) => {
