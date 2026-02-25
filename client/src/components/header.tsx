@@ -99,9 +99,12 @@ export default function Header() {
                 size="sm"
                 className="md:hidden p-2"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
                 data-testid="mobile-menu-toggle"
               >
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6" aria-hidden="true" />
               </Button>
             </div>
           </div>
@@ -110,8 +113,13 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur" data-testid="mobile-menu">
-          <nav className="flex flex-col space-y-4 p-6">
+        <div
+          id="mobile-menu"
+          className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur"
+          data-testid="mobile-menu"
+          onKeyDown={(e) => e.key === 'Escape' && setMobileMenuOpen(false)}
+        >
+          <nav className="flex flex-col space-y-4 p-6" aria-label="Mobile navigation">
             <Link href="/buy" onClick={() => setMobileMenuOpen(false)}>
               <span className="text-lg font-medium text-muted-foreground hover:text-foreground text-left cursor-pointer"
                     data-testid="mobile-nav-buy">

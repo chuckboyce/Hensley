@@ -215,7 +215,7 @@ export default function ConsultationModal({ open, onOpenChange }: ConsultationMo
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel className="text-sm font-normal">
-                      I agree to receive SMS from Hensleys Homes. Msg & data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. By signing up, you agree to our <a href="/terms-of-use" className="text-primary underline hover:text-primary/80" target="_blank">Terms</a> and <a href="/privacy-policy" className="text-primary underline hover:text-primary/80" target="_blank">Privacy Policy</a>.
+                      I agree to receive SMS from Hensleys Homes. Msg & data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. By signing up, you agree to our <a href="/terms-of-use" className="text-primary underline hover:text-primary/80" target="_blank" rel="noopener noreferrer">Terms</a> and <a href="/privacy-policy" className="text-primary underline hover:text-primary/80" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
                     </FormLabel>
                   </div>
                 </FormItem>
@@ -236,7 +236,7 @@ export default function ConsultationModal({ open, onOpenChange }: ConsultationMo
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel className="text-sm font-normal">
-                      I agree to receive email from Hensleys Homes. You can unsubscribe anytime. See our <a href="/terms-of-use" className="text-primary underline hover:text-primary/80" target="_blank">Terms</a> and <a href="/privacy-policy" className="text-primary underline hover:text-primary/80" target="_blank">Privacy Policy</a>.
+                      I agree to receive email from Hensleys Homes. You can unsubscribe anytime. See our <a href="/terms-of-use" className="text-primary underline hover:text-primary/80" target="_blank" rel="noopener noreferrer">Terms</a> and <a href="/privacy-policy" className="text-primary underline hover:text-primary/80" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
                     </FormLabel>
                   </div>
                 </FormItem>

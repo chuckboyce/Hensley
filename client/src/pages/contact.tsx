@@ -243,11 +243,11 @@ export default function Contact() {
               </div>
               
               <div>
-                <Label className="block text-sm font-medium text-foreground mb-2">
+                <Label htmlFor="service" className="block text-sm font-medium text-foreground mb-2">
                   How can we help? *
                 </Label>
                 <Select value={formData.service} onValueChange={(value) => handleInputChange('service', value)}>
-                  <SelectTrigger data-testid="select-service">
+                  <SelectTrigger id="service" data-testid="select-service">
                     <SelectValue placeholder="Select a service" />
                   </SelectTrigger>
                   <SelectContent>
