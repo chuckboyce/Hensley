@@ -41,7 +41,7 @@ export default function About() {
             <div className="space-y-4 w-full max-w-md">
               <div>
                 <h3 className="text-2xl font-bold text-foreground">Kevin Hensley</h3>
-                <p className="text-primary font-medium">Broker / Owner &mdash; RE/MAX Eagle Realty</p>
+                <p className="text-primary font-medium">Broker / Team Leader &mdash; RE/MAX Eagle Realty</p>
               </div>
               <p className="text-muted-foreground leading-relaxed text-sm">
                 {agentInfo.name} has been serving the Delaware community for over {agentInfo.yearsExperience} years, building lasting relationships based on trust, integrity, and exceptional service. As Past President of both the state and local Boards of Realtors and the 2011 Realtor of the Year Award winner for Delaware, he brings unparalleled expertise to every transaction. Outside of real estate, Kevin serves as a State Representative in the Delaware General Assembly.
