@@ -19,8 +19,8 @@ export default function Header() {
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
         <div className="container mx-auto px-4 lg:px-6">
           <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
+            <Link href="/">
+              <div className="flex items-center space-x-2 cursor-pointer">
                 <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center p-1 border border-border">
                   <img 
                     src="/hensleys-homes-logo.png" 
@@ -40,15 +40,9 @@ export default function Header() {
                   />
                 </div>
               </div>
-            </div>
+            </Link>
             
             <nav className="hidden md:flex items-center space-x-8">
-              <Link href="/">
-                <span className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                      data-testid="nav-home">
-                  Home
-                </span>
-              </Link>
               <Link href="/buy">
                 <span className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                       data-testid="nav-buy">
@@ -118,12 +112,6 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur" data-testid="mobile-menu">
           <nav className="flex flex-col space-y-4 p-6">
-            <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-              <span className="text-lg font-medium text-foreground text-left cursor-pointer"
-                    data-testid="mobile-nav-home">
-                Home
-              </span>
-            </Link>
             <Link href="/buy" onClick={() => setMobileMenuOpen(false)}>
               <span className="text-lg font-medium text-muted-foreground hover:text-foreground text-left cursor-pointer"
                     data-testid="mobile-nav-buy">
