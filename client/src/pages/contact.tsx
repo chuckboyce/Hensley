@@ -284,6 +284,17 @@ export default function Contact() {
                     <p className="font-medium text-card-foreground">Direct: (302) 273-0057</p>
                   </div>
                 </div>
+                <div className="flex items-center justify-center">
+                  <a
+                    href="https://www.facebook.com/kevin.hensley.5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Facebook Profile
+                  </a>
+                </div>
               </div>
 
               <div className="border-t border-border pt-6">
