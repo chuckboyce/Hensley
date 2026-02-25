@@ -247,6 +247,17 @@ export default function Contact() {
                 </div>
               </div>
               
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <MapPin className="h-5 w-5 text-primary" />
+                </div>
+                <div className="ml-4 text-center">
+                  <p className="font-medium text-card-foreground">5609 DuPont Pkwy Ste 11</p>
+                  <p className="font-medium text-card-foreground">Smyrna, DE 19977</p>
+                  <p className="font-medium text-card-foreground">(302) 659-1320</p>
+                </div>
+              </div>
+
               <div className="text-center space-y-2 mb-6">
                 <h3 className="text-xl font-semibold text-foreground">Kevin Hensley</h3>
                 <p className="text-muted-foreground">Broker / Team Leader</p>
@@ -263,17 +274,6 @@ export default function Contact() {
                   <div className="ml-4 text-center">
                     <p className="font-medium text-card-foreground">Cell: (302) 218-0130</p>
                     <p className="font-medium text-card-foreground">Direct: (302) 273-0057</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-center">
-                  <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <MapPin className="h-5 w-5 text-primary" />
-                  </div>
-                  <div className="ml-4 text-center">
-                    <p className="font-medium text-card-foreground">5609 DuPont Pkwy Ste 11</p>
-                    <p className="font-medium text-card-foreground">Smyrna, DE 19977</p>
-                    <p className="font-medium text-card-foreground">(302) 659-1320</p>
                   </div>
                 </div>
               </div>
