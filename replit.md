@@ -110,3 +110,11 @@
 - Created public JSON API (`/api/cms/articles`) for serving published content by location — designed API-first so other sites can consume it
 - Built reusable Local News & Updates component with FAQ JSON-LD schema markup for search engine visibility
 - Integrated Local News section into all 19 community pillar pages with location-specific content filtering
+
+## February 25, 2026 — Team Page Update & Address Edit Fix
+*Updated the About section to introduce Megan Donahue as a second team member, giving the site a "Meet the Team" feel that better reflects the full Hensley's Homes crew. Also fixed a bug where editing a property's street address in the admin panel appeared to save but wasn't actually being stored.*
+
+- Redesigned the About section from a single agent profile into a two-column team grid featuring Kevin Hensley and Megan Donahue, each with their own photo, bio, stats, and credential badges
+- Wrote Megan's new bio highlighting her 20+ years in new home building and real estate, builder relationships (Ryan Homes, DRB Homes, DR Horton, Schell Brothers), and expertise in Kent & Sussex County for RE/MAX Eagle Realty
+- Added Megan's professional headshot to the site
+- Fixed property address edit bug: the admin edit modal was accepting the new address but the storage layer was silently discarding it before writing to the database
