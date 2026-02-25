@@ -58,7 +58,7 @@ export default function Contact() {
               recognizedBy: { '@type': 'Organization', name: 'Maryland Real Estate Commission' }
             }
           ],
-          sameAs: ['https://www.facebook.com/kevin.hensley.5'],
+          sameAs: ['https://www.facebook.com/kevin.hensley.5', 'https://www.linkedin.com/in/kevin-hensley-04ba803/'],
           url: 'https://hensleyshomes.com/contact'
         }
       },
@@ -370,7 +370,7 @@ export default function Contact() {
                     <p className="font-medium text-card-foreground">Direct: (302) 273-0057</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center gap-4">
                   <a
                     href="https://www.facebook.com/kevin.hensley.5"
                     target="_blank"
@@ -378,7 +378,16 @@ export default function Contact() {
                     className="flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
                   >
                     <ExternalLink className="h-4 w-4" />
-                    Facebook Profile
+                    Facebook
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/kevin-hensley-04ba803/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    LinkedIn
                   </a>
                 </div>
               </div>
