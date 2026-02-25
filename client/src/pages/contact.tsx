@@ -91,7 +91,7 @@ export default function Contact() {
             recognizedBy: { '@type': 'Organization', name: 'Delaware Real Estate Commission' },
             url: 'https://delpros.delaware.gov/oh_verifylicensedetails?pid=a0ecs00000LydonAAB'
           },
-          sameAs: ['https://www.facebook.com/megan.j.donahue.7'],
+          sameAs: ['https://www.facebook.com/megan.j.donahue.7', 'https://www.linkedin.com/in/megan-donahue-ab091423/'],
           url: 'https://hensleyshomes.com/contact'
         }
       }
@@ -407,7 +407,7 @@ export default function Contact() {
                       <p className="font-medium text-card-foreground">Cell: (302) 275-6369</p>
                     </div>
                   </div>
-                  <div className="flex items-center justify-center">
+                  <div className="flex items-center justify-center gap-4">
                     <a
                       href="https://www.facebook.com/megan.j.donahue.7"
                       target="_blank"
@@ -415,7 +415,16 @@ export default function Contact() {
                       className="flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
                     >
                       <ExternalLink className="h-4 w-4" />
-                      Facebook Profile
+                      Facebook
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/megan-donahue-ab091423/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      LinkedIn
                     </a>
                   </div>
                 </div>
