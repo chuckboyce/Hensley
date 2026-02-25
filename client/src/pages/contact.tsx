@@ -262,7 +262,15 @@ export default function Contact() {
                 <h3 className="text-xl font-semibold text-foreground">Kevin Hensley</h3>
                 <p className="text-muted-foreground">Broker / Team Leader</p>
                 <p className="text-sm text-muted-foreground">
-                  License# 324709, RB-0003526
+                  MD Salesperson# 324709 &bull;{" "}
+                  <a
+                    href="https://delpros.delaware.gov/oh_verifylicensedetails?pid=a0et00000031DQzAAM"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 underline transition-colors"
+                  >
+                    DE License# RA-0020653
+                  </a>
                 </p>
               </div>
               
