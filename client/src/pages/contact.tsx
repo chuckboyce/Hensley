@@ -299,7 +299,7 @@ export default function Contact() {
                       <Phone className="h-5 w-5 text-primary" />
                     </div>
                     <div className="ml-4 text-center">
-                      <p className="font-medium text-card-foreground">Mobile: (302) 275-6369</p>
+                      <p className="font-medium text-card-foreground">Cell: (302) 275-6369</p>
                     </div>
                   </div>
                   <div className="flex items-center justify-center">
