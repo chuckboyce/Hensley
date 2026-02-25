@@ -85,6 +85,11 @@ app.use('/uploads', express.static('public/uploads'));
 // Serve static files from public directory (hero images, logos, etc.)
 app.use(express.static('public'));
 
+// Health check endpoint — must respond instantly for deployment health checks
+app.get("/health", (_req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;

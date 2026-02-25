@@ -1,0 +1,105 @@
+2026-02-25T15:45:02Z info: Deployment: cf4d8df1-c337-42cb-946f-385f23b4f132
+2026-02-25T15:45:02Z info: Build: fead3cdd-206a-4dab-9b76-de6b3dbec07e
+2026-02-25T15:45:02Z info: Running Security Scan
+2026-02-25T15:45:23Z info: Security Scan Complete
+2026-02-25T15:45:23Z info: Connecting to builder
+2026-02-25T15:45:24Z info: Builder connected
+2026-02-25T15:45:25Z info: Installing packages
+2026-02-25T15:45:25Z info: Starting Build
+
+> rest-express@1.0.0 build
+> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+
+
+vite v5.4.20 building for production...
+
+transforming...
+
+Browserslist: browsers data (caniuse-lite) is 16 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+
+✓ 1918 modules transformed.
+
+rendering chunks...
+
+computing gzip size...
+
+../dist/public/index.html                                                              5.04 kB │ gzip:   1.62 kB
+
+../dist/public/assets/remax_2025_logo_1760103527751-DV4Vqh0Y.png                       9.85 kB
+../dist/public/assets/IMG_0525-CDZL6hPI.jpeg                                          11.48 kB
+../dist/public/assets/HH_logotype_1757349200633-CxEpZrjo.png                          14.49 kB
+../dist/public/assets/realtor_logo_1760104830430-C663uct7.png                         35.98 kB
+../dist/public/assets/eho_logo_1760104830421-B_CVMnOc.png                             51.71 kB
+../dist/public/assets/Middletown_DE_1757012981537-C_HkN7JA.jpg                       101.86 kB
+../dist/public/assets/generated-image (1)_1762730474875-DRplOvmE.png                 766.13 kB
+../dist/public/assets/north_star_luxury_suburban_neighborhoods-BKBkSNQD.png        1,767.27 kB
+../dist/public/assets/new_castle_de_historic_waterfront_aerial-Cras8_Mk.png        1,835.06 kB
+../dist/public/assets/trolley_square_walkable_historic_rowhomes-BT3-WVCe.png       1,854.74 kB
+../dist/public/assets/bear_de_suburban_aerial_view-BB6O2-Wx.png                    1,862.88 kB
+../dist/public/assets/perryville_waterfront_river_and_marina-BaRrNbD9.png          1,887.72 kB
+../dist/public/assets/centreville_luxury_estates_and_rolling_hills-Cb7vMY2c.png    1,907.07 kB
+../dist/public/assets/smyrna_de_growing_town_aerial-DfU3k0az.png                   1,928.47 kB
+../dist/public/assets/hockessin_de_scenic_upscale_aerial-DCAqqeeF.png              1,943.45 kB
+../dist/public/assets/wilmington_skyline_riverfront_and_parks-DchhNu9f.png         1,955.50 kB
+../dist/public/assets/elkton_suburban_neighborhoods_aerial_view-CqbhVjaX.png       1,956.09 kB
+../dist/public/assets/highlands_luxury_historic_homes_and_parks-V1s8H4kA.png       1,965.15 kB
+../dist/public/assets/odessa_de_historic_town_aerial-CQJoXjVy.png                  1,984.83 kB
+../dist/public/assets/chesapeake_city_waterfront_aerial_view-Dg9u0sGN.png          1,994.21 kB
+../dist/public/assets/north_wilmington_mature_suburban_homes-DssqK3Yd.png          2,009.20 kB
+../dist/public/assets/townsend_de_aerial_rural_view-CrsGcLqO.png                   2,016.46 kB
+../dist/public/assets/delaware_city_waterfront_and_historic_district-J8jdmv_H.png  2,029.12 kB
+
+../dist/public/assets/north_east_waterfront_marina_and_main_street-FFGT3y12.png    2,066.28 kB
+../dist/public/assets/forty_acres_historic_rowhomes_and_trees-Cl7zhKZP.png         2,201.62 kB
+../dist/public/assets/1415_Whispering_Woods_1765302937957-nSIj4Q1f.mp3             2,651.89 kB
+../dist/public/assets/index-D9njFPf0.css                                              95.70 kB │ gzip:  15.18 kB
+
+../dist/public/assets/mail-DF9Gh8fz.js                                                 0.38 kB │ gzip:   0.30 kB
+
+../dist/public/assets/chart-column-DAhQhVYy.js                                         0.42 kB │ gzip:   0.30 kB
+../dist/public/assets/eye-BFedjk2B.js                                                  0.42 kB │ gzip:   0.30 kB
+../dist/public/assets/list-DSPpF_9z.js                                                 0.47 kB │ gzip:   0.29 kB
+../dist/public/assets/trash-2-DOm2CJ7U.js                                              0.97 kB │ gzip:   0.47 kB
+../dist/public/assets/doorloop-test-76jDpPoH.js                                        1.21 kB │ gzip:   0.64 kB
+../dist/public/assets/admin-dashboard-DtI20fuq.js                                      2.08 kB │ gzip:   1.01 kB
+../dist/public/assets/idx-test-B7eyblTZ.js                                            11.14 kB │ gzip:   3.10 kB
+../dist/public/assets/portal-29wviP8J.js                                              11.62 kB │ gzip:   2.81 kB
+
+../dist/public/assets/property-detail-Bw23d7cP.js                                     12.77 kB │ gzip:   3.59 kB
+../dist/public/assets/admin-listings-M3qp4UYd.js                                      13.12 kB │ gzip:   3.98 kB
+../dist/public/assets/manage-listings-CG705RIL.js                                     15.04 kB │ gzip:   4.19 kB
+../dist/public/assets/admin-cms-BeHKGWWh.js                                           19.40 kB │ gzip:   4.86 kB
+../dist/public/assets/index-DWeZzcFB.js                                              943.72 kB │ gzip: 202.20 kB
+
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+✓ built in 6.49s
+
+
+  dist/index.js  97.2kb
+
+⚡ Done in 11ms
+
+npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.10.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.10.1
+npm notice To update run: npm install -g npm@11.10.1
+npm notice
+
+2026-02-25T15:45:35Z info: Pushing pid1 binary layer...
+2026-02-25T15:45:38Z info: Created pid1 binary layer
+2026-02-25T15:45:44Z info: Pushing Repl layer...
+2026-02-25T15:45:44Z info: Pushing hosting layer...
+2026-02-25T15:45:44Z info: Nix layers for this Repl are uncached.
+2026-02-25T15:45:44Z info: Pushing nix-0 layer...
+2026-02-25T15:45:45Z info: Created hosting layer
+2026-02-25T15:46:12Z info: Created Repl layer
+2026-02-25T15:46:12Z info: Pushing Repl (cache) layer...
+2026-02-25T15:46:12Z info: Created Repl (cache) layer
+Deployment timed out. Check the Logs tab for more details. - 2026-02-25T15:54:02.732Z
