@@ -228,39 +228,6 @@ export default function ManageListings() {
     }
   });
 
-  // Sync listings from RE/MAX website
-  const syncListingsMutation = useMutation({
-    mutationFn: async () => {
-      const response = await fetch('/api/admin/sync-listings', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${password}`
-        }
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Failed to sync listings');
-      }
-      return response.json();
-    },
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/properties/all'] });
-      const { summary } = data;
-      toast({
-        title: "Sync Complete",
-        description: `${summary.newListings} new, ${summary.updatedListings} updated, ${summary.expiredListings} expired`
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Sync Failed",
-        description: error instanceof Error ? error.message : "Failed to sync listings",
-        variant: "destructive"
-      });
-    }
-  });
-
   // Generate AI summaries for schema markup
   const generateSummariesMutation = useMutation({
     mutationFn: async () => {
@@ -412,14 +379,6 @@ export default function ManageListings() {
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Manage Listings</h1>
           <div className="flex gap-4 flex-wrap">
-            <Button
-              onClick={() => syncListingsMutation.mutate()}
-              disabled={syncListingsMutation.isPending}
-              variant="default"
-              data-testid="button-sync-listings"
-            >
-              {syncListingsMutation.isPending ? "Syncing..." : "Sync from RE/MAX"}
-            </Button>
             <Button
               onClick={() => pingSearchEnginesMutation.mutate()}
               disabled={pingSearchEnginesMutation.isPending}
