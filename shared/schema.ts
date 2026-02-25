@@ -231,6 +231,7 @@ export const insertPropertySchema = createInsertSchema(properties).pick({
 // Schema for updating property details
 export const updatePropertyDetailsSchema = insertPropertySchema
   .pick({
+    unparsedAddress: true,
     listPrice: true,
     bedroomsTotal: true,
     bathroomsFull: true,

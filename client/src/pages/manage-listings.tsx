@@ -21,6 +21,7 @@ export default function ManageListings() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingProperty, setEditingProperty] = useState<any>(null);
   const [editFormData, setEditFormData] = useState({ 
+    unparsedAddress: "",
     listPrice: "", 
     bedroomsTotal: "", 
     bathroomsFull: "", 
@@ -262,6 +263,7 @@ export default function ManageListings() {
   const handleOpenEdit = (property: any) => {
     setEditingProperty(property);
     setEditFormData({
+      unparsedAddress: property.unparsedAddress || "",
       listPrice: property.listPrice || "",
       bedroomsTotal: property.bedroomsTotal || "",
       bathroomsFull: property.bathroomsFull || "",
@@ -314,6 +316,7 @@ export default function ManageListings() {
     const updates: any = {};
     
     // Only add fields that have actual values (not empty strings)
+    if (editFormData.unparsedAddress) updates.unparsedAddress = editFormData.unparsedAddress;
     if (editFormData.listPrice) updates.listPrice = editFormData.listPrice;
     if (editFormData.bedroomsTotal) updates.bedroomsTotal = parseInt(editFormData.bedroomsTotal);
     if (editFormData.bathroomsFull) updates.bathroomsFull = parseInt(editFormData.bathroomsFull);
@@ -542,6 +545,16 @@ export default function ManageListings() {
               <DialogTitle>Edit Property</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 py-4">
+              <div>
+                <Label htmlFor="editAddress">Street Address</Label>
+                <Input
+                  id="editAddress"
+                  value={editFormData.unparsedAddress}
+                  onChange={(e) => setEditFormData(prev => ({ ...prev, unparsedAddress: e.target.value }))}
+                  placeholder="e.g., 123 Main St, Wilmington, DE 19801"
+                  data-testid="input-edit-address"
+                />
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="editListPrice">List Price ($)</Label>
