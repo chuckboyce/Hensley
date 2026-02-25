@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Phone, Mail, MapPin, ArrowLeft } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowLeft, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
 import remaxLogo from "@assets/remax_2025_logo_1760103527751.png";
 import hhLogo from "@assets/HH_logotype_1757349200633.png";
@@ -249,13 +249,13 @@ export default function Contact() {
               
               <div className="text-center space-y-2 mb-6">
                 <h3 className="text-xl font-semibold text-foreground">Kevin Hensley</h3>
-                <p className="text-muted-foreground">Associate</p>
+                <p className="text-muted-foreground">Broker / Team Leader</p>
                 <p className="text-sm text-muted-foreground">
                   License# 324709, RB-0003526
                 </p>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-4 mb-6">
                 <div className="flex items-center justify-center">
                   <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <Phone className="h-5 w-5 text-primary" />
@@ -274,6 +274,35 @@ export default function Contact() {
                     <p className="font-medium text-card-foreground">5609 DuPont Pkwy Ste 11</p>
                     <p className="font-medium text-card-foreground">Smyrna, DE 19977</p>
                     <p className="font-medium text-card-foreground">(302) 659-1320</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-border pt-6">
+                <div className="text-center space-y-2 mb-6">
+                  <h3 className="text-xl font-semibold text-foreground">Megan Donahue</h3>
+                  <p className="text-muted-foreground">Licensed Realtor</p>
+                  <p className="text-sm text-muted-foreground">License# RS-0040029</p>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-center">
+                    <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Phone className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="ml-4 text-center">
+                      <p className="font-medium text-card-foreground">Mobile: (302) 275-6369</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <a
+                      href="https://www.facebook.com/megan.j.donahue.7"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      Facebook Profile
+                    </a>
                   </div>
                 </div>
               </div>
