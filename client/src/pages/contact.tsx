@@ -282,7 +282,16 @@ export default function Contact() {
                 <div className="text-center space-y-2 mb-6">
                   <h3 className="text-xl font-semibold text-foreground">Megan Donahue</h3>
                   <p className="text-muted-foreground">Licensed Realtor</p>
-                  <p className="text-sm text-muted-foreground">License# RS-0040029</p>
+                  <p className="text-sm text-muted-foreground">
+                    <a
+                      href="https://delpros.delaware.gov/oh_verifylicensedetails?pid=a0ecs00000LydonAAB"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/80 underline transition-colors"
+                    >
+                      License# RS-0040029
+                    </a>
+                  </p>
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-center justify-center">
