@@ -7,7 +7,6 @@ import { ghlService } from "./services/ghl";
 import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
 import { pingSearchEngines } from "./utils/search-engine-ping";
 import { optimizePropertyImage } from "./utils/image-optimizer";
-import { syncListings } from "../scripts/sync-listings";
 import { generatePropertySummary } from "./aiSummary";
 import { generateFullPageSchema, generatePropertySchema, generatePropertyListSchema } from "./utils/schemaGenerator";
 import multer from "multer";
@@ -389,30 +388,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin: Sync listings from RE/MAX website
-  app.post("/api/admin/sync-listings", adminAuth, async (req, res) => {
-    try {
-      console.log("[API] Starting listing sync...");
-      const result = await syncListings();
-      
-      res.json({
-        success: result.success,
-        summary: {
-          newListings: result.newListings,
-          updatedListings: result.updatedListings,
-          expiredListings: result.expiredListings,
-        },
-        errors: result.errors,
-        timestamp: result.timestamp,
-      });
-    } catch (error) {
-      console.error("Error syncing listings:", error);
-      res.status(500).json({ 
-        success: false,
-        error: error instanceof Error ? error.message : "Failed to sync listings" 
-      });
-    }
-  });
 
   // Admin: Manually trigger AI summary generation for all properties
   app.post("/api/admin/generate-summaries", adminAuth, async (req, res) => {
