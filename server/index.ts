@@ -167,6 +167,7 @@ Sitemap: ${baseUrl}/sitemap.xml`;
         { url: `${baseUrl}/buy`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
         { url: `${baseUrl}/sell`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
         { url: `${baseUrl}/property-management`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
+        { url: `${baseUrl}/property-management/newark-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.9' },
         
         // Properties and contact
         { url: `${baseUrl}/properties`, lastmod: currentDate, changefreq: 'daily', priority: '0.8' },
