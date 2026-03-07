@@ -63,16 +63,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ? (req.headers['x-forwarded-for'] as string).split(',')[0].trim()
         : req.socket.remoteAddress || 'unknown';
       
+      // Extract GHL-only fields (not persisted to DB)
+      const { additionalTags, noteBody, ...dbFields } = validatedData;
+
       // Prepare data with IP and convert null to undefined for optional fields
       const submissionData = {
-        ...validatedData,
+        ...dbFields,
         ipAddress,
-        phone: validatedData.phone || undefined,
-        emailConsentText: validatedData.emailConsentText || undefined,
-        smsConsentText: validatedData.smsConsentText || undefined,
-        userAgent: validatedData.userAgent || undefined,
-        pageUrl: validatedData.pageUrl || undefined,
-        referrer: validatedData.referrer || undefined
+        phone: dbFields.phone || undefined,
+        emailConsentText: dbFields.emailConsentText || undefined,
+        smsConsentText: dbFields.smsConsentText || undefined,
+        userAgent: dbFields.userAgent || undefined,
+        pageUrl: dbFields.pageUrl || undefined,
+        referrer: dbFields.referrer || undefined,
+        additionalTags,
+        noteBody,
       };
       
       // Process contact form submission with GHL integration

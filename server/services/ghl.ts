@@ -167,8 +167,10 @@ class GoHighLevelService {
     ipAddress?: string;
     evidenceId?: string;
     timestamp?: string;
+    additionalTags?: string[];
+    noteBody?: string;
   }): Promise<GHLContact> {
-    const tags = ['Website Lead', 'Real Estate Inquiry', formData.service];
+    const tags = ['Website Lead', 'Real Estate Inquiry', formData.service, ...(formData.additionalTags || [])];
     
     const timestamp = formData.timestamp || new Date().toISOString();
     const method = formData.method || 'webform';
@@ -235,7 +237,28 @@ class GoHighLevelService {
       }
     }
 
+    // Post note if provided (e.g. property address from landing pages)
+    if (formData.noteBody && formData.noteBody.trim()) {
+      try {
+        await this.addNote(contact.id, formData.noteBody);
+        console.log('📌 Note added to GHL contact:', contact.id);
+      } catch (error) {
+        console.warn('Failed to add note to GHL contact:', error);
+      }
+    }
+
     return contact;
+  }
+
+  /**
+   * Creates a note on a GHL contact
+   */
+  async addNote(contactId: string, body: string): Promise<void> {
+    await this.client.request({
+      method: 'POST',
+      url: `/contacts/${contactId}/notes`,
+      data: { body, userId: '' }
+    });
   }
 
   /**
@@ -279,6 +302,8 @@ class GoHighLevelService {
       referrer?: string;
       ipAddress?: string;
       timestamp?: Date;
+      additionalTags?: string[];
+      noteBody?: string;
     },
     localStorageBackup: (data: any) => Promise<any>
   ): Promise<{
@@ -314,7 +339,9 @@ class GoHighLevelService {
         referrer: formData.referrer,
         ipAddress: formData.ipAddress,
         evidenceId: localContact.id,
-        timestamp
+        timestamp,
+        additionalTags: formData.additionalTags,
+        noteBody: formData.noteBody,
       };
       
       ghlContact = await this.createContactFromForm(ghlFormData);

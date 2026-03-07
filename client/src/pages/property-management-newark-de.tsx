@@ -103,12 +103,14 @@ function LeadForm({ compact = false }: { compact?: boolean }) {
         email: formData.email,
         phone: formData.phone,
         service: "property-management",
-        message: `Property Address: ${formData.propertyAddress}\n\nRequested via Newark DE Property Management landing page.`,
+        message: `Requested via Newark DE Property Management landing page.`,
         method: "webform",
         pageUrl: window.location.href,
         referrer: document.referrer,
         userAgent: navigator.userAgent,
         timestamp: new Date(),
+        additionalTags: ["newark pm lead"],
+        noteBody: `Property Address: ${formData.propertyAddress}`,
       });
     },
     onSuccess: () => {

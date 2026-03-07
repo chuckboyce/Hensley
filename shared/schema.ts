@@ -53,7 +53,9 @@ export const insertContactSchema = createInsertSchema(contacts).pick({
   ipAddress: true,
   timestamp: true,
 }).extend({
-  timestamp: z.coerce.date().optional()
+  timestamp: z.coerce.date().optional(),
+  additionalTags: z.array(z.string()).optional(),
+  noteBody: z.string().optional(),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
