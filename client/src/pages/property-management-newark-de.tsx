@@ -298,8 +298,8 @@ export default function PropertyManagementNewarkDE() {
         {/* ── HERO ── */}
         <section className="relative bg-[#0f2044] text-white overflow-hidden">
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-20"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80')" }}
+            className="absolute inset-0 bg-cover bg-center opacity-25"
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&q=80')" }}
             aria-hidden="true"
           />
           <div className="relative container mx-auto px-4 lg:px-6 py-20">
@@ -322,7 +322,7 @@ export default function PropertyManagementNewarkDE() {
                     </Button>
                   </a>
                   <a href="tel:(302)218-0130">
-                    <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 w-full sm:w-auto">
+                    <Button size="lg" className="bg-transparent border border-white text-white hover:bg-white/10 w-full sm:w-auto">
                       <Phone className="mr-2 h-4 w-4" />
                       (302) 218-0130
                     </Button>
