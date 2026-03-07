@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import newarkHeroImg from "@assets/139SMainExterior-700x526_1772895296116.jpg";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -299,7 +300,7 @@ export default function PropertyManagementNewarkDE() {
         <section className="relative bg-[#0f2044] text-white overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-25"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&q=80')" }}
+            style={{ backgroundImage: `url(${newarkHeroImg})` }}
             aria-hidden="true"
           />
           <div className="relative container mx-auto px-4 lg:px-6 py-20">
