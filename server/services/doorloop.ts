@@ -149,3 +149,54 @@ export function clearRentalListingsCache(): void {
   cachedListings = null;
   cacheExpiry = 0;
 }
+
+export interface CreateOwnerPayload {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  companyName?: string;
+  title?: string;
+}
+
+export interface DoorLoopOwner {
+  id: string;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  name: string;
+  active: boolean;
+  emails: { type: string; address: string }[];
+  phones: { type: string; number: string }[];
+  companyName?: string;
+  title?: string;
+  createdAt: string;
+}
+
+export async function createOwner(payload: CreateOwnerPayload): Promise<DoorLoopOwner> {
+  const body: Record<string, unknown> = {
+    firstName: payload.firstName,
+    lastName: payload.lastName,
+    emails: [{ type: "Primary", address: payload.email }],
+    phones: [{ type: "Mobile", number: payload.phone }],
+    active: false,
+  };
+  if (payload.companyName) body.companyName = payload.companyName;
+  if (payload.title) body.title = payload.title;
+
+  const res = await fetch(`${DOORLOOP_BASE}/owners`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getApiKey()}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`DoorLoop create owner failed (${res.status}): ${text}`);
+  }
+
+  return res.json() as Promise<DoorLoopOwner>;
+}

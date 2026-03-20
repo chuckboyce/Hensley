@@ -8,7 +8,7 @@ import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser
 import { pingSearchEngines } from "./utils/search-engine-ping";
 import { optimizePropertyImage } from "./utils/image-optimizer";
 import { generatePropertySummary } from "./aiSummary";
-import { getActiveRentalListings, clearRentalListingsCache } from "./services/doorloop";
+import { getActiveRentalListings, clearRentalListingsCache, createOwner } from "./services/doorloop";
 import { generateFullPageSchema, generatePropertySchema, generatePropertyListSchema } from "./utils/schemaGenerator";
 import multer from "multer";
 import path from "path";
@@ -120,6 +120,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching DoorLoop rentals:", error);
       res.status(500).json({ success: false, error: "Failed to fetch rental listings" });
+    }
+  });
+
+  // Owner onboarding: create owner in DoorLoop (protected by ONBOARDING_PASSWORD)
+  app.post("/api/onboarding/owner", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const onboardingPassword = process.env.ONBOARDING_PASSWORD;
+    if (!onboardingPassword) {
+      return res.status(500).json({ error: "Onboarding not configured" });
+    }
+    if (!authHeader || authHeader !== `Bearer ${onboardingPassword}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const { firstName, lastName, email, phone, companyName, title } = req.body;
+    if (!firstName || !lastName || !email || !phone) {
+      return res.status(400).json({ error: "firstName, lastName, email, and phone are required" });
+    }
+
+    try {
+      const owner = await createOwner({ firstName, lastName, email, phone, companyName, title });
+      res.json({ success: true, owner });
+    } catch (error) {
+      console.error("Error creating DoorLoop owner:", error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : "Failed to create owner" });
     }
   });
 
