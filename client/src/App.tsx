@@ -100,6 +100,7 @@ const PropertyDetail = lazy(() => import("@/pages/property-detail"));
 const IdxTest = lazy(() => import("@/pages/idx-test"));
 const AdminCms = lazy(() => import("@/pages/admin-cms"));
 const AdminDashboard = lazy(() => import("@/pages/admin-dashboard"));
+const OwnerOnboarding = lazy(() => import("@/pages/owner-onboarding"));
 
 // GoHighLevel Chat Widget Component
 function ChatWidget() {
@@ -159,6 +160,7 @@ function Router() {
         <Route path="/admin/listings" component={AdminListings} />
         <Route path="/admin/manage-listings" component={ManageListings} />
         <Route path="/admin/cms" component={AdminCms} />
+        <Route path="/owner-onboarding" component={OwnerOnboarding} />
         <Route path="/doorloop-test" component={DoorLoopTest} />
         {/* Property routes hidden until IDX approval */}
         {/* <Route path="/properties/:listingKey" component={PropertyDetail} /> */}
