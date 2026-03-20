@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -297,7 +298,12 @@ export default function OwnerOnboarding() {
             <p className="text-muted-foreground text-sm">
               Kevin will be in touch shortly to walk you through the next steps of the onboarding process.
             </p>
-            <div className="mt-8 text-sm text-muted-foreground">
+            <div className="mt-6">
+              <Link href="/">
+                <Button variant="outline" className="w-full">Return Home</Button>
+              </Link>
+            </div>
+            <div className="mt-4 text-sm text-muted-foreground">
               <span className="font-medium">Hensley's Homes</span> &mdash; RE/MAX Eagle Realty<br />
               <a href="tel:3022180130" className="text-primary hover:underline">(302) 218-0130</a>
             </div>
