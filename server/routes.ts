@@ -8,6 +8,7 @@ import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser
 import { pingSearchEngines } from "./utils/search-engine-ping";
 import { optimizePropertyImage } from "./utils/image-optimizer";
 import { generatePropertySummary } from "./aiSummary";
+import { getActiveRentalListings, clearRentalListingsCache } from "./services/doorloop";
 import { generateFullPageSchema, generatePropertySchema, generatePropertyListSchema } from "./utils/schemaGenerator";
 import multer from "multer";
 import path from "path";
@@ -107,6 +108,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
         status: 'error', 
         message: error instanceof Error ? error.message : 'Unknown error' 
       });
+    }
+  });
+
+  // DoorLoop: Get active rental listings
+  app.get("/api/doorloop/rentals", async (req, res) => {
+    try {
+      const forceRefresh = req.query.refresh === "true";
+      const listings = await getActiveRentalListings(forceRefresh);
+      res.json({ success: true, data: listings, total: listings.length });
+    } catch (error) {
+      console.error("Error fetching DoorLoop rentals:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch rental listings" });
+    }
+  });
+
+  // DoorLoop: Force-refresh cache (admin only)
+  app.post("/api/admin/doorloop/refresh", adminAuth, async (req, res) => {
+    try {
+      clearRentalListingsCache();
+      const listings = await getActiveRentalListings(true);
+      res.json({ success: true, message: `Refreshed ${listings.length} rental listings` });
+    } catch (error) {
+      console.error("Error refreshing DoorLoop cache:", error);
+      res.status(500).json({ success: false, error: "Failed to refresh listings" });
     }
   });
 

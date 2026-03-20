@@ -111,6 +111,15 @@
 - Built reusable Local News & Updates component with FAQ JSON-LD schema markup for search engine visibility
 - Integrated Local News section into all 19 community pillar pages with location-specific content filtering
 
+## March 20, 2026 — DoorLoop Rental Listings Integration
+*Connected the website's property listings page directly to the DoorLoop property management system, so all 49 active rental units now appear live under a "For Rent" tab — no manual updates needed. Visitors can see every available rental property and call or submit an inquiry directly from the listing card.*
+
+- Integrated DoorLoop API (`/api/doorloop/rentals`) with a 10-minute cache for fast, reliable page loads
+- Added "For Rent" and "For Sale" tabs to the Properties page so buyers and renters can quickly find what they need
+- Rental cards display address, price, and direct call/inquiry buttons; properties without a posted rent show "Contact for pricing"
+- Added an admin-only cache refresh endpoint so listings can be force-updated on demand
+- DoorLoop service includes typed interfaces, error handling, and falls back gracefully if the API is unavailable
+
 ## February 25, 2026 — Team Page Update & Address Edit Fix
 *Updated the About section to introduce Megan Donahue as a second team member, giving the site a "Meet the Team" feel that better reflects the full Hensley's Homes crew. Also fixed a bug where editing a property's street address in the admin panel appeared to save but wasn't actually being stored.*
 
