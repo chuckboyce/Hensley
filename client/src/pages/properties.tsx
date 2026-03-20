@@ -55,7 +55,7 @@ export default function Properties() {
     staleTime: 10 * 60 * 1000,
   });
 
-  const rentals: RentalListing[] = rentalsResponse?.data ?? [];
+  const rentals: RentalListing[] = (rentalsResponse?.data ?? []).filter((r: RentalListing) => r.marketRent !== null && r.marketRent > 0);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -201,10 +201,6 @@ export default function Properties() {
                                 </div>
                               )}
                             </div>
-                          )}
-
-                          {!rental.marketRent && (
-                            <p className="text-sm text-muted-foreground mb-3">Contact for pricing</p>
                           )}
 
                           {/* Actions */}
