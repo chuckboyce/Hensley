@@ -221,18 +221,6 @@ export default function Properties() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="bg-muted py-16">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-4">Didn't Find What You're Looking For?</h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              I can help you find the perfect property — whether buying, selling, or renting. Get in touch today.
-            </p>
-            <Link href="/contact">
-              <Button size="lg">Contact Kevin Hensley</Button>
-            </Link>
-          </div>
-        </section>
       </main>
 
       <Footer />
