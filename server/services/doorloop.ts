@@ -189,7 +189,7 @@ export async function getActiveRentalListings(forceRefresh = false): Promise<Ren
         .map((p) => p.url);
 
       // Listing URL: public DoorLoop tenant-facing listing page
-      const listingUrl = `https://74458621.app.doorloop.com/listings/${u.property}?listingId=${u.id}`;
+      const listingUrl = `https://74458621.app.doorloop.com/listings/?listingId=${u.id}`;
 
       return {
         id: u.id,
