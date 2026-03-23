@@ -49,6 +49,12 @@ interface DoorLoopUnit {
   updatedAt: string;
 }
 
+interface DoorLoopPicture {
+  fileId: string;
+  rank: number;
+  url: string;
+}
+
 interface DoorLoopProperty {
   id: string;
   name: string;
@@ -57,6 +63,9 @@ interface DoorLoopProperty {
   type: string;
   class: string;
   numActiveUnits?: number;
+  description?: string;
+  pictures?: DoorLoopPicture[];
+  amenities?: string[];
 }
 
 export interface RentalListing {
@@ -77,6 +86,7 @@ export interface RentalListing {
   squareFeet: number | null;
   description: string | null;
   amenities: string[];
+  photos: string[];
   propertyId: string;
   propertyName: string | null;
   propertyType: string | null;
@@ -122,6 +132,14 @@ async function fetchAllProperties(): Promise<Map<string, DoorLoopProperty>> {
   return map;
 }
 
+async function fetchPropertyDetail(propertyId: string): Promise<DoorLoopProperty | null> {
+  try {
+    return await fetchJson<DoorLoopProperty>(`/properties/${propertyId}`);
+  } catch {
+    return null;
+  }
+}
+
 export async function getActiveRentalListings(forceRefresh = false): Promise<RentalListing[]> {
   const now = Date.now();
   if (!forceRefresh && cachedListings && now < cacheExpiry) {
@@ -134,18 +152,45 @@ export async function getActiveRentalListings(forceRefresh = false): Promise<Ren
     fetchAllProperties(),
   ]);
 
-  const listings: RentalListing[] = units
-    .filter((u) => u.active && (u.rentalApplicationListing?.activeListing === true || u.listing?.activeListing === true))
+  const activeUnits = units.filter(
+    (u) => u.active && (u.rentalApplicationListing?.activeListing === true || u.listing?.activeListing === true)
+  );
+
+  // Fetch individual property records (with photos + description) for active units only
+  const uniquePropertyIds = [...new Set(activeUnits.map((u) => u.property))];
+  const detailedProperties = await Promise.all(uniquePropertyIds.map(fetchPropertyDetail));
+  const detailedMap = new Map<string, DoorLoopProperty>();
+  for (const p of detailedProperties) {
+    if (p) detailedMap.set(p.id, p);
+  }
+
+  const listings: RentalListing[] = activeUnits
     .map((u) => {
-      const prop = propertiesMap.get(u.property);
+      const prop = detailedMap.get(u.property) ?? propertiesMap.get(u.property);
       const beds = u.beds || u.numBedrooms || null;
       const baths = u.baths || u.numBathrooms || null;
       const sqft = u.size || u.squareFeet || null;
       const rent = u.marketRent ?? u.listing?.rent ?? null;
       const deposit = u.listing?.deposit ?? null;
       const dateAvailable = u.listing?.dateAvailable ?? null;
-      const description = u.description && u.description.trim() ? u.description.trim() : null;
-      const amenities = u.amenities ?? [];
+
+      // Description: prefer property-level (richer), fall back to unit-level
+      const rawDesc = prop?.description?.trim() || u.description?.trim() || null;
+      const description = rawDesc && rawDesc.length > 0 ? rawDesc : null;
+
+      // Merge unit amenities + property amenities, deduplicated
+      const unitAmenities = u.amenities ?? [];
+      const propAmenities = prop?.amenities ?? [];
+      const amenities = [...new Set([...unitAmenities, ...propAmenities])];
+
+      // Photos sorted by rank
+      const photos = (prop?.pictures ?? [])
+        .sort((a, b) => a.rank - b.rank)
+        .map((p) => p.url);
+
+      // Listing URL: public DoorLoop listing page
+      const listingUrl = `https://app.doorloop.com/listings/${u.property}`;
+
       return {
         id: u.id,
         name: u.name,
@@ -164,10 +209,11 @@ export async function getActiveRentalListings(forceRefresh = false): Promise<Ren
         squareFeet: sqft && sqft > 0 ? sqft : null,
         description,
         amenities,
+        photos,
         propertyId: u.property,
         propertyName: prop?.name ?? null,
         propertyType: prop?.type ?? null,
-        listingUrl: `https://app.doorloop.com/listings/${u.property}`,
+        listingUrl,
         updatedAt: u.updatedAt,
       };
     })

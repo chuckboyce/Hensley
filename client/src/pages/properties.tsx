@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useLocation, Link } from "wouter";
-import { Bed, Bath, Square, MapPin, Home, Phone, Calendar, DollarSign, Wifi, Wind, Car, ChefHat } from "lucide-react";
+import { Bed, Bath, Square, MapPin, Home, Phone, Calendar, DollarSign, ExternalLink } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { ResponsivePropertyImage } from "@/components/responsive-property-image";
@@ -31,6 +31,7 @@ interface RentalListing {
   squareFeet: number | null;
   description: string | null;
   amenities: string[];
+  photos: string[];
   propertyId: string;
   propertyName: string | null;
   propertyType: string | null;
@@ -159,12 +160,24 @@ export default function Properties() {
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {rentals.map((rental) => (
                       <Card key={rental.id} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
-                        {/* Header band with price */}
-                        <div className="relative bg-gradient-to-br from-primary/10 to-primary/20 px-5 py-4 flex items-center justify-between">
-                          <Badge className="bg-blue-600 hover:bg-blue-600 text-white font-bold text-xs">FOR RENT</Badge>
+                        {/* Photo or gradient fallback */}
+                        <div className="relative h-52 bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center overflow-hidden">
+                          {rental.photos.length > 0 ? (
+                            <img
+                              src={rental.photos[0]}
+                              alt={rental.street}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <Home className="h-16 w-16 text-primary/30" />
+                          )}
+                          <Badge className="absolute top-3 left-3 bg-blue-600 hover:bg-blue-600 text-white font-bold text-xs shadow">FOR RENT</Badge>
                           {rental.marketRent && (
-                            <div className="text-xl font-bold text-foreground">
-                              ${rental.marketRent.toLocaleString()}<span className="text-sm font-normal text-muted-foreground">/mo</span>
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-3">
+                              <span className="text-white text-xl font-bold">
+                                ${rental.marketRent.toLocaleString()}<span className="text-sm font-normal opacity-80">/mo</span>
+                              </span>
                             </div>
                           )}
                         </div>
@@ -240,18 +253,31 @@ export default function Properties() {
                           )}
 
                           {/* Actions */}
-                          <div className="flex gap-2 mt-auto pt-1">
-                            <a href="tel:3022180130" className="flex-1">
-                              <Button variant="outline" className="w-full" size="sm">
-                                <Phone className="h-3.5 w-3.5 mr-1.5" />
-                                Call to Show
+                          <div className="flex flex-col gap-2 mt-auto pt-1">
+                            <a
+                              href={rental.listingUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full"
+                            >
+                              <Button className="w-full" size="sm">
+                                <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
+                                View Full Listing
                               </Button>
                             </a>
-                            <Link href={`/contact?rental=${rental.id}&address=${encodeURIComponent(rental.street)}`} className="flex-1">
-                              <Button className="w-full" size="sm">
-                                Request Info
-                              </Button>
-                            </Link>
+                            <div className="flex gap-2">
+                              <a href="tel:3022180130" className="flex-1">
+                                <Button variant="outline" className="w-full" size="sm">
+                                  <Phone className="h-3.5 w-3.5 mr-1.5" />
+                                  Call to Show
+                                </Button>
+                              </a>
+                              <Link href={`/contact?rental=${rental.id}&address=${encodeURIComponent(rental.street)}`} className="flex-1">
+                                <Button variant="outline" className="w-full" size="sm">
+                                  Request Info
+                                </Button>
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       </Card>
