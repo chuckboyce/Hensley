@@ -3,8 +3,9 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLocation, Link } from "wouter";
-import { Bed, Bath, Square, MapPin, Home, Phone, Calendar, DollarSign, ExternalLink } from "lucide-react";
+import { Bed, Bath, Square, MapPin, Home, Phone, Calendar, DollarSign, ExternalLink, X } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { ResponsivePropertyImage } from "@/components/responsive-property-image";
@@ -42,6 +43,7 @@ interface RentalListing {
 export default function Properties() {
   const [, setLocation] = useLocation();
   const [tab, setTab] = useState<Tab>("rent");
+  const [listingModal, setListingModal] = useState<{ url: string; address: string } | null>(null);
 
   const { data: properties, isLoading: saleLoading } = useQuery({
     queryKey: ['/api/properties'],
@@ -254,17 +256,14 @@ export default function Properties() {
 
                           {/* Actions */}
                           <div className="flex flex-col gap-2 mt-auto pt-1">
-                            <a
-                              href={rental.listingUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <Button
                               className="w-full"
+                              size="sm"
+                              onClick={() => setListingModal({ url: rental.listingUrl, address: rental.street })}
                             >
-                              <Button className="w-full" size="sm">
-                                <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
-                                View Full Listing
-                              </Button>
-                            </a>
+                              <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
+                              View Full Listing
+                            </Button>
                             <div className="flex gap-2">
                               <a href="tel:3022180130" className="flex-1">
                                 <Button variant="outline" className="w-full" size="sm">
@@ -439,6 +438,25 @@ export default function Properties() {
       </main>
 
       <Footer />
+
+      {/* DoorLoop Listing Modal */}
+      <Dialog open={!!listingModal} onOpenChange={(open) => !open && setListingModal(null)}>
+        <DialogContent className="max-w-4xl w-full h-[90vh] p-0 flex flex-col gap-0">
+          <DialogHeader className="px-5 py-3 border-b flex-shrink-0">
+            <DialogTitle className="text-base font-semibold truncate">
+              {listingModal?.address}
+            </DialogTitle>
+          </DialogHeader>
+          {listingModal && (
+            <iframe
+              src={listingModal.url}
+              className="flex-1 w-full border-0"
+              title={listingModal.address}
+              allow="payment"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
