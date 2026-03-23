@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { Bed, Bath, Square, MapPin } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -16,7 +16,6 @@ type Tab = "sale" | "rent";
 const DOORLOOP_LISTINGS_URL = "https://74458621.app.doorloop.com/listings/";
 
 export default function Properties() {
-  const [, setLocation] = useLocation();
   const [tab, setTab] = useState<Tab>("rent");
 
   const { data: properties, isLoading: saleLoading } = useQuery({
@@ -57,11 +56,6 @@ export default function Properties() {
                 }`}
               >
                 For Rent
-                {rentals.length > 0 && (
-                  <span className="ml-2 bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full">
-                    {rentals.length}
-                  </span>
-                )}
               </button>
               <button
                 onClick={() => setTab("sale")}
