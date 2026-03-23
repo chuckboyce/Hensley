@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link, useLocation } from "wouter";
-import { Bed, Bath, Square, MapPin, Home, Phone, Calendar, DollarSign, ExternalLink } from "lucide-react";
+import { Bed, Bath, Square, MapPin } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { ResponsivePropertyImage } from "@/components/responsive-property-image";
@@ -13,31 +13,7 @@ import comingSoonImage from "@assets/generated-image (1)_1762730474875.png";
 
 type Tab = "sale" | "rent";
 
-interface RentalListing {
-  id: string;
-  name: string;
-  street: string;
-  street2: string;
-  city: string;
-  state: string;
-  zip: string;
-  lat: number | null;
-  lng: number | null;
-  marketRent: number | null;
-  deposit: number | null;
-  dateAvailable: string | null;
-  bedrooms: number | null;
-  bathrooms: number | null;
-  squareFeet: number | null;
-  description: string | null;
-  amenities: string[];
-  photos: string[];
-  propertyId: string;
-  propertyName: string | null;
-  propertyType: string | null;
-  listingUrl: string;
-  updatedAt: string;
-}
+const DOORLOOP_LISTINGS_URL = "https://74458621.app.doorloop.com/listings/";
 
 export default function Properties() {
   const [, setLocation] = useLocation();
@@ -51,20 +27,6 @@ export default function Properties() {
       return response.json();
     }
   });
-
-  const { data: rentalsResponse, isLoading: rentLoading } = useQuery({
-    queryKey: ['/api/doorloop/rentals'],
-    queryFn: async () => {
-      const response = await fetch('/api/doorloop/rentals');
-      if (!response.ok) throw new Error('Failed to fetch rentals');
-      return response.json();
-    },
-    staleTime: 10 * 60 * 1000,
-  });
-
-  const rentals: RentalListing[] = (rentalsResponse?.data ?? []).filter(
-    (r: RentalListing) => r.marketRent !== null && r.marketRent > 0
-  );
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -125,172 +87,15 @@ export default function Properties() {
 
             {/* ── FOR RENT TAB ── */}
             {tab === "rent" && (
-              <>
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold">Rental Properties</h2>
-                  <p className="text-muted-foreground mt-1">
-                    Available rentals managed by Hensley's Homes across Delaware
-                  </p>
-                </div>
-
-                {rentLoading ? (
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {Array.from({ length: 6 }).map((_, i) => (
-                      <Card key={i} className="overflow-hidden animate-pulse">
-                        <div className="h-52 bg-muted" />
-                        <div className="p-5 space-y-3">
-                          <div className="h-5 bg-muted rounded w-1/2" />
-                          <div className="h-4 bg-muted rounded w-3/4" />
-                          <div className="h-4 bg-muted rounded w-1/2" />
-                          <div className="h-9 bg-muted rounded" />
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                ) : rentals.length === 0 ? (
-                  <Card className="p-12 text-center">
-                    <Home className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                    <p className="text-xl text-muted-foreground mb-4">No rental listings at this time</p>
-                    <p className="text-sm text-muted-foreground">Contact us to join our waitlist for upcoming rentals</p>
-                    <Link href="/contact">
-                      <Button className="mt-6">Contact Us</Button>
-                    </Link>
-                  </Card>
-                ) : (
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {rentals.map((rental) => (
-                      <Card key={rental.id} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
-                        {/* Photo */}
-                        <div className="relative h-52 bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center overflow-hidden">
-                          {rental.photos.length > 0 ? (
-                            <img
-                              src={rental.photos[0]}
-                              alt={rental.street}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
-                            />
-                          ) : (
-                            <Home className="h-16 w-16 text-primary/30" />
-                          )}
-                          <Badge className="absolute top-3 left-3 bg-blue-600 hover:bg-blue-600 text-white font-bold text-xs shadow">
-                            FOR RENT
-                          </Badge>
-                          {rental.marketRent && (
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-3">
-                              <span className="text-white text-xl font-bold">
-                                ${rental.marketRent.toLocaleString()}
-                                <span className="text-sm font-normal opacity-80">/mo</span>
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="p-5 flex flex-col flex-1 gap-3">
-                          {/* Address */}
-                          <div className="flex items-start gap-2">
-                            <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-muted-foreground" />
-                            <div>
-                              <div className="font-semibold text-foreground leading-tight">{rental.street}</div>
-                              {rental.street2 && <div className="text-sm text-muted-foreground">{rental.street2}</div>}
-                              <div className="text-sm text-muted-foreground">{rental.city}, {rental.state} {rental.zip}</div>
-                            </div>
-                          </div>
-
-                          {/* Beds / Baths / Sqft */}
-                          {(rental.bedrooms || rental.bathrooms || rental.squareFeet) && (
-                            <div className="flex flex-wrap gap-3 py-2 border-y">
-                              {rental.bedrooms && (
-                                <div className="flex items-center gap-1 text-sm">
-                                  <Bed className="h-4 w-4 text-muted-foreground" />
-                                  {rental.bedrooms} Bed{rental.bedrooms !== 1 ? "s" : ""}
-                                </div>
-                              )}
-                              {rental.bathrooms && (
-                                <div className="flex items-center gap-1 text-sm">
-                                  <Bath className="h-4 w-4 text-muted-foreground" />
-                                  {rental.bathrooms} Bath{rental.bathrooms !== 1 ? "s" : ""}
-                                </div>
-                              )}
-                              {rental.squareFeet && (
-                                <div className="flex items-center gap-1 text-sm">
-                                  <Square className="h-4 w-4 text-muted-foreground" />
-                                  {rental.squareFeet.toLocaleString()} sq ft
-                                </div>
-                              )}
-                            </div>
-                          )}
-
-                          {/* Description */}
-                          {rental.description && (
-                            <p className="text-sm text-muted-foreground line-clamp-3">{rental.description}</p>
-                          )}
-
-                          {/* Deposit + Available date */}
-                          <div className="flex flex-wrap gap-3">
-                            {rental.deposit && (
-                              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                                <DollarSign className="h-3.5 w-3.5" />
-                                Deposit: ${rental.deposit.toLocaleString()}
-                              </div>
-                            )}
-                            {rental.dateAvailable && (
-                              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                                <Calendar className="h-3.5 w-3.5" />
-                                Available: {new Date(rental.dateAvailable).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Amenities */}
-                          {rental.amenities.length > 0 && (
-                            <div className="flex flex-wrap gap-1.5">
-                              {rental.amenities.slice(0, 6).map((a) => (
-                                <span key={a} className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full">
-                                  {a.replace(/([A-Z])/g, " $1").trim()}
-                                </span>
-                              ))}
-                              {rental.amenities.length > 6 && (
-                                <span className="text-xs text-muted-foreground px-1 py-0.5">
-                                  +{rental.amenities.length - 6} more
-                                </span>
-                              )}
-                            </div>
-                          )}
-
-                          {/* Actions */}
-                          <div className="flex flex-col gap-2 mt-auto pt-1">
-                            <a href={rental.listingUrl} target="_blank" rel="noopener noreferrer" className="w-full">
-                              <Button className="w-full" size="sm">
-                                <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
-                                View Full Listing
-                              </Button>
-                            </a>
-                            <div className="flex gap-2">
-                              <a href="tel:3022180130" className="flex-1">
-                                <Button variant="outline" className="w-full" size="sm">
-                                  <Phone className="h-3.5 w-3.5 mr-1.5" />
-                                  Call to Show
-                                </Button>
-                              </a>
-                              <Link href={`/contact?rental=${rental.id}&address=${encodeURIComponent(rental.street)}`} className="flex-1">
-                                <Button variant="outline" className="w-full" size="sm">
-                                  Request Info
-                                </Button>
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                )}
-
-                <div className="mt-10 p-5 bg-muted rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground">
-                    Rental listings are updated in real time from our property management system. Availability is subject to change. Contact us to confirm current availability and schedule a showing.
-                  </p>
-                </div>
-              </>
+              <div className="-mx-4">
+                <iframe
+                  src={DOORLOOP_LISTINGS_URL}
+                  className="w-full border-0"
+                  style={{ minHeight: "900px" }}
+                  title="Available Rental Properties"
+                  allow="payment"
+                />
+              </div>
             )}
 
             {/* ── FOR SALE TAB ── */}
