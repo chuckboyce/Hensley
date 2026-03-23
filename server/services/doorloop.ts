@@ -27,9 +27,23 @@ interface DoorLoopUnit {
   marketRent?: number;
   property: string;
   rentalApplicationListing?: { activeListing: boolean };
+  listing?: {
+    activeListing: boolean;
+    dateAvailable?: string;
+    rent?: number;
+    deposit?: number;
+  };
+  listed?: boolean;
+  // beds/baths/size come back as these names on active listing units
+  beds?: number;
+  baths?: number;
+  size?: number;
+  // legacy field names (may still appear)
   numBedrooms?: number;
   numBathrooms?: number;
   squareFeet?: number;
+  description?: string;
+  amenities?: string[];
   inEviction: boolean;
   createdAt: string;
   updatedAt: string;
@@ -53,10 +67,16 @@ export interface RentalListing {
   city: string;
   state: string;
   zip: string;
+  lat: number | null;
+  lng: number | null;
   marketRent: number | null;
+  deposit: number | null;
+  dateAvailable: string | null;
   bedrooms: number | null;
   bathrooms: number | null;
   squareFeet: number | null;
+  description: string | null;
+  amenities: string[];
   propertyId: string;
   propertyName: string | null;
   propertyType: string | null;
@@ -115,9 +135,17 @@ export async function getActiveRentalListings(forceRefresh = false): Promise<Ren
   ]);
 
   const listings: RentalListing[] = units
-    .filter((u) => u.active && u.rentalApplicationListing?.activeListing === true)
+    .filter((u) => u.active && (u.rentalApplicationListing?.activeListing === true || u.listing?.activeListing === true))
     .map((u) => {
       const prop = propertiesMap.get(u.property);
+      const beds = u.beds || u.numBedrooms || null;
+      const baths = u.baths || u.numBathrooms || null;
+      const sqft = u.size || u.squareFeet || null;
+      const rent = u.marketRent ?? u.listing?.rent ?? null;
+      const deposit = u.listing?.deposit ?? null;
+      const dateAvailable = u.listing?.dateAvailable ?? null;
+      const description = u.description && u.description.trim() ? u.description.trim() : null;
+      const amenities = u.amenities ?? [];
       return {
         id: u.id,
         name: u.name,
@@ -126,10 +154,16 @@ export async function getActiveRentalListings(forceRefresh = false): Promise<Ren
         city: u.address.city,
         state: u.address.state,
         zip: u.address.zip,
-        marketRent: u.marketRent ?? null,
-        bedrooms: u.numBedrooms ?? null,
-        bathrooms: u.numBathrooms ?? null,
-        squareFeet: u.squareFeet ?? null,
+        lat: u.address.lat ?? null,
+        lng: u.address.lng ?? null,
+        marketRent: rent,
+        deposit,
+        dateAvailable,
+        bedrooms: beds && beds > 0 ? beds : null,
+        bathrooms: baths && baths > 0 ? baths : null,
+        squareFeet: sqft && sqft > 0 ? sqft : null,
+        description,
+        amenities,
         propertyId: u.property,
         propertyName: prop?.name ?? null,
         propertyType: prop?.type ?? null,

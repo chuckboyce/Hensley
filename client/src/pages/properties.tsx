@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useLocation, Link } from "wouter";
-import { Bed, Bath, Square, MapPin, Home, ExternalLink, Phone } from "lucide-react";
+import { Bed, Bath, Square, MapPin, Home, Phone, Calendar, DollarSign, Wifi, Wind, Car, ChefHat } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { ResponsivePropertyImage } from "@/components/responsive-property-image";
@@ -21,10 +21,16 @@ interface RentalListing {
   city: string;
   state: string;
   zip: string;
+  lat: number | null;
+  lng: number | null;
   marketRent: number | null;
+  deposit: number | null;
+  dateAvailable: string | null;
   bedrooms: number | null;
   bathrooms: number | null;
   squareFeet: number | null;
+  description: string | null;
+  amenities: string[];
   propertyId: string;
   propertyName: string | null;
   propertyType: string | null;
@@ -153,45 +159,40 @@ export default function Properties() {
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {rentals.map((rental) => (
                       <Card key={rental.id} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
-                        {/* Image placeholder */}
-                        <div className="relative h-48 bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center">
-                          <Home className="h-16 w-16 text-primary/30" />
-                          <Badge className="absolute top-3 left-3 bg-blue-600 hover:bg-blue-600 text-white font-bold">
-                            FOR RENT
-                          </Badge>
+                        {/* Header band with price */}
+                        <div className="relative bg-gradient-to-br from-primary/10 to-primary/20 px-5 py-4 flex items-center justify-between">
+                          <Badge className="bg-blue-600 hover:bg-blue-600 text-white font-bold text-xs">FOR RENT</Badge>
                           {rental.marketRent && (
-                            <div className="absolute bottom-3 left-3 bg-black/70 text-white text-lg font-bold px-3 py-1 rounded-lg">
-                              ${rental.marketRent.toLocaleString()}<span className="text-sm font-normal">/mo</span>
+                            <div className="text-xl font-bold text-foreground">
+                              ${rental.marketRent.toLocaleString()}<span className="text-sm font-normal text-muted-foreground">/mo</span>
                             </div>
                           )}
                         </div>
 
-                        <div className="p-5 flex flex-col flex-1">
+                        <div className="p-5 flex flex-col flex-1 gap-3">
                           {/* Address */}
-                          <div className="flex items-start gap-2 mb-3">
+                          <div className="flex items-start gap-2">
                             <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-muted-foreground" />
                             <div>
                               <div className="font-semibold text-foreground leading-tight">{rental.street}</div>
                               {rental.street2 && <div className="text-sm text-muted-foreground">{rental.street2}</div>}
-                              <div className="text-sm text-muted-foreground">
-                                {rental.city}, {rental.state} {rental.zip}
-                              </div>
+                              <div className="text-sm text-muted-foreground">{rental.city}, {rental.state} {rental.zip}</div>
                             </div>
                           </div>
 
-                          {/* Stats row — show if any data available */}
+                          {/* Beds / Baths / Sqft */}
                           {(rental.bedrooms || rental.bathrooms || rental.squareFeet) && (
-                            <div className="flex flex-wrap gap-3 mb-3 pb-3 border-b">
+                            <div className="flex flex-wrap gap-3 py-2 border-y">
                               {rental.bedrooms && (
                                 <div className="flex items-center gap-1 text-sm">
                                   <Bed className="h-4 w-4 text-muted-foreground" />
-                                  {rental.bedrooms} Beds
+                                  {rental.bedrooms} Bed{rental.bedrooms !== 1 ? "s" : ""}
                                 </div>
                               )}
                               {rental.bathrooms && (
                                 <div className="flex items-center gap-1 text-sm">
                                   <Bath className="h-4 w-4 text-muted-foreground" />
-                                  {rental.bathrooms} Baths
+                                  {rental.bathrooms} Bath{rental.bathrooms !== 1 ? "s" : ""}
                                 </div>
                               )}
                               {rental.squareFeet && (
@@ -203,12 +204,47 @@ export default function Properties() {
                             </div>
                           )}
 
+                          {/* Description */}
+                          {rental.description && (
+                            <p className="text-sm text-muted-foreground line-clamp-3">{rental.description}</p>
+                          )}
+
+                          {/* Deposit + Available date */}
+                          <div className="flex flex-wrap gap-3">
+                            {rental.deposit && (
+                              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                                <DollarSign className="h-3.5 w-3.5" />
+                                Deposit: ${rental.deposit.toLocaleString()}
+                              </div>
+                            )}
+                            {rental.dateAvailable && (
+                              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                                <Calendar className="h-3.5 w-3.5" />
+                                Available: {new Date(rental.dateAvailable).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Amenities */}
+                          {rental.amenities.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5">
+                              {rental.amenities.slice(0, 6).map((a) => (
+                                <span key={a} className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full">
+                                  {a.replace(/([A-Z])/g, " $1").trim()}
+                                </span>
+                              ))}
+                              {rental.amenities.length > 6 && (
+                                <span className="text-xs text-muted-foreground px-1 py-0.5">+{rental.amenities.length - 6} more</span>
+                              )}
+                            </div>
+                          )}
+
                           {/* Actions */}
-                          <div className="flex gap-2 mt-auto">
+                          <div className="flex gap-2 mt-auto pt-1">
                             <a href="tel:3022180130" className="flex-1">
                               <Button variant="outline" className="w-full" size="sm">
                                 <Phone className="h-3.5 w-3.5 mr-1.5" />
-                                Schedule Showing
+                                Call to Show
                               </Button>
                             </a>
                             <Link href={`/contact?rental=${rental.id}&address=${encodeURIComponent(rental.street)}`} className="flex-1">
