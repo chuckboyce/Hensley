@@ -10,8 +10,8 @@ interface PageMeta {
 
 const PAGE_META: Record<string, PageMeta> = {
   '/': {
-    title: "Kevin Hensley's Homes - Delaware & Maryland Real Estate | Property Management",
-    description: "Kevin Hensley's Homes provides expert real estate services in Delaware and Maryland. Specializing in home sales, property management, and investment consulting. Contact us for a free consultation today."
+    title: "Kevin Hensley's Homes | Delaware & Maryland Real Estate",
+    description: "Buy, sell, or manage property in Delaware and Maryland with Kevin Hensley's Homes. Expert real estate services, property management, and investment consulting. Free consultation."
   },
   '/buy': {
     title: "Buy a Home in Delaware & Maryland - Kevin Hensley's Homes",
@@ -52,6 +52,86 @@ const PAGE_META: Record<string, PageMeta> = {
   '/terms-of-use': {
     title: "Terms of Use - Kevin Hensley's Homes",
     description: "Review the terms and conditions for using the Kevin Hensley's Homes website and services."
+  },
+  '/areas': {
+    title: "Delaware & Maryland Service Areas | Kevin Hensley's Homes",
+    description: "Hensley's Homes serves buyers and sellers across Delaware and Maryland — from Middletown and Wilmington to Elkton and Chesapeake City. Find your community."
+  },
+  '/areas/bear-de': {
+    title: "Bear, DE Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Find homes for sale in Bear, Delaware. Family-friendly neighborhoods, easy I-95 access, and top schools in New Castle County. Your local Bear DE real estate expert."
+  },
+  '/areas/smyrna-de': {
+    title: "Smyrna, DE Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Explore homes for sale in Smyrna, Delaware. Affordable prices, growing amenities, and access to Routes 1 and 13. Expert guidance from your local Smyrna real estate agent."
+  },
+  '/areas/townsend-de': {
+    title: "Townsend, DE Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Discover homes for sale in Townsend, Delaware. Golf-course communities, new construction, and Appoquinimink schools. Kevin Hensley — your Townsend DE real estate expert."
+  },
+  '/areas/hockessin-de': {
+    title: "Hockessin, DE Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Browse luxury homes for sale in Hockessin, Delaware. Upscale neighborhoods, top-rated schools, and scenic landscapes near Wilmington. Your Hockessin real estate specialist."
+  },
+  '/areas/new-castle-de': {
+    title: "New Castle, DE Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Find homes for sale in New Castle, Delaware. Historic districts, riverfront living, and affordable prices near Wilmington and I-95. Local expertise from Kevin Hensley."
+  },
+  '/areas/odessa-de': {
+    title: "Odessa, DE Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Explore charming homes for sale in Odessa, Delaware. Preserved historic village, golf communities, and Appoquinimink schools. Your Odessa DE real estate guide."
+  },
+  '/areas/delaware-city-de': {
+    title: "Delaware City, DE Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Find waterfront and historic homes for sale in Delaware City, DE. Riverfront access, marina lifestyle, and unique character. Expert real estate guidance from Kevin Hensley."
+  },
+  '/areas/north-star-de': {
+    title: "North Star, DE Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Browse upscale homes for sale in North Star, Delaware. Luxury neighborhoods near Pike Creek, top schools, and easy Wilmington commute. Your North Star real estate expert."
+  },
+  '/areas/centreville-de': {
+    title: "Centreville, DE Real Estate: Luxury Homes & Estates | Hensley's Homes",
+    description: "Discover luxury homes and estates for sale in Centreville, Delaware. Colonial architecture, rolling landscapes, and proximity to Greenville amenities. Kevin Hensley, your guide."
+  },
+  '/areas/wilmington-de': {
+    title: "Wilmington, DE Real Estate: Homes for Sale & Neighborhoods | Hensley's Homes",
+    description: "Find homes for sale in Wilmington, Delaware. Walkable historic neighborhoods, strong job market, and median prices around $325K. Expert guidance from Kevin Hensley."
+  },
+  '/areas/wilmington-de/north-wilmington': {
+    title: "North Wilmington, DE Homes for Sale | Kevin Hensley's Homes",
+    description: "Explore homes for sale in North Wilmington, Delaware. Mature suburban neighborhoods, top schools, and easy access to Wilmington's employment centers."
+  },
+  '/areas/wilmington-de/highlands': {
+    title: "Highlands Neighborhood Wilmington, DE Homes for Sale | Hensley's Homes",
+    description: "Find historic luxury homes in the Highlands neighborhood of Wilmington, DE. Tree-lined streets, elegant architecture, and walkable to Brandywine Park."
+  },
+  '/areas/wilmington-de/forty-acres': {
+    title: "Forty Acres Neighborhood Wilmington, DE Homes for Sale | Hensley's Homes",
+    description: "Browse homes for sale in the Forty Acres neighborhood of Wilmington, Delaware. Historic rowhomes, community character, and affordable entry-level prices."
+  },
+  '/areas/wilmington-de/trolley-square': {
+    title: "Trolley Square Wilmington, DE Homes for Sale | Hensley's Homes",
+    description: "Discover homes for sale in Trolley Square, Wilmington DE. Walkable shops and dining, charming row homes, and a vibrant urban neighborhood lifestyle."
+  },
+  '/areas/chesapeake-city-md': {
+    title: "Chesapeake City, MD Real Estate: Waterfront Homes for Sale | Hensley's Homes",
+    description: "Find waterfront and Victorian homes for sale in Chesapeake City, Maryland. Canal-side living, boating lifestyle, and charming boutique town. Kevin Hensley, your MD real estate expert."
+  },
+  '/areas/elkton-md': {
+    title: "Elkton, MD Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Explore homes for sale in Elkton, Maryland. Suburban neighborhoods, golf communities, and easy access to I-95 and the Delaware border. Hensley's Homes — your Elkton MD guide."
+  },
+  '/areas/north-east-md': {
+    title: "North East, MD Real Estate: Waterfront Homes for Sale | Hensley's Homes",
+    description: "Find waterfront and single-family homes for sale in North East, Maryland. Chesapeake Bay lifestyle, marina access, and a walkable Main Street. Your North East MD real estate expert."
+  },
+  '/areas/perryville-md': {
+    title: "Perryville, MD Real Estate: Homes for Sale & Community Guide | Hensley's Homes",
+    description: "Browse homes for sale in Perryville, Maryland. Waterfront living, MARC rail access, and easy I-95 commutes to Baltimore or Wilmington. Kevin Hensley — your Perryville MD guide."
+  },
+  '/property-management/newark-de': {
+    title: "Property Management in Newark, DE | Kevin Hensley's Homes",
+    description: "Professional property management services in Newark, Delaware. Tenant screening, rent collection, and maintenance coordination for Newark rental property owners."
   }
 };
 

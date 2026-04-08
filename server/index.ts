@@ -139,10 +139,8 @@ app.use((req, res, next) => {
 
   // Robots.txt route - must be before Vite middleware
   app.get("/robots.txt", (req, res) => {
-    // Use request host or fallback to production domain
-    const protocol = req.protocol;
-    const host = req.get('host') || 'hensleyshomes.com';
-    const baseUrl = `${protocol}://${host}`;
+    // Always use https for production domain
+    const baseUrl = "https://hensleyshomes.com";
     
     const robotsTxt = `# https://www.robotstxt.org/robotstxt.html
 User-agent: *
