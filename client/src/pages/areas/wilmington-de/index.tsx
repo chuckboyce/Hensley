@@ -177,8 +177,6 @@ export default function WilmingtonDE() {
           </div>
           <div className="relative z-10 container mx-auto px-4 text-center text-white">
             <div>
-              {/* Visually hidden H1 for SEO — display text preserved below */}
-              <h1 className="sr-only">Wilmington, DE Real Estate: Homes for Sale &amp; Neighborhoods</h1>
               <p className="text-sm uppercase tracking-[0.3em] text-white/80 mb-2">
                 Discover
               </p>
