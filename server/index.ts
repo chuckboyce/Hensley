@@ -7,6 +7,25 @@ import fs from "fs";
 import path from "path";
 
 const app = express();
+
+// Trust Cloudflare proxy — required for x-forwarded-proto to work correctly
+app.set('trust proxy', 1);
+
+// HTTPS enforcement — respects x-forwarded-proto set by Cloudflare
+// Without this, Replit's platform redirects to https://host:443 (broken)
+app.use((req, res, next) => {
+  const proto = req.headers['x-forwarded-proto'];
+  // If Cloudflare says the visitor is already on HTTPS, don't redirect
+  if (proto === 'https' || req.secure) {
+    return next();
+  }
+  // Only redirect if this is a real HTTP request (not from Cloudflare)
+  // In production behind Cloudflare Flexible, proto will always be 'https'
+  // so this block is effectively unreachable in production
+  const host = req.headers.host?.replace(/:443$/, '') || 'hensleyshomes.com';
+  return res.redirect(301, `https://${host}${req.url}`);
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
