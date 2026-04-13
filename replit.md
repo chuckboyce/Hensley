@@ -120,6 +120,15 @@
 - Added an admin-only cache refresh endpoint so listings can be force-updated on demand
 - DoorLoop service includes typed interfaces, error handling, and falls back gracefully if the API is unavailable
 
+## April 13, 2026 — New Community Pages: Glasgow, Newark & Clayton
+*Added three fully-built community pages for Glasgow, Newark, and Clayton, Delaware — resolving Google Search Console soft 404 errors on all three URLs and turning previously broken pages into valuable SEO assets. Each page includes neighborhood guides, commute times, price ranges, local resource links, and a local news section.*
+
+- Built `/areas/glasgow-de` — covers Glasgow's Route 40 corridor, I-95 access, Christina School District, and neighborhoods like Glasgow Pines and Beckett's Run
+- Built `/areas/newark-de` — covers University of Delaware area, Main Street, six distinct neighborhoods, and the city's diverse $250K–$530K+ housing market
+- Built `/areas/clayton-de` — covers Kent County's affordable small-town market, Smyrna School District, and Route 13 connectivity
+- All three pages registered in the app router and added to the sitemap for Google indexing
+- Fixed Content Security Policy to allow DoorLoop iframe embedding and SmallBiz tracking script
+
 ## February 25, 2026 — Team Page Update & Address Edit Fix
 *Updated the About section to introduce Megan Donahue as a second team member, giving the site a "Meet the Team" feel that better reflects the full Hensley's Homes crew. Also fixed a bug where editing a property's street address in the admin panel appeared to save but wasn't actually being stored.*
 

@@ -188,6 +188,9 @@ Sitemap: ${baseUrl}/sitemap.xml`;
         { url: `${baseUrl}/areas/delaware-city-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/centreville-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/north-star-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/glasgow-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/newark-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
+        { url: `${baseUrl}/areas/clayton-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         
         // Wilmington and sub-neighborhoods
         { url: `${baseUrl}/areas/wilmington-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },

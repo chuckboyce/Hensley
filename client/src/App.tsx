@@ -77,6 +77,9 @@ import DelawareCityDE from "@/pages/areas/delaware-city-de";
 import CentrevilleDe from "@/pages/areas/centreville-de";
 import CentrevilleMisspelled from "@/pages/areas/centerville-de";
 import NorthStarDE from "@/pages/areas/north-star-de";
+import GlasgowDE from "@/pages/areas/glasgow-de";
+import NewarkDE from "@/pages/areas/newark-de";
+import ClaytonDE from "@/pages/areas/clayton-de";
 import PerryvilleMD from "@/pages/areas/perryville-md";
 import NorthEastMD from "@/pages/areas/north-east-md";
 import WilmingtonDE from "@/pages/areas/wilmington-de";
@@ -141,6 +144,9 @@ function Router() {
         <Route path="/areas/centreville-de" component={CentrevilleDe} />
         <Route path="/areas/centerville-de" component={CentrevilleMisspelled} />
         <Route path="/areas/north-star-de" component={NorthStarDE} />
+        <Route path="/areas/glasgow-de" component={GlasgowDE} />
+        <Route path="/areas/newark-de" component={NewarkDE} />
+        <Route path="/areas/clayton-de" component={ClaytonDE} />
         <Route path="/areas/perryville-md" component={PerryvilleMD} />
         <Route path="/areas/north-east-md" component={NorthEastMD} />
         <Route path="/areas/wilmington-de" component={WilmingtonDE} />
