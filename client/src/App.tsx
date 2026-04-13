@@ -80,6 +80,7 @@ import NorthStarDE from "@/pages/areas/north-star-de";
 import GlasgowDE from "@/pages/areas/glasgow-de";
 import NewarkDE from "@/pages/areas/newark-de";
 import ClaytonDE from "@/pages/areas/clayton-de";
+import PikeCreekDE from "@/pages/areas/pike-creek-de";
 import PerryvilleMD from "@/pages/areas/perryville-md";
 import NorthEastMD from "@/pages/areas/north-east-md";
 import WilmingtonDE from "@/pages/areas/wilmington-de";
@@ -147,6 +148,7 @@ function Router() {
         <Route path="/areas/glasgow-de" component={GlasgowDE} />
         <Route path="/areas/newark-de" component={NewarkDE} />
         <Route path="/areas/clayton-de" component={ClaytonDE} />
+        <Route path="/areas/pike-creek-de" component={PikeCreekDE} />
         <Route path="/areas/perryville-md" component={PerryvilleMD} />
         <Route path="/areas/north-east-md" component={NorthEastMD} />
         <Route path="/areas/wilmington-de" component={WilmingtonDE} />

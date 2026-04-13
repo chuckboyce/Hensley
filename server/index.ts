@@ -191,6 +191,7 @@ Sitemap: ${baseUrl}/sitemap.xml`;
         { url: `${baseUrl}/areas/glasgow-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
         { url: `${baseUrl}/areas/newark-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
         { url: `${baseUrl}/areas/clayton-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
+        { url: `${baseUrl}/areas/pike-creek-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.8' },
         
         // Wilmington and sub-neighborhoods
         { url: `${baseUrl}/areas/wilmington-de`, lastmod: currentDate, changefreq: 'monthly', priority: '0.7' },
