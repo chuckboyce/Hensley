@@ -347,7 +347,7 @@ export default function NewarkDE() {
                       <h3 className="font-bold text-lg">Utilities</h3>
                     </div>
                     <ul className="space-y-3">
-                      <li><a href="https://www.newarkde.gov/195/Electric-Division" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Newark Electric</strong> — City-owned electric utility</span></a></li>
+                      <li><a href="https://www.newarkde.gov/18/Electrical-Engineering" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Newark Electric</strong> — City-owned electric utility</span></a></li>
                     </ul>
                   </CardContent>
                 </Card>
@@ -358,7 +358,7 @@ export default function NewarkDE() {
                       <h3 className="font-bold text-lg">Parks & Recreation</h3>
                     </div>
                     <ul className="space-y-3">
-                      <li><a href="https://www.newarkde.gov/197/Parks-Recreation" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Newark Parks & Rec</strong> — Local parks, trails & programs</span></a></li>
+                      <li><a href="https://www.newarkde.gov/58/Parks-and-Recreation" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Newark Parks & Rec</strong> — Local parks, trails & programs</span></a></li>
                     </ul>
                   </CardContent>
                 </Card>

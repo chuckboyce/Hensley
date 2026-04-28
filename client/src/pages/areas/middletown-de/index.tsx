@@ -108,7 +108,7 @@ export default function MiddletownDE() {
       name: "Hyetts Corner / Hyetts Crossing", 
       type: "New Construction",
       description: "These newer communities feature modern floor plans, energy-efficient homes, and convenient access to Route 1. With attractive pricing and contemporary layouts, they appeal to buyers looking for newer construction within the Middletown school district.",
-      link: "https://www.lennar.com/new-homes/delaware/middletown/hyetts-crossing",
+      link: "https://www.lennar.com/new-homes/delaware",
       linkText: "Hyetts Crossing Community Info",
       pageLink: "/areas/middletown-de/hyetts-corner"
     }
@@ -514,13 +514,13 @@ export default function MiddletownDE() {
                         </a>
                       </li>
                       <li>
-                        <a href="https://www.middletown.delaware.gov/town-hall" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                        <a href="https://www.middletown.delaware.gov/government" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
                           <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
                           <span><strong>Town Hall</strong> — Permits, records, taxes, and local administration</span>
                         </a>
                       </li>
                       <li>
-                        <a href="https://www.middletown.delaware.gov/utilities" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                        <a href="https://www.middletown.delaware.gov/departments/Billing" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
                           <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
                           <span><strong>Utilities Department</strong> — Water, sewer, trash, and meter applications</span>
                         </a>
@@ -540,7 +540,7 @@ export default function MiddletownDE() {
                     </div>
                     <ul className="space-y-3">
                       <li>
-                        <a href="https://www.middletown.delaware.gov/electric" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                        <a href="https://www.middletown.delaware.gov/departments/Electric" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
                           <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
                           <span><strong>Middletown Electric</strong> — Town-owned electric with stable rates via DEMEC</span>
                         </a>
@@ -566,7 +566,7 @@ export default function MiddletownDE() {
                     </div>
                     <ul className="space-y-3">
                       <li>
-                        <a href="https://www.middletown.delaware.gov/water-wastewater" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                        <a href="https://www.middletown.delaware.gov/departments/Water-Wastewater" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
                           <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
                           <span><strong>Municipal Water/Wastewater</strong> — Drinking water, sewer, and fire hydrant maintenance</span>
                         </a>
@@ -592,7 +592,7 @@ export default function MiddletownDE() {
                     </div>
                     <ul className="space-y-3">
                       <li>
-                        <a href="https://www.middletown.delaware.gov/history" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
+                        <a href="https://www.middletown.delaware.gov/community" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors">
                           <ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" />
                           <span><strong>Town History</strong> — Local heritage and community development information</span>
                         </a>

@@ -123,7 +123,7 @@ export default function PerryvilleMD() {
       name: "Owens Landing",
       type: "Waterfront / Condos",
       description: "A popular waterfront condo community offering boat slips, scenic river views, and low-maintenance living close to the MARC station and local amenities.",
-      link: "https://www.rrta.com",
+      link: "https://www.dartfirststate.com",
       linkText: "MARC Perryville Station Info"
     },
     { 
