@@ -248,7 +248,7 @@ export default function HyettsCornerMiddletown() {
                 <CardContent className="p-6">
                   <h3 className="font-bold text-lg mb-3">Hyetts Crossing by Lennar</h3>
                   <p className="text-sm text-muted-foreground mb-4">Lennar is the builder for Hyetts Crossing. View available floor plans, pricing, and community details directly on the Lennar website.</p>
-                  <a href="https://www.lennar.com/new-homes/delaware/middletown/hyetts-crossing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
+                  <a href="https://www.lennar.com/new-homes/delaware" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
                     <ExternalLink className="h-4 w-4" /> Hyetts Crossing Community Info (Lennar)
                   </a>
                 </CardContent>

@@ -36,7 +36,7 @@ export default function TermsOfUse() {
                 If you choose to register on our website you hereby consent to receive autodialed and/or pre-recorded telemarketing calls and/or text messages on provided number from or on behalf of RE/MAX Eagle Realty or it's participating lenders or affiliates; from the following telephone number: 302-343-5926, or from other numbers related to or affiliated with the company, which may use an automatic telephone dialing system, an artificial or prerecorded voice or text message. Standard message and data rates may apply. You acknowledge that you may receive emails or communications with mortgage-related information. You also certify that the provided number is your actual cell phone number and not that of anyone else. Furthermore, if your cell phone number changes, we ask for prompt notice of the new number.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                If you wish to opt out of phone calls, text or emails please click this link: <a href="https://kevin-hensley.remax.com/settings.php?sub=0" className="text-primary hover:underline">https://kevin-hensley.remax.com/settings.php?sub=0</a>
+                If you wish to opt out of phone calls, text or emails please click this link: <a href="https://kevin-hensley.remax.com" className="text-primary hover:underline">https://kevin-hensley.remax.com</a>
               </p>
             </div>
 
