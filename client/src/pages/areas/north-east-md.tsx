@@ -10,6 +10,7 @@ import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import northEastHero from "@assets/generated_images/north_east_waterfront_marina_and_main_street.png";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 import AreaLastUpdated from "@/components/area-last-updated";
 
 const NORTH_EAST_ZIP = "21901";
@@ -349,6 +350,7 @@ export default function NorthEastMD() {
           </div>
         </section>
         <LocalNews locationTag="north-east-md" locationName="North East, MD" />
+        <NeighborhoodInfographic slug="north-east-md" neighborhoodName="North East, Maryland" />
         <AreaLastUpdated date="2026-04-28" />
 
 

@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import AreaLastUpdated from "@/components/area-last-updated";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 
 const PIKE_CREEK_ZIP = "19808";
 
@@ -339,6 +340,7 @@ export default function PikeCreekDE() {
             <p className="text-xs text-muted-foreground text-center max-w-3xl mx-auto">Sources: Median home price estimate based on recent New Castle County market data. School district information from Red Clay Consolidated School District. Commute times are estimates and may vary based on traffic conditions.</p>
           </div>
         </section>
+        <NeighborhoodInfographic slug="pike-creek-de" neighborhoodName="Pike Creek, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
       </main>

@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import AreaLastUpdated from "@/components/area-last-updated";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 
 const NEWARK_ZIP = "19711";
 
@@ -344,6 +345,7 @@ export default function NewarkDE() {
             <p className="text-xs text-muted-foreground text-center max-w-3xl mx-auto">Sources: Median home price estimate based on recent New Castle County market data. School district information from Christina School District and Red Clay Consolidated School District. Population from U.S. Census Bureau. Commute times are estimates and may vary.</p>
           </div>
         </section>
+        <NeighborhoodInfographic slug="newark-de" neighborhoodName="Newark, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
       </main>

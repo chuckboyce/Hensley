@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import odessaHero from "@assets/generated_images/odessa_de_historic_town_aerial.png";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 import AreaLastUpdated from "@/components/area-last-updated";
 
 const ODESSA_ZIP = "19730";
@@ -354,6 +355,7 @@ export default function OdessaDE() {
             <p className="text-xs text-muted-foreground text-center max-w-3xl mx-auto">Sources: Median home price from RocketHomes (January 2025). School district information from Appoquinimink School District. Population data from U.S. Census Bureau. Commute times are estimates and may vary.</p>
           </div>
         </section>
+        <NeighborhoodInfographic slug="odessa-de" neighborhoodName="Odessa, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
       </main>

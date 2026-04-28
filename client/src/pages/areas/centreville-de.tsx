@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/breadcrumb";
 import centrevileHero from "@assets/generated_images/centreville_luxury_estates_and_rolling_hills.png";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 import AreaLastUpdated from "@/components/area-last-updated";
 
 const CENTREVILLE_ZIP = "19807";
@@ -342,6 +343,7 @@ export default function CentrevilleDe() {
           </div>
         </section>
         <LocalNews locationTag="centreville-de" locationName="Centreville, DE" />
+        <NeighborhoodInfographic slug="centreville-de" neighborhoodName="Centreville, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
 

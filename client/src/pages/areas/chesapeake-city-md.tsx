@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import chesapeakeCityHero from "@assets/generated_images/chesapeake_city_waterfront_aerial_view.png";
 import AreaLastUpdated from "@/components/area-last-updated";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 
 const CHESAPEAKE_CITY_ZIP = "21915";
 
@@ -311,6 +312,7 @@ export default function ChesapeakeCityMD() {
           </div>
         </section>
         <LocalNews locationTag="chesapeake-city-md" locationName="Chesapeake City, MD" />
+        <NeighborhoodInfographic slug="chesapeake-city-md" neighborhoodName="Chesapeake City, Maryland" />
         <AreaLastUpdated date="2026-04-28" />
 
 

@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import smyrnaHero from "@assets/generated_images/smyrna_de_growing_town_aerial.png";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 import AreaLastUpdated from "@/components/area-last-updated";
 
 const SMYRNA_ZIP = "19977";
@@ -363,6 +364,7 @@ export default function SmyrnaDE() {
             <p className="text-xs text-muted-foreground text-center max-w-3xl mx-auto">Sources: Median home price from RocketHomes (January 2025). School district information from Smyrna School District. Population data from U.S. Census Bureau. Commute times are estimates and may vary.</p>
           </div>
         </section>
+        <NeighborhoodInfographic slug="smyrna-de" neighborhoodName="Smyrna, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
       </main>

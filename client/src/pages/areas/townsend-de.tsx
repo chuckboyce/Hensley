@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import townsendHero from "@assets/generated_images/townsend_de_aerial_rural_view.png";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 import AreaLastUpdated from "@/components/area-last-updated";
 
 const TOWNSEND_ZIP = "19734";
@@ -580,6 +581,7 @@ export default function TownsendDE() {
             </p>
           </div>
         </section>
+        <NeighborhoodInfographic slug="townsend-de" neighborhoodName="Townsend, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
       </main>

@@ -12,6 +12,7 @@ import CensusStatsBar from "@/components/census-stats-bar";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
 import AreaLastUpdated from "@/components/area-last-updated";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 
 const ZIP = "19709";
 
@@ -227,6 +228,7 @@ export default function WhitehallMiddletown() {
             </Link>
           </div>
         </section>
+        <NeighborhoodInfographic slug="whitehall" neighborhoodName="The Town of Whitehall, Middletown" />
         <AreaLastUpdated date="2026-04-28" />
 
       </main>

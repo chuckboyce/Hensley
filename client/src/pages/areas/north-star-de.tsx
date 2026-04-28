@@ -10,6 +10,7 @@ import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import northStarHero from "@assets/generated_images/north_star_luxury_suburban_neighborhoods.png";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 import AreaLastUpdated from "@/components/area-last-updated";
 
 const NORTH_STAR_ZIP = "19808";
@@ -348,6 +349,7 @@ export default function NorthStarDE() {
           </div>
         </section>
         <LocalNews locationTag="north-star-de" locationName="North Star, DE" />
+        <NeighborhoodInfographic slug="north-star-de" neighborhoodName="North Star, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
 

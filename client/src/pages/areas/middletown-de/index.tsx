@@ -12,6 +12,7 @@ import type { Property } from "@shared/schema";
 import AudioPlayer from "@/components/audio-player";
 import LocalNews from "@/components/local-news";
 import whispperingWoodsAudio from "@assets/1415_Whispering_Woods_1765302937957.mp3";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 import AreaLastUpdated from "@/components/area-last-updated";
 
 const MIDDLETOWN_ZIP = "19709";
@@ -621,6 +622,7 @@ export default function MiddletownDE() {
             </p>
           </div>
         </section>
+        <NeighborhoodInfographic slug="middletown-de" neighborhoodName="Middletown, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
       </main>

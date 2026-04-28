@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import AreaLastUpdated from "@/components/area-last-updated";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 
 const GLASGOW_ZIP = "19702";
 
@@ -333,6 +334,7 @@ export default function GlasgowDE() {
             <p className="text-xs text-muted-foreground text-center max-w-3xl mx-auto">Sources: Median home price estimate based on recent New Castle County market data. School district information from Christina School District. Commute times are estimates and may vary based on traffic conditions.</p>
           </div>
         </section>
+        <NeighborhoodInfographic slug="glasgow-de" neighborhoodName="Glasgow, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
       </main>

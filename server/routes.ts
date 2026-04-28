@@ -11,6 +11,7 @@ import { optimizePropertyImage } from "./utils/image-optimizer";
 import { generatePropertySummary } from "./aiSummary";
 import { getActiveRentalListings, clearRentalListingsCache, createOwner } from "./services/doorloop";
 import { getCensusData, getNeighborhoodTractInfo } from "./services/census";
+import { renderInfographicSVG } from "./utils/infographic";
 import { generateFullPageSchema, generatePropertySchema, generatePropertyListSchema } from "./utils/schemaGenerator";
 import multer from "multer";
 import path from "path";
@@ -163,6 +164,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(503).json({ error: "Census data temporarily unavailable" });
     }
     res.json({ success: true, data });
+  });
+
+  // Neighborhood infographic — server-rendered SVG with Census data + Hensley's Homes branding
+  // Usage: <img src="/api/infographic/bear-de.svg"> or direct URL for og:image / social sharing
+  app.get("/api/infographic/:slug.svg", async (req, res) => {
+    const { slug } = req.params;
+    const tractInfo = getNeighborhoodTractInfo(slug);
+    if (!tractInfo) {
+      return res.status(404).send("<!-- Neighborhood not found -->");
+    }
+    const data = await getCensusData(slug);
+    if (!data) {
+      return res.status(503).send("<!-- Census data temporarily unavailable -->");
+    }
+    const svg = renderInfographicSVG(data);
+    res
+      .setHeader("Content-Type", "image/svg+xml; charset=utf-8")
+      .setHeader("Cache-Control", "public, max-age=86400") // cache 24 hours
+      .send(svg);
   });
 
   // DoorLoop: Force-refresh cache (admin only)

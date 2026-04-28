@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import bearHero from "@assets/generated_images/bear_de_suburban_aerial_view.png";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 import AreaLastUpdated from "@/components/area-last-updated";
 
 const BEAR_ZIP = "19701";
@@ -576,6 +577,7 @@ export default function BearDE() {
             </p>
           </div>
         </section>
+        <NeighborhoodInfographic slug="bear-de" neighborhoodName="Bear, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
       </main>

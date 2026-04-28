@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import delawareCityHero from "@assets/generated_images/delaware_city_waterfront_and_historic_district.png";
 import AreaLastUpdated from "@/components/area-last-updated";
 import type { Property } from "@shared/schema";
+import NeighborhoodInfographic from "@/components/neighborhood-infographic";
 
 const DELAWARE_CITY_ZIP = "19706";
 
@@ -313,6 +314,7 @@ export default function DelawareCityDE() {
           </div>
         </section>
         <LocalNews locationTag="delaware-city-de" locationName="Delaware City, DE" />
+        <NeighborhoodInfographic slug="delaware-city-de" neighborhoodName="Delaware City, Delaware" />
         <AreaLastUpdated date="2026-04-28" />
 
 
