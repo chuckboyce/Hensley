@@ -258,7 +258,7 @@ export default function ParksideMiddletown() {
                 <CardContent className="p-6">
                   <h3 className="font-bold text-lg mb-3">Parkside Community Association</h3>
                   <p className="text-sm text-muted-foreground mb-4">Manages the clubhouse, pool, tennis courts, walking trails, and community events. Active social calendar with seasonal events for all ages.</p>
-                  <a href="https://parkisdemc.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
+                  <a href="https://www.middletown.delaware.gov" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
                     <ExternalLink className="h-4 w-4" /> Parkside HOA / Community Site
                   </a>
                 </CardContent>

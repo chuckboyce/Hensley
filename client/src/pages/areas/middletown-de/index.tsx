@@ -76,7 +76,7 @@ export default function MiddletownDE() {
       name: "Parkside", 
       type: "Luxury",
       description: "A beautifully planned community known for its tree-lined streets, large parks, and resort-style amenities including a clubhouse, pool, tennis courts, and walking paths. The neighborhood has a strong sense of community with regular events and a warm, welcoming feel.",
-      link: "https://parkisdemc.com",
+      link: "https://www.middletown.delaware.gov",
       linkText: "Parkside HOA / Community Site",
       pageLink: "/areas/middletown-de/parkside"
     },

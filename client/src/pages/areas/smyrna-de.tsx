@@ -391,8 +391,8 @@ export default function SmyrnaDE() {
                       <h3 className="font-bold text-lg">Community Info</h3>
                     </div>
                     <ul className="space-y-3">
-                      <li><a href="https://smyrnapubliclibrary.org" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Smyrna Library</strong> — Programs & events</span></a></li>
-                      <li><a href="https://www.smyrnahistory.org" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Historical Society</strong> — Local history</span></a></li>
+                      <li><a href="https://duckcreek.lib.de.us" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Smyrna Library</strong> — Programs & events</span></a></li>
+                      <li><a href="https://duckcreekhistoricalsociety.org" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Historical Society</strong> — Local history</span></a></li>
                     </ul>
                   </CardContent>
                 </Card>
