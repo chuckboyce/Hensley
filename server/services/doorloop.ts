@@ -157,7 +157,7 @@ export async function getActiveRentalListings(forceRefresh = false): Promise<Ren
   );
 
   // Fetch individual property records (with photos + description) for active units only
-  const uniquePropertyIds = [...new Set(activeUnits.map((u) => u.property))];
+  const uniquePropertyIds = Array.from(new Set(activeUnits.map((u) => u.property)));
   const detailedProperties = await Promise.all(uniquePropertyIds.map(fetchPropertyDetail));
   const detailedMap = new Map<string, DoorLoopProperty>();
   for (const p of detailedProperties) {
@@ -181,7 +181,7 @@ export async function getActiveRentalListings(forceRefresh = false): Promise<Ren
       // Merge unit amenities + property amenities, deduplicated
       const unitAmenities = u.amenities ?? [];
       const propAmenities = prop?.amenities ?? [];
-      const amenities = [...new Set([...unitAmenities, ...propAmenities])];
+      const amenities = Array.from(new Set([...unitAmenities, ...propAmenities]));
 
       // Photos sorted by rank
       const photos = (prop?.pictures ?? [])

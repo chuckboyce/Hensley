@@ -108,7 +108,13 @@ export default function HockessinDE() {
     };
   }, []);
 
-  const neighborhoods = [
+  const neighborhoods: {
+    name: string;
+    type: string;
+    description: string;
+    link?: string;
+    linkText?: string;
+  }[] = [
     { 
       name: "North Star", 
       type: "Luxury / Established",
