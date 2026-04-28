@@ -5,7 +5,7 @@ import { insertContactSchema, insertPropertySchema, insertPropertyMediaSchema, u
 import { fetchFeedArticles, fetchAllFeeds, generateArticleContent } from "./services/cms";
 import { ghlService } from "./services/ghl";
 import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
-import { pingSearchEngines } from "./utils/search-engine-ping";
+import { submitToIndexNow, ALL_SITE_URLS, NEW_PAGE_URLS } from "./utils/search-engine-ping";
 import { optimizePropertyImage } from "./utils/image-optimizer";
 import { generatePropertySummary } from "./aiSummary";
 import { getActiveRentalListings, clearRentalListingsCache, createOwner } from "./services/doorloop";
@@ -437,25 +437,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin: Ping search engines with sitemap
+  // Admin: Submit all site URLs to IndexNow (Bing, Yandex, DuckDuckGo)
   app.post("/api/admin/ping-search-engines", adminAuth, async (req, res) => {
     try {
-      // Get the base URL from the request or use default
-      const protocol = req.protocol;
-      const host = req.get('host') || 'hensleyshomes.com';
-      const sitemapUrl = `${protocol}://${host}/sitemap.xml`;
-      
-      console.log(`Pinging search engines with sitemap: ${sitemapUrl}`);
-      const results = await pingSearchEngines(sitemapUrl);
-      
-      res.json({
-        success: true,
-        sitemapUrl,
-        results
-      });
+      const results = await submitToIndexNow(ALL_SITE_URLS);
+      res.json({ success: results.statusCode === 200 || results.statusCode === 202, results });
     } catch (error) {
-      console.error("Error pinging search engines:", error);
-      res.status(500).json({ error: "Failed to ping search engines" });
+      console.error("Error submitting to IndexNow:", error);
+      res.status(500).json({ error: "Failed to submit to IndexNow" });
     }
   });
 
