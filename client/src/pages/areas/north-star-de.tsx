@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/breadcrumb";
@@ -38,75 +38,6 @@ export default function NorthStarDE() {
     
     return null;
   }, [properties]);
-
-  useEffect(() => {
-    const placeScript = document.createElement('script');
-    placeScript.type = 'application/ld+json';
-    placeScript.id = 'north-star-place-schema';
-    placeScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/north-star-de/#place",
-      "name": "North Star, Delaware",
-      "description": "Community guide for North Star, DE including luxury neighborhoods, schools, commutes, and insights from local Realtor Kevin Hensley.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "North Star",
-        "addressRegion": "DE",
-        "postalCode": "19808",
-        "addressCountry": "US"
-      },
-      "areaServed": "North Star, Delaware",
-      "url": "https://hensleyshomes.com/areas/north-star-de",
-      "author": {
-        "@type": "RealEstateAgent",
-        "@id": "https://hensleyshomes.com/#kevin-hensley"
-      }
-    });
-    
-    const breadcrumbScript = document.createElement('script');
-    breadcrumbScript.type = 'application/ld+json';
-    breadcrumbScript.id = 'north-star-de-breadcrumb-schema';
-    breadcrumbScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://hensleyshomes.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Delaware Communities",
-          "item": "https://hensleyshomes.com/areas"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "North Star, Delaware",
-          "item": "https://hensleyshomes.com/areas/north-star-de"
-        }
-      ]
-    });
-    
-    const existingPlace = document.getElementById('north-star-place-schema');
-    if (existingPlace) existingPlace.remove();
-    const existingBreadcrumb = document.getElementById('north-star-de-breadcrumb-schema');
-    if (existingBreadcrumb) existingBreadcrumb.remove();
-    
-    document.head.appendChild(placeScript);
-    document.head.appendChild(breadcrumbScript);
-    
-    return () => {
-      const el = document.getElementById('north-star-place-schema');
-      if (el) el.remove();
-      const bc = document.getElementById('north-star-de-breadcrumb-schema');
-      if (bc) bc.remove();
-    };
-  }, []);
 
   const neighborhoods = [
     { 

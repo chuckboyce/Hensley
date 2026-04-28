@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/breadcrumb";
@@ -37,75 +37,6 @@ export default function ElktonMD() {
     
     return null;
   }, [properties]);
-
-  useEffect(() => {
-    const placeScript = document.createElement('script');
-    placeScript.type = 'application/ld+json';
-    placeScript.id = 'elkton-place-schema';
-    placeScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/elkton-md/#place",
-      "name": "Elkton, Maryland",
-      "description": "Community guide for Elkton, MD including neighborhoods, suburban living, schools, commutes, and insights from local Realtor Kevin Hensley.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Elkton",
-        "addressRegion": "MD",
-        "postalCode": "21921",
-        "addressCountry": "US"
-      },
-      "areaServed": "Elkton, Maryland",
-      "url": "https://hensleyshomes.com/areas/elkton-md",
-      "author": {
-        "@type": "RealEstateAgent",
-        "@id": "https://hensleyshomes.com/#kevin-hensley"
-      }
-    });
-    
-    const breadcrumbScript = document.createElement('script');
-    breadcrumbScript.type = 'application/ld+json';
-    breadcrumbScript.id = 'elkton-md-breadcrumb-schema';
-    breadcrumbScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://hensleyshomes.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Maryland Communities",
-          "item": "https://hensleyshomes.com/areas"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Elkton, Maryland",
-          "item": "https://hensleyshomes.com/areas/elkton-md"
-        }
-      ]
-    });
-    
-    const existingPlace = document.getElementById('elkton-place-schema');
-    if (existingPlace) existingPlace.remove();
-    const existingBreadcrumb = document.getElementById('elkton-md-breadcrumb-schema');
-    if (existingBreadcrumb) existingBreadcrumb.remove();
-    
-    document.head.appendChild(placeScript);
-    document.head.appendChild(breadcrumbScript);
-    
-    return () => {
-      const el = document.getElementById('elkton-place-schema');
-      if (el) el.remove();
-      const bc = document.getElementById('elkton-md-breadcrumb-schema');
-      if (bc) bc.remove();
-    };
-  }, []);
 
   const neighborhoods = [
     { 

@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
@@ -38,75 +38,6 @@ export default function WilmingtonDE() {
     
     return null;
   }, [properties]);
-
-  useEffect(() => {
-    const placeScript = document.createElement('script');
-    placeScript.type = 'application/ld+json';
-    placeScript.id = 'wilmington-place-schema';
-    placeScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/wilmington-de/#place",
-      "name": "Wilmington, Delaware",
-      "description": "Community guide for Wilmington, DE including neighborhoods, schools, commutes, and insights from local Realtor Kevin Hensley.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Wilmington",
-        "addressRegion": "DE",
-        "postalCode": "19801",
-        "addressCountry": "US"
-      },
-      "areaServed": "Wilmington, Delaware",
-      "url": "https://hensleyshomes.com/areas/wilmington-de",
-      "author": {
-        "@type": "RealEstateAgent",
-        "@id": "https://hensleyshomes.com/#kevin-hensley"
-      }
-    });
-    
-    const breadcrumbScript = document.createElement('script');
-    breadcrumbScript.type = 'application/ld+json';
-    breadcrumbScript.id = 'wilmington-breadcrumb-schema';
-    breadcrumbScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://hensleyshomes.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Delaware Communities",
-          "item": "https://hensleyshomes.com/areas"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Wilmington, Delaware",
-          "item": "https://hensleyshomes.com/areas/wilmington-de"
-        }
-      ]
-    });
-    
-    const existingPlace = document.getElementById('wilmington-place-schema');
-    if (existingPlace) existingPlace.remove();
-    const existingBreadcrumb = document.getElementById('wilmington-breadcrumb-schema');
-    if (existingBreadcrumb) existingBreadcrumb.remove();
-    
-    document.head.appendChild(placeScript);
-    document.head.appendChild(breadcrumbScript);
-    
-    return () => {
-      const el = document.getElementById('wilmington-place-schema');
-      if (el) el.remove();
-      const bc = document.getElementById('wilmington-breadcrumb-schema');
-      if (bc) bc.remove();
-    };
-  }, []);
 
   const neighborhoods = [
     { 

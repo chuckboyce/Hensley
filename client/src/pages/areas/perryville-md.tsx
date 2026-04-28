@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/breadcrumb";
@@ -38,75 +38,6 @@ export default function PerryvilleMD() {
     
     return null;
   }, [properties]);
-
-  useEffect(() => {
-    const placeScript = document.createElement('script');
-    placeScript.type = 'application/ld+json';
-    placeScript.id = 'perryville-place-schema';
-    placeScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/perryville-md/#place",
-      "name": "Perryville, Maryland",
-      "description": "Community guide for Perryville, MD including neighborhoods, waterfront living, schools, commutes, and insights from local Realtor Kevin Hensley.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Perryville",
-        "addressRegion": "MD",
-        "postalCode": "21903",
-        "addressCountry": "US"
-      },
-      "areaServed": "Perryville, Maryland",
-      "url": "https://hensleyshomes.com/areas/perryville-md",
-      "author": {
-        "@type": "RealEstateAgent",
-        "@id": "https://hensleyshomes.com/#kevin-hensley"
-      }
-    });
-    
-    const breadcrumbScript = document.createElement('script');
-    breadcrumbScript.type = 'application/ld+json';
-    breadcrumbScript.id = 'perryville-md-breadcrumb-schema';
-    breadcrumbScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://hensleyshomes.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Maryland Communities",
-          "item": "https://hensleyshomes.com/areas"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Perryville, Maryland",
-          "item": "https://hensleyshomes.com/areas/perryville-md"
-        }
-      ]
-    });
-    
-    const existingPlace = document.getElementById('perryville-place-schema');
-    if (existingPlace) existingPlace.remove();
-    const existingBreadcrumb = document.getElementById('perryville-md-breadcrumb-schema');
-    if (existingBreadcrumb) existingBreadcrumb.remove();
-    
-    document.head.appendChild(placeScript);
-    document.head.appendChild(breadcrumbScript);
-    
-    return () => {
-      const el = document.getElementById('perryville-place-schema');
-      if (el) el.remove();
-      const bc = document.getElementById('perryville-md-breadcrumb-schema');
-      if (bc) bc.remove();
-    };
-  }, []);
 
   const neighborhoods = [
     { 

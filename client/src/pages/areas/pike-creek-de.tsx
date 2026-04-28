@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,60 +33,6 @@ export default function PikeCreekDE() {
     }
     return null;
   }, [properties]);
-
-  useEffect(() => {
-    const placeScript = document.createElement('script');
-    placeScript.type = 'application/ld+json';
-    placeScript.id = 'pike-creek-place-schema';
-    placeScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/pike-creek-de/#place",
-      "name": "Pike Creek, Delaware",
-      "description": "Community guide for Pike Creek, DE including neighborhoods, schools, commutes, and insights from local Realtor Kevin Hensley.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Pike Creek",
-        "addressRegion": "DE",
-        "postalCode": "19808",
-        "addressCountry": "US"
-      },
-      "areaServed": "Pike Creek, Delaware",
-      "url": "https://hensleyshomes.com/areas/pike-creek-de",
-      "author": {
-        "@type": "RealEstateAgent",
-        "@id": "https://hensleyshomes.com/#kevin-hensley"
-      }
-    });
-
-    const breadcrumbScript = document.createElement('script');
-    breadcrumbScript.type = 'application/ld+json';
-    breadcrumbScript.id = 'pike-creek-de-breadcrumb-schema';
-    breadcrumbScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hensleyshomes.com" },
-        { "@type": "ListItem", "position": 2, "name": "Delaware Communities", "item": "https://hensleyshomes.com/areas" },
-        { "@type": "ListItem", "position": 3, "name": "Pike Creek, Delaware", "item": "https://hensleyshomes.com/areas/pike-creek-de" }
-      ]
-    });
-
-    const existingPlace = document.getElementById('pike-creek-place-schema');
-    if (existingPlace) existingPlace.remove();
-    const existingBreadcrumb = document.getElementById('pike-creek-de-breadcrumb-schema');
-    if (existingBreadcrumb) existingBreadcrumb.remove();
-
-    document.head.appendChild(placeScript);
-    document.head.appendChild(breadcrumbScript);
-
-    return () => {
-      const el = document.getElementById('pike-creek-place-schema');
-      if (el) el.remove();
-      const bc = document.getElementById('pike-creek-de-breadcrumb-schema');
-      if (bc) bc.remove();
-    };
-  }, []);
 
   const neighborhoods = [
     {

@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,60 +33,6 @@ export default function ClaytonDE() {
     }
     return null;
   }, [properties]);
-
-  useEffect(() => {
-    const placeScript = document.createElement('script');
-    placeScript.type = 'application/ld+json';
-    placeScript.id = 'clayton-place-schema';
-    placeScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/clayton-de/#place",
-      "name": "Clayton, Delaware",
-      "description": "Community guide for Clayton, DE including neighborhoods, schools, commutes, and insights from local Realtor Kevin Hensley.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Clayton",
-        "addressRegion": "DE",
-        "postalCode": "19938",
-        "addressCountry": "US"
-      },
-      "areaServed": "Clayton, Delaware",
-      "url": "https://hensleyshomes.com/areas/clayton-de",
-      "author": {
-        "@type": "RealEstateAgent",
-        "@id": "https://hensleyshomes.com/#kevin-hensley"
-      }
-    });
-
-    const breadcrumbScript = document.createElement('script');
-    breadcrumbScript.type = 'application/ld+json';
-    breadcrumbScript.id = 'clayton-de-breadcrumb-schema';
-    breadcrumbScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hensleyshomes.com" },
-        { "@type": "ListItem", "position": 2, "name": "Delaware Communities", "item": "https://hensleyshomes.com/areas" },
-        { "@type": "ListItem", "position": 3, "name": "Clayton, Delaware", "item": "https://hensleyshomes.com/areas/clayton-de" }
-      ]
-    });
-
-    const existingPlace = document.getElementById('clayton-place-schema');
-    if (existingPlace) existingPlace.remove();
-    const existingBreadcrumb = document.getElementById('clayton-de-breadcrumb-schema');
-    if (existingBreadcrumb) existingBreadcrumb.remove();
-
-    document.head.appendChild(placeScript);
-    document.head.appendChild(breadcrumbScript);
-
-    return () => {
-      const el = document.getElementById('clayton-place-schema');
-      if (el) el.remove();
-      const bc = document.getElementById('clayton-de-breadcrumb-schema');
-      if (bc) bc.remove();
-    };
-  }, []);
 
   const neighborhoods = [
     {

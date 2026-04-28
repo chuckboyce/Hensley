@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,75 +34,6 @@ export default function OdessaDE() {
     }
     return null;
   }, [properties]);
-
-  useEffect(() => {
-    const placeScript = document.createElement('script');
-    placeScript.type = 'application/ld+json';
-    placeScript.id = 'odessa-place-schema';
-    placeScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/odessa-de/#place",
-      "name": "Odessa, Delaware",
-      "description": "Community guide for Odessa, DE including neighborhoods, schools, commutes, and insights from local Realtor Kevin Hensley.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Odessa",
-        "addressRegion": "DE",
-        "postalCode": "19730",
-        "addressCountry": "US"
-      },
-      "areaServed": "Odessa, Delaware",
-      "url": "https://hensleyshomes.com/areas/odessa-de",
-      "author": {
-        "@type": "RealEstateAgent",
-        "@id": "https://hensleyshomes.com/#kevin-hensley"
-      }
-    });
-    
-    const breadcrumbScript = document.createElement('script');
-    breadcrumbScript.type = 'application/ld+json';
-    breadcrumbScript.id = 'odessa-de-breadcrumb-schema';
-    breadcrumbScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://hensleyshomes.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Delaware Communities",
-          "item": "https://hensleyshomes.com/areas"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Odessa, Delaware",
-          "item": "https://hensleyshomes.com/areas/odessa-de"
-        }
-      ]
-    });
-    
-    const existingPlace = document.getElementById('odessa-place-schema');
-    if (existingPlace) existingPlace.remove();
-    const existingBreadcrumb = document.getElementById('odessa-de-breadcrumb-schema');
-    if (existingBreadcrumb) existingBreadcrumb.remove();
-    
-    document.head.appendChild(placeScript);
-    document.head.appendChild(breadcrumbScript);
-    
-    return () => {
-      const el = document.getElementById('odessa-place-schema');
-      if (el) el.remove();
-      const bc = document.getElementById('odessa-de-breadcrumb-schema');
-      if (bc) bc.remove();
-    };
-  }, []);
 
   const neighborhoods = [
     { 

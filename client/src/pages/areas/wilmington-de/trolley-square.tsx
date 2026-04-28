@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/breadcrumb";
@@ -38,81 +38,6 @@ export default function TrolleySquareDe() {
     
     return null;
   }, [properties]);
-
-  useEffect(() => {
-    const placeScript = document.createElement('script');
-    placeScript.type = 'application/ld+json';
-    placeScript.id = 'trolley-square-place-schema';
-    placeScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/wilmington-de/trolley-square/#place",
-      "name": "Trolley Square, Wilmington, Delaware",
-      "description": "Community guide for Trolley Square, Wilmington DE including neighborhoods, schools, commutes, and insights from local Realtor Kevin Hensley.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Trolley Square",
-        "addressRegion": "DE",
-        "postalCode": "19806",
-        "addressCountry": "US"
-      },
-      "areaServed": "Trolley Square, Wilmington, Delaware",
-      "url": "https://hensleyshomes.com/areas/wilmington-de/trolley-square",
-      "author": {
-        "@type": "RealEstateAgent",
-        "@id": "https://hensleyshomes.com/#kevin-hensley"
-      }
-    });
-    
-    const breadcrumbScript = document.createElement('script');
-    breadcrumbScript.type = 'application/ld+json';
-    breadcrumbScript.id = 'trolley-square-breadcrumb-schema';
-    breadcrumbScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://hensleyshomes.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Delaware Communities",
-          "item": "https://hensleyshomes.com/areas"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Wilmington, Delaware",
-          "item": "https://hensleyshomes.com/areas/wilmington-de"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Trolley Square",
-          "item": "https://hensleyshomes.com/areas/wilmington-de/trolley-square"
-        }
-      ]
-    });
-    
-    const existingPlace = document.getElementById('trolley-square-place-schema');
-    if (existingPlace) existingPlace.remove();
-    const existingBreadcrumb = document.getElementById('trolley-square-breadcrumb-schema');
-    if (existingBreadcrumb) existingBreadcrumb.remove();
-    
-    document.head.appendChild(placeScript);
-    document.head.appendChild(breadcrumbScript);
-    
-    return () => {
-      const el = document.getElementById('trolley-square-place-schema');
-      if (el) el.remove();
-      const bc = document.getElementById('trolley-square-breadcrumb-schema');
-      if (bc) bc.remove();
-    };
-  }, []);
 
   const neighborhoods = [
     { 
