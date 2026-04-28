@@ -419,6 +419,44 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
         { "@type": "State", name: "Maryland" },
       ],
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What areas does Kevin Hensley serve in Delaware and Maryland?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Kevin Hensley serves communities throughout New Castle County and Kent County in Delaware — including Bear, Hockessin, Middletown, Wilmington, Newark, Pike Creek, Smyrna, and more — as well as Cecil County, Maryland towns such as Chesapeake City, Elkton, North East, and Perryville.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How do I get started buying or selling a home in Delaware?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Contact Kevin Hensley at (302) 218-0130 or visit hensleyshomes.com. Kevin provides a free consultation to review your goals, walk you through the current market in your target area, and outline next steps whether you are buying or selling.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Which Delaware school districts are covered by Kevin Hensley's service areas?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Kevin's service areas span several top-rated Delaware school districts including the Appoquinimink School District (Middletown, Odessa, Townsend), the Christina School District (Newark, Glasgow, Bear), the Red Clay Consolidated School District (Wilmington, Hockessin, Pike Creek), and the Brandywine School District (North Wilmington, Centreville).",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is now a good time to buy a home in Delaware?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Delaware continues to attract buyers from New Jersey, Pennsylvania, and Maryland due to its low property taxes, no sales tax, and relatively affordable home prices compared to neighboring states. Kevin Hensley can provide current market conditions and inventory data for any specific community.",
+          },
+        },
+      ],
+    },
     areaDataset({ slug: "areas", name: "Delaware & Maryland Communities" }),
   ],
 
@@ -1135,7 +1173,8 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
   ],
 
   // ── Wilmington sub-neighborhoods ─────────────────────────────────────────
-  "/areas/wilmington-de/north-wilmington": wilmingtonSubSchemas({
+  "/areas/wilmington-de/north-wilmington": [
+    ...wilmingtonSubSchemas({
     subSlug: "north-wilmington",
     name: "North Wilmington, Delaware",
     description:
@@ -1144,8 +1183,40 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
     postalCode: "19803",
     breadcrumbLabel: "North Wilmington",
   }),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is North Wilmington, Delaware known for?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "North Wilmington is a suburban residential area in New Castle County known for mature landscaping, family-friendly neighborhoods, top-rated Brandywine School District schools, and easy I-95 access to Wilmington and Philadelphia.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What are home prices like in North Wilmington, DE?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "North Wilmington features a mix of split-levels, ranches, and colonials, with prices generally ranging from the mid-$200s to over $600,000 depending on the street and condition. Contact Kevin Hensley at (302) 218-0130 for current listing data.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Which school district serves North Wilmington?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Most of North Wilmington is served by the Brandywine School District, which includes Concord High School and several well-regarded elementary and middle schools.",
+          },
+        },
+      ],
+    },
+  ],
 
-  "/areas/wilmington-de/highlands": wilmingtonSubSchemas({
+  "/areas/wilmington-de/highlands": [
+    ...wilmingtonSubSchemas({
     subSlug: "highlands",
     name: "Highlands, Wilmington, Delaware",
     description:
@@ -1154,8 +1225,40 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
     postalCode: "19806",
     breadcrumbLabel: "Highlands, Wilmington",
   }),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What makes the Highlands neighborhood in Wilmington, DE special?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The Highlands is one of Wilmington's most prestigious historic districts, featuring Tudor Revival, Colonial Revival, and Arts and Crafts architecture, tree-lined streets, and proximity to Brandywine Park and the Delaware Art Museum.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What type of homes are in the Highlands, Wilmington?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The Highlands is characterized by large historic single-family homes — many over 100 years old — with generous lot sizes, front porches, and architectural details uncommon in newer construction. Prices generally range from the $400s to over $1 million.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How close is the Highlands to downtown Wilmington?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The Highlands sits just north of downtown Wilmington, roughly a 5–10 minute drive or a pleasant walk via Brandywine Park to the Rodney Square business district and Amtrak station.",
+          },
+        },
+      ],
+    },
+  ],
 
-  "/areas/wilmington-de/forty-acres": wilmingtonSubSchemas({
+  "/areas/wilmington-de/forty-acres": [
+    ...wilmingtonSubSchemas({
     subSlug: "forty-acres",
     name: "Forty Acres, Wilmington, Delaware",
     description:
@@ -1164,8 +1267,40 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
     postalCode: "19806",
     breadcrumbLabel: "Forty Acres",
   }),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is the Forty Acres neighborhood in Wilmington, DE?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Forty Acres is a historic urban neighborhood in Wilmington known for its tight-knit community, affordable rowhouses and twins, proximity to Brandywine Creek State Park, and strong neighborhood association. It borders the Highlands and Trolley Square areas.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is Forty Acres a good neighborhood to buy in Wilmington?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Forty Acres offers some of Wilmington's more accessible price points for urban rowhouse living, with active neighborhood investment and convenient access to parks, dining, and I-95. Kevin Hensley can provide current active listings and market data.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is commuting like from Forty Acres, Wilmington?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Forty Acres has strong commuter access — the Wilmington Amtrak station is about 10 minutes away, and I-95 provides quick connections to Philadelphia (30 min) and Baltimore (1 hour). DART bus routes also serve the area.",
+          },
+        },
+      ],
+    },
+  ],
 
-  "/areas/wilmington-de/trolley-square": wilmingtonSubSchemas({
+  "/areas/wilmington-de/trolley-square": [
+    ...wilmingtonSubSchemas({
     subSlug: "trolley-square",
     name: "Trolley Square, Wilmington, Delaware",
     description:
@@ -1174,6 +1309,37 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
     postalCode: "19806",
     breadcrumbLabel: "Trolley Square",
   }),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is Trolley Square in Wilmington, DE known for?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Trolley Square is Wilmington's most walkable urban neighborhood, known for its independent restaurants, boutique shops, Victorian rowhouses, and a vibrant arts and nightlife scene along Delaware Avenue.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What kind of homes are in Trolley Square, Wilmington?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Trolley Square features charming Victorian rowhouses, twins, and converted condos, many retaining original architectural details. It appeals to young professionals and buyers seeking walkable city living at moderate price points compared to larger East Coast metros.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is Trolley Square walkable?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes — Trolley Square consistently earns high Walk Scores for Wilmington. Residents can walk to numerous restaurants, coffee shops, yoga studios, and specialty retailers, and the Wilmington Amtrak station is about a 10-minute drive or DART bus ride away.",
+          },
+        },
+      ],
+    },
+  ],
 
   // ── Middletown, DE (parent) ───────────────────────────────────────────────
   "/areas/middletown-de": [
@@ -1254,7 +1420,8 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
   ],
 
   // ── Middletown sub-neighborhoods ─────────────────────────────────────────
-  "/areas/middletown-de/parkside": neighborhoodSchemas({
+  "/areas/middletown-de/parkside": [
+    ...neighborhoodSchemas({
     slug: "parkside",
     name: "Parkside, Middletown, Delaware",
     description:
@@ -1267,8 +1434,40 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       { name: "Parkside", item: `${BASE}/areas/middletown-de/parkside` },
     ],
   }),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is Parkside in Middletown, DE?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Parkside is a luxury master-planned community in Middletown, Delaware, featuring resort-style amenities including a pool and clubhouse, direct trail access, and a variety of single-family homes and townhouses within the Appoquinimink School District.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What are home prices in Parkside, Middletown, DE?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Parkside homes typically range from the mid-$300s to over $600,000 depending on size and build. The community offers both resale and new construction options. Contact Kevin Hensley at (302) 218-0130 for current availability.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Which schools serve Parkside in Middletown, DE?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Parkside is served by the highly rated Appoquinimink School District, which includes Middletown High School, Meredith Middle School, and Bunker Hill Elementary.",
+          },
+        },
+      ],
+    },
+  ],
 
-  "/areas/middletown-de/bayberry": neighborhoodSchemas({
+  "/areas/middletown-de/bayberry": [
+    ...neighborhoodSchemas({
     slug: "bayberry",
     name: "Bayberry, Middletown, Delaware",
     description:
@@ -1281,8 +1480,40 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       { name: "Bayberry", item: `${BASE}/areas/middletown-de/bayberry` },
     ],
   }),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is Bayberry in Middletown, DE?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Bayberry is an award-winning master-planned community in Middletown, Delaware featuring multiple distinct neighborhoods, scenic lakes, walking trails, parks, and the 55+ active-adult enclave known as the Ponds at Bayberry. It is one of the largest planned communities in Delaware.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is Bayberry good for families?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes — Bayberry is one of the most family-friendly communities in Delaware. It sits within the Appoquinimink School District, offers extensive trail and park infrastructure, and features a variety of home styles from townhouses to large single-family homes.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Does Bayberry have a 55+ section?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes — the Ponds at Bayberry is the active adult (55+) section of the broader Bayberry community, featuring low-maintenance homes, clubhouse amenities, and a quiet, resort-style setting still close to Middletown's shopping and services.",
+          },
+        },
+      ],
+    },
+  ],
 
-  "/areas/middletown-de/st-annes": neighborhoodSchemas({
+  "/areas/middletown-de/st-annes": [
+    ...neighborhoodSchemas({
     slug: "st-annes",
     name: "The Estates at St. Anne's, Middletown, Delaware",
     description:
@@ -1295,8 +1526,40 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       { name: "St. Anne's", item: `${BASE}/areas/middletown-de/st-annes` },
     ],
   }),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is The Estates at St. Anne's in Middletown, DE?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The Estates at St. Anne's is an upscale golf course community in Middletown, Delaware, featuring spacious estate homes, scenic fairway views, and easy Route 1 access. Homes typically offer larger lots and premium finishes within the Appoquinimink School District.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Does St. Anne's have a golf course?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes — the community is centered around the St. Anne's Golf Course, providing residents with scenic fairway views and recreational access. The course and surrounding estates create a distinct upscale character compared to other Middletown neighborhoods.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How far is St. Anne's from Middletown town center?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "St. Anne's is located just minutes from Middletown's main commercial corridor on Route 299 and Middletown Warwick Road, providing easy access to restaurants, grocery stores, and the Christiana Mall via Route 1.",
+          },
+        },
+      ],
+    },
+  ],
 
-  "/areas/middletown-de/whitehall": neighborhoodSchemas({
+  "/areas/middletown-de/whitehall": [
+    ...neighborhoodSchemas({
     slug: "whitehall",
     name: "The Town of Whitehall, Middletown, Delaware",
     description:
@@ -1309,8 +1572,40 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       { name: "Whitehall", item: `${BASE}/areas/middletown-de/whitehall` },
     ],
   }),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is The Town of Whitehall in Middletown, DE?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The Town of Whitehall is a new urbanism community in Middletown, Delaware designed to blend homes, shops, parks, and walkability in a traditional neighborhood setting. It features front-porch architecture, mixed-use zoning, and a town center concept uncommon in Delaware new construction.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I walk to shops in Whitehall, Middletown?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "That is a key design goal of Whitehall — the community is being built to include walkable retail and services within the neighborhood itself, reducing car dependence compared to conventional suburban developments.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is Whitehall new construction or resale?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Whitehall is predominantly new construction, with phased development ongoing. Both new build and early resale homes are available. Kevin Hensley can advise on builder contracts, incentives, and resale opportunities at (302) 218-0130.",
+          },
+        },
+      ],
+    },
+  ],
 
-  "/areas/middletown-de/hyetts-corner": neighborhoodSchemas({
+  "/areas/middletown-de/hyetts-corner": [
+    ...neighborhoodSchemas({
     slug: "hyetts-corner",
     name: "Hyetts Corner / Hyetts Crossing, Middletown, Delaware",
     description:
@@ -1323,6 +1618,37 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       { name: "Hyetts Corner", item: `${BASE}/areas/middletown-de/hyetts-corner` },
     ],
   }),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is Hyetts Corner in Middletown, DE?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Hyetts Corner (also marketed as Hyetts Crossing) is a collection of modern new construction communities in Middletown, Delaware featuring energy-efficient homes, contemporary open floor plans, and convenient Route 1 access within the Appoquinimink School District.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Are Hyetts Corner homes new construction?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes — Hyetts Corner consists primarily of recently built or actively under-construction single-family homes and townhouses with modern energy-efficient features. Kevin Hensley works with buyers to navigate builder contracts and negotiate upgrades.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What school district is Hyetts Corner in?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Hyetts Corner falls within the Appoquinimink School District, consistently one of the top-rated districts in Delaware, serving students through Middletown High School.",
+          },
+        },
+      ],
+    },
+  ],
 
   // ── Maryland: Chesapeake City ─────────────────────────────────────────────
   "/areas/chesapeake-city-md": [
