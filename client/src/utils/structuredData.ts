@@ -265,7 +265,7 @@ export function createRealEstateAgentData(): StructuredDataProps {
   return {
     type: 'RealEstateAgent',
     data: {
-      name: "Kevin Hensley's Homes",
+      name: "Kevin Hensley",
       image: "https://hensleyshomes.com/assets/IMG_0525-CDZL6hPI.jpeg",
       description: "Licensed real estate professional specializing in residential sales and property management in Delaware and Maryland",
       url: "https://hensleyshomes.com",

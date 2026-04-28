@@ -120,7 +120,7 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
     {
       "@context": "https://schema.org",
       "@type": "RealEstateAgent",
-      name: "Kevin Hensley's Homes",
+      name: "Kevin Hensley",
       image: KEVIN_PHOTO,
       description:
         "Licensed real estate professional specializing in residential sales and property management in Delaware and Maryland",
@@ -322,7 +322,7 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       name: "Home Buying Services - Delaware & Maryland",
       description:
         "Expert home buying assistance in Delaware and Maryland. Market analysis, property tours, and professional negotiation.",
-      provider: { "@type": "RealEstateAgent", name: "Kevin Hensley's Homes", url: BASE },
+      provider: { "@type": "RealEstateAgent", name: "Kevin Hensley", url: BASE },
       areaServed: [
         { "@type": "State", name: "Delaware" },
         { "@type": "State", name: "Maryland" },
@@ -346,7 +346,7 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       name: "Home Selling Services - Delaware & Maryland",
       description:
         "Sell your Delaware or Maryland home for top dollar. Professional photography, strategic marketing, and expert negotiation.",
-      provider: { "@type": "RealEstateAgent", name: "Kevin Hensley's Homes", url: BASE },
+      provider: { "@type": "RealEstateAgent", name: "Kevin Hensley", url: BASE },
       areaServed: [
         { "@type": "State", name: "Delaware" },
         { "@type": "State", name: "Maryland" },
@@ -370,7 +370,7 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       name: "Property Management Services - Delaware & Maryland",
       description:
         "Professional property management in Delaware and Maryland. Tenant screening, rent collection, maintenance coordination, and 24/7 support.",
-      provider: { "@type": "RealEstateAgent", name: "Kevin Hensley's Homes", url: BASE },
+      provider: { "@type": "RealEstateAgent", name: "Kevin Hensley", url: BASE },
       areaServed: [
         { "@type": "State", name: "Delaware" },
         { "@type": "State", name: "Maryland" },
