@@ -8,6 +8,7 @@ import { MapPin, GraduationCap, Home, TreePine, Heart, Car, Bed, Bath, Ruler, Ex
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
+import AreaLastUpdated from "@/components/area-last-updated";
 import type { Property } from "@shared/schema";
 
 const CLAYTON_ZIP = "19938";
@@ -333,6 +334,8 @@ export default function ClaytonDE() {
             <p className="text-xs text-muted-foreground text-center max-w-3xl mx-auto">Sources: Median home price estimate based on recent Kent County market data. School district information from Smyrna School District. Population data from U.S. Census Bureau. Commute times are estimates and may vary based on traffic conditions.</p>
           </div>
         </section>
+        <AreaLastUpdated date="2026-04-28" />
+
       </main>
       <Footer />
     </div>

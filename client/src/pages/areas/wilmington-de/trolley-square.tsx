@@ -10,6 +10,7 @@ import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import trolleySquareHero from "@assets/generated_images/trolley_square_walkable_historic_rowhomes.png";
 import type { Property } from "@shared/schema";
+import AreaLastUpdated from "@/components/area-last-updated";
 
 const TROLLEY_SQUARE_ZIP = "19806";
 
@@ -320,6 +321,8 @@ export default function TrolleySquareDe() {
           </div>
         </section>
         <LocalNews locationTag="trolley-square-de" locationName="Trolley Square, DE" />
+        <AreaLastUpdated date="2026-04-28" />
+
 
       </main>
       <Footer />

@@ -10,6 +10,7 @@ import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import fortyAcresHero from "@assets/generated_images/forty_acres_historic_rowhomes_and_trees.png";
 import type { Property } from "@shared/schema";
+import AreaLastUpdated from "@/components/area-last-updated";
 
 const FORTY_ACRES_ZIP = "19806";
 
@@ -320,6 +321,8 @@ export default function FortyAcresDe() {
           </div>
         </section>
         <LocalNews locationTag="forty-acres-de" locationName="Forty Acres, DE" />
+        <AreaLastUpdated date="2026-04-28" />
+
 
       </main>
       <Footer />

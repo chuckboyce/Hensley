@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/breadcrumb";
 import highlandsHero from "@assets/generated_images/highlands_luxury_historic_homes_and_parks.png";
 import type { Property } from "@shared/schema";
+import AreaLastUpdated from "@/components/area-last-updated";
 
 const HIGHLANDS_ZIP = "19806";
 
@@ -320,6 +321,8 @@ export default function HighlandsDe() {
           </div>
         </section>
         <LocalNews locationTag="highlands-de" locationName="Highlands, DE" />
+        <AreaLastUpdated date="2026-04-28" />
+
 
       </main>
       <Footer />

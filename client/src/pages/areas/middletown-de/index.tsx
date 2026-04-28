@@ -7,12 +7,12 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MapPin, GraduationCap, Building, TreePine, ShoppingBag, Car, Bed, Bath, Ruler, ExternalLink, Landmark, Zap, Droplets, Leaf } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import JsonLd from "@/components/JsonLd";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
 import type { Property } from "@shared/schema";
 import AudioPlayer from "@/components/audio-player";
 import LocalNews from "@/components/local-news";
 import whispperingWoodsAudio from "@assets/1415_Whispering_Woods_1765302937957.mp3";
+import AreaLastUpdated from "@/components/area-last-updated";
 
 const MIDDLETOWN_ZIP = "19709";
 
@@ -42,34 +42,6 @@ export default function MiddletownDE() {
     return null;
   }, [properties]);
 
-  const schemas = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/middletown-de/#place",
-      name: "Middletown, Delaware",
-      description: "Community guide for Middletown, DE including neighborhoods, new construction, schools, commutes, and insights from local Realtor Kevin Hensley.",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Middletown",
-        addressRegion: "DE",
-        postalCode: "19709",
-        addressCountry: "US",
-      },
-      areaServed: "Middletown, Delaware",
-      url: "https://hensleyshomes.com/areas/middletown-de",
-      author: { "@type": "RealEstateAgent", "@id": "https://hensleyshomes.com/#kevin-hensley" },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://hensleyshomes.com" },
-        { "@type": "ListItem", position: 2, name: "Delaware Communities", item: "https://hensleyshomes.com/areas" },
-        { "@type": "ListItem", position: 3, name: "Middletown, Delaware", item: "https://hensleyshomes.com/areas/middletown-de" },
-      ],
-    },
-  ];
 
   const neighborhoods = [
     { 
@@ -123,7 +95,6 @@ export default function MiddletownDE() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <JsonLd schemas={schemas} />
       <Header />
       <Breadcrumb 
         items={[
@@ -650,6 +621,8 @@ export default function MiddletownDE() {
             </p>
           </div>
         </section>
+        <AreaLastUpdated date="2026-04-28" />
+
       </main>
 
       <Footer />

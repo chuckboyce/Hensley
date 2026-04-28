@@ -8,6 +8,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import elktonHero from "@assets/generated_images/elkton_suburban_neighborhoods_aerial_view.png";
+import AreaLastUpdated from "@/components/area-last-updated";
 import type { Property } from "@shared/schema";
 
 const ELKTON_ZIP = "21921";
@@ -308,6 +309,8 @@ export default function ElktonMD() {
           </div>
         </section>
         <LocalNews locationTag="elkton-md" locationName="Elkton, MD" />
+        <AreaLastUpdated date="2026-04-28" />
+
 
       </main>
       <Footer />

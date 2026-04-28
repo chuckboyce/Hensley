@@ -9,8 +9,8 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import CensusStatsBar from "@/components/census-stats-bar";
-import JsonLd from "@/components/JsonLd";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
+import AreaLastUpdated from "@/components/area-last-updated";
 import type { Property } from "@shared/schema";
 
 const ZIP = "19709";
@@ -29,53 +29,6 @@ export default function BayberryMiddletown() {
     return null;
   }, [properties]);
 
-  const schemas = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Place",
-      "@id": "https://hensleyshomes.com/areas/middletown-de/bayberry/#place",
-      name: "Bayberry, Middletown, Delaware",
-      description: "Award-winning master-planned community in Middletown, DE. Features multiple neighborhoods, walking trails, lakes, parks, and the 55+ Ponds at Bayberry.",
-      address: { "@type": "PostalAddress", addressLocality: "Middletown", addressRegion: "DE", postalCode: "19709", addressCountry: "US" },
-      containsPlace: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/#place" },
-      url: "https://hensleyshomes.com/areas/middletown-de/bayberry",
-      author: { "@type": "RealEstateAgent", "@id": "https://hensleyshomes.com/#kevin-hensley" },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Dataset",
-      "@id": "https://hensleyshomes.com/areas/middletown-de/bayberry/#dataset",
-      name: "Demographic and Housing Profile for Bayberry, Middletown, Delaware",
-      description: "US Census Bureau ACS 5-year estimates covering median household income, homeownership rates, and housing age data for Bayberry, Middletown, Delaware.",
-      license: "https://creativecommons.org/publicdomain/zero/1.0/",
-      creator: { "@type": "Organization", name: "US Census Bureau", url: "https://www.census.gov" },
-      variableMeasured: ["Median Household Income", "Homeownership Rate", "Median Year Structure Built"],
-      citation: "ACS 5-Year Estimates Tables B25003, B19013, B25035",
-      subjectOf: { "@type": "RealEstateAgent", "@id": "https://hensleyshomes.com/#kevin-hensley", knowsAbout: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/bayberry/#place" } },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://hensleyshomes.com" },
-        { "@type": "ListItem", position: 2, name: "Delaware Communities", item: "https://hensleyshomes.com/areas" },
-        { "@type": "ListItem", position: 3, name: "Middletown, Delaware", item: "https://hensleyshomes.com/areas/middletown-de" },
-        { "@type": "ListItem", position: 4, name: "Bayberry", item: "https://hensleyshomes.com/areas/middletown-de/bayberry" },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "RealEstateAgent",
-      "@id": "https://hensleyshomes.com/#kevin-hensley",
-      name: "Kevin Hensley",
-      image: "https://hensleyshomes.com/assets/IMG_0525-CDZL6hPI.jpeg",
-      url: "https://hensleyshomes.com",
-      telephone: "+13022180130",
-      description: "Delaware and Maryland licensed real estate agent specializing in residential sales, new construction, and neighborhood guides for Middletown, DE and surrounding communities.",
-      areaServed: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/bayberry/#place" },
-      knowsAbout: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/bayberry/#place" },
-    },
-  ];
 
   const highlights = [
     { icon: TreePine, title: "Lakes & Trails", desc: "Miles of walking paths" },
@@ -86,7 +39,6 @@ export default function BayberryMiddletown() {
 
   return (
     <>
-      <JsonLd schemas={schemas} />
       <Header />
       <Breadcrumb
         items={[
@@ -316,6 +268,8 @@ export default function BayberryMiddletown() {
             </Link>
           </div>
         </section>
+        <AreaLastUpdated date="2026-04-28" />
+
       </main>
       <Footer />
     </>

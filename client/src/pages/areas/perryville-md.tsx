@@ -10,6 +10,7 @@ import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import perryvilleHero from "@assets/generated_images/perryville_waterfront_river_and_marina.png";
 import type { Property } from "@shared/schema";
+import AreaLastUpdated from "@/components/area-last-updated";
 
 const PERRYVILLE_ZIP = "21903";
 
@@ -337,6 +338,8 @@ export default function PerryvilleMD() {
           </div>
         </section>
         <LocalNews locationTag="perryville-md" locationName="Perryville, MD" />
+        <AreaLastUpdated date="2026-04-28" />
+
 
       </main>
       <Footer />

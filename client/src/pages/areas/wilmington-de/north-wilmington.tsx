@@ -10,6 +10,7 @@ import LocalNews from "@/components/local-news";
 import { Button } from "@/components/ui/button";
 import northWilmingtonHero from "@assets/generated_images/north_wilmington_mature_suburban_homes.png";
 import type { Property } from "@shared/schema";
+import AreaLastUpdated from "@/components/area-last-updated";
 
 const NORTH_WILMINGTON_ZIPS = ["19803", "19810"];
 
@@ -320,6 +321,8 @@ export default function NorthWilmingtonDE() {
           </div>
         </section>
         <LocalNews locationTag="north-wilmington-de" locationName="North Wilmington, DE" />
+        <AreaLastUpdated date="2026-04-28" />
+
 
       </main>
       <Footer />

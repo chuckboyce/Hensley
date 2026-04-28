@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import hockessinHero from "@assets/generated_images/hockessin_de_scenic_upscale_aerial.png";
 import type { Property } from "@shared/schema";
+import AreaLastUpdated from "@/components/area-last-updated";
 
 const HOCKESSIN_ZIP = "19707";
 
@@ -572,6 +573,8 @@ export default function HockessinDE() {
             </p>
           </div>
         </section>
+        <AreaLastUpdated date="2026-04-28" />
+
       </main>
 
       <Footer />

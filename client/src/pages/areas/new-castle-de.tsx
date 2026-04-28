@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import newCastleHero from "@assets/generated_images/new_castle_de_historic_waterfront_aerial.png";
 import type { Property } from "@shared/schema";
+import AreaLastUpdated from "@/components/area-last-updated";
 
 const NEW_CASTLE_ZIP = "19720";
 
@@ -350,6 +351,8 @@ export default function NewCastleDE() {
             <p className="text-xs text-muted-foreground text-center max-w-3xl mx-auto">Sources: Median home price from RocketHomes (January 2025). School district information from Colonial School District. Population data from U.S. Census Bureau. Commute times are estimates and may vary.</p>
           </div>
         </section>
+        <AreaLastUpdated date="2026-04-28" />
+
       </main>
       <Footer />
     </div>

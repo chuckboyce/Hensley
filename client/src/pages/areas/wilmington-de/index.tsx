@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/breadcrumb";
 import wilmingtonHero from "@assets/generated_images/wilmington_skyline_riverfront_and_parks.png";
 import type { Property } from "@shared/schema";
+import AreaLastUpdated from "@/components/area-last-updated";
 
 const WILMINGTON_ZIPS = ["19801", "19802", "19805", "19806"];
 
@@ -337,6 +338,8 @@ export default function WilmingtonDE() {
           </div>
         </section>
         <LocalNews locationTag="wilmington-de" locationName="Wilmington, DE" />
+        <AreaLastUpdated date="2026-04-28" />
+
 
       </main>
       <Footer />

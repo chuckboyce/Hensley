@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight, MapPin } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import AreaLastUpdated from "@/components/area-last-updated";
 import { Breadcrumb } from "@/components/breadcrumb";
 
 export default function AreasIndex() {
@@ -137,6 +138,8 @@ export default function AreasIndex() {
             </Link>
           </div>
         </div>
+        <AreaLastUpdated date="2026-04-28" />
+
       </main>
 
       <Footer />
