@@ -46,6 +46,8 @@ export default function BayberryMiddletown() {
       "@type": "Dataset",
       "@id": "https://hensleyshomes.com/areas/middletown-de/bayberry/#dataset",
       name: "Demographic and Housing Profile for Bayberry, Middletown, Delaware",
+      description: "US Census Bureau ACS 5-year estimates covering median household income, homeownership rates, and housing age data for Bayberry, Middletown, Delaware.",
+      license: "https://creativecommons.org/publicdomain/zero/1.0/",
       creator: { "@type": "Organization", name: "US Census Bureau", url: "https://www.census.gov" },
       variableMeasured: ["Median Household Income", "Homeownership Rate", "Median Year Structure Built"],
       citation: "ACS 5-Year Estimates Tables B25003, B19013, B25035",

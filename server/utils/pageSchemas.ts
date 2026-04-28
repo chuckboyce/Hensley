@@ -55,6 +55,8 @@ function neighborhoodSchemas(opts: {
       "@type": "Dataset",
       "@id": `${BASE}/areas/middletown-de/${opts.slug}/#dataset`,
       name: opts.datasetName,
+      description: `US Census Bureau ACS 5-year estimates covering median household income, homeownership rates, and housing age data for ${opts.name}.`,
+      license: "https://creativecommons.org/publicdomain/zero/1.0/",
       creator: {
         "@type": "Organization",
         name: "US Census Bureau",
