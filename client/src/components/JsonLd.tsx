@@ -1,9 +1,11 @@
+import { Helmet } from "react-helmet-async";
+
 /**
- * Renders one or more fully-formed JSON-LD objects as inline <script> tags
- * so that schema markup is present in the initial HTML and visible to crawlers.
+ * Injects one or more fully-formed JSON-LD objects into <head> via Helmet.
+ * Schema markup lands in the document head on every render, visible to crawlers.
  *
  * Usage:
- *   <JsonLd schemas={[placeSchema, breadcrumbSchema, datasetSchema]} />
+ *   <JsonLd schemas={[placeSchema, breadcrumbSchema, agentSchema]} />
  */
 interface JsonLdProps {
   schemas: Record<string, unknown>[];
@@ -11,14 +13,15 @@ interface JsonLdProps {
 
 export default function JsonLd({ schemas }: JsonLdProps) {
   return (
-    <>
+    <Helmet>
       {schemas.map((schema, i) => (
         <script
-          key={(schema["@type"] as string) ?? i}
+          key={`${schema["@type"] ?? "schema"}-${i}`}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema, null, 2) }}
-        />
+        >
+          {JSON.stringify(schema)}
+        </script>
       ))}
-    </>
+    </Helmet>
   );
 }

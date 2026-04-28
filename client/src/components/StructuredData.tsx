@@ -1,37 +1,32 @@
-import { StructuredDataProps } from '@/utils/structuredData';
+import { Helmet } from "react-helmet-async";
+import { StructuredDataProps } from "@/utils/structuredData";
 
 interface StructuredDataComponentProps {
   data: StructuredDataProps | StructuredDataProps[];
 }
 
 /**
- * Component for injecting structured data into the page head.
- * Renders inline <script type="application/ld+json"> tags so that
- * schema markup is present in the initial HTML and visible to crawlers.
+ * Injects schema.org JSON-LD blocks into <head> via Helmet.
+ * Accepts the StructuredDataProps format (type + data) used by the
+ * structuredData utility helpers (createWebPageData, createRealEstateAgentData, etc.).
  */
 export default function StructuredData({ data }: StructuredDataComponentProps) {
   const dataArray = Array.isArray(data) ? data : [data];
 
   return (
-    <>
-      {dataArray.map((item) => {
-        const json = JSON.stringify(
-          {
-            '@context': 'https://schema.org',
-            '@type': item.type,
+    <Helmet>
+      {dataArray.map((item, i) => (
+        <script
+          key={`${item.type}-${i}`}
+          type="application/ld+json"
+        >
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": item.type,
             ...item.data,
-          },
-          null,
-          2
-        );
-        return (
-          <script
-            key={item.type}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: json }}
-          />
-        );
-      })}
-    </>
+          })}
+        </script>
+      ))}
+    </Helmet>
   );
 }
