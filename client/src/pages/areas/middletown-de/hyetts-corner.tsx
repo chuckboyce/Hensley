@@ -61,6 +61,17 @@ export default function HyettsCornerMiddletown() {
         { "@type": "ListItem", position: 4, name: "Hyetts Corner / Hyetts Crossing", item: "https://hensleyshomes.com/areas/middletown-de/hyetts-corner" },
       ],
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "@id": "https://hensleyshomes.com/#kevin-hensley",
+      name: "Kevin Hensley",
+      url: "https://hensleyshomes.com",
+      telephone: "+13022180130",
+      description: "Delaware and Maryland licensed real estate agent specializing in residential sales, new construction, and neighborhood guides for Middletown, DE and surrounding communities.",
+      areaServed: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/hyetts-corner/#place" },
+      knowsAbout: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/hyetts-corner/#place" },
+    },
   ];
 
   const highlights = [

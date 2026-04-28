@@ -61,6 +61,17 @@ export default function StAnnesMiddletown() {
         { "@type": "ListItem", position: 4, name: "The Estates at St. Anne's", item: "https://hensleyshomes.com/areas/middletown-de/st-annes" },
       ],
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "@id": "https://hensleyshomes.com/#kevin-hensley",
+      name: "Kevin Hensley",
+      url: "https://hensleyshomes.com",
+      telephone: "+13022180130",
+      description: "Delaware and Maryland licensed real estate agent specializing in residential sales, new construction, and neighborhood guides for Middletown, DE and surrounding communities.",
+      areaServed: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/st-annes/#place" },
+      knowsAbout: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/st-annes/#place" },
+    },
   ];
 
   const highlights = [

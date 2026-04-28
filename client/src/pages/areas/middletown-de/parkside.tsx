@@ -61,6 +61,17 @@ export default function ParksideMiddletown() {
         { "@type": "ListItem", position: 4, name: "Parkside", item: "https://hensleyshomes.com/areas/middletown-de/parkside" },
       ],
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "@id": "https://hensleyshomes.com/#kevin-hensley",
+      name: "Kevin Hensley",
+      url: "https://hensleyshomes.com",
+      telephone: "+13022180130",
+      description: "Delaware and Maryland licensed real estate agent specializing in residential sales, new construction, and neighborhood guides for Middletown, DE and surrounding communities.",
+      areaServed: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/parkside/#place" },
+      knowsAbout: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/parkside/#place" },
+    },
   ];
 
   const highlights = [

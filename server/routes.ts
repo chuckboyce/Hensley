@@ -150,8 +150,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Census ACS data proxy — cached until next January (annual ACS release cycle)
-  app.get("/api/census/neighborhood/:slug", async (req, res) => {
-    const { slug } = req.params;
+  // :tractId accepts a neighborhood slug that is mapped server-side to its Census tract ID
+  app.get("/api/census/neighborhood/:tractId", async (req, res) => {
+    const { tractId: slug } = req.params;
     const tractInfo = getNeighborhoodTractInfo(slug);
     if (!tractInfo) {
       return res.status(404).json({ error: "Neighborhood not found" });
