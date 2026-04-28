@@ -6,6 +6,7 @@ import { fetchFeedArticles, fetchAllFeeds, generateArticleContent } from "./serv
 import { ghlService } from "./services/ghl";
 import { parseBrightMLSText, generateListingKey } from "./utils/brightmls-parser";
 import { submitToIndexNow, ALL_SITE_URLS, NEW_PAGE_URLS } from "./utils/search-engine-ping";
+import { submitToGoogleIndexing } from "./utils/google-indexing";
 import { optimizePropertyImage } from "./utils/image-optimizer";
 import { generatePropertySummary } from "./aiSummary";
 import { getActiveRentalListings, clearRentalListingsCache, createOwner } from "./services/doorloop";
@@ -445,6 +446,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error submitting to IndexNow:", error);
       res.status(500).json({ error: "Failed to submit to IndexNow" });
+    }
+  });
+
+  // Admin: Submit URLs to Google Indexing API via service account
+  app.post("/api/admin/google-index", adminAuth, async (req, res) => {
+    try {
+      const { urls } = req.body;
+      const urlList: string[] = Array.isArray(urls) && urls.length > 0 ? urls : ALL_SITE_URLS;
+      const results = await submitToGoogleIndexing(urlList);
+      res.json({ success: results.totalFailed === 0, results });
+    } catch (error: any) {
+      console.error("Error submitting to Google Indexing API:", error);
+      res.status(500).json({ error: error?.message ?? "Failed to submit to Google Indexing API" });
     }
   });
 
