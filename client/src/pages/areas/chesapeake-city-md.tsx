@@ -129,7 +129,7 @@ export default function ChesapeakeCityMD() {
       name: "Back Creek Area",
       type: "Waterfront / Boating",
       description: "Known for marina access, boating facilities, and scenic water views. A top choice for buyers wanting Chesapeake Bay lifestyle amenities.",
-      link: "https://www.mdimarina.com",
+      link: "https://summitnorthmarina.com",
       linkText: "Back Creek Marina"
     },
     { 

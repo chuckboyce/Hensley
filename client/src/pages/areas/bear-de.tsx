@@ -113,7 +113,7 @@ export default function BearDE() {
       name: "Brennan Estates", 
       type: "Family-Friendly",
       description: "A highly desirable community featuring tree-lined streets, playgrounds, and well-maintained homes. Popular among families for its strong community feel, nearby schools, and easy access to Route 40 and I-95.",
-      link: "https://www.brennanestateshoa.org",
+      link: "https://brennanestatesassociation.org",
       linkText: "Brennan Estates HOA"
     },
     { 
@@ -127,14 +127,14 @@ export default function BearDE() {
       name: "Red Lion Chase", 
       type: "Luxury / Master Planned",
       description: "An upscale community with large homes, clubhouse amenities, open space, and scenic streetscapes. Ideal for buyers seeking newer construction with premium finishes and community facilities.",
-      link: "https://redlionchasemc.com",
+      link: "https://www.neighborhoods.com/red-lion-chase-bear-de",
       linkText: "Red Lion Chase Maintenance Corp."
     },
     { 
       name: "Village of Red Lion Creek", 
       type: "Active Adult (55+)",
       description: "A popular 55+ community offering low-maintenance homes, quiet streets, and proximity to shopping and medical services. Great for active adults seeking a comfortable, well-kept neighborhood.",
-      link: "https://www.villageofredlioncreek.com",
+      link: "https://www.activeadultsdelaware.com/neighborhood/village-of-red-lion-creek",
       linkText: "Village of Red Lion Creek Community Site"
     }
   ];

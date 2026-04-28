@@ -325,8 +325,8 @@ export default function ClaytonDE() {
                       <h3 className="font-bold text-lg">Government</h3>
                     </div>
                     <ul className="space-y-3">
-                      <li><a href="https://www.townofclaytonde.com" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Town of Clayton</strong> — Local government & services</span></a></li>
-                      <li><a href="https://www.kent.delaware.gov" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Kent County</strong> — County services & resources</span></a></li>
+                      <li><a href="https://clayton.delaware.gov" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Town of Clayton</strong> — Local government & services</span></a></li>
+                      <li><a href="https://kentcountyde.gov" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Kent County</strong> — County services & resources</span></a></li>
                     </ul>
                   </CardContent>
                 </Card>
@@ -348,7 +348,7 @@ export default function ClaytonDE() {
                       <h3 className="font-bold text-lg">Parks & Recreation</h3>
                     </div>
                     <ul className="space-y-3">
-                      <li><a href="https://www.kent.delaware.gov/recreation" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Kent County Recreation</strong> — Parks, programs & trails</span></a></li>
+                      <li><a href="https://kentcountyde.gov/recreation" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"><ExternalLink className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100" /><span><strong>Kent County Recreation</strong> — Parks, programs & trails</span></a></li>
                     </ul>
                   </CardContent>
                 </Card>
