@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import CensusStatsBar from "@/components/census-stats-bar";
+import JsonLd from "@/components/JsonLd";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
 import type { Property } from "@shared/schema";
 
@@ -28,14 +29,8 @@ export default function ParksideMiddletown() {
     return null;
   }, [properties]);
 
-  useEffect(() => {
-    const schemaId = "parkside-place-schema";
-    const breadcrumbId = "parkside-breadcrumb-schema";
-
-    const placeScript = document.createElement("script");
-    placeScript.type = "application/ld+json";
-    placeScript.id = schemaId;
-    placeScript.textContent = JSON.stringify({
+  const schemas = [
+    {
       "@context": "https://schema.org",
       "@type": "Place",
       "@id": "https://hensleyshomes.com/areas/middletown-de/parkside/#place",
@@ -45,12 +40,8 @@ export default function ParksideMiddletown() {
       containsPlace: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/#place" },
       url: "https://hensleyshomes.com/areas/middletown-de/parkside",
       author: { "@type": "RealEstateAgent", "@id": "https://hensleyshomes.com/#kevin-hensley" },
-    });
-
-    const datasetScript = document.createElement("script");
-    datasetScript.type = "application/ld+json";
-    datasetScript.id = "parkside-dataset-schema";
-    datasetScript.textContent = JSON.stringify({
+    },
+    {
       "@context": "https://schema.org",
       "@type": "Dataset",
       "@id": "https://hensleyshomes.com/areas/middletown-de/parkside/#dataset",
@@ -59,12 +50,8 @@ export default function ParksideMiddletown() {
       variableMeasured: ["Median Household Income", "Homeownership Rate", "Median Year Structure Built"],
       citation: "ACS 5-Year Estimates Tables B25003, B19013, B25035",
       subjectOf: { "@type": "RealEstateAgent", "@id": "https://hensleyshomes.com/#kevin-hensley", knowsAbout: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/parkside/#place" } },
-    });
-
-    const breadcrumbScript = document.createElement("script");
-    breadcrumbScript.type = "application/ld+json";
-    breadcrumbScript.id = breadcrumbId;
-    breadcrumbScript.textContent = JSON.stringify({
+    },
+    {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
@@ -73,17 +60,8 @@ export default function ParksideMiddletown() {
         { "@type": "ListItem", position: 3, name: "Middletown, Delaware", item: "https://hensleyshomes.com/areas/middletown-de" },
         { "@type": "ListItem", position: 4, name: "Parkside", item: "https://hensleyshomes.com/areas/middletown-de/parkside" },
       ],
-    });
-
-    [schemaId, "parkside-dataset-schema", breadcrumbId].forEach((id) => document.getElementById(id)?.remove());
-    document.head.appendChild(placeScript);
-    document.head.appendChild(datasetScript);
-    document.head.appendChild(breadcrumbScript);
-
-    return () => {
-      [schemaId, "parkside-dataset-schema", breadcrumbId].forEach((id) => document.getElementById(id)?.remove());
-    };
-  }, []);
+    },
+  ];
 
   const highlights = [
     { icon: TreePine, title: "Resort Amenities", desc: "Pool, tennis & trails" },
@@ -94,6 +72,7 @@ export default function ParksideMiddletown() {
 
   return (
     <>
+      <JsonLd schemas={schemas} />
       <Header />
       <Breadcrumb
         items={[

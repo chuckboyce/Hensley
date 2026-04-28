@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import LocalNews from "@/components/local-news";
 import CensusStatsBar from "@/components/census-stats-bar";
+import JsonLd from "@/components/JsonLd";
 import middletownHero from "@assets/Middletown_DE_1757012981537.jpg";
 import type { Property } from "@shared/schema";
 
@@ -28,14 +29,8 @@ export default function WhitehallMiddletown() {
     return null;
   }, [properties]);
 
-  useEffect(() => {
-    const ids = ["whitehall-place-schema", "whitehall-dataset-schema", "whitehall-breadcrumb-schema"];
-    ids.forEach((id) => document.getElementById(id)?.remove());
-
-    const placeScript = document.createElement("script");
-    placeScript.type = "application/ld+json";
-    placeScript.id = ids[0];
-    placeScript.textContent = JSON.stringify({
+  const schemas = [
+    {
       "@context": "https://schema.org",
       "@type": "Place",
       "@id": "https://hensleyshomes.com/areas/middletown-de/whitehall/#place",
@@ -45,12 +40,8 @@ export default function WhitehallMiddletown() {
       containsPlace: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/#place" },
       url: "https://hensleyshomes.com/areas/middletown-de/whitehall",
       author: { "@type": "RealEstateAgent", "@id": "https://hensleyshomes.com/#kevin-hensley" },
-    });
-
-    const datasetScript = document.createElement("script");
-    datasetScript.type = "application/ld+json";
-    datasetScript.id = ids[1];
-    datasetScript.textContent = JSON.stringify({
+    },
+    {
       "@context": "https://schema.org",
       "@type": "Dataset",
       "@id": "https://hensleyshomes.com/areas/middletown-de/whitehall/#dataset",
@@ -59,12 +50,8 @@ export default function WhitehallMiddletown() {
       variableMeasured: ["Median Household Income", "Homeownership Rate", "Median Year Structure Built"],
       citation: "ACS 5-Year Estimates Tables B25003, B19013, B25035",
       subjectOf: { "@type": "RealEstateAgent", "@id": "https://hensleyshomes.com/#kevin-hensley", knowsAbout: { "@type": "Place", "@id": "https://hensleyshomes.com/areas/middletown-de/whitehall/#place" } },
-    });
-
-    const bcScript = document.createElement("script");
-    bcScript.type = "application/ld+json";
-    bcScript.id = ids[2];
-    bcScript.textContent = JSON.stringify({
+    },
+    {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
@@ -73,12 +60,8 @@ export default function WhitehallMiddletown() {
         { "@type": "ListItem", position: 3, name: "Middletown, Delaware", item: "https://hensleyshomes.com/areas/middletown-de" },
         { "@type": "ListItem", position: 4, name: "The Town of Whitehall", item: "https://hensleyshomes.com/areas/middletown-de/whitehall" },
       ],
-    });
-
-    ids.forEach((id) => document.getElementById(id)?.remove());
-    [placeScript, datasetScript, bcScript].forEach((s) => document.head.appendChild(s));
-    return () => ids.forEach((id) => document.getElementById(id)?.remove());
-  }, []);
+    },
+  ];
 
   const highlights = [
     { icon: ShoppingBag, title: "Walkable Living", desc: "Shops & dining on-site" },
@@ -89,6 +72,7 @@ export default function WhitehallMiddletown() {
 
   return (
     <>
+      <JsonLd schemas={schemas} />
       <Header />
       <Breadcrumb
         items={[
