@@ -266,6 +266,7 @@ export function createRealEstateAgentData(): StructuredDataProps {
     type: 'RealEstateAgent',
     data: {
       name: "Kevin Hensley's Homes",
+      image: "https://hensleyshomes.com/assets/IMG_0525-CDZL6hPI.jpeg",
       description: "Licensed real estate professional specializing in residential sales and property management in Delaware and Maryland",
       url: "https://hensleyshomes.com",
       telephone: "(302) 218-0130",
@@ -298,6 +299,7 @@ export function createRealEstateAgentData(): StructuredDataProps {
       agent: {
         "@type": "Person",
         "name": "Kevin Hensley",
+        "image": "https://hensleyshomes.com/assets/IMG_0525-CDZL6hPI.jpeg",
         "jobTitle": "Real Estate Broker",
         "telephone": "(302) 218-0130",
         "knowsAbout": [

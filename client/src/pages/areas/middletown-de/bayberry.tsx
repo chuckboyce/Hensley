@@ -66,6 +66,7 @@ export default function BayberryMiddletown() {
       "@type": "RealEstateAgent",
       "@id": "https://hensleyshomes.com/#kevin-hensley",
       name: "Kevin Hensley",
+      image: "https://hensleyshomes.com/assets/IMG_0525-CDZL6hPI.jpeg",
       url: "https://hensleyshomes.com",
       telephone: "+13022180130",
       description: "Delaware and Maryland licensed real estate agent specializing in residential sales, new construction, and neighborhood guides for Middletown, DE and surrounding communities.",

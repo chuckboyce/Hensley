@@ -7,11 +7,14 @@
 
 const BASE = "https://hensleyshomes.com";
 
+const KEVIN_PHOTO = `${BASE}/assets/IMG_0525-CDZL6hPI.jpeg`;
+
 const KEVIN_AGENT = {
   "@context": "https://schema.org",
   "@type": "RealEstateAgent",
   "@id": `${BASE}/#kevin-hensley`,
   name: "Kevin Hensley",
+  image: KEVIN_PHOTO,
   url: BASE,
   telephone: "+13022180130",
   description:
@@ -118,6 +121,7 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       "@context": "https://schema.org",
       "@type": "RealEstateAgent",
       name: "Kevin Hensley's Homes",
+      image: KEVIN_PHOTO,
       description:
         "Licensed real estate professional specializing in residential sales and property management in Delaware and Maryland",
       url: BASE,
@@ -141,6 +145,7 @@ export const PAGE_SCHEMAS: Record<string, object[]> = {
       agent: {
         "@type": "Person",
         name: "Kevin Hensley",
+        image: KEVIN_PHOTO,
         jobTitle: "Real Estate Broker",
         telephone: "(302) 218-0130",
       },
