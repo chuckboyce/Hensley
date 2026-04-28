@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { generateFullPageSchema } from "./utils/schemaGenerator";
+import { buildSchemaHtml } from "./utils/pageSchemas";
 import { storage } from "./storage";
 import fs from "fs";
 import path from "path";
@@ -230,55 +231,69 @@ ${pages.map(page => `  <url>
     }
   });
 
-  // Server-side rendered properties page with schema injection for SEO
-  // This ensures search engines see the JSON-LD without JavaScript execution
-  // In production, this serves HTML with pre-injected schema
-  // In development, this falls through to Vite (client-side injection used for testing)
+  // Server-side schema injection for SEO.
+  // Injects JSON-LD into the HTML before serving so search engines see schema
+  // in the raw page source without requiring JavaScript execution.
   if (app.get("env") !== "development") {
-    // Cache the HTML template for performance
+    const htmlPath = path.resolve(import.meta.dirname, "public", "index.html");
     let cachedHtml: string | null = null;
     let cacheTime = 0;
-    const CACHE_TTL = 60 * 1000; // 1 minute cache for HTML template
-    
+    const CACHE_TTL = 60 * 1000; // 1 minute
+
+    const getHtmlTemplate = (): string | null => {
+      const now = Date.now();
+      if (!cachedHtml || now - cacheTime > CACHE_TTL) {
+        if (!fs.existsSync(htmlPath)) return null;
+        cachedHtml = fs.readFileSync(htmlPath, "utf-8");
+        cacheTime = now;
+      }
+      return cachedHtml;
+    };
+
+    // /properties uses a dynamic schema built from the database
     app.get("/properties", async (req, res, next) => {
       try {
         const baseUrl = "https://hensleyshomes.com";
         const properties = await storage.listActiveProperties();
         const schemaJson = generateFullPageSchema(properties, baseUrl);
-        
-        // Production build outputs to dist/public (same as serveStatic uses)
-        const htmlPath = path.resolve(import.meta.dirname, "public", "index.html");
-        
-        // Use cached template if available and fresh
-        const now = Date.now();
-        if (!cachedHtml || (now - cacheTime) > CACHE_TTL) {
-          if (!fs.existsSync(htmlPath)) {
-            console.warn("[SSR Properties] HTML file not found at:", htmlPath);
-            return next();
-          }
-          cachedHtml = fs.readFileSync(htmlPath, 'utf-8');
-          cacheTime = now;
-        }
-        
-        let html = cachedHtml;
-        
-        // Inject the schema before closing head tag
-        const schemaScript = `<script type="application/ld+json" id="ssr-property-schema">${schemaJson}</script>`;
-        html = html.replace('</head>', `${schemaScript}\n</head>`);
-        
-        // Also update meta tags for this specific page
+        const template = getHtmlTemplate();
+        if (!template) return next();
+
+        let html = template;
+        html = html.replace(
+          "</head>",
+          `<script type="application/ld+json">${schemaJson}</script>\n</head>`
+        );
         html = html.replace(
           /<title>.*?<\/title>/,
           `<title>Available Properties | Kevin Hensley's Homes</title>`
         );
-        
-        res.header('Content-Type', 'text/html');
-        res.header('Cache-Control', 'public, max-age=300'); // Cache for 5 minutes
+        res.header("Content-Type", "text/html");
+        res.header("Cache-Control", "public, max-age=300");
         res.send(html);
       } catch (error) {
         console.error("[SSR Properties] Error:", error);
         next();
       }
+    });
+
+    // All other pages: inject static JSON-LD schemas defined in pageSchemas.ts
+    app.use((req, res, next) => {
+      // Only handle GET requests for HTML pages (not API calls or static assets)
+      if (req.method !== "GET") return next();
+      if (req.path.startsWith("/api/")) return next();
+      if (/\.(js|css|png|jpg|jpeg|webp|avif|svg|ico|woff2?|ttf|eot|json|xml|txt|mp3|mp4)(\?|$)/.test(req.path)) return next();
+
+      const schemaHtml = buildSchemaHtml(req.path);
+      if (!schemaHtml) return next();
+
+      const template = getHtmlTemplate();
+      if (!template) return next();
+
+      const html = template.replace("</head>", `${schemaHtml}\n</head>`);
+      res.header("Content-Type", "text/html");
+      res.header("Cache-Control", "no-cache, must-revalidate");
+      res.send(html);
     });
   }
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -72,11 +73,12 @@
       defer>
     </script>
 
-    <!-- Structured Data / JSON-LD schemas are injected server-side by Express before this HTML is served -->
+    <!-- Structured Data loaded client-side via React StructuredData component for better performance -->
+    <script type="module" crossorigin src="/assets/index-CfKqkBer.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Do-8abqW.css">
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
     <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
   </body>
