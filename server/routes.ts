@@ -9,6 +9,7 @@ import { pingSearchEngines } from "./utils/search-engine-ping";
 import { optimizePropertyImage } from "./utils/image-optimizer";
 import { generatePropertySummary } from "./aiSummary";
 import { getActiveRentalListings, clearRentalListingsCache, createOwner } from "./services/doorloop";
+import { getCensusData, getNeighborhoodTractInfo } from "./services/census";
 import { generateFullPageSchema, generatePropertySchema, generatePropertyListSchema } from "./utils/schemaGenerator";
 import multer from "multer";
 import path from "path";
@@ -146,6 +147,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error("Error creating DoorLoop owner:", error);
       res.status(500).json({ success: false, error: error instanceof Error ? error.message : "Failed to create owner" });
     }
+  });
+
+  // Census ACS data proxy — cached until next January (annual ACS release cycle)
+  app.get("/api/census/neighborhood/:slug", async (req, res) => {
+    const { slug } = req.params;
+    const tractInfo = getNeighborhoodTractInfo(slug);
+    if (!tractInfo) {
+      return res.status(404).json({ error: "Neighborhood not found" });
+    }
+    const data = await getCensusData(slug);
+    if (!data) {
+      return res.status(503).json({ error: "Census data temporarily unavailable" });
+    }
+    res.json({ success: true, data });
   });
 
   // DoorLoop: Force-refresh cache (admin only)

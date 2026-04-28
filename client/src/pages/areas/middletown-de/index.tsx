@@ -116,40 +116,40 @@ export default function MiddletownDE() {
       type: "Luxury",
       description: "A beautifully planned community known for its tree-lined streets, large parks, and resort-style amenities including a clubhouse, pool, tennis courts, and walking paths. The neighborhood has a strong sense of community with regular events and a warm, welcoming feel.",
       link: "https://parkisdemc.com",
-      linkText: "Parkside HOA / Community Site"
+      linkText: "Parkside HOA / Community Site",
+      pageLink: "/areas/middletown-de/parkside"
     },
     { 
       name: "The Estates at St. Anne's", 
       type: "Golf Course",
       description: "An upscale golf course community featuring spacious homes, scenic fairway views, peaceful streets, and easy access to Route 1. Residents enjoy elegant architecture, open landscapes, and a quiet, refined atmosphere perfect for those who appreciate a more private setting.",
       link: "https://stannesgolf.com",
-      linkText: "St. Anne's Golf Course & Community Info"
+      linkText: "St. Anne's Golf Course & Community Info",
+      pageLink: "/areas/middletown-de/st-annes"
     },
     { 
       name: "Bayberry", 
       type: "Master Planned",
-      description: "An award-winning master-planned community featuring multiple neighborhoods with beautiful streetscapes, walking trails, lakes, and parks. Bayberry offers a range of home styles from new construction to established sections, with the upcoming Bayberry Town Center bringing retail and dining options.",
+      description: "An award-winning master-planned community featuring multiple neighborhoods with beautiful streetscapes, walking trails, lakes, and parks. Bayberry offers a range of home styles from new construction to established sections, with the upcoming Bayberry Town Center bringing retail and dining options. Also home to The Ponds at Bayberry (55+ community).",
       link: "https://www.vbsmc.net",
-      linkText: "Bayberry Community HOA"
-    },
-    { 
-      name: "The Ponds at Bayberry", 
-      type: "55+ Active Adult",
-      description: "Bayberry's premier 55+ community offering low-maintenance living with beautifully designed homes, neighborhood gathering spaces, walking trails, and convenient access to parks and open areas. A strong choice for active adults seeking comfort and community."
+      linkText: "Bayberry Community HOA",
+      pageLink: "/areas/middletown-de/bayberry"
     },
     { 
       name: "The Town of Whitehall", 
       type: "Master Planned",
       description: "A beautifully designed 'new urbanism' community blending homes, shops, parks, community events, and walkability. Whitehall emphasizes front-porch living, architectural charm, and a connected community feel. It's one of Middletown's most visually distinctive developments.",
       link: "https://whitehallde.com",
-      linkText: "The Town of Whitehall Official Site"
+      linkText: "The Town of Whitehall Official Site",
+      pageLink: "/areas/middletown-de/whitehall"
     },
     { 
       name: "Hyetts Corner / Hyetts Crossing", 
       type: "New Construction",
       description: "These newer communities feature modern floor plans, energy-efficient homes, and convenient access to Route 1. With attractive pricing and contemporary layouts, they appeal to buyers looking for newer construction within the Middletown school district.",
       link: "https://www.lennar.com/new-homes/delaware/middletown/hyetts-crossing",
-      linkText: "Hyetts Crossing Community Info"
+      linkText: "Hyetts Crossing Community Info",
+      pageLink: "/areas/middletown-de/hyetts-corner"
     }
   ];
 
@@ -461,17 +461,28 @@ export default function MiddletownDE() {
                       <p className="text-muted-foreground text-sm mb-4 flex-1">
                         {hood.description}
                       </p>
-                      {hood.link && (
-                        <a 
-                          href={hood.link} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                          {hood.linkText}
-                        </a>
-                      )}
+                      <div className="flex flex-col gap-2 mt-auto">
+                        {hood.pageLink && (
+                          <Link
+                            href={hood.pageLink}
+                            className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                          >
+                            <MapPin className="h-4 w-4" />
+                            View Neighborhood Guide →
+                          </Link>
+                        )}
+                        {hood.link && (
+                          <a 
+                            href={hood.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary hover:underline"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                            {hood.linkText}
+                          </a>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 ))}

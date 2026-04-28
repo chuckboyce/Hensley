@@ -100,6 +100,18 @@
 
 # Recent Changes
 
+## April 28, 2026 — Middletown Neighborhood Pages + Live Census Data
+*Built 5 dedicated neighborhood guide pages for Middletown's top communities — Parkside, The Estates at St. Anne's, Bayberry (with 55+ Ponds at Bayberry section), The Town of Whitehall, and Hyetts Corner / Hyetts Crossing. Each page pulls live demographic data directly from the US Census Bureau and caches it annually.*
+
+- Restructured `middletown-de` from a single file into a folder matching the `wilmington-de` pattern (`middletown-de/index.tsx` + 5 neighborhood sub-pages)
+- Built Census ACS proxy service (`server/services/census.ts`) that calls the Census Bureau API for owner-occupancy %, median household income, and median year built; cache expires each January 1st to match annual ACS release cycle
+- Mapped each neighborhood to its actual New Castle County Census tract (tracts 166.08, 166.11, 166.12, 166.14, 168.07) using real 2023 ACS 5-Year Estimates
+- Created reusable `CensusStatsBar` component with loading/error states and "as of" data attribution label
+- Each page includes: hero with photo placeholder badge, Community DNA stats bar (live census data), school feeder pathway (Appoquinimink district), commute times, spotlight listing, highlights grid, HOA/resource links, and schema.org JSON-LD (Place, BreadcrumbList, Dataset, RealEstateAgent)
+- Bayberry page includes a styled 55+ sub-section for The Ponds at Bayberry
+- Middletown hub cards now link directly to each neighborhood guide page
+- CENSUS_API_KEY added to Replit Secrets
+
 ## February 17, 2026 — Headless CMS & Local News System
 *Built a complete content management system that automatically pulls local news from RSS feeds, generates AI-powered summaries and FAQs tailored to each community, and displays them on all 19 location pages — boosting SEO with fresh, location-specific content and FAQ schema markup.*
 

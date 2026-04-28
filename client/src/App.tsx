@@ -64,7 +64,12 @@ import Sell from "@/pages/sell";
 import PropertyManagement from "@/pages/property-management";
 import PropertyManagementNewarkDE from "@/pages/property-management-newark-de";
 import AreasIndex from "@/pages/areas";
-import MiddletownDE from "@/pages/areas/middletown-de";
+import MiddletownDE from "@/pages/areas/middletown-de/index";
+import ParksideMiddletown from "@/pages/areas/middletown-de/parkside";
+import StAnnesMiddletown from "@/pages/areas/middletown-de/st-annes";
+import BayberryMiddletown from "@/pages/areas/middletown-de/bayberry";
+import WhitehallMiddletown from "@/pages/areas/middletown-de/whitehall";
+import HyettsCornerMiddletown from "@/pages/areas/middletown-de/hyetts-corner";
 import TownsendDE from "@/pages/areas/townsend-de";
 import BearDE from "@/pages/areas/bear-de";
 import HockessinDE from "@/pages/areas/hockessin-de";
@@ -133,6 +138,11 @@ function Router() {
         <Route path="/property-management/newark-de" component={PropertyManagementNewarkDE} />
         <Route path="/areas" component={AreasIndex} />
         <Route path="/areas/middletown-de" component={MiddletownDE} />
+        <Route path="/areas/middletown-de/parkside" component={ParksideMiddletown} />
+        <Route path="/areas/middletown-de/st-annes" component={StAnnesMiddletown} />
+        <Route path="/areas/middletown-de/bayberry" component={BayberryMiddletown} />
+        <Route path="/areas/middletown-de/whitehall" component={WhitehallMiddletown} />
+        <Route path="/areas/middletown-de/hyetts-corner" component={HyettsCornerMiddletown} />
         <Route path="/areas/townsend-de" component={TownsendDE} />
         <Route path="/areas/bear-de" component={BearDE} />
         <Route path="/areas/hockessin-de" component={HockessinDE} />
