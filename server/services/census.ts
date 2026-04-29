@@ -115,11 +115,11 @@ const ACS_VARS = [
   "B19013_001E",
   // Median year built
   "B25035_001E",
-  // Age groups (under 18: male groups 3-9, female 27-33; 65+: male 20-25, female 44-49)
+  // Age groups (under 18: male 003-006, female 027-030; 65+: male 020-025, female 044-049)
   "B01001_001E",
-  "B01001_003E","B01001_004E","B01001_005E","B01001_006E","B01001_007E","B01001_008E","B01001_009E",
+  "B01001_003E","B01001_004E","B01001_005E","B01001_006E",
   "B01001_020E","B01001_021E","B01001_022E","B01001_023E","B01001_024E","B01001_025E",
-  "B01001_027E","B01001_028E","B01001_029E","B01001_030E","B01001_031E","B01001_032E","B01001_033E",
+  "B01001_027E","B01001_028E","B01001_029E","B01001_030E",
   "B01001_044E","B01001_045E","B01001_046E","B01001_047E","B01001_048E","B01001_049E",
   // Year structure built
   "B25034_001E","B25034_002E","B25034_003E","B25034_004E","B25034_005E","B25034_006E",
@@ -268,8 +268,8 @@ export async function getCensusData(slug: string): Promise<CensusData | null> {
 
     // ── Age buckets ──
     const totalPop = g("B01001_001E");
-    const under18Male   = sumVars(headers, row, ["B01001_003E","B01001_004E","B01001_005E","B01001_006E","B01001_007E","B01001_008E","B01001_009E"]);
-    const under18Female = sumVars(headers, row, ["B01001_027E","B01001_028E","B01001_029E","B01001_030E","B01001_031E","B01001_032E","B01001_033E"]);
+    const under18Male   = sumVars(headers, row, ["B01001_003E","B01001_004E","B01001_005E","B01001_006E"]);
+    const under18Female = sumVars(headers, row, ["B01001_027E","B01001_028E","B01001_029E","B01001_030E"]);
     const age65plusMale   = sumVars(headers, row, ["B01001_020E","B01001_021E","B01001_022E","B01001_023E","B01001_024E","B01001_025E"]);
     const age65plusFemale = sumVars(headers, row, ["B01001_044E","B01001_045E","B01001_046E","B01001_047E","B01001_048E","B01001_049E"]);
 
