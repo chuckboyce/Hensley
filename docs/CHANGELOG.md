@@ -2,6 +2,95 @@
 
 All notable changes to the Kevin Hensley real estate website will be documented in this file.
 
+---
+
+## [2.0.0] - 2026-04-28
+
+### SEO & AEO Overhaul — Structured Data, Census Integration, Broken Links, Search Engine Submission
+
+*A comprehensive SEO/AEO (Answer Engine Optimization) pass covering server-side schema injection, live Census data on all neighborhood pages, broken link repairs, and direct search engine submission integrations.*
+
+---
+
+#### New Pages Added
+
+Five new Middletown sub-neighborhood pages, each with full community writeup, live U.S. Census ACS data, and a shareable data infographic:
+
+- **Parkside** — `/areas/middletown-de/parkside`
+- **Bayberry** — `/areas/middletown-de/bayberry`
+- **The Estates at St. Anne's** — `/areas/middletown-de/st-annes`
+- **The Town of Whitehall** — `/areas/middletown-de/whitehall`
+- **Hyetts Corner / Hyetts Crossing** — `/areas/middletown-de/hyetts-corner`
+
+---
+
+#### Server-Side JSON-LD Schema Injection
+
+*Google and AI assistants now read your structured data directly from the HTML source, not from JavaScript that runs after the page loads. This is the most SEO-effective way to deliver schema markup.*
+
+- Moved all JSON-LD structured data from client-side `useEffect` calls to server-side `<head>` injection using `react-helmet-async`
+- Every page now includes appropriate schema types: `RealEstateAgent`, `Neighborhood`, `Dataset`, `FAQPage`, `BreadcrumbList`, `WebPage`
+- Added Kevin's professional headshot URL to all `RealEstateAgent` schema objects
+- Corrected agent name to "Kevin Hensley" across all structured data entries
+- Added missing `description` and `license` fields to `Dataset` schemas on all 5 Middletown neighborhood pages (required for valid Dataset markup)
+- Added `FAQPage` JSON-LD schema to 10 area pages that were previously missing it
+- Added "Last Updated" timestamps visible on all pages for freshness signals
+
+#### Live Census Data — Community DNA Section
+
+*All neighborhood pages now show real U.S. Census Bureau data pulled directly from the American Community Survey (ACS 5-Year Estimates, 2023). Data is cached until January 1 each year to match the ACS release cycle.*
+
+- **CensusStatsBar** component expanded with four new data dimensions:
+  - Age distribution breakdown (Under 18 / Ages 18–64 / Ages 65+)
+  - Commute mode breakdown (Drove alone / Carpool / Public transit / Walked / Work from home)
+  - Household type (Family households / Married-couple households)
+  - Year-built decade buckets (Built 2000+ / 1980–1999 / Pre-1980)
+- Census tract mappings added for all 25+ area pages (Delaware + Maryland)
+- Fixed Census API 400 error: request was sending 51 variables, exceeding the API's 50-variable hard limit — reduced to 45 variables
+- Fixed data accuracy bug: the "Under 18" age calculation incorrectly included 18–21 year-olds (ACS variables B01001_007–009 male and B01001_031–033 female); corrected to only count true under-18 groups
+
+#### SVG Neighborhood Infographic
+
+*Each neighborhood page now includes a shareable, visually styled data infographic rendered server-side as a scalable vector image.*
+
+- New `/api/infographic/:slug.svg` endpoint generates a 800×500 SVG data card
+- Infographic displays: owner-occupancy rate, median household income, home vintage breakdown, and age distribution
+- Embedded directly on each neighborhood page and available as a standalone URL for sharing
+
+#### Sitemap Expansion
+
+- Updated `sitemap.xml` to include all 30+ area and sub-neighborhood pages
+- Correct priority and change frequency values assigned per page type
+
+#### IndexNow Integration
+
+*New admin tool: instantly notify Bing and other IndexNow-compatible search engines whenever new pages go live.*
+
+- New `/api/admin/ping-search-engines` admin endpoint
+- Submits all sitemap URLs to IndexNow in a single API call
+- Returns a per-URL status report (HTTP 202 = accepted)
+- IndexNow key file served at `/.well-known/` and root path
+
+#### Google Indexing API Integration
+
+*New admin tool: request immediate crawling of any page directly through Google's API.*
+
+- New `/api/admin/google-index` admin endpoint
+- Uses Google service account (`replit-google-search@foundrywave-tech.iam.gserviceaccount.com`) with `googleapis` package
+- Submits each sitemap URL as a `URL_UPDATED` indexing request
+- Returns per-URL success/failure summary
+- Note: requires service account to be added as an Owner in Google Search Console to activate
+
+#### Broken Link Repairs
+
+*23 confirmed broken outbound links fixed across 13 files. Broken links are a negative ranking signal and create a poor user experience.*
+
+- Fixed 10 confirmed 404 links: `middletown.delaware.gov`, `newarkde.gov`, `lennar.com` builder pages, RE/MAX `settings.php` URL
+- Fixed 13 additional dead links: `kent.delaware.gov` → `kentcountyde.gov`, `smyrnapubliclibrary.org` → `duckcreek.lib.de.us`, and others provided with verified replacement URLs
+- Removed one unresolvable HOA link (Parkside HOA); replaced with contact-Kevin text
+
+---
+
 ## [1.4.0] - 2025-12-06
 
 ### AI-Enhanced Search Engine Visibility
