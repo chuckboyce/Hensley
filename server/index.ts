@@ -271,7 +271,7 @@ ${pages.map(page => `  <url>
         let html = template;
         html = html.replace(
           "</head>",
-          `<script type="application/ld+json">${schemaJson}</script>\n</head>`
+          `<link rel="canonical" href="https://hensleyshomes.com/properties" />\n<script type="application/ld+json">${schemaJson}</script>\n</head>`
         );
         html = html.replace(
           /<title>.*?<\/title>/,
@@ -286,20 +286,32 @@ ${pages.map(page => `  <url>
       }
     });
 
-    // All other pages: inject static JSON-LD schemas defined in pageSchemas.ts
+    // All other pages: inject canonical + static JSON-LD schemas into <head>
     app.use((req, res, next) => {
       // Only handle GET requests for HTML pages (not API calls or static assets)
       if (req.method !== "GET") return next();
       if (req.path.startsWith("/api/")) return next();
       if (/\.(js|css|png|jpg|jpeg|webp|avif|svg|ico|woff2?|ttf|eot|json|xml|txt|mp3|mp4)(\?|$)/.test(req.path)) return next();
 
-      const schemaHtml = buildSchemaHtml(req.path);
-      if (!schemaHtml) return next();
-
       const template = getHtmlTemplate();
       if (!template) return next();
 
-      const html = template.replace("</head>", `${schemaHtml}\n</head>`);
+      // Canonical URL: strip trailing slash so Google has one definitive version
+      const normalizedPath = req.path.replace(/\/$/, "") || "/";
+      const canonicalUrl = normalizedPath === "/"
+        ? "https://hensleyshomes.com"
+        : `https://hensleyshomes.com${normalizedPath}`;
+      const canonicalTag = `<link rel="canonical" href="${canonicalUrl}" />`;
+
+      // Schema HTML (may be null for pages without a defined schema)
+      const schemaHtml = buildSchemaHtml(req.path);
+
+      // Always inject canonical; add schema if available for this path
+      const headInjection = schemaHtml
+        ? `${canonicalTag}\n${schemaHtml}`
+        : canonicalTag;
+
+      const html = template.replace("</head>", `${headInjection}\n</head>`);
       res.header("Content-Type", "text/html");
       res.header("Cache-Control", "no-cache, must-revalidate");
       res.send(html);
