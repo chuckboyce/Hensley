@@ -4,6 +4,25 @@ All notable changes to the Kevin Hensley real estate website will be documented 
 
 ---
 
+## [2.0.1] - 2026-04-29
+
+### Fixed: Duplicate Content / Canonical URL Errors
+
+*Google Search Console was reporting "Duplicate without user-selected canonical" on area pages like `/areas/smyrna-de/`. Every page on the site was affected.*
+
+**Root cause:** The base `index.html` template had a hardcoded `<link rel="canonical" href="https://hensleyshomes.com" />`. Because this SPA serves the same HTML file for every route, every single page was telling Google it was a duplicate of the homepage — including all 34 area and neighborhood pages.
+
+**What changed:**
+
+- Removed the hardcoded root canonical from `client/index.html`
+- In **production**: Express server now injects a page-specific `<link rel="canonical">` directly into the HTML `<head>` for every route before the response is sent — Google sees the correct canonical in the raw HTML source without needing to execute JavaScript. Trailing slashes are stripped so both `/areas/smyrna-de` and `/areas/smyrna-de/` resolve to the same canonical URL.
+- In **development**: React's existing `SEOHead` component continues to handle canonical tags dynamically via `react-helmet-async`
+- Also added canonical tag to the `/properties` route, which has its own server-side handler separate from the catch-all
+
+This fix applies to all 34 public-facing pages simultaneously.
+
+---
+
 ## [2.0.0] - 2026-04-28
 
 ### SEO & AEO Overhaul — Structured Data, Census Integration, Broken Links, Search Engine Submission
